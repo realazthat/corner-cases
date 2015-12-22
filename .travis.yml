@@ -31,7 +31,7 @@ install:
 script:
     - mkdir build
     - cd build
-    - cmake ..
+    - cmake .. -DGTEST_LIB=gtest;pthread
     - cmake --build .
     - ./unittests
 
