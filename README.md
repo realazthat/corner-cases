@@ -30,3 +30,48 @@ Released under the [MIT License](https://opensource.org/licenses/MIT).
 
 
 
+
+Building
+----
+
+Use of the library in C does not require anything to be built.
+
+The library can however be built for use in opencl, in which case certain constant-arrays need to be
+pre-calculated. Therefore, a binary can be built, which will generate the headers with the constants.
+
+Furthermore, there are unittests that can be built.
+
+The unittests require googletest (gtest) to be installed on the system.
+
+To build (on linux):
+
+```
+mkdir build
+cd build
+cmake ..
+#on msys2/mingw-w64 you would run this instead
+cmake -G"MSYS Makefiles" ..
+
+#on some systems, you must additionally link pthreads after gtest, so let's store pthread in GTEST_LIB
+cmake . "-DGTEST_LIB=gtest;pthread"
+
+#now build
+#optionally make the program that generates the opencl consts header, unnecessary
+make cubelib-clgen-consts
+#optionally make the generated opencl consts header
+make cubelib.clgen.h
+#make the unittests
+make unittests
+#or make all
+make all
+```
+
+The program `cubelib-clgen-consts` will be built, which can generate the required header `cubelib.clgen.h`, which will itself be generated as well
+in the build directory.
+
+To run the unittests:
+
+```
+#in the build directory
+./unittests
+```
