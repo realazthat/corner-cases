@@ -37,6 +37,7 @@ cd googletest
 
 mkdir -p build
 cd build
-cmake "$CMAKE_GENERATOR_FLAG" .. "$CMAKE_GTEST_FLAG"
+#cmake "$CMAKE_GENERATOR_FLAG" .. "$CMAKE_GTEST_FLAG"
+cmake ..
 cmake --build .
 
