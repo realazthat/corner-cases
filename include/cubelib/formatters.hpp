@@ -1,3 +1,5 @@
+#ifndef CUBELIB_FORMATTERS_HPP
+#define CUBELIB_FORMATTERS_HPP 1
 
 #include "cubelib/cubelib.h"
 
@@ -40,14 +42,14 @@ std::ostream& operator<<(std::ostream& out, const corner_t& corner)
     return out;
 }
 
-std::string tostr(const corner_t& corner)
+inline std::string tostr(const corner_t& corner)
 {
     std::ostringstream out;
     out << corner;
     return out.str();
 }
 
-std::string tostr(const direction_t& direction)
+inline std::string tostr(const direction_t& direction)
 {
     std::ostringstream out;
     out << direction;
@@ -57,5 +59,5 @@ std::string tostr(const direction_t& direction)
 
 
 
-
+#endif
 
