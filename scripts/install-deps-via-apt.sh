@@ -8,8 +8,7 @@
 #exit on failed line
 set -exv
 
-apt-get update
-apt-get install libgtest-dev
-apt-get install gtest0
+#apt-get update
+#apt-get install libgtest-dev
 
 
