@@ -1,5 +1,5 @@
-#ifndef CUBELIB_H
-#define CUBELIB_H 1
+#ifndef CUBELIB_CUBELIB_H
+#define CUBELIB_CUBELIB_H 1
 
 #ifdef __OPENCL_VERSION__
 
@@ -12,6 +12,7 @@
 
     #include <assert.h>
     #include <stdint.h>
+    #include <stdlib.h>
 
     #define CUBELIB_GLOBAL_STATIC_CONST static const
     #define CUBELIB_LOCAL_STATIC_CONST static const
@@ -91,7 +92,7 @@ extern "C"{
     CUBELIB_GLOBAL_STATIC_CONST corner_t cnr_adj_cnrs[8][3] = CNR_ADJ_CNRS;
 #else
 
-    CUBELIB_GLOBAL_STATIC_CONST corner_t cnr_adj_cnrs[8][3]
+    CUBELIB_GLOBAL_STATIC_CONST corner_t cnr_adj_cnrs[8][3] =
         {
             {     calc_cnr_adj_cnr(get_corner_by_index(0), 0)
                 , calc_cnr_adj_cnr(get_corner_by_index(0), 1)
@@ -214,7 +215,7 @@ extern "C"{
         bool pos = x > 0 || y > 0 || z > 0;
         bool neg = x < 0 || y < 0 || z < 0;
 
-        assert(pos != neg);
+        assert(pos != neg && "direction must face a side/face, not a corner or edge of the cube");
         assert(abs(x+y+z) == 1);
 
         word_t value = (x != 0 ? 1 : 0) | ((y != 0 ? 1 : 0) << 1) | ((z != 0 ? 1 : 0) << 2);
@@ -528,3 +529,4 @@ extern "C"{
 #endif
 
 #endif
+

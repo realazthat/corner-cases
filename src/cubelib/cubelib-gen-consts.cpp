@@ -1,6 +1,6 @@
 
 
-#include "cubelib.h"
+#include "cubelib/cubelib.h"
 
 #include <ostream>
 #include <iostream>
