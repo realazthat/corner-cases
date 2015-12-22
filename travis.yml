@@ -1,0 +1,37 @@
+sudo: required
+dist: trusty
+
+language: cpp
+compiler:
+  - gcc
+  - clang
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+    - clang
+    #- wget
+    #- ca-certificates #for wget
+
+install:
+    - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+    #takes too long, we'll download the binaries instead.
+    #- sudo bash ./helpful-scripts/build-install-cmake3.sh
+    #- sudo bash ./helpful-scripts/download-install-cmake3.sh
+    - sudo bash ./helpful-scripts/install-deps-via-apt.sh
+    #- sudo bash ./helpful-scripts/download-and-build-libs-with-no-pkg.sh
+
+
+script:
+    - mkdir build
+    - cd build
+    - cmake ..
+    - cmake --build .
+    - ./unittests
+
+
+
