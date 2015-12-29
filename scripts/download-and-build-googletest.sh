@@ -2,7 +2,7 @@
 
 #####################################################################
 ####Run this from the project root directory
-####This script assumes that these libraries are already there.
+####This script will delete the library if it is already in the libs directory.
 #####################################################################
 
 
@@ -20,11 +20,8 @@ PROJECT_PATH=$PWD
 ## get/build googletest
 #############################################################################
 
-#CMAKE_GENERATOR_FLAG='-GMSYS Makefiles'
-#CMAKE_GTEST_FLAG='-Dgtest_disable_pthreads=1'
- 
 
-cd $PROJECT_PATH
+cd "$PROJECT_PATH"
 cd libs
 
 mkdir -p googletest && cd googletest
@@ -37,7 +34,11 @@ cd googletest
 
 mkdir -p build
 cd build
-#cmake "$CMAKE_GENERATOR_FLAG" .. "$CMAKE_GTEST_FLAG"
-cmake ..
+
+if [ $(echo "$MSYSTEM" | grep -io MINGW) = "MINGW" ]; then
+    cmake -G"$CMAKE_GENERATOR" .. -Dgtest_disable_pthreads=1
+else
+    cmake -G"$CMAKE_GENERATOR" ..
+fi
 cmake --build .
 
