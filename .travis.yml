@@ -20,12 +20,8 @@ addons:
 
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
-    #takes too long, we'll download the binaries instead.
-    #- sudo bash ./scripts/build-install-cmake3.sh
     #- sudo bash ./scripts/download-install-cmake3.sh
-    - sudo bash ./scripts/install-deps-via-apt.sh
-    - sudo bash ./scripts/download-and-build-googletest.sh
-    #- sudo bash ./scripts/download-and-build-libs-with-no-pkg.sh
+    - sudo CMAKE_GENERATOR="Unix Makefiles" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-googletest.sh
 
 
 script:
