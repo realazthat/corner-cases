@@ -1,4 +1,4 @@
-cubelib
+corner-cases/cubelib
 ---
 
 cubelib is a C header-only library for reasoning about a cube's corners, directions/faces, and edges. It is useful for
