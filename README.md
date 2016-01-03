@@ -4,7 +4,7 @@ corner-cases/cubelib
 cubelib is a C header-only library for reasoning about a cube's corners, directions/faces, and edges. It is useful for
 dealing with data structures based on cubes, such as octrees.
 
-[![Build Status](https://travis-ci.org/realazthat/cubelib.svg?branch=master)](https://travis-ci.org/realazthat/cubelib)
+[![Build Status](https://travis-ci.org/realazthat/cubelib.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)
 
 
 Motivation
