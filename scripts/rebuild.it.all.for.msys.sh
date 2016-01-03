@@ -21,6 +21,7 @@ mkdir -p build && cd build
 
 cmake -G"MSYS Makefiles" ..
 cmake . -DCMAKE_BUILD_TYPE="$CMAKE_BUILD_TYPE"
+cmake . -DCMAKE_VERBOSE_MAKEFILE=1
 cmake --build .
 
 ./unittests
