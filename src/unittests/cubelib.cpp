@@ -3,8 +3,6 @@
 
 #include "cubelib/cubelib.h"
 #include "cubelib/formatters.hpp"
-#include "cubexx/cubexx.hpp"
-#include "cubexx/formatters.hpp"
 
 #include "gtest/gtest.h"
 
