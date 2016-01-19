@@ -25,6 +25,7 @@
 #ifndef CORNER_CASES_CUBEXX_CUBEXX_HPP
 #define CORNER_CASES_CUBEXX_CUBEXX_HPP
 
+#include "cubexx/cubexx.fwd.hpp"
 
 #include <bitset>
 #include <cstdint>
