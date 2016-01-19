@@ -20,6 +20,15 @@ Motivation
 Using corner-cases allows one to avoid cryptic bit-twiddling, and instead use logical and
 self-documenting functions provided by this library to reason about and manipulate corners of the cube.
 
+**CDEF**
+-----
+
+* Corners
+* Directions
+* Edges
+* Faces
+
+
 Example functionality (cubexx) pseudocode:
 
 * `auto corner0 = cubexx::corners_t::get(-1,-1,+1);`
@@ -60,6 +69,10 @@ Targets:
     * Program that generates a header containing constants for cubelib, for use with opencl
 * cubelib.clgen.h
     * Target that generates the constants header, for use with opencl
+* cubelib-formatters
+    * Optionally link the iostream pretty printing formatters; alternatively can define the macro
+        `CORNER_CASES_CUBELIB_FORMATTERS_HEADER_ONLY` to include the functionality inline (header-only)
+    * Requires C++98
 * cubelib-unittests
     * Unit tests for cubelib
     * Requires C++11
@@ -139,8 +152,20 @@ corner-cases/cubelib
 
 Use of the library in C does not require anything to be built.
 
+You can use **corner-cases/cubelib** in C99 by simply including the file `cubelib/cubelib.h` (there is also a
+forward declaration header you can use at `cubelib/cubelib.fwd.h`.
+
+
+If you want to use the `iostream` formatters (for pretty printing), you should include the file
+`cubelib/formatters.hpp` and define the macro `CORNER_CASES_CUBELIB_FORMATTERS_HEADER_ONLY` in your project;
+alternatively you can link to the `cubelib-formatters` target, which you can build, instructions to follow.
+
+
+
 The library can however be built for use in opencl, in which case certain constant-arrays need to be
-pre-calculated. Therefore, a binary can be built, which will generate the headers with the constants.
+pre-calculated. To do this, cubelib includes a target called `cubelib-clgen-consts`, which can be built
+and which will generate the headers with the constants. There is also a direct target called `cubelib.clgen.h`
+which will build everything necessary and dump the header into the build directory.
 
 Furthermore, there are unit tests that can be built.
 
@@ -148,6 +173,8 @@ The cubelib-unittests require:
 
 * googletest (gtest) to be installed on the system.
 * C++11
+
+
 
 To build (on a linux-like environment, or msys2):
 
@@ -180,6 +207,8 @@ cmake . "-DGTEST_LIB=gtest;pthread"
 cmake --build . --target cubelib-clgen-consts
 #optionally make the generated opencl consts header
 cmake --build . --target cubelib.clgen.h
+#optionally make the cubelib formatter lib for iostream pretty printing
+cmake --build . --target cubelib-formatters
 #optionally make the unittests
 cmake --build . --target cubelib-unittests
 #or make all
