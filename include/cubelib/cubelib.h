@@ -1,5 +1,8 @@
-#ifndef CUBELIB_CUBELIB_H
-#define CUBELIB_CUBELIB_H 1
+#ifndef CORNER_CASES_CUBELIB_CUBELIB_H
+#define CORNER_CASES_CUBELIB_CUBELIB_H 1
+
+
+#include "cubelib/cubelib.fwd.h"
 
 #ifdef __OPENCL_VERSION__
 
@@ -528,5 +531,5 @@ extern "C"{
 }
 #endif
 
-#endif
+#endif // CORNER_CASES_CUBELIB_CUBELIB_H
 
