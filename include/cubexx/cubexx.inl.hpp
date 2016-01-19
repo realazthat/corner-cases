@@ -24,9 +24,9 @@
 */
 
 
-#include <cube/cube.h>
-#include "logic_utility.h"
+#include <cubexx/cubexx.hpp>
 
+#include <cassert>
 #include <vector>
 #include <boost/range/irange.hpp>
 #include <boost/utility.hpp>
@@ -37,7 +37,7 @@
 
 namespace cubexx{
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 face_t::
 face_t(const direction_t& direction)
   : mdirection(direction)
@@ -46,7 +46,7 @@ face_t(const direction_t& direction)
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::uint8_t
 face_t::index() const
 {
@@ -54,7 +54,7 @@ face_t::index() const
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const boost::array< face_t, 6 >&
 face_t::all()
 {
@@ -72,7 +72,7 @@ face_t::all()
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const face_t&
 face_t::get(const direction_t& direction)
 {
@@ -80,8 +80,8 @@ face_t::get(const direction_t& direction)
   return all()[direction.index()];
 }
 
-CORNER_CASES_CUBE_INLINE
-const cube::face_t&
+CORNER_CASES_CUBEXX_INLINE
+const face_t&
 face_t::get(const boost::uint8_t& idx)
 {
   BOOST_ASSERT(idx < all().size());
@@ -89,19 +89,19 @@ face_t::get(const boost::uint8_t& idx)
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const direction_t& face_t::direction() const
 {
   return mdirection;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const face_t& face_t::opposite() const
 {
   return face_t::get(mdirection.opposite());
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::array<corner_t, 4>
 face_t::corners() const
 {
@@ -170,23 +170,23 @@ face_t::corners() const
   return result;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool
-face_t::operator==(const cube::face_t& other) const
+face_t::operator==(const face_t& other) const
 {
   return mdirection == other.mdirection;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool
-face_t::operator!=(const cube::face_t& other) const
+face_t::operator!=(const face_t& other) const
 {
   return mdirection != other.mdirection;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool
-face_t::operator<(const cube::face_t& other) const
+face_t::operator<(const face_t& other) const
 {
   return mdirection < other.mdirection;
 }
@@ -202,7 +202,7 @@ face_t::operator<(const cube::face_t& other) const
 
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 direction_t::
 direction_t()
   : bits(BOOST_BINARY(111))
@@ -217,7 +217,7 @@ direction_t()
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 direction_t::direction_t(const std::bitset< 3 >& bits)
   : bits(bits)
 {
@@ -232,7 +232,7 @@ direction_t::direction_t(const std::bitset< 3 >& bits)
 
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const direction_t&
 direction_t::
 get(boost::int8_t x, boost::int8_t y, boost::int8_t z)
@@ -276,7 +276,7 @@ get(boost::int8_t x, boost::int8_t y, boost::int8_t z)
   return direction_t::get( direction );
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const direction_t&
 direction_t::
 get(const direction_t& direction)
@@ -285,7 +285,7 @@ get(const direction_t& direction)
   return all()[direction.bits.to_ulong()];
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const boost::array< direction_t, 6 >&
 direction_t::
 all()
@@ -302,32 +302,32 @@ all()
   return directions;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::int8_t direction_t::x() const
 {
   return (bits[0] ? 1 : -1)  * (bits[2] && !bits[1] ? 1 : 0);
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::int8_t direction_t::y() const
 {
   return (bits[0] ? 1 : -1)  * (!bits[2] && bits[1] ? 1 : 0);
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::int8_t direction_t::z() const
 {
   return (bits[0] ? 1 : -1)  * (!bits[2] && !bits[1] ? 1 : 0);
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::uint8_t direction_t::index() const
 {
   return bits.to_ulong();
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const direction_t&
 direction_t::index(boost::uint8_t idx)
 {
@@ -335,19 +335,19 @@ direction_t::index(boost::uint8_t idx)
   return all()[idx];
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool direction_t::
 operator<(const direction_t& other) const
 {
   return bits.to_ulong() < other.bits.to_ulong();
 }
 
-CORNER_CASES_CUBE_INLINE bool direction_t::operator==(const direction_t& other) const
+CORNER_CASES_CUBEXX_INLINE bool direction_t::operator==(const direction_t& other) const
 {
   return bits == other.bits;
 }
 
-CORNER_CASES_CUBE_INLINE bool direction_t::operator!=(const direction_t& other) const
+CORNER_CASES_CUBEXX_INLINE bool direction_t::operator!=(const direction_t& other) const
 {
   return bits != other.bits;
 }
@@ -355,13 +355,13 @@ CORNER_CASES_CUBE_INLINE bool direction_t::operator!=(const direction_t& other) 
 
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const face_t& direction_t::face() const
 {
   return face_t::get(*this);
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const direction_t& direction_t::opposite() const
 {
   std::bitset<3> result_bits = bits;
@@ -371,13 +371,13 @@ const direction_t& direction_t::opposite() const
   return all()[ result_bits.to_ulong() ];
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool direction_t::positive() const
 {
   return bits.test(0);
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::array<direction_t, 4>
 direction_t::adjacent() const
 {
@@ -415,14 +415,14 @@ direction_t::adjacent() const
 //#### Corners
 //###################################################################
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 corner_t::
 corner_t()
 {
   
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 corner_t::
 corner_t(const std::bitset< 3 >& bits)
   : bits(bits)
@@ -434,10 +434,10 @@ corner_t(const std::bitset< 3 >& bits)
 #endif
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 corner_t::
-corner_t(bool x, bool y, bool z)
-  : bits( (x ? 1 : 0) + (y ? 2 : 0) + (z ? 4 : 0))
+corner_t(int_fast8_t x, int_fast8_t y, int_fast8_t z)
+  : bits( (x > 0 ? 1 : 0) | (y > 0 ? 2 : 0) | (z > 0 ? 4 : 0))
 {
   
 #ifndef NDEBUG
@@ -451,20 +451,20 @@ corner_t(bool x, bool y, bool z)
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::
-get(bool x, bool y, bool z)
+get(int_fast8_t x, int_fast8_t y, int_fast8_t z)
 {
   std::bitset<3> bits;
-  bits.set(0,x);
-  bits.set(1,y);
-  bits.set(2,z);
+  bits.set(0,x > 0);
+  bits.set(1,y > 0);
+  bits.set(2,z > 0);
   return all()[bits.to_ulong()];
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const boost::array< corner_t, 8 >&
 corner_t::
 all()
@@ -483,7 +483,7 @@ all()
   return corners;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::uint8_t
 corner_t::
 index() const
@@ -491,7 +491,7 @@ index() const
   return bits.to_ulong();
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::
 get(boost::uint8_t i)
@@ -500,122 +500,144 @@ get(boost::uint8_t i)
   return all()[i];
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::array< corner_t, 3 >
 corner_t::
 adjacent() const
 {
   boost::array<corner_t,3> result =
     {{
-      corner_t(!x(), y(), z() ),
-      corner_t( x(),!y(), z() ),
-      corner_t( x(), y(),!z() )
+      corner_t(-x(), y(), z() ),
+      corner_t( x(),-y(), z() ),
+      corner_t( x(), y(),-z() )
     }};
   
   return result;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 corner_set_t
 corner_t::adjacent_set() const
 {
   return corner_set_t(adjacent());
 }
 
-CORNER_CASES_CUBE_INLINE
-bool
+CORNER_CASES_CUBEXX_INLINE
+int_fast8_t
 corner_t::
 x() const
 {
-  return bits[0];
+  return (bits[0] ? 1 : -1);
 }
-CORNER_CASES_CUBE_INLINE
-bool
+CORNER_CASES_CUBEXX_INLINE
+int_fast8_t
 corner_t::
 y() const
+{
+  return (bits[1] ? 1 : -1);
+}
+
+CORNER_CASES_CUBEXX_INLINE
+int_fast8_t
+corner_t::
+z() const
+{
+  return (bits[2] ? 1 : -1);
+}
+
+CORNER_CASES_CUBEXX_INLINE
+uint_fast8_t
+corner_t::
+ux() const
+{
+  return bits[0];
+}
+CORNER_CASES_CUBEXX_INLINE
+uint_fast8_t
+corner_t::
+uy() const
 {
   return bits[1];
 }
 
-CORNER_CASES_CUBE_INLINE
-bool
+CORNER_CASES_CUBEXX_INLINE
+uint_fast8_t
 corner_t::
-z() const
+uz() const
 {
   return bits[2];
 }
-
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool corner_t::operator<(const corner_t& other) const
 {
   return bits.to_ulong() < other.bits.to_ulong();
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 boost::array< face_t, 3 >
 corner_t::faces() const
 {
   boost::array< face_t, 3 > result = 
     {{
-      direction_t::get( x() ? 1 : -1, 0, 0).face(),
-      direction_t::get( 0, y() ? 1 : -1, 0).face(),
-      direction_t::get( 0, 0, z() ? 1 : -1).face()
+      direction_t::get( x() > 0 ? 1 : -1, 0, 0).face(),
+      direction_t::get( 0, y() > 0 ? 1 : -1, 0).face(),
+      direction_t::get( 0, 0, z() > 0 ? 1 : -1).face()
     }};
   return result;
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 face_set_t
 corner_t::face_set() const
 {
   return face_set_t(faces());
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::get(const corner_t& corner)
 {
-  BOOST_ASSERT(corner.index() < SIZE);
+  assert(corner.index() < SIZE);
   return all()[corner.index()];
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::opposite() const
 {
   std::size_t idx =  std::bitset<3>(bits).flip().to_ulong();
-  BOOST_ASSERT(idx < SIZE);
+  assert(idx < SIZE);
   return all()[idx];
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool corner_t::operator!=(const corner_t& other) const
 {
   return bits != other.bits;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool corner_t::operator==(const corner_t& other) const
 {
   return bits == other.bits;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::index(boost::uint8_t idx)
 {
   return corner_t::get(idx);
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::
 adjacent(const direction_t& direction) const
 {
-  return corner_t::get(lxor(x(), (direction.x() != 0)),
-                       lxor(y(), (direction.y() != 0)),
-                       lxor(z(), (direction.z() != 0)));
+  return corner_t::get(lxor(x() > 0, (direction.x() != 0)),
+                       lxor(y() > 0, (direction.y() != 0)),
+                       lxor(z() > 0, (direction.z() != 0)));
 }
 
 
@@ -631,7 +653,7 @@ adjacent(const direction_t& direction) const
 
 
 namespace detail{
-  CORNER_CASES_CUBE_INLINE
+  CORNER_CASES_CUBEXX_INLINE
   boost::array<corner_t, 2>
   make_edge_corners(const corner_t& a, const corner_t& b)
   {
@@ -644,7 +666,7 @@ namespace detail{
   }
 } // namespace detail
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 edge_t::
 edge_t(const corner_t& a, const corner_t& b)
   : mcorners(detail::make_edge_corners(a,b))
@@ -655,7 +677,7 @@ edge_t(const corner_t& a, const corner_t& b)
   BOOST_ASSERT(mcorners.back().adjacent_set().contains(mcorners.front()));
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const boost::array<corner_t, 2>&
 edge_t::
 corners() const
@@ -663,7 +685,7 @@ corners() const
   return mcorners;
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const boost::array<edge_t, 12>&
 edge_t::
 all()
@@ -711,14 +733,14 @@ all()
 
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 cube_t::
 cube_t()
 {
 
 }
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const cube_t&
 cube_t::
 identity()
@@ -728,7 +750,7 @@ identity()
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 const boost::array< corner_t, 8 >&
 cube_t::corners() const
 {
@@ -793,7 +815,7 @@ cube_t::corners() const
 //###################################################################
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 set_base_t<derived_t, element_t, N>::
 set_base_t()
   : bits(0)
@@ -804,7 +826,7 @@ set_base_t()
 
 template<typename derived_t, typename element_t, std::size_t N>
 template<typename Sequence>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 set_base_t<derived_t, element_t, N>::
 set_base_t(const Sequence& sequence)
   : bits(0)
@@ -813,7 +835,7 @@ set_base_t(const Sequence& sequence)
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool
 set_base_t<derived_t, element_t, N>::
 contains(const element_t& element) const
@@ -824,7 +846,7 @@ contains(const element_t& element) const
 
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 derived_t&
 set_base_t<derived_t, element_t, N>::
 operator=(const element_t& element)
@@ -839,7 +861,7 @@ operator=(const element_t& element)
 
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 derived_t&
 set_base_t<derived_t, element_t, N>::
 operator=(const derived_t& set)
@@ -851,7 +873,7 @@ operator=(const derived_t& set)
 
   
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 derived_t&
 set_base_t<derived_t, element_t, N>::
 operator|=(const derived_t& set)
@@ -862,7 +884,7 @@ operator|=(const derived_t& set)
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 derived_t&
 set_base_t<derived_t, element_t, N>::
 operator|=(const element_t& element)
@@ -876,7 +898,7 @@ operator|=(const element_t& element)
 
 template<typename derived_t, typename element_t, std::size_t N>
 template<typename Sequence>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 derived_t&
 set_base_t<derived_t, element_t, N>::
 operator|=(const Sequence& sequence)
@@ -892,7 +914,7 @@ operator|=(const Sequence& sequence)
 
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 derived_t&
 set_base_t<derived_t, element_t, N>::
 self()
@@ -906,7 +928,7 @@ self()
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 typename set_base_t<derived_t, element_t, N>::const_iterator 
 set_base_t<derived_t, element_t, N>::
 begin() const
@@ -916,7 +938,7 @@ begin() const
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 typename set_base_t<derived_t, element_t, N>::const_iterator 
 set_base_t<derived_t, element_t, N>::
 end() const
@@ -927,7 +949,7 @@ end() const
 
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 std::size_t
 set_base_t<derived_t, element_t, N>::
 size() const
@@ -936,7 +958,7 @@ size() const
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 void
 set_base_t<derived_t, element_t, N>::
 clear()
@@ -946,7 +968,7 @@ clear()
 
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool
 set_base_t<derived_t, element_t, N>::
 operator==(const derived_t& other) const
@@ -959,7 +981,7 @@ operator==(const derived_t& other) const
 
 
 template<typename derived_t, typename element_t, std::size_t N>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 bool
 set_base_t<derived_t, element_t, N>::
 contains(const std::size_t& idx) const
@@ -977,7 +999,7 @@ contains(const std::size_t& idx) const
 
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 direction_set_t::direction_set_t()
   : base_t()
 {
@@ -985,7 +1007,7 @@ direction_set_t::direction_set_t()
 }
 
 template<typename T>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 direction_set_t::direction_set_t(const T& v)
   : base_t(v)
 {
@@ -993,7 +1015,7 @@ direction_set_t::direction_set_t(const T& v)
 }
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 face_set_t::face_set_t()
   : base_t()
 {
@@ -1001,7 +1023,7 @@ face_set_t::face_set_t()
 }
 
 template<typename T>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 face_set_t::face_set_t(const T& v)
   : base_t(v)
 {
@@ -1012,7 +1034,7 @@ face_set_t::face_set_t(const T& v)
 
 
 
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 corner_set_t::corner_set_t()
   : base_t()
 {
@@ -1020,7 +1042,7 @@ corner_set_t::corner_set_t()
 }
 
 template<typename T>
-CORNER_CASES_CUBE_INLINE
+CORNER_CASES_CUBEXX_INLINE
 corner_set_t::corner_set_t(const T& v)
   : base_t(v)
 {

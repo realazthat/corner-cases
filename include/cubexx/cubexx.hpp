@@ -27,6 +27,8 @@
 
 
 #include <bitset>
+#include <cstdint>
+
 #include <boost/array.hpp>
 #include <boost/integer.hpp>
 #include <boost/foreach.hpp>
@@ -418,7 +420,7 @@ struct corner_t{
   const corner_t& opposite() const;
   
   static const corner_t& get(boost::uint8_t i);
-  static const corner_t& get(bool x, bool y, bool z);
+  static const corner_t& get(int_fast8_t x, int_fast8_t y, int_fast8_t z);
   static const corner_t& get(const corner_t& corner);
   static const corner_t& index(boost::uint8_t idx);
   
@@ -430,10 +432,20 @@ struct corner_t{
   
   static const boost::array<corner_t, 8>& all();
   
+  ///return {-1,1} depending if the corner is in the near side or the far side of the x, respectively
+  int_fast8_t x() const;
+  ///return {-1,1} depending if the corner is in the near side or the far side of the y, respectively
+  int_fast8_t y() const;
+  ///return {-1,1} depending if the corner is in the near side or the far side of the z, respectively
+  int_fast8_t z() const;
   
-  bool x() const;
-  bool y() const;
-  bool z() const;
+  ///return {0,1} depending if the corner is in the near side or the far side of the x, respectively
+  uint_fast8_t ux() const;
+  ///return {0,1} depending if the corner is in the near side or the far side of the y, respectively
+  uint_fast8_t uy() const;
+  ///return {0,1} depending if the corner is in the near side or the far side of the z, respectively
+  uint_fast8_t uz() const;
+  
   
   ///Number of corners
   static const std::size_t SIZE = 8;
@@ -444,7 +456,7 @@ protected:
   bool mx, my, mz;
 #endif
 private:
-  corner_t(bool x, bool y, bool z);
+  corner_t(int_fast8_t x, int_fast8_t y, int_fast8_t z);
   corner_t(const std::bitset<3>& bits);
   
   std::bitset<3> bits;
@@ -483,7 +495,7 @@ private:
 
 } // namespace cubexx
 
-#include <cubexx/cubexx.inl.h>
+#include <cubexx/cubexx.inl.hpp>
 
 
 #endif // CORNER_CASES_CUBEXX_CUBEXX_HPP
