@@ -56,6 +56,11 @@ add_library(HEADER_ONLY_TARGET STATIC include/cubelib/cubelib.h cubelib.clgen.h)
    
 set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
 ###############################################################################
+add_library(cubelib-formatters src/cubelib/formatters.cpp)
+   
+set_property(TARGET cubelib-formatters PROPERTY CXX_STANDARD 98)
+set_property(TARGET cubelib-formatters PROPERTY CXX_STANDARD_REQUIRED ON)
+###############################################################################
 add_library(cubexx-formatters src/cubexx/formatters.cpp)
    
 set_property(TARGET cubexx-formatters PROPERTY CXX_STANDARD 11)
@@ -69,7 +74,7 @@ add_executable(cubelib-unittests
 
 
 target_link_libraries(cubelib-unittests
-    
+    cubelib-formatters
     ${GTEST_LIB}
     )
 
