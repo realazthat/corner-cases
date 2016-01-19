@@ -52,9 +52,10 @@ struct corner_t;
 struct corner_set_t;
 struct edge_t;
 struct edge_set_t;
-struct box_t;
+struct cube_t;
 
 
+namespace detail{
 CORNER_CASES_CUBEXX_INLINE
 bool lxor(const bool& a, const bool& b)
 {
@@ -81,6 +82,15 @@ bool lnand(const bool& a, const bool& b)
 }
 
 
+template<std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+bool has_exactly_one_bit(const std::bitset<N>& v)
+{
+    return v.count() == 1;
+}
+
+
+} // namespace detail
 
 template<typename value_type, typename set_type>
 struct  const_element_set_iterator_t
@@ -409,6 +419,7 @@ struct corner_t{
   const corner_t& adjacent(const direction_t& direction) const;
   boost::array<corner_t, 3> adjacent() const;
   corner_set_t adjacent_set() const;
+  bool is_adjacent(const corner_t& other) const;
   
   boost::array<face_t, 3> faces() const;
   face_set_t face_set() const;

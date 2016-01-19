@@ -31,11 +31,11 @@
 #include <boost/range/irange.hpp>
 #include <boost/utility.hpp>
 
+namespace cubexx{
+
 //###################################################################
 //#### face_t
 //###################################################################
-
-namespace cubexx{
 
 CORNER_CASES_CUBEXX_INLINE
 face_t::
@@ -237,7 +237,7 @@ const direction_t&
 direction_t::
 get(boost::int8_t x, boost::int8_t y, boost::int8_t z)
 {
-  BOOST_ASSERT(lxor(lxor(x != 0, y != 0), z != 0));
+  BOOST_ASSERT(detail::lxor(detail::lxor(x != 0, y != 0), z != 0));
   
   BOOST_ASSERT(std::abs(x) == 1 || x == 0);
   BOOST_ASSERT(std::abs(y) == 1 || y == 0);
@@ -635,11 +635,17 @@ const corner_t&
 corner_t::
 adjacent(const direction_t& direction) const
 {
-  return corner_t::get(lxor(x() > 0, (direction.x() != 0)),
-                       lxor(y() > 0, (direction.y() != 0)),
-                       lxor(z() > 0, (direction.z() != 0)));
+  return corner_t::get(detail::lxor(x() > 0, (direction.x() != 0)),
+                       detail::lxor(y() > 0, (direction.y() != 0)),
+                       detail::lxor(z() > 0, (direction.z() != 0)));
 }
 
+CORNER_CASES_CUBEXX_INLINE
+bool
+corner_t::is_adjacent(const corner_t& other) const
+{
+  return detail::has_exactly_one_bit(bits ^ other.bits);
+}
 
 
 //###################################################################
