@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.1.3 FATAL_ERROR)
 
 project(cubelib)
 
@@ -55,22 +55,40 @@ ADD_CUSTOM_COMMAND(
 add_library(HEADER_ONLY_TARGET STATIC include/cubelib/cubelib.h cubelib.clgen.h)
    
 set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
+###############################################################################
+add_library(cubexx-formatters src/cubexx/formatters.cpp)
+   
+set_property(TARGET cubexx-formatters PROPERTY CXX_STANDARD 11)
+set_property(TARGET cubexx-formatters PROPERTY CXX_STANDARD_REQUIRED ON)
 
 ###############################################################################
-add_executable(unittests
-    src/unittests/main.cpp
+add_executable(cubelib-unittests
+    src/unittests/cubelib.cpp
     
     )
 
 
-target_link_libraries(unittests
+target_link_libraries(cubelib-unittests
     
     ${GTEST_LIB}
     )
 
+set_property(TARGET cubelib-unittests PROPERTY CXX_STANDARD 11)
+set_property(TARGET cubelib-unittests PROPERTY CXX_STANDARD_REQUIRED ON)
+###############################################################################
+add_executable(cubexx-unittests
+    src/unittests/cubexx.cpp
+    
+    )
 
-set_property(TARGET unittests PROPERTY CXX_STANDARD 11)
 
+target_link_libraries(cubexx-unittests
+    cubexx-formatters
+    ${GTEST_LIB}
+    
+    )
 
+set_property(TARGET cubexx-unittests PROPERTY CXX_STANDARD 11)
+set_property(TARGET cubexx-unittests PROPERTY CXX_STANDARD_REQUIRED ON)
 ###############################################################################
 
