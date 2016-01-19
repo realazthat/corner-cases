@@ -2,12 +2,12 @@
 corner-cases
 ----
 
-corner-cases/cubexx and corner-cases/cubelib are two libraries for reasoning about a cube's corners, directions/faces, and edges. It is useful for
+**corner-cases/cubexx** and **corner-cases/cubelib** are two libraries for reasoning about a cube's corners, directions/faces, and edges. It is useful for
 dealing with data structures based on cubes, such as octrees.
 
-cubexx is a C++11 header-only template library with bells and whistles.
+**corner-cases/cubexx** is a C++11 header-only template library with bells and whistles.
 
-cubelib is a C header-only library; it is also made to be compilable and usable in opencl.
+**corner-cases/cubelib** is a C header-only library; it is also made to be compilable and usable in opencl.
 
 
 
@@ -90,7 +90,7 @@ Targets:
     * Unit tests for cubexx
     * Requires C++11, gtest
 
-corner-cases/cubexx
+**corner-cases/cubexx**
 -----
 
 You can use **corner-cases/cubexx** by simply including the file `cubexx/cubexx.hpp` (there is also a
@@ -100,7 +100,7 @@ If you want to use the `iostream` formatters (for pretty printing), you should i
 `cubexx/formatters.hpp` and define the macro `CORNER_CASES_CUBEXX_FORMATTERS_HEADER_ONLY` in your project;
 alternatively you can link to the `cubexx-formatters` target, which you can build, instructions to follow.
 
-There are also cubexx unit tests that can be built.
+There are also **corner-cases/cubexx** unit tests that can be built.
 
 The cubexx-unittests require:
 
@@ -150,7 +150,7 @@ To run the unit tests:
 ```
 
 
-corner-cases/cubelib
+**corner-cases/cubelib**
 -----
 
 Use of the library in C does not require anything to be built.
@@ -166,11 +166,11 @@ alternatively you can link to the `cubelib-formatters` target, which you can bui
 
 
 The library can however be built for use in opencl, in which case certain constant-arrays need to be
-pre-calculated. To do this, cubelib includes a target called `cubelib-clgen-consts`, which can be built
+pre-calculated. To do this, **corner-cases/cubelib** includes a target called `cubelib-clgen-consts`, which can be built
 and which will generate the headers with the constants. There is also a direct target called `cubelib.clgen.h`
 which will build everything necessary and dump the header into the build directory.
 
-Furthermore, there are unit tests that can be built.
+Furthermore, there are also **corner-cases/cubelib** unit tests that can be built.
 
 The cubelib-unittests require:
 
