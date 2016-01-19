@@ -5,9 +5,10 @@ corner-cases
 corner-cases/cubexx and corner-cases/cubelib are two libraries for reasoning about a cube's corners, directions/faces, and edges. It is useful for
 dealing with data structures based on cubes, such as octrees.
 
+cubexx is a C++ header-only template library with bells and whistles.
+
 cubelib is a C header-only library; it is also made to be compilable and usable in opencl.
 
-cubexx is a C++ header-only template library.
 
 
 [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)
@@ -19,6 +20,13 @@ Motivation
 Using corner-cases allows one to avoid cryptic bit-twiddling, and instead use logical and
 self-documenting functions provided by this library to reason about and manipulate corners of the cube.
 
+Example functionality (cubecxx) pseudocode:
+
+* `auto corner0 = cubecxx::corners_t::get(-1,-1,+1);`
+* `auto direction = cubecxx::direction_t::get( 0,-1, 0);`
+* `auto corner1 = corner0.adjacent(direction);`
+* `auto corner2 = corner1.opposite();`
+
 Example functionality (cubelib) pseudocode:
 
 * `corner0 = get_corner_by_int3(-1,-1,+1)` - get the lower x,y, and upper z corner
@@ -26,13 +34,6 @@ Example functionality (cubelib) pseudocode:
 * `corner1 = move_corner(corner0, direction)` - move the corner in the +y direction, return the resulting corner
 * `corner2 = opposite_corner(corner1)` - calculate the opposite corner
 
-
-Example functionality (cubecxx) pseudocode:
-
-* `auto corner0 = cubecxx::corners_t::get(-1,-1,+1);`
-* `auto direction = cubecxx::direction_t::get( 0,-1, 0);`
-* `auto corner1 = corner0.adjacent(direction);`
-* `auto corner2 = corner1.opposite();`
 
 
 License
