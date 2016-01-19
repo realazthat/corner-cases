@@ -6,6 +6,12 @@ dealing with data structures based on cubes, such as octrees.
 
 [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)
 
+Branch  | Status
+---     | ---
+master  | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)
+develop | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=develop)](https://travis-ci.org/realazthat/corner-cases)
+
+
 
 Motivation
 ----
