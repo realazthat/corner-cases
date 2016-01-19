@@ -87,7 +87,7 @@ template<std::size_t N>
 CORNER_CASES_CUBEXX_INLINE
 bool has_exactly_one_bit(const std::bitset<N>& v)
 {
-    return v.count() == 1;
+  return v.count() == 1;
 }
 
 
@@ -360,8 +360,8 @@ struct direction_t
   boost::int8_t z() const;
   bool positive() const;
   
-  boost::uint8_t index() const;
-  static const direction_t& index(boost::uint8_t idx);
+  std::uint_fast8_t index() const;
+  static const direction_t& index(std::uint_fast8_t idx);
   bool operator<(const direction_t& other) const;
   bool operator==(const direction_t& other) const;
   bool operator!=(const direction_t& other) const;
@@ -393,11 +393,11 @@ struct face_t{
   
   static const boost::array<face_t, 6>& all();
   static const face_t& get(const direction_t& direction);
-  static const face_t& get(const boost::uint8_t& idx);
+  static const face_t& get(const std::uint_fast8_t& idx);
   
   
-  boost::uint8_t index() const;
-  static const direction_t& index(boost::uint8_t idx);
+  std::uint_fast8_t index() const;
+  static const direction_t& index(std::uint_fast8_t idx);
   bool operator<(const face_t& other) const;
   bool operator==(const face_t& other) const;
   bool operator!=(const face_t& other) const;
@@ -417,9 +417,24 @@ struct corner_t{
   typedef face_t face_type;
   
   
+  /**
+   * Returns a corner that is adjacent in the axis of the direction.
+   * Specifically, it will wrap around the cube if there is no corner
+   * in the specified direction
+   *
+   * @see move()
+   */
   const corner_t& adjacent(const direction_t& direction) const;
-  boost::array<corner_t, 3> adjacent() const;
-  corner_set_t adjacent_set() const;
+  /**
+   * Returns a corner that is the next corner in the specified direction.
+   * Specifically, it will **NOT** wrap around the cube if there is no corner
+   * in the specified direction; but instead return the same corner.
+   *
+   * @see corner_t::adjacent(const direction_t& direction)
+   */
+  const corner_t& move(const direction_t& direction) const;
+  boost::array<corner_t, 3> adjacents() const;
+  corner_set_t adjacents_set() const;
   bool is_adjacent(const corner_t& other) const;
   
   boost::array<face_t, 3> faces() const;
@@ -431,12 +446,12 @@ struct corner_t{
   
   const corner_t& opposite() const;
   
-  static const corner_t& get(boost::uint8_t i);
-  static const corner_t& get(int_fast8_t x, int_fast8_t y, int_fast8_t z);
+  static const corner_t& get(std::uint_fast8_t i);
+  static const corner_t& get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
   static const corner_t& get(const corner_t& corner);
-  static const corner_t& index(boost::uint8_t idx);
+  static const corner_t& index(std::uint_fast8_t idx);
   
-  boost::uint8_t index() const;
+  std::uint_fast8_t index() const;
   bool operator<(const corner_t& other) const;
   bool operator==(const corner_t& other) const;
   bool operator!=(const corner_t& other) const;
@@ -445,18 +460,18 @@ struct corner_t{
   static const boost::array<corner_t, 8>& all();
   
   ///return {-1,1} depending if the corner is in the near side or the far side of the x, respectively
-  int_fast8_t x() const;
+  std::int_fast8_t x() const;
   ///return {-1,1} depending if the corner is in the near side or the far side of the y, respectively
-  int_fast8_t y() const;
+  std::int_fast8_t y() const;
   ///return {-1,1} depending if the corner is in the near side or the far side of the z, respectively
-  int_fast8_t z() const;
+  std::int_fast8_t z() const;
   
   ///return {0,1} depending if the corner is in the near side or the far side of the x, respectively
-  uint_fast8_t ux() const;
+  std::uint_fast8_t ux() const;
   ///return {0,1} depending if the corner is in the near side or the far side of the y, respectively
-  uint_fast8_t uy() const;
+  std::uint_fast8_t uy() const;
   ///return {0,1} depending if the corner is in the near side or the far side of the z, respectively
-  uint_fast8_t uz() const;
+  std::uint_fast8_t uz() const;
   
   
   ///Number of corners
@@ -468,7 +483,7 @@ protected:
   bool mx, my, mz;
 #endif
 private:
-  corner_t(int_fast8_t x, int_fast8_t y, int_fast8_t z);
+  corner_t(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
   corner_t(const std::bitset<3>& bits);
   
   std::bitset<3> bits;

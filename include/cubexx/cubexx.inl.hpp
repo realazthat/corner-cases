@@ -47,7 +47,7 @@ face_t(const direction_t& direction)
 
 
 CORNER_CASES_CUBEXX_INLINE
-boost::uint8_t
+std::uint_fast8_t
 face_t::index() const
 {
   return mdirection.index();
@@ -82,7 +82,7 @@ face_t::get(const direction_t& direction)
 
 CORNER_CASES_CUBEXX_INLINE
 const face_t&
-face_t::get(const boost::uint8_t& idx)
+face_t::get(const std::uint_fast8_t& idx)
 {
   BOOST_ASSERT(idx < all().size());
   return all()[idx];
@@ -322,14 +322,14 @@ boost::int8_t direction_t::z() const
 
 
 CORNER_CASES_CUBEXX_INLINE
-boost::uint8_t direction_t::index() const
+std::uint_fast8_t direction_t::index() const
 {
   return bits.to_ulong();
 }
 
 CORNER_CASES_CUBEXX_INLINE
 const direction_t&
-direction_t::index(boost::uint8_t idx)
+direction_t::index(std::uint_fast8_t idx)
 {
   BOOST_ASSERT(idx < SIZE);
   return all()[idx];
@@ -436,7 +436,7 @@ corner_t(const std::bitset< 3 >& bits)
 
 CORNER_CASES_CUBEXX_INLINE
 corner_t::
-corner_t(int_fast8_t x, int_fast8_t y, int_fast8_t z)
+corner_t(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
   : bits( (x > 0 ? 1 : 0) | (y > 0 ? 2 : 0) | (z > 0 ? 4 : 0))
 {
   
@@ -454,7 +454,7 @@ corner_t(int_fast8_t x, int_fast8_t y, int_fast8_t z)
 CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::
-get(int_fast8_t x, int_fast8_t y, int_fast8_t z)
+get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
 {
   std::bitset<3> bits;
   bits.set(0,x > 0);
@@ -484,7 +484,7 @@ all()
 }
 
 CORNER_CASES_CUBEXX_INLINE
-boost::uint8_t
+std::uint_fast8_t
 corner_t::
 index() const
 {
@@ -494,7 +494,7 @@ index() const
 CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::
-get(boost::uint8_t i)
+get(std::uint_fast8_t i)
 {
   BOOST_ASSERT(i < SIZE);
   return all()[i];
@@ -625,7 +625,7 @@ bool corner_t::operator==(const corner_t& other) const
 
 CORNER_CASES_CUBEXX_INLINE
 const corner_t&
-corner_t::index(boost::uint8_t idx)
+corner_t::index(boost::uint_fast8_t idx)
 {
   return corner_t::get(idx);
 }
