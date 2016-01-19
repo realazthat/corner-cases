@@ -35,7 +35,7 @@ self-documenting functions provided by this library to reason about and manipula
 Example functionality (cubexx) pseudocode:
 
 * `auto corner0 = cubexx::corners_t::get(-1,-1,+1);`
-* `auto direction = cubexx::direction_t::get( 0,-1, 0);`
+* `auto direction = cubexx::direction_t::get( 0,+1, 0);`
 * `auto corner1 = corner0.adjacent(direction);`
 * `auto corner2 = corner1.opposite();`
 
