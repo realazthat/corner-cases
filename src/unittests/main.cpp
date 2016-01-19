@@ -1,6 +1,13 @@
+
+
+
 #include "cubelib/cubelib.h"
-#include "gtest/gtest.h"
 #include "cubelib/formatters.hpp"
+#include "cubexx/cubexx.hpp"
+
+#include "gtest/gtest.h"
+
+
 
 #include <vector>
 #include <fstream>
@@ -64,9 +71,6 @@ TEST_F(CornerTest,corner_indices)
         }
         
     }
-    
-
-
 }
 
 
@@ -512,3 +516,68 @@ TEST_F(CornerTest,direction_formatters)
 
 
 
+
+
+TEST_F(CornerTest,cubexx_corner_unique)
+{
+
+    ///test corner indices
+    {
+        ///mark each corner's index, and test if all the indices get marked off
+        uint32_t bitmask = 0;
+        for (auto corner : cubexx::corner_t::all())
+        {
+            bitmask |= (1 << corner.index());
+        }
+        
+        EXPECT_EQ(bitmask, uint32_t(1 << 8) - 1);
+        
+        
+        
+        ///test corner_t::index()
+        uint32_t index = 0;
+        for (auto corner : cubexx::corner_t::all())
+        {
+            EXPECT_EQ(index, corner.index());
+            
+            EXPECT_EQ(corner, cubexx::corner_t::index(index));
+            
+            auto opposite_corner = corner.opposite();
+            
+            
+            EXPECT_NE(corner, opposite_corner);
+            EXPECT_EQ(corner, opposite_corner.opposite());
+            EXPECT_EQ(-opposite_corner.x(), corner.x());
+            EXPECT_EQ(-opposite_corner.y(), corner.y());
+            EXPECT_EQ(-opposite_corner.z(), corner.z());
+            
+            ++index;
+        }
+        
+    }
+}
+
+TEST_F(CornerTest,cubexx_corner_get)
+{
+
+    ///test corner get
+    {
+        uint8_t mask = 0;
+        
+        for (int x = -1; x <= 1; x += 2)
+        for (int y = -1; y <= 1; y += 2)
+        for (int z = -1; z <= 1; z += 2)
+        {
+            auto corner = cubexx::corner_t::get(x,y,z);
+            
+            EXPECT_EQ(corner.x(), x);
+            EXPECT_EQ(corner.y(), y);
+            EXPECT_EQ(corner.z(), z);
+            
+            mask |= (1 << corner.index());
+        }
+        
+        EXPECT_EQ(mask, uint32_t(1 << 8) - 1);
+
+    }
+}
