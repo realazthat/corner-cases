@@ -379,7 +379,7 @@ bool direction_t::positive() const
 
 CORNER_CASES_CUBEXX_INLINE
 boost::array<direction_t, 4>
-direction_t::adjacent() const
+direction_t::adjacents() const
 {
   boost::array<direction_t, 4> result = {{ direction_t(), direction_t(), direction_t(), direction_t()}};
   std::size_t ri = 0;
@@ -503,7 +503,7 @@ get(boost::uint8_t i)
 CORNER_CASES_CUBEXX_INLINE
 boost::array< corner_t, 3 >
 corner_t::
-adjacent() const
+adjacents() const
 {
   boost::array<corner_t,3> result =
     {{
@@ -517,9 +517,9 @@ adjacent() const
 
 CORNER_CASES_CUBEXX_INLINE
 corner_set_t
-corner_t::adjacent_set() const
+corner_t::adjacents_set() const
 {
-  return corner_set_t(adjacent());
+  return corner_set_t(adjacents());
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -679,8 +679,8 @@ edge_t(const corner_t& a, const corner_t& b)
 {
   BOOST_ASSERT(mcorners.front().index() < mcorners.back().index());
   BOOST_ASSERT(mcorners.front() != mcorners.back());
-  BOOST_ASSERT(mcorners.front().adjacent_set().contains(mcorners.back()));
-  BOOST_ASSERT(mcorners.back().adjacent_set().contains(mcorners.front()));
+  BOOST_ASSERT(mcorners.front().adjacents_set().contains(mcorners.back()));
+  BOOST_ASSERT(mcorners.back().adjacents_set().contains(mcorners.front()));
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -714,21 +714,21 @@ all()
   
   static const boost::array<edge_t, 12> result = 
   {{
-    edge_t(rtf, rtf.adjacent()[0]),
-    edge_t(rtf, rtf.adjacent()[1]),
-    edge_t(rtf, rtf.adjacent()[2]),
+    edge_t(rtf, rtf.adjacents()[0]),
+    edge_t(rtf, rtf.adjacents()[1]),
+    edge_t(rtf, rtf.adjacents()[2]),
     
-    edge_t(rbn, rbn.adjacent()[0]),
-    edge_t(rbn, rbn.adjacent()[1]),
-    edge_t(rbn, rbn.adjacent()[2]),
+    edge_t(rbn, rbn.adjacents()[0]),
+    edge_t(rbn, rbn.adjacents()[1]),
+    edge_t(rbn, rbn.adjacents()[2]),
     
-    edge_t(lbf, lbf.adjacent()[0]),
-    edge_t(lbf, lbf.adjacent()[1]),
-    edge_t(lbf, lbf.adjacent()[2]),
+    edge_t(lbf, lbf.adjacents()[0]),
+    edge_t(lbf, lbf.adjacents()[1]),
+    edge_t(lbf, lbf.adjacents()[2]),
     
-    edge_t(lbn, lbn.adjacent()[0]),
-    edge_t(lbn, lbn.adjacent()[1]),
-    edge_t(lbn, lbn.adjacent()[2])
+    edge_t(lbn, lbn.adjacents()[0]),
+    edge_t(lbn, lbn.adjacents()[1]),
+    edge_t(lbn, lbn.adjacents()[2])
   }};
   
   return result;

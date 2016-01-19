@@ -349,7 +349,7 @@ struct direction_t
   
   const face_t& face() const;
   const direction_t& opposite() const;
-  boost::array<direction_t, 4> adjacent() const;
+  boost::array<direction_t, 4> adjacents() const;
   
   static const direction_t& get(boost::int8_t x, boost::int8_t y, boost::int8_t z);
   static const direction_t& get(const direction_t& direction);
@@ -386,7 +386,7 @@ struct face_t{
   
   const direction_t& direction() const;
   const face_t& opposite() const;
-  boost::array<face_t, 4> adjacent() const;
+  boost::array<face_t, 4> adjacents() const;
   boost::array<corner_t, 4> corners() const;
   corner_set_t corner_set() const;
   boost::array<edge_t, 4> edges() const;
@@ -477,7 +477,7 @@ private:
 
 struct edge_t{
   const boost::array<corner_t, 2>& corners() const;
-  boost::array<edge_t, 4> adjacent() const;
+  boost::array<edge_t, 4> adjacents() const;
   boost::array<face_t, 2> faces() const;
   
   corner_set_t corner_set() const;
