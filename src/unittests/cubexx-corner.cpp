@@ -58,9 +58,37 @@ TEST_F(CUBEXXCornerTest,unique)
         }
         
         EXPECT_EQ(bitmask, uint32_t(1 << 8) - 1);
+    }
+    
+    
+    std::map< std::tuple<int,int,int>, cubexx::corner_t > xyz_values;
+    std::map< std::size_t, cubexx::corner_t > index_values;
+    for (auto corner : cubexx::corner_t::all())
+    {
+        int x = corner.x(), y = corner.y(), z = corner.z();
         
+
+        if (xyz_values.count(std::make_tuple(x,y,z)) > 0)
+        {
+            auto corner0 = xyz_values[std::make_tuple(x,y,z)];
+            ASSERT_TRUE( xyz_values.count(std::make_tuple(x,y,z)) == 0 )
+                << "corner: " << corner
+                << ", (x,y,z): " << "(" << x << "," << y << "," << z << ")"
+                << ", corner0: " << corner0;
+        }
+        xyz_values[std::make_tuple(x,y,z)] = corner;
         
-        
+        if (index_values.count(corner.index()) > 0)
+        {
+            
+            auto corner0 = index_values[corner.index()];
+            ASSERT_TRUE( index_values.count(corner.index()) == 0 )
+                << "corner: " << corner
+                << ", (x,y,z): " << "(" << x << "," << y << "," << z << ")"
+                << ", corner0: " << corner0;
+            
+        }
+        index_values[corner.index()] = corner;
         
     }
 }
