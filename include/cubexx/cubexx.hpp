@@ -29,6 +29,7 @@
 
 #include <bitset>
 #include <cstdint>
+#include <array>
 
 #include <boost/array.hpp>
 #include <boost/integer.hpp>
@@ -372,11 +373,11 @@ struct direction_t
   
   const face_t& face() const;
   const direction_t& opposite() const;
-  boost::array<direction_t, 4> adjacents() const;
+  std::array<direction_t, 4> adjacents() const;
   
   static const direction_t& get(boost::int8_t x, boost::int8_t y, boost::int8_t z);
   static const direction_t& get(const direction_t& direction);
-  static const boost::array<direction_t, 6>& all();
+  static const std::array<direction_t, 6>& all();
   
   boost::int8_t x() const;
   boost::int8_t y() const;
@@ -409,12 +410,12 @@ struct face_t{
   
   const direction_t& direction() const;
   const face_t& opposite() const;
-  boost::array<face_t, 4> adjacents() const;
-  boost::array<corner_t, 4> corners() const;
+  std::array<face_t, 4> adjacents() const;
+  std::array<corner_t, 4> corners() const;
   corner_set_t corner_set() const;
-  boost::array<edge_t, 4> edges() const;
+  std::array<edge_t, 4> edges() const;
   
-  static const boost::array<face_t, 6>& all();
+  static const std::array<face_t, 6>& all();
   static const face_t& get(const direction_t& direction);
   static const face_t& get(const std::uint_fast8_t& idx);
   
@@ -456,14 +457,14 @@ struct corner_t{
    * @see corner_t::adjacent(const direction_t& direction)
    */
   const corner_t& push(const direction_t& direction) const;
-  boost::array<corner_t, 3> adjacents() const;
+  std::array<corner_t, 3> adjacents() const;
   corner_set_t adjacents_set() const;
   bool is_adjacent(const corner_t& other) const;
   
-  boost::array<face_t, 3> faces() const;
+  std::array<face_t, 3> faces() const;
   face_set_t face_set() const;
   
-  boost::array<edge_t, 3> edges() const;
+  std::array<edge_t, 3> edges() const;
   edge_t edge(const direction_t& direction);
   
   
@@ -480,7 +481,7 @@ struct corner_t{
   bool operator!=(const corner_t& other) const;
   
   
-  static const boost::array<corner_t, 8>& all();
+  static const std::array<corner_t, 8>& all();
   
   ///return {-1,1} depending if the corner is in the near side or the far side of the x, respectively
   std::int_fast8_t x() const;
@@ -514,13 +515,13 @@ private:
 
 
 struct edge_t{
-  const boost::array<corner_t, 2>& corners() const;
-  boost::array<edge_t, 4> adjacents() const;
-  boost::array<face_t, 2> faces() const;
+  const std::array<corner_t, 2>& corners() const;
+  std::array<edge_t, 4> adjacents() const;
+  std::array<face_t, 2> faces() const;
   
   corner_set_t corner_set() const;
   
-  static const boost::array<edge_t, 12>& all();
+  static const std::array<edge_t, 12>& all();
   
   bool operator<(const edge_t& other) const;
   
@@ -528,14 +529,14 @@ private:
   edge_t(const corner_t& a, const corner_t& b);
   edge_t();
   
-  boost::array<corner_t, 2> mcorners;
+  std::array<corner_t, 2> mcorners;
 };
 
 struct cube_t{
-  boost::array<face_t, 6> faces() const;
-  const boost::array<corner_t, 8>& corners() const;
-  boost::array<edge_t, 12> edges() const;
-  boost::array<direction_t, 6> directions() const;
+  std::array<face_t, 6> faces() const;
+  const std::array<corner_t, 8>& corners() const;
+  std::array<edge_t, 12> edges() const;
+  std::array<direction_t, 6> directions() const;
   
   static const cube_t& identity();
 private:

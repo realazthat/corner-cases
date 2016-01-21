@@ -55,10 +55,10 @@ face_t::index() const
 
 
 CORNER_CASES_CUBEXX_INLINE
-const boost::array< face_t, 6 >&
+const std::array< face_t, 6 >&
 face_t::all()
 {
-  static const boost::array<face_t, 6> faces = 
+  static const std::array<face_t, 6> faces = 
     {{
       face_t(direction_t::index(0)),
       face_t(direction_t::index(1)),
@@ -102,12 +102,12 @@ const face_t& face_t::opposite() const
 }
 
 CORNER_CASES_CUBEXX_INLINE
-boost::array<corner_t, 4>
+std::array<corner_t, 4>
 face_t::corners() const
 {
   
   /*
-  boost::array<boost::int8_t, 3> direction_components =
+  std::array<boost::int8_t, 3> direction_components =
     {{
       direction.x(),
       direction.y(),
@@ -159,7 +159,7 @@ face_t::corners() const
   
   BOOST_ASSERT(tmp.size() == 4);
   
-  boost::array<corner_t, 4> result =
+  std::array<corner_t, 4> result =
     {{
       tmp[0],
       tmp[1],
@@ -286,11 +286,11 @@ get(const direction_t& direction)
 }
 
 CORNER_CASES_CUBEXX_INLINE
-const boost::array< direction_t, 6 >&
+const std::array< direction_t, 6 >&
 direction_t::
 all()
 {
-  static const boost::array<direction_t, 6> directions =
+  static const std::array<direction_t, 6> directions =
     {{
       direction_t(std::bitset<3>(0)),
       direction_t(std::bitset<3>(1)),
@@ -378,10 +378,10 @@ bool direction_t::positive() const
 }
 
 CORNER_CASES_CUBEXX_INLINE
-boost::array<direction_t, 4>
+std::array<direction_t, 4>
 direction_t::adjacents() const
 {
-  boost::array<direction_t, 4> result = {{ direction_t(), direction_t(), direction_t(), direction_t()}};
+  std::array<direction_t, 4> result = {{ direction_t(), direction_t(), direction_t(), direction_t()}};
   std::size_t ri = 0;
   BOOST_FOREACH(const direction_t& d, direction_t::all())
   {
@@ -465,11 +465,11 @@ get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
 
 
 CORNER_CASES_CUBEXX_INLINE
-const boost::array< corner_t, 8 >&
+const std::array< corner_t, 8 >&
 corner_t::
 all()
 {
-  static const boost::array<corner_t, 8> corners =
+  static const std::array<corner_t, 8> corners =
     {{
       corner_t(std::bitset<3>(0)),
       corner_t(std::bitset<3>(1)),
@@ -501,11 +501,11 @@ get(std::uint_fast8_t i)
 }
 
 CORNER_CASES_CUBEXX_INLINE
-boost::array< corner_t, 3 >
+std::array< corner_t, 3 >
 corner_t::
 adjacents() const
 {
-  boost::array<corner_t,3> result =
+  std::array<corner_t,3> result =
     {{
       corner_t(-x(), y(), z() ),
       corner_t( x(),-y(), z() ),
@@ -574,10 +574,10 @@ bool corner_t::operator<(const corner_t& other) const
 }
 
 CORNER_CASES_CUBEXX_INLINE
-boost::array< face_t, 3 >
+std::array< face_t, 3 >
 corner_t::faces() const
 {
-  boost::array< face_t, 3 > result = 
+  std::array< face_t, 3 > result = 
     {{
       direction_t::get( x() > 0 ? 1 : -1, 0, 0).face(),
       direction_t::get( 0, y() > 0 ? 1 : -1, 0).face(),
@@ -670,10 +670,10 @@ corner_t::is_adjacent(const corner_t& other) const
 
 namespace detail{
   CORNER_CASES_CUBEXX_INLINE
-  boost::array<corner_t, 2>
+  std::array<corner_t, 2>
   make_edge_corners(const corner_t& a, const corner_t& b)
   {
-    boost::array<corner_t, 2> result =
+    std::array<corner_t, 2> result =
     {{
       (a.index() < b.index() ? a : b),
       (a.index() < b.index() ? b : a)
@@ -694,7 +694,7 @@ edge_t(const corner_t& a, const corner_t& b)
 }
 
 CORNER_CASES_CUBEXX_INLINE
-const boost::array<corner_t, 2>&
+const std::array<corner_t, 2>&
 edge_t::
 corners() const
 {
@@ -702,7 +702,7 @@ corners() const
 }
 
 CORNER_CASES_CUBEXX_INLINE
-const boost::array<edge_t, 12>&
+const std::array<edge_t, 12>&
 edge_t::
 all()
 {
@@ -722,7 +722,7 @@ all()
   
   
   
-  static const boost::array<edge_t, 12> result = 
+  static const std::array<edge_t, 12> result = 
   {{
     edge_t(rtf, rtf.adjacents()[0]),
     edge_t(rtf, rtf.adjacents()[1]),
@@ -767,7 +767,7 @@ identity()
 
 
 CORNER_CASES_CUBEXX_INLINE
-const boost::array< corner_t, 8 >&
+const std::array< corner_t, 8 >&
 cube_t::corners() const
 {
   return corner_t::all();
