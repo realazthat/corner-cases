@@ -28,8 +28,6 @@
 
 #include <cassert>
 #include <vector>
-#include <boost/range/irange.hpp>
-#include <boost/utility.hpp>
 
 namespace cubexx{
 
