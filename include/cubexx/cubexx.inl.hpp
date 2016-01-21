@@ -76,7 +76,7 @@ CORNER_CASES_CUBEXX_INLINE
 const face_t&
 face_t::get(const direction_t& direction)
 {
-  BOOST_ASSERT(direction.index() < all().size());
+  assert(direction.index() < all().size());
   return all()[direction.index()];
 }
 
@@ -84,7 +84,7 @@ CORNER_CASES_CUBEXX_INLINE
 const face_t&
 face_t::get(const std::uint_fast8_t& idx)
 {
-  BOOST_ASSERT(idx < all().size());
+  assert(idx < all().size());
   return all()[idx];
 }
 
@@ -137,7 +137,7 @@ face_t::corners() const
     }
   }
   
-  BOOST_ASSERT(corner_set.size() == 4);
+  assert(corner_set.size() == 4);
   std::vector<corner_t> tmp;
   
   for (const corner_t& corner : corner_t::all())
@@ -157,7 +157,7 @@ face_t::corners() const
   }
   */
   
-  BOOST_ASSERT(tmp.size() == 4);
+  assert(tmp.size() == 4);
   
   std::array<corner_t, 4> result =
     {{
@@ -237,11 +237,11 @@ const direction_t&
 direction_t::
 get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
 {
-  BOOST_ASSERT(detail::lxor(detail::lxor(x != 0, y != 0), z != 0));
+  assert(detail::lxor(detail::lxor(x != 0, y != 0), z != 0));
   
-  BOOST_ASSERT(std::abs(x) == 1 || x == 0);
-  BOOST_ASSERT(std::abs(y) == 1 || y == 0);
-  BOOST_ASSERT(std::abs(z) == 1 || z == 0);
+  assert(std::abs(x) == 1 || x == 0);
+  assert(std::abs(y) == 1 || y == 0);
+  assert(std::abs(z) == 1 || z == 0);
   
   
   /**
@@ -281,7 +281,7 @@ const direction_t&
 direction_t::
 get(const direction_t& direction)
 {
-  BOOST_ASSERT(direction.bits.to_ulong() < SIZE);
+  assert(direction.bits.to_ulong() < SIZE);
   return all()[direction.bits.to_ulong()];
 }
 
@@ -331,7 +331,7 @@ CORNER_CASES_CUBEXX_INLINE
 const direction_t&
 direction_t::index(std::uint_fast8_t idx)
 {
-  BOOST_ASSERT(idx < SIZE);
+  assert(idx < SIZE);
   return all()[idx];
 }
 
@@ -367,7 +367,7 @@ const direction_t& direction_t::opposite() const
   std::bitset<3> result_bits = bits;
   result_bits.flip(0);
   
-  BOOST_ASSERT(result_bits.to_ulong() < SIZE);
+  assert(result_bits.to_ulong() < SIZE);
   return all()[ result_bits.to_ulong() ];
 }
 
@@ -387,12 +387,12 @@ direction_t::adjacents() const
   {
     if (d != *this && d != opposite())
     {
-      BOOST_ASSERT(ri < result.size());
+      assert(ri < result.size());
       result[ri++] = d;
     }
   }
   
-  BOOST_ASSERT(ri == 4);
+  assert(ri == 4);
   
   return result;
 }
@@ -496,7 +496,7 @@ const corner_t&
 corner_t::
 get(std::uint_fast8_t i)
 {
-  BOOST_ASSERT(i < SIZE);
+  assert(i < SIZE);
   return all()[i];
 }
 
@@ -687,10 +687,10 @@ edge_t::
 edge_t(const corner_t& a, const corner_t& b)
   : mcorners(detail::make_edge_corners(a,b))
 {
-  BOOST_ASSERT(mcorners.front().index() < mcorners.back().index());
-  BOOST_ASSERT(mcorners.front() != mcorners.back());
-  BOOST_ASSERT(mcorners.front().adjacents_set().contains(mcorners.back()));
-  BOOST_ASSERT(mcorners.back().adjacents_set().contains(mcorners.front()));
+  assert(mcorners.front().index() < mcorners.back().index());
+  assert(mcorners.front() != mcorners.back());
+  assert(mcorners.front().adjacents_set().contains(mcorners.back()));
+  assert(mcorners.back().adjacents_set().contains(mcorners.front()));
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -856,7 +856,7 @@ bool
 set_base_t<derived_t, element_t, N>::
 contains(const element_t& element) const
 {
-  BOOST_ASSERT(element.index() < N);
+  assert(element.index() < N);
   return bits.test(element.index());
 }
 
@@ -867,7 +867,7 @@ derived_t&
 set_base_t<derived_t, element_t, N>::
 operator=(const element_t& element)
 {
-  BOOST_ASSERT(element.index() < N);
+  assert(element.index() < N);
   
   bits.reset();
   bits.set(element.index(), true);
@@ -905,7 +905,7 @@ derived_t&
 set_base_t<derived_t, element_t, N>::
 operator|=(const element_t& element)
 {
-  BOOST_ASSERT(element.index() < N);
+  assert(element.index() < N);
   bits.set(element.index(), true);
   return self();
 }
@@ -948,7 +948,7 @@ typename set_base_t<derived_t, element_t, N>::const_iterator
 set_base_t<derived_t, element_t, N>::
 begin() const
 {
-  BOOST_ASSERT(false && "set_base_t::begin() is broken");
+  assert(false && "set_base_t::begin() is broken");
   return const_iterator(*this);
 }
 
@@ -958,7 +958,7 @@ typename set_base_t<derived_t, element_t, N>::const_iterator
 set_base_t<derived_t, element_t, N>::
 end() const
 {
-  BOOST_ASSERT(false && "set_base_t::end() is broken");
+  assert(false && "set_base_t::end() is broken");
   return const_iterator(*this, N);
 }
 
@@ -1001,7 +1001,7 @@ bool
 set_base_t<derived_t, element_t, N>::
 contains(const std::size_t& idx) const
 {
-  BOOST_ASSERT(idx < N);
+  assert(idx < N);
   return bits.test(idx);
 }
 

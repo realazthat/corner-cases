@@ -30,6 +30,7 @@
 #include <bitset>
 #include <cstdint>
 #include <array>
+#include <cassert>
 
 #include <boost/array.hpp>
 #include <boost/integer.hpp>
@@ -137,14 +138,14 @@ public:
   const_element_set_iterator_t(set_type& set, std::size_t index)
     : mset(&set), mindex(index)
   {
-    BOOST_ASSERT(valid());
+    assert(valid());
   }
   
   CORNER_CASES_CUBEXX_INLINE
   const_element_set_iterator_t(set_type& set)
     : mset(&set), mindex(0)
   {
-    BOOST_ASSERT(valid());
+    assert(valid());
     
     while (mindex < value_type::SIZE)
     {
@@ -155,8 +156,8 @@ public:
       ++mindex;
     }
     
-    BOOST_ASSERT(valid());
-    BOOST_ASSERT(dereferencable() || mindex == value_type::SIZE);
+    assert(valid());
+    assert(dereferencable() || mindex == value_type::SIZE);
     
   }
 
@@ -174,8 +175,8 @@ public:
     )
     : mset(other.mset), mindex(other.mindex)
   {
-    BOOST_ASSERT(other.valid());
-    BOOST_ASSERT(valid());
+    assert(other.valid());
+    assert(valid());
     
     
   }
@@ -192,12 +193,11 @@ private:
   friend class boost::iterator_core_access;
   CORNER_CASES_CUBEXX_INLINE
   void increment() {
-    BOOST_ASSERT(valid());
-      BOOST_ASSERT(valid());
-      BOOST_ASSERT(mset);
-      BOOST_ASSERT(mindex != value_type::SIZE);
-      BOOST_ASSERT(mset->contains(mindex));
-    BOOST_ASSERT(dereferencable());
+    assert(valid());
+      assert(mset);
+      assert(mindex != value_type::SIZE);
+      assert(mset->contains(mindex));
+    assert(dereferencable());
     
     ++mindex;
       
@@ -207,13 +207,13 @@ private:
         break;
       ++mindex;
     }
-    BOOST_ASSERT(valid());
+    assert(valid());
   }
   
   CORNER_CASES_CUBEXX_INLINE
   value_type& dereference() const {
-    BOOST_ASSERT(valid());
-    BOOST_ASSERT(dereferencable());
+    assert(valid());
+    assert(dereferencable());
     return value_type::get(mindex);
   }
   
@@ -254,10 +254,10 @@ private:
               , enabler
             >::type = enabler() )
   {
-    BOOST_ASSERT(other.valid());
+    assert(other.valid());
     mset = other.mset;
     mindex = other.mindex;
-    BOOST_ASSERT(valid());
+    assert(valid());
   }
   
   
