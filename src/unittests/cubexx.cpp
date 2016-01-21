@@ -263,6 +263,55 @@ TEST_F(CUBEXXTest,corner_push_direction)
     }
 }
 
+TEST_F(CUBEXXTest,corner_is_adjacent)
+{
+
+    ///test corner is_adjacent(corner_t)
+    {
+        
+        for (auto corner0 : cubexx::corner_t::all())
+        {
+            
+            for (auto corner1 : cubexx::corner_t::all())
+            {
+                
+                ASSERT_EQ(corner0.is_adjacent(corner1), corner1.is_adjacent(corner0))
+                    << "corner0: " << corner0 << ", corner1: " << corner1;
+                
+                
+                if (corner0 == corner1)
+                {
+                    ASSERT_FALSE(corner0.is_adjacent(corner1))
+                        << "corner0: " << corner0 << ", corner1: " << corner1;
+                }
+                
+                if (corner0.is_adjacent(corner1))
+                    ASSERT_TRUE( !corner0.is_adjacent(corner1) || corner0 != corner1 )
+                        << "adjacency =implies> corner0 != corner1."
+                        << " corner0: " << corner0
+                        << ", corner1: " << corner1
+                        << ", corner0.is_adjacent(corner1): " << (corner0.is_adjacent(corner1) ? "true" : "false");
+                
+                int deltas[] = {corner1.x() - corner0.x(), corner1.y() - corner0.y(), corner1.z() - corner0.z()};
+                
+                int absdeltas[] = {std::abs(deltas[0]), std::abs(deltas[1]), std::abs(deltas[2]) };
+                
+                
+                int absdeltassum = absdeltas[0] + absdeltas[1] + absdeltas[2];
+                
+                ///iff the sum of all the absolute deltas is 2, then it is adjacent
+                ///in other words: if the corners differ from eachother in only one dimension, they are
+                /// adjacent.
+                ASSERT_EQ(corner0.is_adjacent(corner1), absdeltassum == 2)
+                    << "corner0: " << corner0 << ", corner1: " << corner1
+                    << ", absdeltassum: " << absdeltassum;
+            }
+        }
+    }
+}
+
+
+
 
 
 
