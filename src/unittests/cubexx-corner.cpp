@@ -61,25 +61,6 @@ TEST_F(CUBEXXCornerTest,unique)
         
         
         
-        ///test corner_t::index()
-        uint32_t index = 0;
-        for (auto corner : cubexx::corner_t::all())
-        {
-            EXPECT_EQ(index, corner.index());
-            
-            EXPECT_EQ(corner, cubexx::corner_t::index(index));
-            
-            auto opposite_corner = corner.opposite();
-            
-            
-            EXPECT_NE(corner, opposite_corner);
-            EXPECT_EQ(corner, opposite_corner.opposite());
-            EXPECT_EQ(-opposite_corner.x(), corner.x());
-            EXPECT_EQ(-opposite_corner.y(), corner.y());
-            EXPECT_EQ(-opposite_corner.z(), corner.z());
-            
-            ++index;
-        }
         
     }
 }
