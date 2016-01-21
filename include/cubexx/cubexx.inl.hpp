@@ -625,7 +625,7 @@ bool corner_t::operator==(const corner_t& other) const
 
 CORNER_CASES_CUBEXX_INLINE
 const corner_t&
-corner_t::index(boost::uint_fast8_t idx)
+corner_t::index(std::uint_fast8_t idx)
 {
   return corner_t::get(idx);
 }
