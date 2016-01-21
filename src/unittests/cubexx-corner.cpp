@@ -313,6 +313,108 @@ TEST_F(CUBEXXCornerTest,is_adjacent)
 
 
 
+TEST_F(CUBEXXCornerTest,corner_set)
+{
+    cubexx::corner_set_t empty_set;
+    
+    ///its an empty set, should not contain anything
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_FALSE(empty_set.contains(corner));
+        ASSERT_FALSE(empty_set.contains(corner.index()));
+    }
+    
+    std::vector<cubexx::corner_set_t> all_corner_sets;
+    
+    /// every combination of an 8 corner selection
+    for (uint32_t combo = 0; combo < 256; ++combo)
+    {
+        cubexx::corner_set_t corner_set;
+        
+        ///insert the corners in this combination
+        for (auto corner : cubexx::corner_t::all())
+        {
+            bool corner_bit = (combo >> corner.index()) & 1;
+            if ( corner_bit )
+                corner_set |= corner;
+            
+            ASSERT_EQ(corner_set.contains(corner), corner_bit);
+            ASSERT_EQ(corner_set.contains(corner.index()), corner_bit);
+        }
+        ///(double) check the corners in this combination
+        for (auto corner : cubexx::corner_t::all())
+        {
+            bool corner_bit = (combo >> corner.index()) & 1;
+            if ( corner_bit )
+                corner_set |= corner;
+            
+            ASSERT_EQ(corner_bit, corner_set.contains(corner));
+            ASSERT_EQ(corner_bit, corner_set.contains(corner.index()));
+        }
+        
+        ///check size
+        {
+            std::size_t size = 0;
+            for (auto corner : cubexx::corner_t::all())
+            {
+                bool corner_bit = (combo >> corner.index()) & 1;
+                if ( corner_bit )
+                    ++size;
+            }
+            
+            ASSERT_EQ(size, corner_set.size());
+        }
+        all_corner_sets.push_back(corner_set);
+    }
+    
+    ///check operator== and operator!=
+    for (uint32_t combo0 = 0; combo0 < 256; ++combo0)
+    {
+        auto corner_set0 = all_corner_sets[combo0];
+        for (uint32_t combo1 = 0; combo1 < 256; ++combo1)
+        {
+            auto corner_set1 = all_corner_sets[combo1];
+            
+            /// combo0 == combo1 =implies> corner_set0 == corner_set1
+            ASSERT_TRUE(combo0 != combo1 || corner_set0 == corner_set1);
+            ASSERT_TRUE(combo0 != combo1 || !(corner_set0 != corner_set1));
+            /// combo0 == combo1 =implies> corner_set0 != corner_set1
+            ASSERT_TRUE(combo0 == combo1 || corner_set0 != corner_set1);
+            ASSERT_TRUE(combo0 == combo1 || !(corner_set0 == corner_set1));
+        }
+    }
+    
+    ///check begin(), end()
+    for (uint32_t combo = 0; combo < 256; ++combo)
+    {
+        ///we are gonna blank out each bit as we get that corner
+        uint32_t combo_mask = combo;
+        auto corner_set = all_corner_sets[combo];
+        
+        std::size_t count = 0;
+        
+        ///iterate through the set
+        for (auto corner : corner_set)
+        {
+            ///lets count the corners
+            count++;
+            
+            ///make sure this corner is in the combo_mask
+            ASSERT_TRUE( (combo_mask >> corner.index()) & 1 );
+            ///sanity
+            ASSERT_TRUE( corner_set.contains(corner) );
+            
+            ///blank this bit
+            combo_mask ^= 1 << corner.index();
+        }
+        
+        ASSERT_EQ( corner_set.size(), count );
+        ///make sure all the bits are blanked out
+        ASSERT_EQ( uint32_t(0), combo_mask );
+    }
+}
+
+
 
 
 
