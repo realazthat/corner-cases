@@ -375,7 +375,7 @@ struct direction_t
   const direction_t& opposite() const;
   std::array<direction_t, 4> adjacents() const;
   
-  static const direction_t& get(boost::int8_t x, boost::int8_t y, boost::int8_t z);
+  static const direction_t& get(std::int_fast8_t x, std::int_fast8_t y, boost::int8_t z);
   static const direction_t& get(const direction_t& direction);
   static const std::array<direction_t, 6>& all();
   

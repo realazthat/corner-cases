@@ -107,7 +107,7 @@ face_t::corners() const
 {
   
   /*
-  std::array<boost::int8_t, 3> direction_components =
+  std::array<std::int_fast8_t, 3> direction_components =
     {{
       direction.x(),
       direction.y(),
@@ -235,7 +235,7 @@ direction_t::direction_t(const std::bitset< 3 >& bits)
 CORNER_CASES_CUBEXX_INLINE
 const direction_t&
 direction_t::
-get(boost::int8_t x, boost::int8_t y, boost::int8_t z)
+get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
 {
   BOOST_ASSERT(detail::lxor(detail::lxor(x != 0, y != 0), z != 0));
   
@@ -303,19 +303,19 @@ all()
 }
 
 CORNER_CASES_CUBEXX_INLINE
-boost::int8_t direction_t::x() const
+std::int_fast8_t direction_t::x() const
 {
   return (bits[0] ? 1 : -1)  * (bits[2] && !bits[1] ? 1 : 0);
 }
 
 CORNER_CASES_CUBEXX_INLINE
-boost::int8_t direction_t::y() const
+std::int_fast8_t direction_t::y() const
 {
   return (bits[0] ? 1 : -1)  * (!bits[2] && bits[1] ? 1 : 0);
 }
 
 CORNER_CASES_CUBEXX_INLINE
-boost::int8_t direction_t::z() const
+std::int_fast8_t direction_t::z() const
 {
   return (bits[0] ? 1 : -1)  * (!bits[2] && !bits[1] ? 1 : 0);
 }
