@@ -121,7 +121,7 @@ face_t::corners() const
   direction_bits.set(0, mdirection.z() != 0);
   
   corner_set_t corner_set;
-  BOOST_FOREACH(const corner_t& corner, corner_t::all())
+  for(const corner_t& corner : corner_t::all())
   {
     std::bitset<3> corner_bits;
     corner_bits.set(2, corner.x() != 0);
@@ -140,7 +140,7 @@ face_t::corners() const
   BOOST_ASSERT(corner_set.size() == 4);
   std::vector<corner_t> tmp;
   
-  BOOST_FOREACH(const corner_t& corner, corner_t::all())
+  for (const corner_t& corner : corner_t::all())
   {
     if (corner_set.contains(corner))
       tmp.push_back(corner);
@@ -383,7 +383,7 @@ direction_t::adjacents() const
 {
   std::array<direction_t, 4> result = {{ direction_t(), direction_t(), direction_t(), direction_t()}};
   std::size_t ri = 0;
-  BOOST_FOREACH(const direction_t& d, direction_t::all())
+  for (const direction_t& d : direction_t::all())
   {
     if (d != *this && d != opposite())
     {
@@ -920,7 +920,7 @@ set_base_t<derived_t, element_t, N>::
 operator|=(const Sequence& sequence)
 {
   
-  BOOST_FOREACH(const element_t& element, sequence)
+  for(const element_t& element : sequence)
   {
     *this |= element;
   }
