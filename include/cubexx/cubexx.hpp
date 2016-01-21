@@ -32,10 +32,11 @@
 #include <array>
 #include <cassert>
 
-#include <boost/iterator/iterator_facade.hpp>
-#include <boost/type_traits.hpp>
-#include <boost/mpl/and.hpp>
-#include <boost/mpl/logical.hpp>
+#include <type_traits>
+#include <cstddef>
+#include <iterator>
+#include <memory>
+
 
 namespace cubexx{
 
@@ -114,15 +115,59 @@ T wrap_around_2(const T& v)
 
 } // namespace detail
 
+
+/**
+ * @class const_element_set_iterator_t
+ * @brief An iterator for the set_base_t set; as an example this would be what is
+ *          returned from corner_set_t::begin().
+ * 
+ * @param value_type
+ *          The type of the value that the iterator returns when dereferences; as an example
+ *          for the corner_set_t, this would return a const cubexx::corner_t.
+ * @param set_type
+ *          The type of the set that this is an iterator for; as an example, for the iterator
+ *          returned by corner_set_t::begin(), this would be of type corner_set_t.
+ * 
+ * Note that changing the underlying set can invalidate the iterator.
+ *
+ * Note that there are few states an iterator can be in.
+ * * Default constructed
+ *   * Not associated with any container.
+ *   * Only the assignment operation is valid.
+ * * Valid
+ *   * Associated with a container
+ *   * In this state, an iterator is either also "dereferencable" or is the end() iterator
+ * * Invalid
+ *   * Associated with a container
+ *   * Does not represent any item in the container, and cannot be used, it must be discarded. Using such
+ *      an iterator (other than assignment operations) leads to undefined behaviour.
+ *   * In this state, the iterator is certainly not "dereferencable".
+ *   * Such an iterator can result from changing the underlying set after obtaining the iterator.
+ * * Dereferencable
+ *   * Associated with a container
+ *   * Valid
+ *   * The iterator is *not* equivalent to end().
+ *   * In this state the iterator represents an item in the container, and the item may be retrieved.
+ */
 template<typename value_type, typename set_type>
-struct  const_element_set_iterator_t
-  : public boost::iterator_facade<const_element_set_iterator_t<value_type, set_type>,
-                                  value_type,
-                                  boost::forward_traversal_tag>
+struct const_element_set_iterator_t
+  : public std::iterator<std::forward_iterator_tag,
+                                  value_type, std::ptrdiff_t, const value_type*,
+                                  const value_type&>
 {
 private:
+
+  template<typename V, typename S>
+  friend struct const_element_set_iterator_t;
+  
+  ///we will use this later for enable_if (google SFINAE), see below
   struct enabler {};  // a private type avoids misuse
-public:
+    public:
+
+  /**
+   * @brief Default constructor; it is not a "valid" iterator, because it is not associated
+   *        with a particular set.
+   */
   CORNER_CASES_CUBEXX_INLINE
   const_element_set_iterator_t()
     : mset(NULL), mindex(value_type::SIZE)
@@ -130,18 +175,19 @@ public:
     
   }
   
-  CORNER_CASES_CUBEXX_INLINE
-  const_element_set_iterator_t(set_type& set, std::size_t index)
-    : mset(&set), mindex(index)
-  {
-    assert(valid());
-  }
   
+  /**
+   * @brief Constructor, associates the iterator with a set; it finds the first
+   *            valid item in the set, and represents that item; otherwise it
+   *            represents set_type_t::end().
+   * @param set the set this iterator is to be associated with.
+   * @return A valid iterator, though not necessarily dereferencable if the
+   *        set is empty, as it will be equal to set_type_t::end().
+   */
   CORNER_CASES_CUBEXX_INLINE
   const_element_set_iterator_t(set_type& set)
     : mset(&set), mindex(0)
   {
-    assert(valid());
     
     while (mindex < value_type::SIZE)
     {
@@ -157,26 +203,48 @@ public:
     
   }
 
+  /**
+   * @brief Constructor, with explicit index; this allows the caller to
+   *        set the iterator to point to a specific bit in the underlying bitset representation
+   *        of the set. Alternatively, it can point to `SIZE` of the bitset, which indicates a
+   *        non-dereferencable iterator (end()). Note that if index != SIZE, this bit *must* be set;
+   *        in other words, the set *must* contain this item.
+   * @param set the set this iterator is to be associated with.
+   * @param index the specific bit in the underlying bitset representation that this iterator will represent,
+   *        or be equal to `SIZE`, the size of the underlying bitset, to represent and end() iterator.
+   * @return An iterator pointing at the item represented by index.
+   */
+  CORNER_CASES_CUBEXX_INLINE
+  const_element_set_iterator_t(set_type& set, std::size_t index)
+    : mset(&set), mindex(index)
+  {
+    assert(valid());
+  }
+  
+  /**
+   * @brief Copy constructor, or conversion from a non-const version of this iterator to a const one.
+   * @param other the other iterator
+   * @return A copy of the iterator.
+   */
   template <class OtherValue, class OtherSet>
   CORNER_CASES_CUBEXX_INLINE
   const_element_set_iterator_t(
       const_element_set_iterator_t<OtherValue, OtherSet> const& other
-    , typename boost::enable_if<
-          boost::mpl::and_<
-            boost::is_convertible<OtherValue*,value_type*>,
-            boost::is_convertible<OtherSet*,set_type*>
-            >
-        , enabler
-      >::type = enabler()
+    , typename std::enable_if< std::is_convertible<OtherValue*,value_type*>::value, enabler>::type = enabler()
     )
     : mset(other.mset), mindex(other.mindex)
   {
-    assert(other.valid());
-    assert(valid());
     
     
   }
 
+  /**
+   * @brief Assignment.
+   * @param other the other iterator
+   * 
+   * After being assigned, this iterator will point to the same set, and the same item in the set as
+   * @p other.
+   */
   template<typename T>
   CORNER_CASES_CUBEXX_INLINE
   const_element_set_iterator_t& operator=(const T& other)
@@ -185,8 +253,85 @@ public:
     return *this;
   }
 
+  /**
+   * @brief Iterator dereference. Note, calling this on end() or an invalid iterator is an error (undefined behavior).
+   * @return The value represented.
+   */
+  CORNER_CASES_CUBEXX_INLINE
+  const value_type& operator*() const {
+    assert(valid());
+    assert(dereferencable());
+    return value_type::get(mindex);
+  }
+  
+  /**
+   * @brief Iterator dereference. Note, calling this on end() or an invalid iterator is an error (undefined behavior).
+   * @return The value represented.
+   */
+  CORNER_CASES_CUBEXX_INLINE
+  const value_type* operator->() const {
+    assert(valid());
+    assert(dereferencable());
+    return &value_type::get(mindex);
+  }
+  
+  
+  
+  /**
+   * @brief Equality test; tests that the other iterator points to the same set, and the same item in the set
+   *            (or if they are both end() of the same set). Note that invalid iterators are never equal.
+   * @param other compare this to other.
+   * @return true if they are equal.
+   */
+  template <class OtherValue, class OtherSet>
+  CORNER_CASES_CUBEXX_INLINE
+  bool operator==(const const_element_set_iterator_t<OtherValue, OtherSet>& other) const
+  {
+    return
+      ///Invalid iterators are never equal.
+      this->mset != nullptr
+      ///The two iterators are referring to the same set
+      && (this->mset == other.mset
+        ///Or one of them is a default constructed iterator
+        || ( this->mset == NULL || other.mset == NULL ))
+      ///And the indices are equal
+      && this->mindex == other.mindex;
+  }
+  
+  /**
+   * @brief Inequality test.
+   * @param other compare this to other.
+   * @return true if they are not equal
+   * @see operator==()
+   */
+  template <class OtherValue, class OtherSet>
+  CORNER_CASES_CUBEXX_INLINE
+  bool operator!=(const const_element_set_iterator_t<OtherValue, OtherSet>& other) const
+  {
+    return !(*this == other);
+  }
+  
+  /**
+   * @brief Regular iterator pre-increment.
+   */
+  const_element_set_iterator_t& operator++() {
+    increment();
+    return *this;
+  }
+  
+  /**
+   * @brief Regular iterator post-increment.
+   */
+  const_element_set_iterator_t operator++(int) {
+    const_element_set_iterator_t result(*this);
+    increment();
+    return result;
+  }
+  
 private:
-  friend class boost::iterator_core_access;
+  /**
+   * @brief internal self increment.
+   */
   CORNER_CASES_CUBEXX_INLINE
   void increment() {
     assert(valid());
@@ -206,49 +351,41 @@ private:
     assert(valid());
   }
   
-  CORNER_CASES_CUBEXX_INLINE
-  value_type& dereference() const {
-    assert(valid());
-    assert(dereferencable());
-    return value_type::get(mindex);
-  }
-  
-  template <class OtherValue, class OtherSet>
-  CORNER_CASES_CUBEXX_INLINE
-  bool equal(const_element_set_iterator_t<OtherValue, OtherSet> const& other) const
-  {
-    return
-      ///The two iterators are referring to the same set
-      (this->mset == other.mset
-        ///Or one of them is a default constructed iterator
-        || ( this->mset == NULL || other.mset == NULL ))
-      ///And the indices are equal
-      && this->mindex == other.mindex;
-  }
 private:
+  /**
+   * @brief tests if an iterator is valid; an iterator is valid if it is associated with a set,
+   *        and {represents an item in the set, or represents the end() iterator}.
+   * @see dereferencable()
+   */
   CORNER_CASES_CUBEXX_INLINE
   bool valid() const{
-    return mindex <= value_type::SIZE
+    return
+      mset != nullptr &&
+      mindex <= value_type::SIZE &&
       ///If not an end iterator, mset should be set, and mindex should be contained in it
-      && (mindex == value_type::SIZE || ((mset) && mset->contains(mindex)));
+      (mindex == value_type::SIZE || ((mset) && mset->contains(mindex)));
   }
   
+  /**
+   * @brief tests if an iterator is dereferencable; an iterator is dereferencable if
+   *        it is valid (see valid()) and does *NOT* represent end().
+   * @return 
+   * @see valid()
+   */
   CORNER_CASES_CUBEXX_INLINE
   bool dereferencable() const{
-    return valid() && (mset) && mindex != value_type::SIZE && mset->contains(mindex);
+    return valid() && mindex != value_type::SIZE && mset->contains(mindex);
   }
   
+  /**
+   * @brief Internal assignment.
+   * @param other the iterator to assign from.
+   */
   template <class OtherValue, class OtherSet>
   CORNER_CASES_CUBEXX_INLINE
   void
   assign(const_element_set_iterator_t<OtherValue, OtherSet> const& other,
-            typename boost::enable_if<
-                boost::mpl::and_<
-                  boost::is_convertible<OtherValue*,value_type*>,
-                  boost::is_convertible<OtherSet*,set_type*>
-                  >
-              , enabler
-            >::type = enabler() )
+            typename std::enable_if< std::is_convertible<OtherValue*,value_type*>::value, enabler >::type = enabler() )
   {
     assert(other.valid());
     mset = other.mset;
@@ -257,7 +394,13 @@ private:
   }
   
   
+  /**
+   * Pointer to the representative set or nullptr if defaultconstructed.
+   */
   set_type* mset;
+  /**
+   *
+   */
   std::size_t mindex;
   
 };
@@ -297,9 +440,9 @@ struct set_base_t
   derived_t& operator|=(const element_t& element);
   
   template<typename Sequence>
-  derived_t operator|(const Sequence& sequence);
-  derived_t operator|(const derived_t& set);
-  derived_t operator|(const element_t& element);
+  derived_t operator|(const Sequence& sequence) const;
+  derived_t operator|(const derived_t& set) const;
+  derived_t operator|(const element_t& element) const;
   
   bool contains(const element_t& element) const;
   bool contains(const std::size_t& idx) const;
@@ -309,6 +452,7 @@ struct set_base_t
   void clear();
   
   bool operator==(const derived_t& other) const;
+  bool operator!=(const derived_t& other) const;
 private:
   
   derived_t& self();

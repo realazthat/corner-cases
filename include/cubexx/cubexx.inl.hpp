@@ -946,7 +946,6 @@ typename set_base_t<derived_t, element_t, N>::const_iterator
 set_base_t<derived_t, element_t, N>::
 begin() const
 {
-  assert(false && "set_base_t::begin() is broken");
   return const_iterator(*this);
 }
 
@@ -956,7 +955,6 @@ typename set_base_t<derived_t, element_t, N>::const_iterator
 set_base_t<derived_t, element_t, N>::
 end() const
 {
-  assert(false && "set_base_t::end() is broken");
   return const_iterator(*this, N);
 }
 
@@ -987,6 +985,15 @@ set_base_t<derived_t, element_t, N>::
 operator==(const derived_t& other) const
 {
   return bits == other.bits;
+}
+
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+bool
+set_base_t<derived_t, element_t, N>::
+operator!=(const derived_t& other) const
+{
+  return bits != other.bits;
 }
 
 
