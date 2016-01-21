@@ -935,9 +935,8 @@ derived_t&
 set_base_t<derived_t, element_t, N>::
 self()
 {
-  
-  typedef boost::is_base_of< set_base_t<derived_t, element_t, N>, derived_t > derives_correctly;
-  BOOST_STATIC_ASSERT( derives_correctly::value );
+  static_assert( std::is_base_of< set_base_t<derived_t, element_t, N>, derived_t >::value
+                , "Something's really wrong with our CRTP" );
   
   
   return static_cast<derived_t&>(*this);
