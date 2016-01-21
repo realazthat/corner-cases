@@ -35,7 +35,8 @@ script:
     - cd build
     - cmake .. "-DGTEST_LIB=gtest;pthread"
     - cmake --build .
-    - ./unittests
+    - ./cubelib-unittests
+    - ./cubexx-unittests
 
 
 
