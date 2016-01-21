@@ -6,6 +6,15 @@ compiler:
   - gcc
   - clang
 
+env:
+  global:
+    - CMAKE_GENERATOR="Unix Makefiles"
+    - CMAKE_DEPS_BUILD_TYPE=Release
+    - GTEST_BUILD_TYPE=Release
+  matrix:
+    - CMAKE_BUILD_TYPE=Release SGFXAPI_BUILD_TYPE=Release
+    - CMAKE_BUILD_TYPE=Debug SGFXAPI_BUILD_TYPE=Debug
+    
 addons:
   apt:
     sources:
@@ -14,14 +23,11 @@ addons:
     - gcc-4.8
     - g++-4.8
     - clang
-    - libgtest-dev
-    #- wget
-    #- ca-certificates #for wget
+    #- libgtest-dev
 
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
-    #- sudo bash ./scripts/download-install-cmake3.sh
-    - sudo CMAKE_GENERATOR="Unix Makefiles" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-googletest.sh
+    - sudo CMAKE_GENERATOR="$CMAKE_GENERATOR" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-googletest.sh
 
 
 script:
