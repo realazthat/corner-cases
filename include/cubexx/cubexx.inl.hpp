@@ -205,7 +205,7 @@ face_t::operator<(const face_t& other) const
 CORNER_CASES_CUBEXX_INLINE
 direction_t::
 direction_t()
-  : bits(BOOST_BINARY(111))
+  : bits(0b111)
 {
 
 #ifndef NDEBUG
