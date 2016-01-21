@@ -29,7 +29,23 @@ protected:
 
 
 
-TEST_F(CUBEXXCornerTest,corner_unique)
+TEST_F(CUBEXXCornerTest,index)
+{
+
+
+    ///test corner_t::index() and corner_t::index(index)
+    uint32_t index = 0;
+    for (auto corner : cubexx::corner_t::all())
+    {
+        EXPECT_EQ(index, corner.index());
+        
+        EXPECT_EQ(corner, cubexx::corner_t::index(index));
+        
+        ++index;
+    }
+}
+
+TEST_F(CUBEXXCornerTest,unique)
 {
 
     ///test corner indices
@@ -68,7 +84,7 @@ TEST_F(CUBEXXCornerTest,corner_unique)
     }
 }
 
-TEST_F(CUBEXXCornerTest,corner_opposite)
+TEST_F(CUBEXXCornerTest,opposite)
 {
 
     ///test corner_t::opposite_corner()
@@ -93,24 +109,9 @@ TEST_F(CUBEXXCornerTest,corner_opposite)
 }
 
 
-TEST_F(CUBEXXCornerTest,corner_index)
-{
 
 
-    ///test corner_t::index() and corner_t::index(index)
-    uint32_t index = 0;
-    for (auto corner : cubexx::corner_t::all())
-    {
-        EXPECT_EQ(index, corner.index());
-        
-        EXPECT_EQ(corner, cubexx::corner_t::index(index));
-        
-        ++index;
-    }
-}
-
-
-TEST_F(CUBEXXCornerTest,corner_get)
+TEST_F(CUBEXXCornerTest,get)
 {
 
     ///test corner get
@@ -135,7 +136,7 @@ TEST_F(CUBEXXCornerTest,corner_get)
     }
 }
 
-TEST_F(CUBEXXCornerTest,corner_adjacent_direction)
+TEST_F(CUBEXXCornerTest,adjacent_direction)
 {
 
     ///test corner adjacent(direction_t)
@@ -192,7 +193,7 @@ TEST_F(CUBEXXCornerTest,corner_adjacent_direction)
 }
 
 
-TEST_F(CUBEXXCornerTest,corner_push_direction)
+TEST_F(CUBEXXCornerTest,push_direction)
 {
 
     ///test corner push(direction_t)
@@ -254,7 +255,7 @@ TEST_F(CUBEXXCornerTest,corner_push_direction)
     }
 }
 
-TEST_F(CUBEXXCornerTest,corner_is_adjacent)
+TEST_F(CUBEXXCornerTest,is_adjacent)
 {
 
     ///test corner is_adjacent(corner_t)
