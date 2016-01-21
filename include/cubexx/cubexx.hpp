@@ -91,6 +91,29 @@ bool has_exactly_one_bit(const std::bitset<N>& v)
 }
 
 
+template<typename T>
+CORNER_CASES_CUBEXX_INLINE
+T clamp(const T& v, const T& a, const T& b)
+{
+    return std::max(std::min(v, b), a);
+}
+
+template<typename T>
+CORNER_CASES_CUBEXX_INLINE
+T safemod(const T& v, const T& modulo)
+{
+    assert(false);
+}
+
+
+template<typename T>
+CORNER_CASES_CUBEXX_INLINE
+T wrap_around_2(const T& v)
+{
+    return v > 1 ? -1 : (v < -1 ? +1 : v);
+}
+
+
 } // namespace detail
 
 template<typename value_type, typename set_type>
@@ -422,7 +445,7 @@ struct corner_t{
    * Specifically, it will wrap around the cube if there is no corner
    * in the specified direction
    *
-   * @see move()
+   * @see corner_t::push()
    */
   const corner_t& adjacent(const direction_t& direction) const;
   /**
@@ -432,7 +455,7 @@ struct corner_t{
    *
    * @see corner_t::adjacent(const direction_t& direction)
    */
-  const corner_t& move(const direction_t& direction) const;
+  const corner_t& push(const direction_t& direction) const;
   boost::array<corner_t, 3> adjacents() const;
   corner_set_t adjacents_set() const;
   bool is_adjacent(const corner_t& other) const;

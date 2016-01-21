@@ -635,9 +635,19 @@ const corner_t&
 corner_t::
 adjacent(const direction_t& direction) const
 {
-  return corner_t::get(detail::lxor(x() > 0, (direction.x() != 0)),
-                       detail::lxor(y() > 0, (direction.y() != 0)),
-                       detail::lxor(z() > 0, (direction.z() != 0)));
+  
+  return corner_t::get(detail::wrap_around_2(x() + 2*direction.x()),
+                       detail::wrap_around_2(y() + 2*direction.y()),
+                       detail::wrap_around_2(z() + 2*direction.z()));
+}
+CORNER_CASES_CUBEXX_INLINE
+const corner_t&
+corner_t::
+push(const direction_t& direction) const
+{
+  return corner_t::get(detail::clamp(x() + direction.x()*2, -1, +1),
+                       detail::clamp(y() + direction.y()*2, -1, +1),
+                       detail::clamp(z() + direction.z()*2, -1, +1));
 }
 
 CORNER_CASES_CUBEXX_INLINE
