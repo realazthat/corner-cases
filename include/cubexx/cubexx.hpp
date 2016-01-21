@@ -375,13 +375,13 @@ struct direction_t
   const direction_t& opposite() const;
   std::array<direction_t, 4> adjacents() const;
   
-  static const direction_t& get(std::int_fast8_t x, std::int_fast8_t y, boost::int8_t z);
+  static const direction_t& get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
   static const direction_t& get(const direction_t& direction);
   static const std::array<direction_t, 6>& all();
   
-  boost::int8_t x() const;
-  boost::int8_t y() const;
-  boost::int8_t z() const;
+  std::int_fast8_t x() const;
+  std::int_fast8_t y() const;
+  std::int_fast8_t z() const;
   bool positive() const;
   
   std::uint_fast8_t index() const;
@@ -395,7 +395,7 @@ struct direction_t
 protected:
 #ifndef NDEBUG
   int mx, my, mz;
-  boost::uint8_t mindex;
+  std::uint8_t mindex;
 #endif
 private:
   std::bitset<3> bits;
