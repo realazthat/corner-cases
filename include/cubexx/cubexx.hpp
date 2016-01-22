@@ -229,7 +229,24 @@ private:
   template <class OtherValue, class OtherSet>
   CORNER_CASES_CUBEXX_INLINE
   const_element_set_iterator_t(
-      const_element_set_iterator_t<OtherValue, OtherSet> const& other
+      const const_element_set_iterator_t<OtherValue, OtherSet>& other
+    )
+    : mset(other.mset), mindex(other.mindex)
+  {
+    
+    static_assert( std::is_convertible< OtherValue*,value_type >::value
+                , "Converting iterator with non-convertible value type;"
+                  " prolly trying to convert a const iterator with a const value type to a non-const iterator" );
+    static_assert( std::is_convertible< OtherSet*,set_type >::value
+                , "Converting iterator with non-convertible container type;"
+                  " prolly trying to convert a const iterator with a const value type to a non-const iterator" );
+    
+  }
+  /*
+  template <class OtherValue, class OtherSet>
+  CORNER_CASES_CUBEXX_INLINE
+  const_element_set_iterator_t(
+      const const_element_set_iterator_t<OtherValue, OtherSet>& other
     , typename std::enable_if< std::is_convertible<OtherValue*,value_type*>::value, enabler>::type = enabler()
     )
     : mset(other.mset), mindex(other.mindex)
@@ -237,6 +254,7 @@ private:
     
     
   }
+   */
 
   /**
    * @brief Assignment.
@@ -454,6 +472,7 @@ struct set_base_t
   bool operator==(const derived_t& other) const;
   bool operator!=(const derived_t& other) const;
 private:
+  
   
   derived_t& self();
   const derived_t& self() const;
