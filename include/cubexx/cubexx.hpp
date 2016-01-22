@@ -545,18 +545,16 @@ struct direction_t
   bool operator==(const direction_t& other) const;
   bool operator!=(const direction_t& other) const;
   
-  bool valid() const;
-  static const std::size_t SIZE = 6;
-protected:
-#ifndef NDEBUG
-  int mx, my, mz;
-  std::uint8_t mindex;
-#endif
-private:
-  std::bitset<3> bits;
-  
-  ///Default constructs an invalid direction with index >= @c SIZE
+  ///Default constructs a null direction_t
   direction_t();
+  
+  bool is_null() const;
+  bool is_sane() const;
+  static const direction_t& null_direction();
+  static const std::size_t SIZE = 6;
+private:
+  std::bitset<3> mbits;
+  
   
   direction_t(const std::bitset<3>& bits);
 };

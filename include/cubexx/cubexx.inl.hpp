@@ -203,30 +203,47 @@ face_t::operator<(const face_t& other) const
 CORNER_CASES_CUBEXX_INLINE
 direction_t::
 direction_t()
-  : bits(0b111)
+  : mbits(6)
 {
-
-#ifndef NDEBUG
-  mx = x();
-  my = y();
-  mz = z();
-  mindex = index();
-#endif
+  assert(is_null());
+  assert(is_sane());
 }
 
 
 CORNER_CASES_CUBEXX_INLINE
 direction_t::direction_t(const std::bitset< 3 >& bits)
-  : bits(bits)
+  : mbits(bits)
 {
-#ifndef NDEBUG
-  mx = x();
-  my = y();
-  mz = z();
-  mindex = index();
-#endif
+  assert(is_sane());
 }
 
+
+
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+direction_t::
+is_null() const
+{
+    return mbits == 6;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+direction_t::
+is_sane() const
+{
+    return mbits.to_ulong() <= 6;
+}
+CORNER_CASES_CUBEXX_INLINE
+const direction_t&
+direction_t::
+null_direction()
+{
+    static const direction_t internal_null = direction_t();
+    assert(internal_null.is_null());
+    return internal_null;
+}
 
 
 
@@ -235,6 +252,7 @@ const direction_t&
 direction_t::
 get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
 {
+  
   assert(detail::lxor(detail::lxor(x != 0, y != 0), z != 0));
   
   assert(std::abs(x) == 1 || x == 0);
@@ -256,7 +274,7 @@ get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
   
   direction_t direction(std::bitset<3>(0));
   
-  std::bitset<3>& bits = direction.bits;
+  std::bitset<3>& bits = direction.mbits;
   if ( x != 0 )
   {
     bits.set(2);
@@ -279,8 +297,10 @@ const direction_t&
 direction_t::
 get(const direction_t& direction)
 {
-  assert(direction.bits.to_ulong() < SIZE);
-  return all()[direction.bits.to_ulong()];
+  assert(!direction.is_null());
+  assert(direction.is_sane());
+  assert(direction.mbits.to_ulong() < SIZE);
+  return all()[direction.mbits.to_ulong()];
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -303,26 +323,34 @@ all()
 CORNER_CASES_CUBEXX_INLINE
 std::int_fast8_t direction_t::x() const
 {
-  return (bits[0] ? 1 : -1)  * (bits[2] && !bits[1] ? 1 : 0);
+  assert(!is_null());
+  assert(is_sane());
+  return (mbits[0] ? 1 : -1)  * (mbits[2] && !mbits[1] ? 1 : 0);
 }
 
 CORNER_CASES_CUBEXX_INLINE
 std::int_fast8_t direction_t::y() const
 {
-  return (bits[0] ? 1 : -1)  * (!bits[2] && bits[1] ? 1 : 0);
+  assert(!is_null());
+  assert(is_sane());
+  return (mbits[0] ? 1 : -1)  * (!mbits[2] && mbits[1] ? 1 : 0);
 }
 
 CORNER_CASES_CUBEXX_INLINE
 std::int_fast8_t direction_t::z() const
 {
-  return (bits[0] ? 1 : -1)  * (!bits[2] && !bits[1] ? 1 : 0);
+  assert(!is_null());
+  assert(is_sane());
+  return (mbits[0] ? 1 : -1)  * (!mbits[2] && !mbits[1] ? 1 : 0);
 }
 
 
 CORNER_CASES_CUBEXX_INLINE
 std::uint_fast8_t direction_t::index() const
 {
-  return bits.to_ulong();
+  assert(!is_null());
+  assert(is_sane());
+  return mbits.to_ulong();
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -337,18 +365,30 @@ CORNER_CASES_CUBEXX_INLINE
 bool direction_t::
 operator<(const direction_t& other) const
 {
-  return bits.to_ulong() < other.bits.to_ulong();
+  assert(!is_null());
+  assert(is_sane());
+  assert(!other.is_null());
+  assert(other.is_sane());
+  return mbits.to_ulong() < other.mbits.to_ulong();
 }
 
 CORNER_CASES_CUBEXX_INLINE bool direction_t::operator==(const direction_t& other) const
 {
-  return bits == other.bits;
+  assert(is_sane());
+  assert(other.is_sane());
+  return mbits == other.mbits;
 }
 
 CORNER_CASES_CUBEXX_INLINE bool direction_t::operator!=(const direction_t& other) const
 {
-  return bits != other.bits;
+  assert(is_sane());
+  assert(other.is_sane());
+  return mbits != other.mbits;
 }
+
+
+
+
 
 
 
@@ -362,7 +402,7 @@ const face_t& direction_t::face() const
 CORNER_CASES_CUBEXX_INLINE
 const direction_t& direction_t::opposite() const
 {
-  std::bitset<3> result_bits = bits;
+  std::bitset<3> result_bits = mbits;
   result_bits.flip(0);
   
   assert(result_bits.to_ulong() < SIZE);
@@ -372,7 +412,7 @@ const direction_t& direction_t::opposite() const
 CORNER_CASES_CUBEXX_INLINE
 bool direction_t::positive() const
 {
-  return bits.test(0);
+  return mbits.test(0);
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -464,8 +504,9 @@ const corner_t&
 corner_t::
 null_corner()
 {
-    static corner_t internal_null_corner = corner_t();
-    return internal_null_corner;
+    static corner_t internal_null = corner_t();
+    assert(internal_null.is_null());
+    return internal_null;
 }
 
 CORNER_CASES_CUBEXX_INLINE
