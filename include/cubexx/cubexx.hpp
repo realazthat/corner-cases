@@ -657,15 +657,17 @@ struct corner_t{
   static const std::size_t SIZE = 8;
   corner_t();
   
+  bool is_null() const;
+  static const corner_t& null_corner();
 protected:
 #ifndef NDEBUG
   bool mx, my, mz;
 #endif
 private:
   corner_t(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
-  corner_t(const std::bitset<3>& bits);
+  corner_t(const std::bitset<4>& bits);
   
-  std::bitset<3> bits;
+  std::bitset<4> mbits;
 };
 
 
