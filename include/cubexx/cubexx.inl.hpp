@@ -917,7 +917,6 @@ operator|(const Sequence& sequence) const
 
 template<typename derived_t, typename element_t, std::size_t N>
 CORNER_CASES_CUBEXX_INLINE
-CORNER_CASES_CUBEXX_INLINE
 derived_t&
 set_base_t<derived_t, element_t, N>::
 operator|=(const derived_t& set)
