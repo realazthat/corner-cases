@@ -12,6 +12,12 @@ set(GTEST_LIB_DIR "./libs/googletest/googletest/googletest/build" CACHE STRING "
 set(GTEST_LIB "gtest" CACHE STRING "Libs for googletest")
 
 
+set(CPPFORMAT_INCLUDE_DIR "./libs/cppformat/cppformat"
+    CACHE STRING "Paths to cppformat includes")
+set(CPPFORMAT_LIB_DIR "./libs/cppformat/cppformat/build"
+    CACHE STRING "Paths to cppformat libs")
+set(CPPFORMAT_LIB "cppformat"
+    CACHE STRING "Libs for cppformat")
 
 if (MSVC)
     add_definitions(-DNOMINMAX -D_CRT_SECURE_NO_WARNINGS)
@@ -27,12 +33,13 @@ endif()
 include_directories(
     ./include
     ./src
+    ${CPPFORMAT_INCLUDE_DIR}
     ${GTEST_INCLUDE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR} #for generated headers
     
     )
 link_directories(
-
+    ${CPPFORMAT_LIB_DIR}
     ${GTEST_LIB_DIR}
 )
 
@@ -90,6 +97,7 @@ add_executable(cubexx-unittests
 
 target_link_libraries(cubexx-unittests
     cubexx-formatters
+    ${CPPFORMAT_LIB}
     ${GTEST_LIB}
     
     )

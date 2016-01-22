@@ -28,6 +28,7 @@ addons:
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
     - sudo CMAKE_GENERATOR="$CMAKE_GENERATOR" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-googletest.sh
+    - sudo CMAKE_GENERATOR="$CMAKE_GENERATOR" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-cppformat.sh
 
 
 script:

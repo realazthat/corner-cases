@@ -89,6 +89,11 @@ Targets:
 * cubexx-unittests
     * Unit tests for cubexx
     * Requires C++11, gtest
+    * Requires [cppformat](https://github.com/cppformat/cppformat)
+        * Formatting strings for C++, mostly useful for debugging, error messages etc.
+        * Tested with commit [4797ca0](https://github.com/cppformat/cppformat/commit/4797ca025eef17b8df42edd8c9bde83c43806bf1)
+            ([browse files](https://github.com/cppformat/cppformat/tree/4797ca025eef17b8df42edd8c9bde83c43806bf1))
+        * BSD License
 
 **corner-cases/cubexx**
 -----
