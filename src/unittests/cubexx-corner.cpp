@@ -653,6 +653,7 @@ TEST_F(CUBEXXCornerTest,corner_set)
     
     
     ///check ::operator<<
+    /*
     for (uint32_t combo0 = 0; combo0 < 256; ++combo0)
     {
         const auto corner_set = all_corner_sets[combo0];
@@ -707,6 +708,7 @@ TEST_F(CUBEXXCornerTest,corner_set)
             << ", formatted: " << formatted;
         
     }
+    */
     
 }
 
