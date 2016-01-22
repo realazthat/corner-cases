@@ -378,7 +378,7 @@ private:
       mset != nullptr &&
       mindex <= value_type::SIZE &&
       ///If not an end iterator, mset should be set, and mindex should be contained in it
-      (mindex == value_type::SIZE || ((mset) && mset->contains(mindex)));
+      (mindex == value_type::SIZE || mset->contains(mindex));
   }
   
   /**
@@ -402,10 +402,8 @@ private:
   assign(const_element_set_iterator_t<OtherValue, OtherSet> const& other,
             typename std::enable_if< std::is_convertible<OtherValue*,value_type*>::value, enabler >::type = enabler() )
   {
-    assert(other.valid());
     mset = other.mset;
     mindex = other.mindex;
-    assert(valid());
   }
   
   
@@ -414,7 +412,7 @@ private:
    */
   set_type* mset;
   /**
-   *
+   * Position of the iterator within the bitset/container.
    */
   std::size_t mindex;
   
