@@ -25,9 +25,9 @@ CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 ::std::ostream& operator<<(::std::ostream& out, const direction_t& direction)
 {
 
-    out << "(" << (int)direction.x()
-             << "," << (int)direction.y()
-             << "," << (int)direction.z()
+    out << "(" << (direction.x() > 0 ? "+" : "") << (int)direction.x()
+             << "," << (direction.y() > 0 ? "+" : "") << (int)direction.y()
+             << "," << (direction.z() > 0 ? "+" : "") << (int)direction.z()
              << ")";
     return out;
 }
@@ -50,9 +50,10 @@ CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 ::std::ostream& operator<<(::std::ostream& out, const corner_t& corner)
 {
-    out << "(" << (int)corner.x()
-             << "," << (int)corner.y()
-             << "," << (int)corner.z()
+    
+    out << "(" << (corner.x() > 0 ? "+" : "") << (int)corner.x()
+             << "," << (corner.y() > 0 ? "+" : "") << (int)corner.y()
+             << "," << (corner.z() > 0 ? "+" : "") << (int)corner.z()
              << ")";
     return out;
 }
