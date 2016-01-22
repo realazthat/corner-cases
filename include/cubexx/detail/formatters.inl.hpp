@@ -33,6 +33,21 @@ CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 }
 
 CORNER_CASES_CUBEXX_FORMATTERS_INLINE
+::std::ostream& operator<<(::std::ostream& out, const corner_set_t& corner_set)
+{
+    std::size_t i = 0;
+    
+    out << "[";
+    for (auto corner : corner_set)
+    {
+        out << (i++ != 0 ? ", " : "") << corner;
+    }
+    out << "]";
+    
+    return out;
+}
+
+CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 ::std::ostream& operator<<(::std::ostream& out, const corner_t& corner)
 {
     out << "(" << (int)corner.x()
@@ -50,6 +65,14 @@ CORNER_CASES_CUBEXX_FORMATTERS_INLINE
     
     out << "(" << corner0 << " <=> " << corner1 << ")";
     return out;
+}
+
+CORNER_CASES_CUBEXX_FORMATTERS_INLINE
+std::string tostr(const corner_set_t& corner_set)
+{
+    std::ostringstream out;
+    out << corner_set;
+    return out.str();
 }
 
 CORNER_CASES_CUBEXX_FORMATTERS_INLINE
