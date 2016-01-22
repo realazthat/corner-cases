@@ -29,6 +29,11 @@ if (CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_WARNINGS} -fvisibility-inlines-hidden")
 endif()
 
+set(C11_CXX_FLAGS "")
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    set(CXX_WARNINGS "-Wall -Wextra -Wpointer-arith -Wcast-align -fstrict-aliasing")
+    set(C11_CXX_FLAGS "-std=c++11")
+endif()
 
 include_directories(
     ./include
@@ -69,7 +74,8 @@ set_property(TARGET cubelib-formatters PROPERTY CXX_STANDARD 98)
 set_property(TARGET cubelib-formatters PROPERTY CXX_STANDARD_REQUIRED ON)
 ###############################################################################
 add_library(cubexx-formatters src/cubexx/formatters.cpp)
-   
+
+target_compile_options(cubexx-formatters PRIVATE "${C11_CXX_FLAGS}")
 set_property(TARGET cubexx-formatters PROPERTY CXX_STANDARD 11)
 set_property(TARGET cubexx-formatters PROPERTY CXX_STANDARD_REQUIRED ON)
 
@@ -84,6 +90,7 @@ target_link_libraries(cubelib-unittests
     cubelib-formatters
     ${GTEST_LIB}
     )
+target_compile_options(cubelib-unittests PRIVATE "${C11_CXX_FLAGS}")
 
 set_property(TARGET cubelib-unittests PROPERTY CXX_STANDARD 11)
 set_property(TARGET cubelib-unittests PROPERTY CXX_STANDARD_REQUIRED ON)
@@ -102,6 +109,7 @@ target_link_libraries(cubexx-unittests
     
     )
 
+target_compile_options(cubexx-unittests PRIVATE "${C11_CXX_FLAGS}")
 set_property(TARGET cubexx-unittests PROPERTY CXX_STANDARD 11)
 set_property(TARGET cubexx-unittests PROPERTY CXX_STANDARD_REQUIRED ON)
 ###############################################################################
