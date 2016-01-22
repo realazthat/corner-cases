@@ -185,8 +185,8 @@ private:
    *        set is empty, as it will be equal to set_type_t::end().
    */
   CORNER_CASES_CUBEXX_INLINE
-  const_element_set_iterator_t(set_type& set)
-    : mset(&set), mindex(0)
+  const_element_set_iterator_t(set_type* set)
+    : mset(set), mindex(0)
   {
     
     while (mindex < value_type::SIZE)
@@ -215,8 +215,8 @@ private:
    * @return An iterator pointing at the item represented by index.
    */
   CORNER_CASES_CUBEXX_INLINE
-  const_element_set_iterator_t(set_type& set, std::size_t index)
-    : mset(&set), mindex(index)
+  const_element_set_iterator_t(set_type* set, std::size_t index)
+    : mset(set), mindex(index)
   {
     assert(valid());
   }
