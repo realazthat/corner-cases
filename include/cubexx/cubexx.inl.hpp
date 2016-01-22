@@ -965,10 +965,20 @@ self()
 {
   static_assert( std::is_base_of< set_base_t<derived_t, element_t, N>, derived_t >::value
                 , "Something's really wrong with our CRTP" );
-  
-  
   return static_cast<derived_t&>(*this);
 }
+
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+const derived_t&
+set_base_t<derived_t, element_t, N>::
+self() const
+{
+  static_assert( std::is_base_of< set_base_t<derived_t, element_t, N>, derived_t >::value
+                , "Something's really wrong with our CRTP" );
+  return *static_cast<const derived_t*>(this);
+}
+
 
 template<typename derived_t, typename element_t, std::size_t N>
 CORNER_CASES_CUBEXX_INLINE
