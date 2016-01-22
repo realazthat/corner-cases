@@ -360,12 +360,9 @@ private:
     
     ++mindex;
       
-    while (mindex < value_type::SIZE)
-    {
-      if (dereferencable())
-        break;
+    while (mindex < value_type::SIZE && !dereferencable())
       ++mindex;
-    }
+    
     assert(valid());
   }
   
