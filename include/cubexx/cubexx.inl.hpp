@@ -832,7 +832,7 @@ template<typename derived_t, typename element_t, std::size_t N>
 CORNER_CASES_CUBEXX_INLINE
 set_base_t<derived_t, element_t, N>::
 set_base_t()
-  : bits(0)
+  : mbits(0)
 {
 
 }
@@ -843,7 +843,7 @@ template<typename Sequence>
 CORNER_CASES_CUBEXX_INLINE
 set_base_t<derived_t, element_t, N>::
 set_base_t(const Sequence& sequence)
-  : bits(0)
+  : mbits(0)
 {
   *this |= sequence;
 }
@@ -855,7 +855,7 @@ set_base_t<derived_t, element_t, N>::
 contains(const element_t& element) const
 {
   assert(element.index() < N);
-  return bits.test(element.index());
+  return mbits.test(element.index());
 }
 
 
@@ -867,8 +867,8 @@ operator=(const element_t& element)
 {
   assert(element.index() < N);
   
-  bits.reset();
-  bits.set(element.index(), true);
+  mbits.reset();
+  mbits.set(element.index(), true);
   return self();
 }
 
@@ -880,7 +880,7 @@ derived_t&
 set_base_t<derived_t, element_t, N>::
 operator=(const derived_t& set)
 {
-  bits = set.bits;
+  mbits = set.mbits;
   return self();
 }
 
@@ -888,11 +888,12 @@ operator=(const derived_t& set)
   
 template<typename derived_t, typename element_t, std::size_t N>
 CORNER_CASES_CUBEXX_INLINE
+CORNER_CASES_CUBEXX_INLINE
 derived_t&
 set_base_t<derived_t, element_t, N>::
 operator|=(const derived_t& set)
 {
-  bits |= set.bits;
+  mbits |= set.mbits;
   
   return self();
 }
@@ -904,7 +905,7 @@ set_base_t<derived_t, element_t, N>::
 operator|=(const element_t& element)
 {
   assert(element.index() < N);
-  bits.set(element.index(), true);
+  mbits.set(element.index(), true);
   return self();
 }
 
@@ -946,7 +947,7 @@ typename set_base_t<derived_t, element_t, N>::const_iterator
 set_base_t<derived_t, element_t, N>::
 begin() const
 {
-  return const_iterator(*this);
+  return const_iterator(&self());
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
@@ -955,7 +956,7 @@ typename set_base_t<derived_t, element_t, N>::const_iterator
 set_base_t<derived_t, element_t, N>::
 end() const
 {
-  return const_iterator(*this, N);
+  return const_iterator(&self(), N);
 }
 
 
@@ -965,7 +966,7 @@ std::size_t
 set_base_t<derived_t, element_t, N>::
 size() const
 {
-  return bits.count();
+  return mbits.count();
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
@@ -974,7 +975,7 @@ void
 set_base_t<derived_t, element_t, N>::
 clear()
 {
-  bits.reset();
+  mbits.reset();
 }
 
 
@@ -984,7 +985,7 @@ bool
 set_base_t<derived_t, element_t, N>::
 operator==(const derived_t& other) const
 {
-  return bits == other.bits;
+  return mbits == other.mbits;
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
@@ -993,7 +994,7 @@ bool
 set_base_t<derived_t, element_t, N>::
 operator!=(const derived_t& other) const
 {
-  return bits != other.bits;
+  return mbits != other.mbits;
 }
 
 
@@ -1007,11 +1008,19 @@ set_base_t<derived_t, element_t, N>::
 contains(const std::size_t& idx) const
 {
   assert(idx < N);
-  return bits.test(idx);
+  return mbits.test(idx);
 }
 
 
 
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+const std::bitset<N>&
+set_base_t<derived_t, element_t, N>::
+bits() const
+{
+  return mbits;
+}
 
 
 

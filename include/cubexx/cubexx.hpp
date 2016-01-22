@@ -438,7 +438,6 @@ struct set_base_t
   
   template<typename Sequence>
   set_base_t(const Sequence& sequence);
-  set_base_t(const element_t& element);
   set_base_t(const derived_t& set);
   set_base_t();
   
@@ -466,13 +465,15 @@ struct set_base_t
   
   bool operator==(const derived_t& other) const;
   bool operator!=(const derived_t& other) const;
+  
+  const std::bitset<N>& bits() const;
 private:
   
   
   derived_t& self();
   const derived_t& self() const;
   
-  std::bitset<N> bits;
+  std::bitset<N> mbits;
 };
 
 
