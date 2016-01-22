@@ -6,10 +6,17 @@ project(cubelib)
 cmake_policy(SET CMP0015 NEW)
 
 
+set(GTEST_LIB_DEFAULT "gtest")
+
+if (MSVC)
+
+else()
+    set(GTEST_LIB_DEFAULT "${GTEST_LIB_DEFAULT};pthread")
+endif()
 
 set(GTEST_INCLUDE_DIR "./libs/googletest/googletest/googletest/include" CACHE STRING "Paths to googletest includes")
 set(GTEST_LIB_DIR "./libs/googletest/googletest/googletest/build" CACHE STRING "Paths to googletest libs")
-set(GTEST_LIB "gtest" CACHE STRING "Libs for googletest")
+set(GTEST_LIB "gtest;pthread" CACHE STRING "Libs for googletest")
 
 
 set(CPPFORMAT_INCLUDE_DIR "./libs/cppformat/cppformat"
