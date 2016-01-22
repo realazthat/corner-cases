@@ -885,7 +885,36 @@ operator=(const derived_t& set)
 }
 
 
-  
+
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+derived_t
+set_base_t<derived_t, element_t, N>::
+operator|(const derived_t& set) const
+{
+  return derived_t(*this) |= set;
+}
+
+
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+derived_t
+set_base_t<derived_t, element_t, N>::
+operator|(const element_t& element) const
+{
+  return derived_t(*this) | element;
+}
+
+template<typename derived_t, typename element_t, std::size_t N>
+template<typename Sequence>
+CORNER_CASES_CUBEXX_INLINE
+derived_t
+set_base_t<derived_t, element_t, N>::
+operator|(const Sequence& sequence) const
+{
+  return derived_t(*this) | sequence;
+}
+
 template<typename derived_t, typename element_t, std::size_t N>
 CORNER_CASES_CUBEXX_INLINE
 CORNER_CASES_CUBEXX_INLINE
