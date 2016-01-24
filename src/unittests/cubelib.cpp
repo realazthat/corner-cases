@@ -1,9 +1,14 @@
+
+
+
 #include "cubelib/cubelib.h"
-#include "gtest/gtest.h"
 #include "cubelib/formatters.hpp"
 
+#include "gtest/gtest.h"
+
+
+
 #include <vector>
-#include <fstream>
 #include <tuple>
 
 
@@ -17,7 +22,7 @@ int main(int argc, char **argv){
 
 
 
-struct CornerTest : public ::testing::Test {
+struct CubelibTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
         
@@ -34,7 +39,7 @@ protected:
 
 
 
-TEST_F(CornerTest,corner_indices)
+TEST_F(CubelibTest,corner_indices)
 {
 
     ///test corner indices
@@ -64,13 +69,10 @@ TEST_F(CornerTest,corner_indices)
         }
         
     }
-    
-
-
 }
 
 
-TEST_F(CornerTest,corner_null)
+TEST_F(CubelibTest,corner_null)
 {
 
     
@@ -91,7 +93,7 @@ TEST_F(CornerTest,corner_null)
 
 
 
-TEST_F(CornerTest,get_corner_by_int3_unitx)
+TEST_F(CubelibTest,get_corner_by_int3_unitx)
 {
 
     ///test get_corner_by_int3() with unit x,y,z
@@ -130,7 +132,7 @@ TEST_F(CornerTest,get_corner_by_int3_unitx)
 }
 
 
-TEST_F(CornerTest,get_corner_by_int3)
+TEST_F(CubelibTest,get_corner_by_int3)
 {
 
     ///test get_corner_by_int3()
@@ -167,7 +169,7 @@ TEST_F(CornerTest,get_corner_by_int3)
 }
 
 
-TEST_F(CornerTest,opposite_corner)
+TEST_F(CubelibTest,opposite_corner)
 {
     ///test opposite_corner
     {
@@ -186,7 +188,7 @@ TEST_F(CornerTest,opposite_corner)
 }
 
 
-TEST_F(CornerTest,direction_indices)
+TEST_F(CubelibTest,direction_indices)
 {
     ///test direction indices
     {
@@ -217,7 +219,7 @@ TEST_F(CornerTest,direction_indices)
     }
 }
 
-TEST_F(CornerTest,null_direction)
+TEST_F(CubelibTest,null_direction)
 {
 
     
@@ -235,7 +237,7 @@ TEST_F(CornerTest,null_direction)
 
 }
 
-TEST_F(CornerTest,get_direction_by_int3)
+TEST_F(CubelibTest,get_direction_by_int3)
 {
 
     
@@ -277,7 +279,7 @@ TEST_F(CornerTest,get_direction_by_int3)
 
 
 
-TEST_F(CornerTest,calc_cnr_adj_cnr)
+TEST_F(CubelibTest,calc_cnr_adj_cnr)
 {
 
     
@@ -330,7 +332,7 @@ TEST_F(CornerTest,calc_cnr_adj_cnr)
 }
 
 
-TEST_F(CornerTest,cnr_adj_cnrs)
+TEST_F(CubelibTest,cnr_adj_cnrs)
 {
 
     
@@ -385,7 +387,7 @@ TEST_F(CornerTest,cnr_adj_cnrs)
 
 
 
-TEST_F(CornerTest,move_corner)
+TEST_F(CubelibTest,move_corner)
 {
 
     for (corner_t corner0 : all_corners)
@@ -454,7 +456,7 @@ TEST_F(CornerTest,move_corner)
 
 
 
-TEST_F(CornerTest,corner_formatters)
+TEST_F(CubelibTest,corner_formatters)
 {
 
     
@@ -479,7 +481,7 @@ TEST_F(CornerTest,corner_formatters)
     
 }
 
-TEST_F(CornerTest,direction_formatters)
+TEST_F(CubelibTest,direction_formatters)
 {
 
     
@@ -507,6 +509,8 @@ TEST_F(CornerTest,direction_formatters)
     
     
 }
+
+
 
 
 
