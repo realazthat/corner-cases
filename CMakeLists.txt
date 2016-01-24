@@ -105,6 +105,7 @@ set_property(TARGET cubelib-unittests PROPERTY CXX_STANDARD_REQUIRED ON)
 add_executable(cubexx-unittests
     src/unittests/cubexx.cpp
     src/unittests/cubexx-corner.cpp
+    src/unittests/cubexx-direction.cpp
     
     )
 
