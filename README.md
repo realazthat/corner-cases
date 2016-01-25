@@ -11,11 +11,22 @@ dealing with data structures based on cubes, such as octrees.
 
 
 
-Branch  | Status
+Branch  | Build Status
 ---     | ---
 master  | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)
 develop | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=develop)](https://travis-ci.org/realazthat/corner-cases)
 
+
+Incomplete
+---
+
+* cubelib
+    * [ ] cubelib::edge
+    * [ ] API docs
+    * [ ] Motivating examples
+* cubexx
+    * [ ] API docs
+    * [ ] Motivating examples
 
 Motivation
 ----
