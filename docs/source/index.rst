@@ -20,10 +20,10 @@ dealing with data structures based on cubes, such as octrees.
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    
-   cubexx-edge
-   cubexx-corner
+   cubelib-reference
+   cubexx-reference
   
 
 Indices and tables
