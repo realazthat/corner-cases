@@ -607,7 +607,7 @@ struct corner_t{
    * Specifically, it will **NOT** wrap around the cube if there is no corner
    * in the specified direction; but instead return the same corner.
    *
-   * @see corner_t::adjacent(const direction_t& direction)
+   * @see corner_t::adjacent()
    */
   const corner_t& push(const direction_t& direction) const;
   std::array<corner_t, 3> adjacents() const;
