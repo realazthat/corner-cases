@@ -701,7 +701,7 @@ private:
 
 } // namespace cubexx
 
-#include <cubexx/cubexx.inl.hpp>
+#include <cubexx/detail/cubexx.inl.hpp>
 
 
 #endif // CORNER_CASES_CUBEXX_CUBEXX_HPP
