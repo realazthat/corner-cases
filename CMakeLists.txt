@@ -42,6 +42,8 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(C11_CXX_FLAGS "-std=c++11")
 endif()
 
+add_subdirectory(docs)
+
 include_directories(
     ./include
     ./src
@@ -80,6 +82,12 @@ add_library(cubelib-formatters src/cubelib/formatters.cpp)
 set_property(TARGET cubelib-formatters PROPERTY CXX_STANDARD 98)
 set_property(TARGET cubelib-formatters PROPERTY CXX_STANDARD_REQUIRED ON)
 ###############################################################################
+add_library(cubexx src/cubexx/cubexx.cpp)
+
+target_compile_options(cubexx PRIVATE "${C11_CXX_FLAGS}")
+set_property(TARGET cubexx PROPERTY CXX_STANDARD 11)
+set_property(TARGET cubexx PROPERTY CXX_STANDARD_REQUIRED ON)
+###############################################################################
 add_library(cubexx-formatters src/cubexx/formatters.cpp)
 
 target_compile_options(cubexx-formatters PRIVATE "${C11_CXX_FLAGS}")
@@ -111,6 +119,7 @@ add_executable(cubexx-unittests
 
 
 target_link_libraries(cubexx-unittests
+    cubexx
     cubexx-formatters
     ${CPPFORMAT_LIB}
     ${GTEST_LIB}
