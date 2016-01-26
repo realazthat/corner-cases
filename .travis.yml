@@ -34,12 +34,12 @@ install:
 
 
 script:
-    - mkdir build
-    - cd build
+    - mkdir build && cd build
     - cmake .. "-DGTEST_LIB=gtest;pthread"
     - cmake --build .
     - ./cubelib-unittests
     - ./cubexx-unittests
+    - cd ../
 
 
 after_success:
