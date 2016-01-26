@@ -751,13 +751,393 @@ namespace detail{
 
 CORNER_CASES_CUBEXX_INLINE
 edge_t::
-edge_t(const corner_t& a, const corner_t& b)
-  : mcorners(detail::make_edge_corners(a,b))
+edge_t()
+  : mbits(0b1100)
 {
-  assert(mcorners.front().index() < mcorners.back().index());
-  assert(mcorners.front() != mcorners.back());
-  assert(mcorners.front().adjacents_set().contains(mcorners.back()));
-  assert(mcorners.back().adjacents_set().contains(mcorners.front()));
+  assert(is_sane());
+  assert(is_null());
+}
+CORNER_CASES_CUBEXX_INLINE
+edge_t::
+edge_t(const std::bitset<4>& bits)
+  : mbits(bits)
+{
+  assert(is_sane());
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+edge_t::
+is_null() const
+{
+  return mbits == std::bitset<4>(0b1100);
+}
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+edge_t::
+is_sane() const
+{
+  return mbits.to_ulong() <= 0b1100;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const edge_t&
+edge_t::
+null_edge()
+{
+  static const auto internal_result = edge_t();
+  return internal_result;
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
+std::uint_fast8_t
+edge_t::
+base_axis() const
+{
+  auto calc = [](const std::bitset<4>& bits){
+    auto base_axis = std::uint_fast8_t((bits >> 2).to_ulong());
+    assert(base_axis < 3);
+    return std::uint_fast8_t(base_axis);
+  };
+  
+  static const std::uint_fast8_t internal_result[] = {
+      calc(edge_t::get(0).mbits)
+    , calc(edge_t::get(1).mbits)
+    , calc(edge_t::get(2).mbits)
+    , calc(edge_t::get(3).mbits)
+    , calc(edge_t::get(4).mbits)
+    , calc(edge_t::get(5).mbits)
+    , calc(edge_t::get(6).mbits)
+    , calc(edge_t::get(7).mbits)
+    , calc(edge_t::get(8).mbits)
+    , calc(edge_t::get(9).mbits)
+    , calc(edge_t::get(10).mbits)
+    , calc(edge_t::get(11).mbits)
+  };
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  
+  return internal_result[index()];
+}
+
+CORNER_CASES_CUBEXX_INLINE
+std::uint_fast8_t
+edge_t::
+secondary_axis() const
+{
+  auto calc = [](const std::bitset<4>& bits){
+    auto base_axis = std::uint_fast8_t((bits >> 2).to_ulong());
+    assert(base_axis < 3);
+    
+#ifdef CUBEXX_EDGE_MODULAR_AXIS_STRATEGY
+    /// one strategy
+    return std::uint_fast8_t(base_axis + 1 % 3);
+#else
+    /// another strategy
+    return std::uint_fast8_t(base_axis != 0 ? 0 : 1);
+#endif
+  };
+  
+  static const std::uint_fast8_t internal_result[] = {
+      calc(edge_t::get(0).mbits)
+    , calc(edge_t::get(1).mbits)
+    , calc(edge_t::get(2).mbits)
+    , calc(edge_t::get(3).mbits)
+    , calc(edge_t::get(4).mbits)
+    , calc(edge_t::get(5).mbits)
+    , calc(edge_t::get(6).mbits)
+    , calc(edge_t::get(7).mbits)
+    , calc(edge_t::get(8).mbits)
+    , calc(edge_t::get(9).mbits)
+    , calc(edge_t::get(10).mbits)
+    , calc(edge_t::get(11).mbits)
+  };
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  
+  return internal_result[index()];
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
+std::uint_fast8_t
+edge_t::
+tertiary_axis() const
+{
+  auto calc = [](const std::bitset<4>& bits){
+    auto base_axis = std::uint_fast8_t((bits >> 2).to_ulong());
+    assert(base_axis < 3);
+    
+#ifdef CUBEXX_EDGE_MODULAR_AXIS_STRATEGY
+    /// one strategy
+    return std::uint_fast8_t(base_axis + 2 % 3);
+#else
+    /// another strategy
+    return std::uint_fast8_t(base_axis != 2 ? 1 : 0);
+#endif
+  };
+  
+  static const std::uint_fast8_t internal_result[] = {
+      calc(edge_t::get(0).mbits)
+    , calc(edge_t::get(1).mbits)
+    , calc(edge_t::get(2).mbits)
+    , calc(edge_t::get(3).mbits)
+    , calc(edge_t::get(4).mbits)
+    , calc(edge_t::get(5).mbits)
+    , calc(edge_t::get(6).mbits)
+    , calc(edge_t::get(7).mbits)
+    , calc(edge_t::get(8).mbits)
+    , calc(edge_t::get(9).mbits)
+    , calc(edge_t::get(10).mbits)
+    , calc(edge_t::get(11).mbits)
+  };
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  
+  return internal_result[index()];
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+edge_t::
+project_secondary() const
+{
+  assert(!is_null());
+  assert(is_sane());
+  return mbits.test(0);
+}
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+edge_t::
+project_tertiary() const
+{
+  assert(!is_null());
+  assert(is_sane());
+  return mbits.test(1);
+}
+
+
+
+CORNER_CASES_CUBEXX_INLINE
+const edge_t&
+edge_t::
+get(std::uint_fast8_t base_axis, bool project_secondary, bool project_tertiary)
+{
+  assert(base_axis < 3);
+  
+  
+  std::uint_fast8_t bits = base_axis << 2;
+  
+  bits |= (project_secondary ? 1 : 0) << 0;
+  bits |= (project_tertiary ? 1 : 0) << 1;
+  
+  assert(bits < 12);
+  
+  const edge_t& result = edge_t::get(bits);
+  
+  assert(result.base_axis() == base_axis);
+  assert(result.project_secondary() == project_secondary);
+  assert(result.project_tertiary() == project_tertiary);
+  
+  return result;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const edge_t&
+edge_t::
+get(std::uint_fast8_t idx)
+{
+  assert(idx < 12);
+  const auto& result = all()[idx];
+  
+  assert(!result.is_null());
+  assert(result.is_sane());
+  
+  return result;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+std::uint_fast8_t
+edge_t::
+index() const
+{
+  assert(!is_null());
+  assert(is_sane());
+  
+  std::uint_fast8_t result = mbits.to_ulong();
+  assert(result < SIZE());
+  return result;
+}
+
+
+
+
+CORNER_CASES_CUBEXX_INLINE
+const corner_t&
+edge_t::
+calc_corner0() const
+{
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  int xyz[] = {-1, -1, -1};
+  
+  xyz[secondary_axis()] += project_secondary() ? 2 : 0;
+  xyz[tertiary_axis()] += project_tertiary() ? 2 : 0;
+  return corner_t::get( xyz[0], xyz[1], xyz[2] );
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const corner_t&
+edge_t::
+calc_corner1() const
+{
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  int xyz[] = {-1, -1, -1};
+  
+  xyz[secondary_axis()] += project_secondary() ? 2 : 0;
+  xyz[tertiary_axis()] += project_tertiary() ? 2 : 0;
+  xyz[base_axis()] += 2;
+  return corner_t::get( xyz[0], xyz[1], xyz[2] );
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const corner_t&
+edge_t::
+corner0() const
+{
+  static const corner_t internal_results[] = {
+      edge_t::get(0).calc_corner0()
+    , edge_t::get(1).calc_corner0()
+    , edge_t::get(2).calc_corner0()
+    , edge_t::get(3).calc_corner0()
+    , edge_t::get(4).calc_corner0()
+    , edge_t::get(5).calc_corner0()
+    , edge_t::get(6).calc_corner0()
+    , edge_t::get(7).calc_corner0()
+    , edge_t::get(8).calc_corner0()
+    , edge_t::get(9).calc_corner0()
+    , edge_t::get(10).calc_corner0()
+    , edge_t::get(11).calc_corner0()
+  };
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  return internal_results[index()];
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
+const corner_t&
+edge_t::
+corner1() const
+{
+  static const corner_t internal_results[] = {
+      edge_t::get(0).calc_corner1()
+    , edge_t::get(1).calc_corner1()
+    , edge_t::get(2).calc_corner1()
+    , edge_t::get(3).calc_corner1()
+    , edge_t::get(4).calc_corner1()
+    , edge_t::get(5).calc_corner1()
+    , edge_t::get(6).calc_corner1()
+    , edge_t::get(7).calc_corner1()
+    , edge_t::get(8).calc_corner1()
+    , edge_t::get(9).calc_corner1()
+    , edge_t::get(10).calc_corner1()
+    , edge_t::get(11).calc_corner1()
+  };
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  return internal_results[index()];
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
+const edge_t&
+edge_t::
+calc_opposite() const
+{
+  assert(!is_null());
+  assert(is_sane());
+  
+  return edge_t::get(base_axis(), !project_secondary(), !project_tertiary());
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const edge_t&
+edge_t::
+opposite() const
+{
+  
+  static const edge_t internal_results[] = {
+      edge_t::get(0).calc_opposite()
+    , edge_t::get(1).calc_opposite()
+    , edge_t::get(2).calc_opposite()
+    , edge_t::get(3).calc_opposite()
+    , edge_t::get(4).calc_opposite()
+    , edge_t::get(5).calc_opposite()
+    , edge_t::get(6).calc_opposite()
+    , edge_t::get(7).calc_opposite()
+    , edge_t::get(8).calc_opposite()
+    , edge_t::get(9).calc_opposite()
+    , edge_t::get(10).calc_opposite()
+    , edge_t::get(11).calc_opposite()
+  };
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  return internal_results[index()];
+}
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+edge_t::
+operator==(const edge_t& other) const
+{
+  assert(is_sane());
+  assert(other.is_sane());
+  return mbits == other.mbits;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+edge_t::
+operator!=(const edge_t& other) const
+{
+  assert(is_sane());
+  assert(other.is_sane());
+  return mbits != other.mbits;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+edge_t::
+operator<(const edge_t& other) const
+{
+  assert(is_sane());
+  assert(!is_null());
+  assert(other.is_sane());
+  assert(!other.is_null());
+  return index() < other.index();
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -765,7 +1145,25 @@ const std::array<corner_t, 2>&
 edge_t::
 corners() const
 {
-  return mcorners;
+  static const std::array<corner_t, 2> internal_results[] = {
+      std::array<corner_t, 2>{edge_t::get(0).calc_corner0(), edge_t::get(0).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(1).calc_corner0(), edge_t::get(1).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(2).calc_corner0(), edge_t::get(2).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(3).calc_corner0(), edge_t::get(3).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(4).calc_corner0(), edge_t::get(4).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(5).calc_corner0(), edge_t::get(5).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(6).calc_corner0(), edge_t::get(6).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(7).calc_corner0(), edge_t::get(7).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(8).calc_corner0(), edge_t::get(8).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(9).calc_corner0(), edge_t::get(9).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(10).calc_corner0(), edge_t::get(10).calc_corner1()}
+    , std::array<corner_t, 2>{edge_t::get(11).calc_corner0(), edge_t::get(11).calc_corner1()}
+  };
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  
+  return internal_results[ index() ];
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -774,38 +1172,39 @@ edge_t::
 all()
 {
   
-  ///right top far
-  static const corner_t& rtf = corner_t::get( true, true, true);
-  
-  ///right bottom near
-  static const corner_t& rbn = corner_t::get( true,false,false);
-  
-  ///left bottom, far
-  static const corner_t& lbf = corner_t::get(false,false, true);
-  
-  ///left top near
-  static const corner_t& lbn = corner_t::get(false, true,false);
-  
   
   
   
   static const std::array<edge_t, 12> result = 
   {{
-    edge_t(rtf, rtf.adjacents()[0]),
-    edge_t(rtf, rtf.adjacents()[1]),
-    edge_t(rtf, rtf.adjacents()[2]),
+    //x-based edge, no projection
+    edge_t(std::bitset<4>(0b0000)),
+    //x-based edge, y-projected
+    edge_t(std::bitset<4>(0b0001)),
+    //x-based edge, z-projected
+    edge_t(std::bitset<4>(0b0010)),
+    //x-based edge, yz-projected
+    edge_t(std::bitset<4>(0b0011)),
     
-    edge_t(rbn, rbn.adjacents()[0]),
-    edge_t(rbn, rbn.adjacents()[1]),
-    edge_t(rbn, rbn.adjacents()[2]),
+    //y-based edge, no projection
+    edge_t(std::bitset<4>(0b0100)),
+    //y-based edge, x-projected
+    edge_t(std::bitset<4>(0b0101)),
+    //y-based edge, z-projected
+    edge_t(std::bitset<4>(0b0110)),
+    //y-based edge, xz-projected
+    edge_t(std::bitset<4>(0b0111)),
     
-    edge_t(lbf, lbf.adjacents()[0]),
-    edge_t(lbf, lbf.adjacents()[1]),
-    edge_t(lbf, lbf.adjacents()[2]),
     
-    edge_t(lbn, lbn.adjacents()[0]),
-    edge_t(lbn, lbn.adjacents()[1]),
-    edge_t(lbn, lbn.adjacents()[2])
+    //z-based edge, no projection
+    edge_t(std::bitset<4>(0b1000)),
+    //z-based edge, x-projected
+    edge_t(std::bitset<4>(0b1001)),
+    //z-based edge, y-projected
+    edge_t(std::bitset<4>(0b1010)),
+    //z-based edge, xy-projected
+    edge_t(std::bitset<4>(0b1011)),
+    
   }};
   
   return result;

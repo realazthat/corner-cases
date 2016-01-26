@@ -664,22 +664,136 @@ private:
 };
 
 
+/**
+ * Represents an edge of a cube. There are 12 edges in a cube.
+ *
+ */
 struct edge_t{
+  /**
+   * Retrieve a list of (2) corners associated with this edge.
+   */
   const std::array<corner_t, 2>& corners() const;
-  std::array<edge_t, 4> adjacents() const;
-  std::array<face_t, 2> faces() const;
   
-  corner_set_t corner_set() const;
+  const corner_t& corner0() const;
+  const corner_t& corner1() const;
   
+  /**
+   * Retrieve the set of corners associated with this edge.
+   */
+  const corner_set_t& corner_set() const;
+  
+  /**
+   * Retrieve a list of (4) edges that are adjacent with this edge.
+   *
+   */
+  const std::array<edge_t, 4>& adjacents() const;
+  
+  ///Retrieve a list of (2) faces that are adjacent with this edge.
+  const std::array<face_t, 2>& faces() const;
+  
+  
+  /**
+   * Retrieve a list of (2) adjacent edges associated with a particular corner of the edge.
+   */
+  const std::array<edge_t, 2>& adjacents(const corner_t& corner) const;
+  
+  ///Retrieve a list of all (12) edges on the cube.
   static const std::array<edge_t, 12>& all();
   
-  bool operator<(const edge_t& other) const;
   
-private:
-  edge_t(const corner_t& a, const corner_t& b);
+  
+  ///Retrieve the edge on the opposite side of the cube.
+  const edge_t& opposite() const;
+  
+  
+  ///Default construct a "null" edge.
   edge_t();
   
-  std::array<corner_t, 2> mcorners;
+  ///Test if an edge is a "null" edge.
+  bool is_null() const;
+  
+  bool is_sane() const;
+  
+  ///Retrieve the "null" edge.
+  static const edge_t& null_edge();
+  
+  /**
+   * Retrieve an edge by its index.
+   * 
+   * @see index()
+   */
+  static const edge_t& get(std::uint_fast8_t idx);
+  
+  /**
+   * Retrieves an edge by the following descriptive logic:
+   *
+   * First, choose a base-axis, the X axis, the Y axis or the Z axis (0,1, or 2 respectively).
+   *
+   * Second, let us define the "secondary-axis" as the first non-base-axis in (X,Y,Z), and the "tertiary-axis"
+   * as the remaining non-base-axis.
+   *
+   * Finally, you can "project" the axis across the cube in the direction of the secondary or tertiary axes.
+   *
+   * There are four combinations of projection: project none, project the secondary only, project the tertiary only,
+   * and project it across both, which would give an edge on the far side of the cube.
+   */
+  static const edge_t& get(std::uint_fast8_t axis, bool project_secondary, bool project_tertiary);
+  static const edge_t& get(const corner_t& corner0, const corner_t& corner1);
+  
+  std::uint_fast8_t base_axis() const;
+  std::uint_fast8_t secondary_axis() const;
+  std::uint_fast8_t tertiary_axis() const;
+  bool project_secondary() const;
+  bool project_tertiary() const;
+  
+  ///Retrieve a numeric 0-based index for the edge, for use in indexing when storing in an array, or for comparison
+  /// when storing in a container requiring comparison. The index will be less than SIZE. The "null" edge
+  /// has no index, and it is illegal to call index() on it.
+  std::uint_fast8_t index() const;
+  ///A comparison operator for using the edge in an std::set-like container.
+  bool operator<(const edge_t& other) const;
+  
+  ///Equality operator, can be used between null edge and non-null-edges etc. Two null edges are equal.
+  bool operator==(const edge_t& other) const;
+  ///Inequality operator, can be used between null edge and non-null-edges etc. Two null edges are equal.
+  bool operator!=(const edge_t& other) const;
+  
+  ///Indicates how many edges there are in total.
+  CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE() { return 12; }
+private:
+  ///internal ctor
+  edge_t(const std::bitset<4>& bits);
+  
+  /**
+   * Representation:
+   *
+   * `edge description possibilities = {base-axis-x, base-axis-y, base-axis-z, null}*{4 projections}`
+   *
+   * `projections possibilities = {no projection, project axis a, project axis b, project both axis a and axis b}
+   *
+   * `axis a,b` are the remaining 2 axis for the `base-axis` of the edge.
+   *
+   * bit packing as follows:
+   * 
+   * ```
+   * 
+   * mbits := 0bBBTS
+   * 
+   * BB    := the base axis; 00 is x, 01 is y, 10 is z, and 11 is used for null.
+   * 
+   * T     := bit to indicate if *t*ertiary axis is projected.
+   * 
+   * P     := bit to indicate if *s*econdary axis is projected.
+   * ```
+   * Some examples: 0b0010, means the edge on the x-axis, projected along the z-axis (which is tertiary when the base axis is x).
+   
+   */
+  std::bitset<4> mbits;
+  
+  
+  const corner_t& calc_corner0() const;
+  const corner_t& calc_corner1() const;
+  const edge_t& calc_opposite() const;
 };
 
 struct cube_t{
