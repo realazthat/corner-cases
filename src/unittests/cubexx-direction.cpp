@@ -27,6 +27,10 @@ protected:
 };
 
 
+TEST_F(CUBEXXDirectionTest,SIZE)
+{
+    ASSERT_EQ(6U, cubexx::direction_t::SIZE());
+}
 
 TEST_F(CUBEXXDirectionTest,sanity)
 {
@@ -64,7 +68,7 @@ TEST_F(CUBEXXDirectionTest,index)
     {
         EXPECT_EQ(index, direction.index());
         
-        EXPECT_EQ(direction, cubexx::direction_t::index(index));
+        EXPECT_EQ(direction, cubexx::direction_t::get(index));
         
         
         ++index;
@@ -153,7 +157,7 @@ TEST_F(CUBEXXDirectionTest,get)
 
     ///test direction get(int,int,int) and get(direction_t)
     {
-        uint8_t mask = 0;
+        uint32_t mask = 0;
         
         for (int dim = 0; dim < 3; ++dim)
         for (int sign = -1; sign <= 1; sign += 2)
@@ -177,7 +181,7 @@ TEST_F(CUBEXXDirectionTest,get)
             mask |= (1 << direction.index());
         }
         
-        EXPECT_EQ(mask, uint32_t(1 << cubexx::direction_t::SIZE) - 1);
+        EXPECT_EQ(mask, uint32_t(1 << cubexx::direction_t::SIZE()) - 1);
     }
 }
 
@@ -187,7 +191,7 @@ TEST_F(CUBEXXDirectionTest,positive)
 
     ///test direction positive
     {
-        uint8_t mask = 0;
+        uint32_t mask = 0;
         
         for (int dim = 0; dim < 3; ++dim)
         for (int sign = -1; sign <= 1; sign += 2)
@@ -206,7 +210,7 @@ TEST_F(CUBEXXDirectionTest,positive)
             mask |= (1 << direction.index());
         }
         
-        EXPECT_EQ(mask, uint32_t(1 << cubexx::direction_t::SIZE) - 1);
+        EXPECT_EQ(mask, uint32_t(1 << cubexx::direction_t::SIZE()) - 1);
     }
 }
 
