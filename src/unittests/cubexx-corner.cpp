@@ -34,17 +34,42 @@ protected:
 
 
 
+TEST_F(CUBEXXCornerTest,SIZE)
+{
+    ASSERT_EQ(8U, cubexx::corner_t::SIZE());
+}
+
 TEST_F(CUBEXXCornerTest,index)
 {
 
 
-    ///test corner_t::index() and corner_t::index(index)
+    ///test corner_t::index() and corner_t::get(index)
     uint32_t index = 0;
     for (auto corner : cubexx::corner_t::all())
     {
         EXPECT_EQ(index, corner.index());
         
-        EXPECT_EQ(corner, cubexx::corner_t::index(index));
+        EXPECT_EQ(corner, cubexx::corner_t::get(index));
+        
+        ++index;
+    }
+}
+
+TEST_F(CUBEXXCornerTest,index_morton)
+{
+
+
+    ///test corner_t::index() and corner_t::get(index)
+    uint32_t index = 0;
+    for (auto corner : cubexx::corner_t::all())
+    {
+        int x = (index >> 0) & 1;
+        int y = (index >> 1) & 1;
+        int z = (index >> 2) & 1;
+        
+        ASSERT_EQ(x, corner.ux());
+        ASSERT_EQ(y, corner.uy());
+        ASSERT_EQ(z, corner.uz());
         
         ++index;
     }
@@ -62,7 +87,7 @@ TEST_F(CUBEXXCornerTest,unique)
             bitmask |= (1 << corner.index());
         }
         
-        EXPECT_EQ(bitmask, uint32_t(1 << 8) - 1);
+        EXPECT_EQ(bitmask, uint32_t(1 << cubexx::corner_t::SIZE()) - 1);
     }
     
     
@@ -101,7 +126,7 @@ TEST_F(CUBEXXCornerTest,unique)
 TEST_F(CUBEXXCornerTest,opposite)
 {
 
-    ///test corner_t::opposite_corner()
+    ///test corner_t::opposite()
     {
         
         
@@ -130,7 +155,7 @@ TEST_F(CUBEXXCornerTest,get)
 
     ///test corner get
     {
-        uint8_t mask = 0;
+        uint32_t mask = 0;
         
         for (int x = -1; x <= 1; x += 2)
         for (int y = -1; y <= 1; y += 2)
@@ -145,7 +170,7 @@ TEST_F(CUBEXXCornerTest,get)
             mask |= (1 << corner.index());
         }
         
-        EXPECT_EQ(mask, uint32_t(1 << 8) - 1);
+        EXPECT_EQ(mask, uint32_t(1 << cubexx::corner_t::SIZE()) - 1);
 
     }
 }
@@ -339,7 +364,7 @@ TEST_F(CUBEXXCornerTest,corner_set)
         
         for (uint32_t bitmask_tmp = bitmask, index = 0; bitmask_tmp != 0; bitmask_tmp >>= 1, ++index)
         {
-            assert(index < cubexx::corner_set_t::value_type::SIZE);
+            assert(index < cubexx::corner_set_t::value_type::SIZE());
             
             bool bit = bitmask_tmp & 1;
             if (corner_set.contains(index) != bit)
@@ -575,7 +600,7 @@ TEST_F(CUBEXXCornerTest,corner_set)
             bool bit = (combo >> corner.index()) & 1;
             ASSERT_EQ(corner_set.contains(corner), bit);
         }
-        for (std::size_t index = 0; index < cubexx::corner_t::SIZE; ++index)
+        for (std::size_t index = 0; index < cubexx::corner_t::SIZE(); ++index)
         {
             bool bit = (combo >> index) & 1;
             ASSERT_EQ(corner_set.contains(index), bit);
