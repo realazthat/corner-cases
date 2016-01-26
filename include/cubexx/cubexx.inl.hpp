@@ -58,12 +58,12 @@ face_t::all()
 {
   static const std::array<face_t, 6> faces = 
     {{
-      face_t(direction_t::index(0)),
-      face_t(direction_t::index(1)),
-      face_t(direction_t::index(2)),
-      face_t(direction_t::index(3)),
-      face_t(direction_t::index(4)),
-      face_t(direction_t::index(5))
+      face_t(direction_t::get(0)),
+      face_t(direction_t::get(1)),
+      face_t(direction_t::get(2)),
+      face_t(direction_t::get(3)),
+      face_t(direction_t::get(4)),
+      face_t(direction_t::get(5))
     }};
   
   return faces;
@@ -355,7 +355,7 @@ std::uint_fast8_t direction_t::index() const
 
 CORNER_CASES_CUBEXX_INLINE
 const direction_t&
-direction_t::index(std::uint_fast8_t idx)
+direction_t::get(std::uint_fast8_t idx)
 {
   assert(idx < SIZE());
   return all()[idx];
@@ -692,13 +692,6 @@ CORNER_CASES_CUBEXX_INLINE
 bool corner_t::operator==(const corner_t& other) const
 {
   return mbits == other.mbits;
-}
-
-CORNER_CASES_CUBEXX_INLINE
-const corner_t&
-corner_t::index(std::uint_fast8_t idx)
-{
-  return corner_t::get(idx);
 }
 
 CORNER_CASES_CUBEXX_INLINE

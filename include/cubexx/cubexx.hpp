@@ -528,6 +528,7 @@ struct direction_t
   
   static const direction_t& get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
   static const direction_t& get(const direction_t& direction);
+  static const direction_t& get(std::uint_fast8_t idx);
   static const std::array<direction_t, 6>& all();
   
   std::int_fast8_t x() const;
@@ -536,7 +537,6 @@ struct direction_t
   bool positive() const;
   
   std::uint_fast8_t index() const;
-  static const direction_t& index(std::uint_fast8_t idx);
   bool operator<(const direction_t& other) const;
   bool operator==(const direction_t& other) const;
   bool operator!=(const direction_t& other) const;
@@ -570,7 +570,6 @@ struct face_t{
   
   
   std::uint_fast8_t index() const;
-  static const direction_t& index(std::uint_fast8_t idx);
   bool operator<(const face_t& other) const;
   bool operator==(const face_t& other) const;
   bool operator!=(const face_t& other) const;
@@ -620,10 +619,9 @@ struct corner_t{
   
   const corner_t& opposite() const;
   
-  static const corner_t& get(std::uint_fast8_t i);
+  static const corner_t& get(std::uint_fast8_t idx);
   static const corner_t& get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
   static const corner_t& get(const corner_t& corner);
-  static const corner_t& index(std::uint_fast8_t idx);
   
   std::uint_fast8_t index() const;
   bool operator<(const corner_t& other) const;
