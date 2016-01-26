@@ -299,7 +299,7 @@ get(const direction_t& direction)
 {
   assert(!direction.is_null());
   assert(direction.is_sane());
-  assert(direction.mbits.to_ulong() < SIZE);
+  assert(direction.mbits.to_ulong() < SIZE());
   return all()[direction.mbits.to_ulong()];
 }
 
@@ -357,7 +357,7 @@ CORNER_CASES_CUBEXX_INLINE
 const direction_t&
 direction_t::index(std::uint_fast8_t idx)
 {
-  assert(idx < SIZE);
+  assert(idx < SIZE());
   return all()[idx];
 }
 
@@ -405,7 +405,7 @@ const direction_t& direction_t::opposite() const
   std::bitset<3> result_bits = mbits;
   result_bits.flip(0);
   
-  assert(result_bits.to_ulong() < SIZE);
+  assert(result_bits.to_ulong() < SIZE());
   return all()[ result_bits.to_ulong() ];
 }
 
@@ -555,7 +555,7 @@ const corner_t&
 corner_t::
 get(std::uint_fast8_t i)
 {
-  assert(i < SIZE);
+  assert(i < SIZE());
   return all()[i];
 }
 
@@ -668,7 +668,7 @@ CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::get(const corner_t& corner)
 {
-  assert(corner.index() < SIZE);
+  assert(corner.index() < SIZE());
   return all()[corner.index()];
 }
 
@@ -678,7 +678,7 @@ corner_t::opposite() const
 {
   assert(!is_null());
   std::size_t idx =  (std::bitset<4>(mbits) ^ std::bitset<4>(0b0111)).to_ulong();
-  assert(idx < SIZE);
+  assert(idx < SIZE());
   return all()[idx];
 }
 

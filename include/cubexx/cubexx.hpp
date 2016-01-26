@@ -170,7 +170,7 @@ private:
    */
   CORNER_CASES_CUBEXX_INLINE
   const_element_set_iterator_t()
-    : mset(NULL), mindex(value_type::SIZE)
+    : mset(NULL), mindex(value_type::SIZE())
   {
     
   }
@@ -189,7 +189,7 @@ private:
     : mset(set), mindex(0)
   {
     
-    while (mindex < value_type::SIZE)
+    while (mindex < value_type::SIZE())
     {
       if (mset->contains(mindex))
       {
@@ -199,7 +199,7 @@ private:
     }
     
     assert(valid());
-    assert(dereferencable() || mindex == value_type::SIZE);
+    assert(dereferencable() || mindex == value_type::SIZE());
     
   }
 
@@ -354,13 +354,13 @@ private:
   void increment() {
     assert(valid());
       assert(mset);
-      assert(mindex != value_type::SIZE);
+      assert(mindex != value_type::SIZE());
       assert(mset->contains(mindex));
     assert(dereferencable());
     
     ++mindex;
       
-    while (mindex < value_type::SIZE && !dereferencable())
+    while (mindex < value_type::SIZE() && !dereferencable())
       ++mindex;
     
     assert(valid());
@@ -376,9 +376,9 @@ private:
   bool valid() const{
     return
       mset != nullptr &&
-      mindex <= value_type::SIZE &&
+      mindex <= value_type::SIZE() &&
       ///If not an end iterator, mset should be set, and mindex should be contained in it
-      (mindex == value_type::SIZE || mset->contains(mindex));
+      (mindex == value_type::SIZE() || mset->contains(mindex));
   }
   
   /**
@@ -389,7 +389,7 @@ private:
    */
   CORNER_CASES_CUBEXX_INLINE
   bool dereferencable() const{
-    return valid() && mindex != value_type::SIZE && mset->contains(mindex);
+    return valid() && mindex != value_type::SIZE() && mset->contains(mindex);
   }
   
   /**
@@ -519,10 +519,6 @@ struct direction_set_t : public set_base_t<direction_set_t, direction_t, 6>
 
 
 
-
-
-
-
 struct direction_t
 {
   
@@ -551,7 +547,7 @@ struct direction_t
   bool is_null() const;
   bool is_sane() const;
   static const direction_t& null_direction();
-  static const std::size_t SIZE = 6;
+  CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 6; }
 private:
   std::bitset<3> mbits;
   
@@ -578,7 +574,8 @@ struct face_t{
   bool operator<(const face_t& other) const;
   bool operator==(const face_t& other) const;
   bool operator!=(const face_t& other) const;
-  static const std::size_t SIZE = 6;
+  
+  CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 6; }
   
 protected:
   direction_t mdirection;
@@ -652,7 +649,7 @@ struct corner_t{
   
   
   ///Number of corners
-  static const std::size_t SIZE = 8;
+  CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 8; }
   corner_t();
   
   bool is_null() const;
