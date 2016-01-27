@@ -6,6 +6,15 @@ compiler:
   - gcc
   - clang
 
+env:
+  global:
+    - CMAKE_GENERATOR="Unix Makefiles"
+    - CMAKE_DEPS_BUILD_TYPE=Release
+    - GTEST_BUILD_TYPE=Release
+  matrix:
+    - CMAKE_BUILD_TYPE=Release SGFXAPI_BUILD_TYPE=Release
+    - CMAKE_BUILD_TYPE=Debug SGFXAPI_BUILD_TYPE=Debug
+    
 addons:
   apt:
     sources:
@@ -13,19 +22,13 @@ addons:
     packages:
     - gcc-4.8
     - g++-4.8
-    - clang
-    - libgtest-dev
-    #- wget
-    #- ca-certificates #for wget
+    - libboost-all-dev
+    #- libgtest-dev
 
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
-    #takes too long, we'll download the binaries instead.
-    #- sudo bash ./scripts/build-install-cmake3.sh
-    #- sudo bash ./scripts/download-install-cmake3.sh
-    - sudo bash ./scripts/install-deps-via-apt.sh
-    - sudo bash ./scripts/download-and-build-googletest.sh
-    #- sudo bash ./scripts/download-and-build-libs-with-no-pkg.sh
+    - sudo CMAKE_GENERATOR="$CMAKE_GENERATOR" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-googletest.sh
+    - sudo CMAKE_GENERATOR="$CMAKE_GENERATOR" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-cppformat.sh
 
 
 script:
@@ -33,7 +36,8 @@ script:
     - cd build
     - cmake .. "-DGTEST_LIB=gtest;pthread"
     - cmake --build .
-    - ./unittests
+    - ./cubelib-unittests
+    - ./cubexx-unittests
 
 
 

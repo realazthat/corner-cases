@@ -16,30 +16,23 @@ PROJECT_PATH=$PWD
 
 
 
-#############################################################################
-## get/build googletest
-#############################################################################
 
-
+#############################################################################
+## get/build cppformat
+#############################################################################
 cd "$PROJECT_PATH"
 cd libs
 
-mkdir -p googletest && cd googletest
+mkdir -p cppformat && cd cppformat
+rm -rf ./cppformat/
+git clone https://github.com/cppformat/cppformat.git
+cd cppformat
+git checkout "4797ca0"
 
-rm -rf ./googletest/
-git clone https://github.com/google/googletest.git
-cd googletest
-git checkout "ddb8012"
-cd googletest
-
-mkdir -p build
-cd build
-
+mkdir -p build && cd build
 cmake -G"$CMAKE_GENERATOR" ..
 cmake . -DCMAKE_BUILD_TYPE="$CMAKE_BUILD_TYPE"
 cmake . -DCMAKE_VERBOSE_MAKEFILE=1
-if [ $(echo "$MSYSTEM" | grep -io MINGW) = "MINGW" ]; then
-    cmake . -Dgtest_disable_pthreads=1
-fi
-cmake --build .
+cmake --build . --target cppformat
+
 
