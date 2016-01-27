@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1.3 FATAL_ERROR)
 
-project(cubelib)
+project(corner-cases)
 
 #relative link directories are to be turned into full paths
 cmake_policy(SET CMP0015 NEW)
