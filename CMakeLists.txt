@@ -42,6 +42,8 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(C11_CXX_FLAGS "-std=c++11")
 endif()
 
+add_subdirectory(docs)
+
 include_directories(
     ./include
     ./src
