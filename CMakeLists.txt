@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1.3 FATAL_ERROR)
 
-project(cubelib)
+project(corner-cases)
 
 #relative link directories are to be turned into full paths
 cmake_policy(SET CMP0015 NEW)
@@ -41,6 +41,8 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CXX_WARNINGS "-Wall -Wextra -Wpointer-arith -Wcast-align -fstrict-aliasing")
     set(C11_CXX_FLAGS "-std=c++11")
 endif()
+
+add_subdirectory(docs)
 
 include_directories(
     ./include
@@ -109,6 +111,7 @@ add_executable(cubexx-unittests
     src/unittests/cubexx.cpp
     src/unittests/cubexx-corner.cpp
     src/unittests/cubexx-direction.cpp
+    src/unittests/cubexx-edge.cpp
     
     )
 
