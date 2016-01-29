@@ -7,6 +7,163 @@ extern "C"{
 
 
 
+    /*
+     * ---------------------------------------------------------------------
+     * Corners
+     * ---------------------------------------------------------------------
+     */
+    static inline bool is_corner_valid(corner_t corner)
+    {
+        ///0b1000 represents a null corner
+        ///0b0*** are all valid corners
+        return (corner.value <= 0x8);
+    }
+
+    static inline bool is_corner_null(corner_t corner)
+    {
+        ///0b1000 represents a null corner
+        ///0b0*** are all valid corners
+        //return valid_corner(corner) && (corner.value & 0x8);
+        return corner.value == 0x8;
+    }
+
+
+    static inline int get_corner_x(corner_t corner)
+    {
+        return (corner.value & 1 ? 1 : -1);
+    }
+    static inline int get_corner_y(corner_t corner)
+    {
+        return (corner.value & 2 ? 1 : -1);
+    }
+    static inline int get_corner_z(corner_t corner)
+    {
+        return (corner.value & 4 ? 1 : -1);
+    }
+
+    static inline int get_corner_i(corner_t corner, uint_fast8_t dim)
+    {
+        assert (dim < 3);
+
+        return ( corner.value & (1 << dim) ? 1 : -1 );
+    }
+
+
+
+
+    static inline int get_corner_unitx(corner_t corner)
+    {
+        return (corner.value & 1 ? 1 : 0);
+    }
+    static inline int get_corner_unity(corner_t corner)
+    {
+        return (corner.value & 2 ? 1 : 0);
+    }
+    static inline int get_corner_unitz(corner_t corner)
+    {
+        return (corner.value & 4 ? 1 : 0);
+    }
+
+
+    static inline int get_corner_uniti(corner_t corner, uint_fast8_t dim)
+    {
+        assert (dim < 3);
+
+        return ( corner.value & (1 << dim) ? 1 : 0 );
+    }
+
+
+    static inline
+    corner_t get_corner_by_float3(float x, float y, float z)
+    {
+        corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
+
+        corner_t result = {value};
+        return result;
+    }
+    static inline
+    corner_t get_corner_by_int3(int x, int y, int z)
+    {
+        corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
+
+        corner_t result;
+
+        result.value = value;
+
+        return result;
+    }
+
+    static inline
+    corner_t get_corner_by_index(uint_fast8_t index)
+    {
+        assert (index < 8);
+        corner_t result = {(corner_value_t)index};
+        return result;
+    }
+
+
+    /**
+
+     */
+    static inline corner_t get_opposite_corner(corner_t corner)
+    {
+        if (is_corner_null(corner))
+            return null_corner;
+
+        corner_t result;
+        result.value = (~corner.value) & 0x7;
+        return result;
+    }
+
+    static inline corner_t corner_move(corner_t corner, direction_t direction)
+    {
+
+        int x = get_corner_x(corner) + get_direction_x(direction)*2;
+        int y = get_corner_y(corner) + get_direction_y(direction)*2;
+        int z = get_corner_z(corner) + get_direction_z(direction)*2;
+
+        //std::cout << "corner: " << corner << ", direction: " << direction << std::endl;
+        //std::cout << "x0,y0,z0: " << get_corner_x(corner) << ", " << get_corner_y(corner) << ", " << get_corner_z(corner) << std::endl;
+        //std::cout << "x,y,z: " << x << ", " << y << ", " << z << std::endl;
+
+        if (x > 1 || x < -1 || y > 1 || y < -1 || z > 1 || z < -1)
+            return null_corner;
+
+        return get_corner_by_int3(x,y,z);
+    }
+
+    static inline corner_t corner_push(corner_t corner, direction_t direction)
+    {
+
+        int x = get_corner_x(corner) + get_direction_x(direction)*2;
+        int y = get_corner_y(corner) + get_direction_y(direction)*2;
+        int z = get_corner_z(corner) + get_direction_z(direction)*2;
+
+        return get_corner_by_int3(x,y,z);
+    }
+
+    static inline uint_fast8_t get_corner_index(corner_t corner){
+        assert (is_corner_valid(corner) && !is_corner_null(corner));
+        return corner.value;
+    }
+
+
+    static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim)
+    {
+        assert( dim < 3 );
+
+        ///flip the bit of the specified dimension
+        corner_t result = {(corner_value_t)(corner.value ^ (1 << dim))};
+
+        return result;
+    }
+
+
+    static inline bool is_corner_equal(corner_t left, corner_t right)
+    {
+        return left.value == right.value;
+    }
+
 
     /*
      * ---------------------------------------------------------------------
@@ -199,165 +356,13 @@ extern "C"{
 
 
 
+
+
     /*
      * ---------------------------------------------------------------------
-     * Corners
+     * Edges
      * ---------------------------------------------------------------------
      */
-    static inline bool is_corner_valid(corner_t corner)
-    {
-        ///0b1000 represents a null corner
-        ///0b0*** are all valid corners
-        return (corner.value <= 0x8);
-    }
-
-    static inline bool is_corner_null(corner_t corner)
-    {
-        ///0b1000 represents a null corner
-        ///0b0*** are all valid corners
-        //return valid_corner(corner) && (corner.value & 0x8);
-        return corner.value == 0x8;
-    }
-
-
-    static inline int get_corner_x(corner_t corner)
-    {
-        return (corner.value & 1 ? 1 : -1);
-    }
-    static inline int get_corner_y(corner_t corner)
-    {
-        return (corner.value & 2 ? 1 : -1);
-    }
-    static inline int get_corner_z(corner_t corner)
-    {
-        return (corner.value & 4 ? 1 : -1);
-    }
-
-    static inline int get_corner_i(corner_t corner, uint_fast8_t dim)
-    {
-        assert (dim < 3);
-
-        return ( corner.value & (1 << dim) ? 1 : -1 );
-    }
-
-
-
-
-    static inline int get_corner_unitx(corner_t corner)
-    {
-        return (corner.value & 1 ? 1 : 0);
-    }
-    static inline int get_corner_unity(corner_t corner)
-    {
-        return (corner.value & 2 ? 1 : 0);
-    }
-    static inline int get_corner_unitz(corner_t corner)
-    {
-        return (corner.value & 4 ? 1 : 0);
-    }
-
-
-    static inline int get_corner_uniti(corner_t corner, uint_fast8_t dim)
-    {
-        assert (dim < 3);
-
-        return ( corner.value & (1 << dim) ? 1 : 0 );
-    }
-
-
-    static inline
-    corner_t get_corner_by_float3(float x, float y, float z)
-    {
-        corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
-
-        corner_t result = {value};
-        return result;
-    }
-    static inline
-    corner_t get_corner_by_int3(int x, int y, int z)
-    {
-        corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
-
-        corner_t result;
-
-        result.value = value;
-
-        return result;
-    }
-
-    static inline
-    corner_t get_corner_by_index(uint_fast8_t index)
-    {
-        assert (index < 8);
-        corner_t result = {(corner_value_t)index};
-        return result;
-    }
-
-
-    /**
-
-     */
-    static inline corner_t get_opposite_corner(corner_t corner)
-    {
-        if (is_corner_null(corner))
-            return null_corner;
-
-        corner_t result;
-        result.value = (~corner.value) & 0x7;
-        return result;
-    }
-
-    static inline corner_t corner_move(corner_t corner, direction_t direction)
-    {
-
-        int x = get_corner_x(corner) + get_direction_x(direction)*2;
-        int y = get_corner_y(corner) + get_direction_y(direction)*2;
-        int z = get_corner_z(corner) + get_direction_z(direction)*2;
-
-        //std::cout << "corner: " << corner << ", direction: " << direction << std::endl;
-        //std::cout << "x0,y0,z0: " << get_corner_x(corner) << ", " << get_corner_y(corner) << ", " << get_corner_z(corner) << std::endl;
-        //std::cout << "x,y,z: " << x << ", " << y << ", " << z << std::endl;
-
-        if (x > 1 || x < -1 || y > 1 || y < -1 || z > 1 || z < -1)
-            return null_corner;
-
-        return get_corner_by_int3(x,y,z);
-    }
-
-    static inline corner_t corner_push(corner_t corner, direction_t direction)
-    {
-
-        int x = get_corner_x(corner) + get_direction_x(direction)*2;
-        int y = get_corner_y(corner) + get_direction_y(direction)*2;
-        int z = get_corner_z(corner) + get_direction_z(direction)*2;
-
-        return get_corner_by_int3(x,y,z);
-    }
-
-    static inline uint_fast8_t get_corner_index(corner_t corner){
-        assert (is_corner_valid(corner) && !is_corner_null(corner));
-        return corner.value;
-    }
-
-
-    static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim)
-    {
-        assert( dim < 3 );
-
-        ///flip the bit of the specified dimension
-        corner_t result = {(corner_value_t)(corner.value ^ (1 << dim))};
-
-        return result;
-    }
-
-
-    static inline bool is_corner_equal(corner_t left, corner_t right)
-    {
-        return left.value == right.value;
-    }
-
-
-
 
 
 
