@@ -11,6 +11,8 @@
     #define GLOBAL_STATIC_CONST __constant const
     #define LOCAL_STATIC_CONST const
     
+    typedef uint8_t uint_fast8_t;
+    
 #else
 
     #include <assert.h>
@@ -26,23 +28,31 @@
 extern "C"{
 #endif
 
-    typedef unsigned int word_t;
+    typedef uint_fast8_t corner_value_t;
+    typedef uint_fast8_t direction_value_t;
+    typedef uint_fast8_t edge_value_t;
+    
     typedef struct corner_t{
-        word_t value;
+        corner_value_t value;
     } corner_t;
 
     typedef struct direction_t{
-        word_t value;
+        direction_value_t value;
     } direction_t;
 
     
+    typedef struct edge_t{
+        edge_value_t value;
+    } edge_t;
 
     #define NULL_CORNER (corner_t){8}
     #define NULL_DIRECTION (direction_t){0}
+    #define NULL_EGDE (edge_t){12}
     #define NULL_FACE (face_t){0}
 
     CUBELIB_GLOBAL_STATIC_CONST corner_t null_corner = NULL_CORNER;
     CUBELIB_GLOBAL_STATIC_CONST direction_t null_direction = NULL_DIRECTION;
+    CUBELIB_GLOBAL_STATIC_CONST edge_t null_edge = NULL_EGDE;
     CUBELIB_GLOBAL_STATIC_CONST face_t null_face = NULL_FACE;
 
 /* -------------------------------------------------------------------------- */
@@ -52,11 +62,15 @@ extern "C"{
     static inline int get_corner_x(corner_t corner);
     static inline int get_corner_y(corner_t corner);
     static inline int get_corner_z(corner_t corner);
-    static inline int get_corner_i(corner_t corner, uint32_t dim);
+    static inline int get_corner_i(corner_t corner, uint_fast8_t dim);
     static inline int get_corner_unitx(corner_t corner);
     static inline int get_corner_unity(corner_t corner);
     static inline int get_corner_unitz(corner_t corner);
-    static inline int get_corner_uniti(corner_t corner, uint32_t dim);
+    /**
+     * @brief compute the ith component of the corner's coordinates in unit-space
+     * @see get_corner_unitx(), get_corner_unity(), get_corner_unitz()
+     */
+    static inline int get_corner_uniti(corner_t corner, uint_fast8_t dim);
 
 
     static inline
@@ -95,7 +109,7 @@ extern "C"{
     
     
     static inline uint32_t get_corner_index(corner_t corner);
-    static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint32_t dim);
+    static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim);
     static inline bool is_corner_equal(corner_t left, corner_t right);
 
 
@@ -106,7 +120,7 @@ extern "C"{
     static inline int get_direction_x(direction_t direction);
     static inline int get_direction_y(direction_t direction);
     static inline int get_direction_z(direction_t direction);
-    static inline int get_direction_i(direction_t direction, uint32_t dim);
+    static inline int get_direction_i(direction_t direction, uint_fast8_t dim);
 
     static inline uint32_t get_direction_index(direction_t direction);
     static inline direction_t get_direction_by_index(uint32_t index);
@@ -119,6 +133,26 @@ extern "C"{
     static inline bool is_direction_valid(direction_t direction);
     static inline bool is_direction_null(direction_t direction);
     static inline bool is_direction_equal(direction_t left, direction_t right);
+/* -------------------------------------------------------------------------- */
+
+    static inline edge_t get_edge_by_corner_direction(corner_t corner, direction_t direction);
+    static inline edge_t get_edge_by_index(uint32_t index);
+    static inline uint32_t get_edge_index(edge_t edge);
+    static inline edge_t get_opposite_edge(edge_t edge);
+    
+    
+    static inline bool is_corner_adjacent_edge(corner_t corner, edge_t edge);
+    static inline bool is_direction_adjacent_edge(direction_t direction, edge_t edge);
+    
+    
+    
+    static inline bool is_edge_valid(edge_t edge);
+    static inline bool is_edge_null(edge_t edge);
+    static inline bool is_edge_equal(edge_t left, edge_t right);
+
+    
+    
+/* -------------------------------------------------------------------------- */
 
     
 #ifdef __OPENCL_VERSION__
@@ -194,7 +228,7 @@ extern "C"{
         const char zs[] = { 0, 0, 0, -1, 1, 0, 0, 0};
         return direction.value < 8 ? zs[direction.value] : 0;
     }
-    static inline int get_direction_i(direction_t direction, uint32_t dim)
+    static inline int get_direction_i(direction_t direction, uint_fast8_t dim)
     {
         assert(dim < 3);
         if (dim == 0)
@@ -232,7 +266,7 @@ extern "C"{
     static inline direction_t get_opposite_direction(direction_t direction)
     {
         assert( !is_direction_null(direction) );
-        word_t value = (~direction.value) & 7;
+        direction_value_t value = (~direction.value) & 7;
         direction_t result = {value};
         return result;
     }
@@ -251,7 +285,7 @@ extern "C"{
         assert(pos != neg && "direction must face a side/face, not a corner or edge of the cube");
         assert(abs(x+y+z) == 1);
 
-        word_t value = (x != 0 ? 1 : 0) | ((y != 0 ? 1 : 0) << 1) | ((z != 0 ? 1 : 0) << 2);
+        direction_value_t value = (x != 0 ? 1 : 0) | ((y != 0 ? 1 : 0) << 1) | ((z != 0 ? 1 : 0) << 2);
         value = pos ? value : ((~value) & 7);
 
         direction_t result = {value};
@@ -263,7 +297,7 @@ extern "C"{
     direction_t get_direction_by_index(uint32_t index)
     {
         assert(index < 6);
-        direction_t result = {index + 1};
+        direction_t result = {(direction_value_t)(index + 1)};
         return result;
     }
 
@@ -388,7 +422,7 @@ extern "C"{
         return (corner.value & 4 ? 1 : -1);
     }
 
-    static inline int get_corner_i(corner_t corner, uint32_t dim)
+    static inline int get_corner_i(corner_t corner, uint_fast8_t dim)
     {
         assert (dim < 3);
 
@@ -412,7 +446,7 @@ extern "C"{
     }
 
 
-    static inline int get_corner_uniti(corner_t corner, uint32_t dim)
+    static inline int get_corner_uniti(corner_t corner, uint_fast8_t dim)
     {
         assert (dim < 3);
 
@@ -423,7 +457,7 @@ extern "C"{
     static inline
     corner_t get_corner_by_float3(float x, float y, float z)
     {
-        word_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
+        corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
 
         corner_t result = {value};
         return result;
@@ -431,7 +465,7 @@ extern "C"{
     static inline
     corner_t get_corner_by_int3(int x, int y, int z)
     {
-        word_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
+        corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
 
         corner_t result;
 
@@ -444,7 +478,7 @@ extern "C"{
     corner_t get_corner_by_index(uint32_t index)
     {
         assert (index < 8);
-        corner_t result = {(word_t)index};
+        corner_t result = {(corner_value_t)index};
         return result;
     }
 
@@ -495,12 +529,12 @@ extern "C"{
     }
 
 
-    static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint32_t dim)
+    static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim)
     {
         assert( dim < 3 );
 
         ///flip the bit of the specified dimension
-        corner_t result = {corner.value ^ (1 << dim)};
+        corner_t result = {(corner_value_t)(corner.value ^ (1 << dim))};
 
         return result;
     }
