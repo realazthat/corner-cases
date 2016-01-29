@@ -344,16 +344,6 @@ extern "C"{
     
 #endif
     
-    /*
-     * ---------------------------------------------------------------------
-     * Faces
-     * ---------------------------------------------------------------------
-     */
-    static inline bool is_face_null(face_t face)
-    {
-        return is_direction_null(face);
-    }
-
 
 
 
@@ -363,9 +353,33 @@ extern "C"{
      * Edges
      * ---------------------------------------------------------------------
      */
+    
+    static inline bool is_edge_valid(edge_t edge)
+    {
+        return edge.value <= 12;
+    }
 
 
+    static inline bool is_edge_null(edge_t edge)
+    {
+        return edge.value == 12;
+    }
 
+    static inline bool is_edge_equal(edge_t left, edge_t right)
+    {
+        return left.value == right.value;
+    }
+
+
+    /*
+     * ---------------------------------------------------------------------
+     * Faces
+     * ---------------------------------------------------------------------
+     */
+    static inline bool is_face_null(face_t face)
+    {
+        return is_direction_null(face);
+    }
 
 
 
