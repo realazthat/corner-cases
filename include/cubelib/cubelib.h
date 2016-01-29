@@ -150,7 +150,14 @@ extern "C"{
     static inline bool is_edge_valid(edge_t edge);
     static inline bool is_edge_null(edge_t edge);
     static inline bool is_edge_equal(edge_t left, edge_t right);
-
+    
+    CUBELIB_GLOBAL_STATIC_CONST edge_t all_edges[12] = {  {0}, {1}
+                                                        , {2}, {3}
+                                                        , {4}, {5}
+                                                        , {6}, {7}
+                                                        , {8}, {9}
+                                                        , {10}, {11}
+                                                        };
     
     
 /* -------------------------------------------------------------------------- */
