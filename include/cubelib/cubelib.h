@@ -79,7 +79,7 @@ extern "C"{
     corner_t get_corner_by_int3(int x, int y, int z);
 
     static inline
-    corner_t get_corner_by_index(uint32_t index);
+    corner_t get_corner_by_index(uint_fast8_t index);
 
     /**
      * Return
@@ -108,7 +108,7 @@ extern "C"{
     static inline corner_t corner_push(corner_t corner, direction_t direction);
     
     
-    static inline uint32_t get_corner_index(corner_t corner);
+    static inline uint_fast8_t get_corner_index(corner_t corner);
     static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim);
     static inline bool is_corner_equal(corner_t left, corner_t right);
 
@@ -122,8 +122,8 @@ extern "C"{
     static inline int get_direction_z(direction_t direction);
     static inline int get_direction_i(direction_t direction, uint_fast8_t dim);
 
-    static inline uint32_t get_direction_index(direction_t direction);
-    static inline direction_t get_direction_by_index(uint32_t index);
+    static inline uint_fast8_t get_direction_index(direction_t direction);
+    static inline direction_t get_direction_by_index(uint_fast8_t index);
     static inline direction_t get_direction_by_int3(int x, int y, int z);
     static inline direction_t get_opposite_direction(direction_t direction);
     static inline direction_t get_opposite_face(direction_t direction);
@@ -136,8 +136,8 @@ extern "C"{
 /* -------------------------------------------------------------------------- */
 
     static inline edge_t get_edge_by_corner_direction(corner_t corner, direction_t direction);
-    static inline edge_t get_edge_by_index(uint32_t index);
-    static inline uint32_t get_edge_index(edge_t edge);
+    static inline edge_t get_edge_by_index(uint_fast8_t index);
+    static inline uint_fast8_t get_edge_index(edge_t edge);
     static inline edge_t get_opposite_edge(edge_t edge);
     
     
