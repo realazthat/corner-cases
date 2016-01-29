@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Corner-cases by realazthat</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Corner-cases</h1>
+        <h2>A library for reasoning about a cube, the faces, corners, and edges of a cube.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/realazthat/corner-cases/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/realazthat/corner-cases/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/realazthat/corner-cases" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h2>
+<a id="corner-casescubelib" class="anchor" href="#corner-casescubelib" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>corner-cases/cubelib</h2>
+
+<p>cubelib is a C header-only library for reasoning about a cube's corners, directions/faces, and edges. It is useful for
+dealing with data structures based on cubes, such as octrees.</p>
+
+<p><a href="https://travis-ci.org/realazthat/corner-cases"><img src="https://travis-ci.org/realazthat/corner-cases.svg?branch=master" alt="Build Status"></a></p>
+
+<h2>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivation</h2>
+
+<p>Using cubelib allows one to avoid cryptic bit-twiddling, and instead use logical and
+self-documenting functions provided by this library to reason about and manipulate corners of the cube.</p>
+
+<p>Example functionality:</p>
+
+<ul>
+<li>
+<code>corner0 = get_corner_by_int3(-1,-1,1)</code> - get the lower x,y, and upper z corner</li>
+<li>
+<code>direction = get_direction_by_int3(0,1,0)</code> - get the direction of +y</li>
+<li>
+<code>corner1 = move_corner(corner0, direction)</code> - move the corner in the +y direction, return the resulting corner</li>
+<li>
+<code>corner2 = opposite_corner(corner1)</code> - calculate the opposite corner</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+
+<h2>
+<a id="building" class="anchor" href="#building" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Building</h2>
+
+<p>Use of the library in C does not require anything to be built.</p>
+
+<p>The library can however be built for use in opencl, in which case certain constant-arrays need to be
+pre-calculated. Therefore, a binary can be built, which will generate the headers with the constants.</p>
+
+<p>Furthermore, there are unittests that can be built.</p>
+
+<p>The unittests require googletest (gtest) to be installed on the system.</p>
+
+<p>To build (on linux):</p>
+
+<pre><code>mkdir build
+cd build
+cmake ..
+#on msys2/mingw-w64 you would run this instead
+cmake -G"MSYS Makefiles" ..
+
+#on some systems, you must additionally link pthreads after gtest, so let's store pthread in GTEST_LIB
+cmake . "-DGTEST_LIB=gtest;pthread"
+
+#now build
+#optionally make the program that generates the opencl consts header, unnecessary
+make cubelib-clgen-consts
+#optionally make the generated opencl consts header
+make cubelib.clgen.h
+#make the unittests
+make unittests
+#or make all
+make all
+</code></pre>
+
+<p>The program <code>cubelib-clgen-consts</code> will be built, which can generate the required header <code>cubelib.clgen.h</code>, which will itself be generated as well
+in the build directory.</p>
+
+<p>To run the unittests:</p>
+
+<pre><code>#in the build directory
+./unittests
+</code></pre>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
