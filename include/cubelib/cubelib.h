@@ -136,6 +136,7 @@ extern "C"{
 /* -------------------------------------------------------------------------- */
 
     static inline edge_t get_edge_by_corner_direction(corner_t corner, direction_t direction);
+    static inline edge_t get_edge_by_corners(corner_t corner0, corner_t corner1);
     static inline edge_t get_edge_by_index(uint_fast8_t index);
     static inline uint_fast8_t get_edge_index(edge_t edge);
     static inline edge_t get_opposite_edge(edge_t edge);
@@ -241,6 +242,9 @@ extern "C"{
 #ifdef __cplusplus
 }
 #endif
+
+
+#include "cubelib/detail/cubelib.inl.h"
 
 #endif // CORNER_CASES_CUBELIB_CUBELIB_H
 
