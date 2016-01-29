@@ -55,8 +55,8 @@ TEST_F(CubelibCornerTest,indices)
             EXPECT_EQ(index, get_corner_index(corner));
             
             EXPECT_TRUE(is_corner_equal(corner, get_corner_by_index(index)));
-            EXPECT_FALSE(is_null_corner(corner));
-            EXPECT_TRUE(is_valid_corner(corner));
+            EXPECT_FALSE(is_corner_null(corner));
+            EXPECT_TRUE(is_corner_valid(corner));
             
             ++index;
         }
@@ -162,13 +162,13 @@ TEST_F(CubelibCornerTest,get_corner_by_int3)
 }
 
 
-TEST_F(CubelibCornerTest,opposite_corner)
+TEST_F(CubelibCornerTest,get_opposite_corner)
 {
-    ///test opposite_corner
+    ///test get_opposite_corner
     {
         for (corner_t corner0 : all_corners)
         {
-            auto corner1 = opposite_corner(corner0);
+            auto corner1 = get_opposite_corner(corner0);
 
             EXPECT_EQ(get_corner_x(corner1), -get_corner_x(corner0));
             EXPECT_EQ(get_corner_y(corner1), -get_corner_y(corner0));
@@ -182,16 +182,17 @@ TEST_F(CubelibCornerTest,opposite_corner)
 
 
 
-TEST_F(CubelibCornerTest,move_corner)
+TEST_F(CubelibCornerTest,corner_move)
 {
 
     for (corner_t corner0 : all_corners)
     {
         for (direction_t direction : all_directions)
         {
-            corner_t corner1 = move_corner(corner0, direction);
+            corner_t corner1 = corner_move(corner0, direction);
             
-            ASSERT_FALSE(is_corner_equal(corner0, corner1)) << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
+            ASSERT_FALSE(is_corner_equal(corner0, corner1))
+                << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
             
             int xyz0[] = {get_corner_x(corner0), get_corner_y(corner0), get_corner_z(corner0)};
             int dir[] = {get_direction_x(direction), get_direction_y(direction), get_direction_z(direction)};
@@ -206,12 +207,14 @@ TEST_F(CubelibCornerTest,move_corner)
                     expected_out_of_bounds = true;
             
             
-            ASSERT_TRUE(!is_null_corner(corner1) || expected_out_of_bounds) << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
+            ///corner1 is null <=> it was out of bound
+            ASSERT_EQ(is_corner_null(corner1), expected_out_of_bounds)
+                << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
             
             
-            if (is_null_corner(corner1))
+            if (is_corner_null(corner1))
                 continue;
-                
+            
             int xyz1_actual[] = {get_corner_x(corner1), get_corner_y(corner1), get_corner_z(corner1)};
             
             for (int i = 0; i < 3; ++i)
@@ -229,8 +232,9 @@ TEST_F(CubelibCornerTest,move_corner)
     {
         for (direction_t direction : all_directions)
         {
-            auto corner1 = move_corner(corner0,direction);
-            ASSERT_FALSE(is_corner_equal(corner0, corner1))  << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
+            auto corner1 = corner_move(corner0,direction);
+            ASSERT_FALSE(is_corner_equal(corner0, corner1))
+                << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
 
             auto x1 = get_corner_x(corner0) + 2*get_direction_x(direction);
             auto y1 = get_corner_y(corner0) + 2*get_direction_y(direction);
@@ -238,7 +242,7 @@ TEST_F(CubelibCornerTest,move_corner)
 
             if (x1 > 1 || x1 < -1 || y1 > 1 || y1 < -1 || z1 > 1 || z1 < -1)
             {
-                ASSERT_TRUE(is_null_corner(corner1)) << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
+                ASSERT_TRUE(is_corner_null(corner1)) << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
             } else {
                 ASSERT_EQ(x1, get_corner_x(corner1)) << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
                 ASSERT_EQ(y1, get_corner_y(corner1)) << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;

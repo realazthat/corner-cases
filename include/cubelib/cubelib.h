@@ -35,20 +35,20 @@ extern "C"{
         word_t value;
     } direction_t;
 
-    typedef direction_t face_t;
+    
 
     #define NULL_CORNER (corner_t){8}
     #define NULL_DIRECTION (direction_t){0}
     #define NULL_FACE (face_t){0}
 
-    CUBELIB_GLOBAL_STATIC_CONST face_t null_face = (face_t){0};
-    CUBELIB_GLOBAL_STATIC_CONST direction_t null_direction = (direction_t){0};
-    CUBELIB_GLOBAL_STATIC_CONST corner_t null_corner = (corner_t){8};
+    CUBELIB_GLOBAL_STATIC_CONST corner_t null_corner = NULL_CORNER;
+    CUBELIB_GLOBAL_STATIC_CONST direction_t null_direction = NULL_DIRECTION;
+    CUBELIB_GLOBAL_STATIC_CONST face_t null_face = NULL_FACE;
 
+/* -------------------------------------------------------------------------- */
+    static inline bool is_corner_valid(corner_t corner);
+    static inline bool is_corner_null(corner_t corner);
 
-    static inline bool is_valid_corner(corner_t corner);
-    static inline bool is_null_corner(corner_t corner);
-    //static inline bool is_a_corner(corner_t corner);
     static inline int get_corner_x(corner_t corner);
     static inline int get_corner_y(corner_t corner);
     static inline int get_corner_z(corner_t corner);
@@ -67,14 +67,42 @@ extern "C"{
     static inline
     corner_t get_corner_by_index(uint32_t index);
 
-    static inline corner_t opposite_corner(corner_t corner);
-    static inline corner_t move_corner(corner_t corner, direction_t direction);
-
-    static inline corner_t bounded_move_corner(corner_t corner, direction_t direction);
+    /**
+     * Return
+     *  then this method will wrap around and return the adjacent corner in the specified direction.
+     * @see corner_push(), corner_move()
+     */
+    static inline corner_t get_opposite_corner(corner_t corner);
+    
+    /**
+     * Move a corner in a specified direction. If the new corner cannot be moved in that direction
+     *  then this method will wrap around and return the adjacent corner in the specified direction.
+     * @see corner_push(), corner_move()
+     */
+    static inline corner_t get_adjacent_corner(corner_t corner, direction_t direction);
+    /**
+     * Move a corner in a specified direction. If the new corner cannot be moved in that direction
+     *  then this method will return a @c null_corner.
+     * @see corner_push(), get_adjacent_corner()
+     */
+    static inline corner_t corner_move(corner_t corner, direction_t direction);
+    /**
+     * Move a corner in a specified direction. If the new corner cannot be moved in that direction
+     *  then this method will return the same corner.
+     * @see corner_move(), get_adjacent_corner()
+     */
+    static inline corner_t corner_push(corner_t corner, direction_t direction);
+    
+    
     static inline uint32_t get_corner_index(corner_t corner);
     static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint32_t dim);
     static inline bool is_corner_equal(corner_t left, corner_t right);
 
+
+
+
+
+/* -------------------------------------------------------------------------- */
     static inline int get_direction_x(direction_t direction);
     static inline int get_direction_y(direction_t direction);
     static inline int get_direction_z(direction_t direction);
@@ -83,11 +111,13 @@ extern "C"{
     static inline uint32_t get_direction_index(direction_t direction);
     static inline direction_t get_direction_by_index(uint32_t index);
     static inline direction_t get_direction_by_int3(int x, int y, int z);
-    static inline direction_t opposite_direction(direction_t direction);
-    static inline direction_t opposite_face(direction_t direction);
+    static inline direction_t get_opposite_direction(direction_t direction);
+    static inline direction_t get_opposite_face(direction_t direction);
 
-    static inline bool is_valid_direction(direction_t direction);
-    static inline bool is_null_direction(direction_t direction);
+    static inline bool is_corner_adjacent_direction(corner_t corner, direction_t direction);
+    
+    static inline bool is_direction_valid(direction_t direction);
+    static inline bool is_direction_null(direction_t direction);
     static inline bool is_direction_equal(direction_t left, direction_t right);
 
     
@@ -138,13 +168,13 @@ extern "C"{
      * Directions
      * ---------------------------------------------------------------------
      */
-    static inline bool is_valid_direction(direction_t direction){
+    static inline bool is_direction_valid(direction_t direction){
         ///0b111 is an invalid direction; anything more than 0b111 is also an invalid direction.
         ///0b000 is a null direction.
         return (direction.value < 7);
     }
 
-    static inline bool is_null_direction(direction_t direction)
+    static inline bool is_direction_null(direction_t direction)
     {
         return direction.value == 0;
     }
@@ -199,17 +229,17 @@ extern "C"{
     }
     */
 
-    static inline direction_t opposite_direction(direction_t direction)
+    static inline direction_t get_opposite_direction(direction_t direction)
     {
-        assert( !is_null_direction(direction) );
+        assert( !is_direction_null(direction) );
         word_t value = (~direction.value) & 7;
         direction_t result = {value};
         return result;
     }
 
-    static inline direction_t opposite_face(direction_t direction)
+    static inline direction_t get_opposite_face(direction_t direction)
     {
-        return opposite_direction(direction);
+        return get_opposite_direction(direction);
     }
 
     static inline
@@ -240,7 +270,7 @@ extern "C"{
     static inline
     uint32_t get_direction_index(direction_t direction)
     {
-        assert(is_valid_direction(direction) && !is_null_direction(direction));
+        assert(is_direction_valid(direction) && !is_direction_null(direction));
 
         return direction.value - 1;
     }
@@ -317,9 +347,9 @@ extern "C"{
      * Faces
      * ---------------------------------------------------------------------
      */
-    static inline bool is_null_face(face_t face)
+    static inline bool is_face_null(face_t face)
     {
-        return is_null_direction(face);
+        return is_direction_null(face);
     }
 
 
@@ -329,14 +359,14 @@ extern "C"{
      * Corners
      * ---------------------------------------------------------------------
      */
-    static inline bool is_valid_corner(corner_t corner)
+    static inline bool is_corner_valid(corner_t corner)
     {
         ///0b1000 represents a null corner
         ///0b0*** are all valid corners
         return (corner.value <= 0x8);
     }
 
-    static inline bool is_null_corner(corner_t corner)
+    static inline bool is_corner_null(corner_t corner)
     {
         ///0b1000 represents a null corner
         ///0b0*** are all valid corners
@@ -422,9 +452,9 @@ extern "C"{
     /**
 
      */
-    static inline corner_t opposite_corner(corner_t corner)
+    static inline corner_t get_opposite_corner(corner_t corner)
     {
-        if (is_null_corner(corner))
+        if (is_corner_null(corner))
             return null_corner;
 
         corner_t result;
@@ -432,11 +462,7 @@ extern "C"{
         return result;
     }
 
-    /**
-     * Move a corner in a specified direction. If the new corner cannot be moved in that direction
-     *  then this method will return a @c null_corner.
-     */
-    static inline corner_t move_corner(corner_t corner, direction_t direction)
+    static inline corner_t corner_move(corner_t corner, direction_t direction)
     {
 
         int x = get_corner_x(corner) + get_direction_x(direction)*2;
@@ -453,18 +479,18 @@ extern "C"{
         return get_corner_by_int3(x,y,z);
     }
 
-    static inline corner_t bounded_move_corner(corner_t corner, direction_t direction)
+    static inline corner_t corner_push(corner_t corner, direction_t direction)
     {
 
-        int x = get_corner_x(corner) + get_direction_x(direction);
-        int y = get_corner_y(corner) + get_direction_y(direction);
-        int z = get_corner_z(corner) + get_direction_z(direction);
+        int x = get_corner_x(corner) + get_direction_x(direction)*2;
+        int y = get_corner_y(corner) + get_direction_y(direction)*2;
+        int z = get_corner_z(corner) + get_direction_z(direction)*2;
 
         return get_corner_by_int3(x,y,z);
     }
 
     static inline uint32_t get_corner_index(corner_t corner){
-        assert (is_valid_corner(corner) && !is_null_corner(corner));
+        assert (is_corner_valid(corner) && !is_corner_null(corner));
         return corner.value;
     }
 

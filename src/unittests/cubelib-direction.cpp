@@ -53,8 +53,8 @@ TEST_F(CubelibDirectionTest,direction_indices)
             EXPECT_EQ(index, get_direction_index(direction));
 
             EXPECT_TRUE(is_direction_equal(direction, get_direction_by_index(index)));
-            EXPECT_FALSE(is_null_direction(direction));
-            EXPECT_TRUE(is_valid_direction(direction));
+            EXPECT_FALSE(is_direction_null(direction));
+            EXPECT_TRUE(is_direction_valid(direction));
 
             ++index;
         }
@@ -68,13 +68,13 @@ TEST_F(CubelibDirectionTest,null_direction)
     
     ///test null direction
     {
-        EXPECT_TRUE(is_valid_direction(null_direction));
-        EXPECT_TRUE(is_null_direction(null_direction));
+        EXPECT_TRUE(is_direction_valid(null_direction));
+        EXPECT_TRUE(is_direction_null(null_direction));
         
         for (auto direction : all_directions)
         {
-            EXPECT_FALSE(is_null_direction(direction));
-            EXPECT_TRUE(is_valid_direction(direction));
+            EXPECT_FALSE(is_direction_null(direction));
+            EXPECT_TRUE(is_direction_valid(direction));
         }
     }
 

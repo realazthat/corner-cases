@@ -21,7 +21,7 @@ CORNER_CASES_CUBELIB_FORMATTERS_INLINE
 std::ostream& operator<<(std::ostream& out, const direction_t& direction)
 {
 
-    if (is_null_direction(direction))
+    if (is_direction_null(direction))
         out << "null";
     else
         out << "(" << get_direction_x(direction)
@@ -34,7 +34,7 @@ std::ostream& operator<<(std::ostream& out, const direction_t& direction)
 CORNER_CASES_CUBELIB_FORMATTERS_INLINE
 std::ostream& operator<<(std::ostream& out, const corner_t& corner)
 {
-    if (is_null_corner(corner))
+    if (is_corner_null(corner))
         out << "null";
     else
     out << "(" << get_corner_x(corner)
