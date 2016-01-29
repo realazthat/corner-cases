@@ -62,7 +62,7 @@ TEST_F(CubelibDirectionTest,direction_indices)
     }
 }
 
-TEST_F(CubelibDirectionTest,null_direction)
+TEST_F(CubelibDirectionTest,null)
 {
 
     
@@ -70,12 +70,15 @@ TEST_F(CubelibDirectionTest,null_direction)
     {
         EXPECT_TRUE(is_direction_valid(null_direction));
         EXPECT_TRUE(is_direction_null(null_direction));
-        
-        for (auto direction : all_directions)
-        {
-            EXPECT_FALSE(is_direction_null(direction));
-            EXPECT_TRUE(is_direction_valid(direction));
-        }
+        EXPECT_TRUE(is_direction_equal(null_direction, null_direction));
+    }
+    
+    ///make sure all the regular corners are not null_corner
+    for (auto direction : all_directions)
+    {
+        EXPECT_FALSE(is_direction_null(direction));
+        EXPECT_TRUE(is_direction_valid(direction));
+        EXPECT_FALSE(is_direction_equal(direction, null_direction));
     }
 
 }
