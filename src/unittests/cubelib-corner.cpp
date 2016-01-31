@@ -89,7 +89,7 @@ TEST_F(CubelibCornerTest,null)
 
 
 
-TEST_F(CubelibCornerTest,get_corner_by_int3_unitx)
+TEST_F(CubelibCornerTest,get_corner_by_int3_unitxyz)
 {
 
     ///test get_corner_by_int3() with unit x,y,z
