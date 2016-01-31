@@ -372,7 +372,24 @@ extern "C"{
         return left.value == right.value;
     }
 
+    static inline
+    uint_fast8_t get_edge_index(edge_t edge)
+    {
+        assert(is_edge_valid(edge) && !is_edge_null(edge));
 
+        return edge.value;
+    }
+
+    static inline
+    edge_t get_edge_by_index(uint_fast8_t index)
+    {
+        assert(index < 12);
+
+        edge_t result = {(edge_value_t)index};
+        assert(is_edge_valid(result));
+        assert(!is_edge_null(result));
+        return result;
+    }
     /*
      * ---------------------------------------------------------------------
      * Faces
