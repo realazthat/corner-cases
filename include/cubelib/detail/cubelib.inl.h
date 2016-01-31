@@ -98,6 +98,8 @@ extern "C"{
     {
         assert (index < 8);
         corner_t result = {(corner_value_t)index};
+        assert(is_corner_valid(result));
+        assert(!is_corner_null(result));
         return result;
     }
 
