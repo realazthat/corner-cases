@@ -49,3 +49,39 @@ TEST_F(CubelibEdgeTest,null)
 }
 
 
+
+TEST_F(CubelibEdgeTest,indices)
+{
+
+    ///test edge indices
+    {
+        ///mark each edge's index, and test if all the indices get marked off
+        uint32_t bitmask = 0;
+        for (edge_t edge : all_edges)
+        {
+            bitmask |= (1 << get_edge_index(edge));
+        }
+        
+        EXPECT_EQ(bitmask, uint32_t(1 << 12) - 1);
+        
+        
+        
+        ///test get_edge_by_index()
+        uint32_t index = 0;
+        for (edge_t edge : all_edges)
+        {
+            EXPECT_EQ(index, get_edge_index(edge));
+            
+            EXPECT_TRUE(is_edge_equal(edge, get_edge_by_index(index)));
+            EXPECT_FALSE(is_edge_null(edge));
+            EXPECT_TRUE(is_edge_valid(edge));
+            
+            ++index;
+        }
+        
+    }
+    
+
+}
+
+
