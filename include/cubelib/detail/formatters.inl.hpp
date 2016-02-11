@@ -45,6 +45,19 @@ std::ostream& operator<<(std::ostream& out, const corner_t& corner)
 }
 
 CORNER_CASES_CUBELIB_FORMATTERS_INLINE
+std::ostream& operator<<(std::ostream& out, const edge_t& edge)
+{
+    if (is_edge_null(edge))
+        out << "null";
+    else
+        out << "(" << get_edge_corner0(edge)
+                 << " <=> "
+                 << get_edge_corner1(edge)
+                 << ")";
+    return out;
+}
+
+CORNER_CASES_CUBELIB_FORMATTERS_INLINE
 std::string tostr(const corner_t& corner)
 {
     std::ostringstream out;
