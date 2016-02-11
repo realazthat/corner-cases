@@ -49,11 +49,22 @@ extern "C"{
     #define NULL_DIRECTION (direction_t){0}
     #define NULL_EGDE (edge_t){12}
     #define NULL_FACE (face_t){0}
+    
+    #define CORNERS_SIZE 8
+    #define DIRECTIONS_SIZE 6
+    #define EDGES_SIZE 12
+    #define FACES_SIZE 6
 
     CUBELIB_GLOBAL_STATIC_CONST corner_t null_corner = NULL_CORNER;
     CUBELIB_GLOBAL_STATIC_CONST direction_t null_direction = NULL_DIRECTION;
     CUBELIB_GLOBAL_STATIC_CONST edge_t null_edge = NULL_EGDE;
     CUBELIB_GLOBAL_STATIC_CONST face_t null_face = NULL_FACE;
+    
+    CUBELIB_GLOBAL_STATIC_CONST size_t corners_size = CORNERS_SIZE;
+    CUBELIB_GLOBAL_STATIC_CONST size_t directions_size = DIRECTIONS_SIZE;
+    CUBELIB_GLOBAL_STATIC_CONST size_t edges_size = EDGES_SIZE;
+    CUBELIB_GLOBAL_STATIC_CONST size_t faces_size = FACES_SIZE;
+    
 
 /* -------------------------------------------------------------------------- */
     static inline bool is_corner_valid(corner_t corner);
