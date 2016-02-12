@@ -143,6 +143,29 @@ extern "C"{
 
         return get_corner_by_int3(x,y,z);
     }
+    
+    static inline corner_t calc_adjacent_corner(corner_t corner, direction_t direction)
+    {
+        assert(!is_corner_null(corner));
+        assert(is_corner_valid(corner));
+        assert(is_direction_valid(direction));
+        
+        
+        uint_fast8_t x = (get_corner_unitx(corner) + get_direction_absx(direction)) % 2;
+        uint_fast8_t y = (get_corner_unity(corner) + get_direction_absy(direction)) % 2;
+        uint_fast8_t z = (get_corner_unitz(corner) + get_direction_absz(direction)) % 2;
+
+        return get_corner_by_int3(x,y,z);
+        
+    }
+    
+    
+    static inline corner_t get_adjacent_corner(corner_t corner, direction_t direction){
+        assert(!is_corner_null(corner));
+        assert(is_corner_valid(corner));
+        assert(is_direction_valid(direction));
+        return calc_adjacent_corner(corner, direction);
+    }
 
     static inline uint_fast8_t get_corner_index(corner_t corner){
         assert (is_corner_valid(corner) && !is_corner_null(corner));

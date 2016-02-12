@@ -105,6 +105,9 @@ extern "C"{
      * @see corner_push(), corner_move()
      */
     static inline corner_t get_adjacent_corner(corner_t corner, direction_t direction);
+    ///@copydoc get_adjacent_corner()
+    static inline corner_t calc_adjacent_corner(corner_t corner, direction_t direction);
+    
     /**
      * Move a corner in a specified direction. If the new corner cannot be moved in that direction
      *  then this method will return a @c null_corner.
