@@ -163,6 +163,19 @@ extern "C"{
     static inline uint_fast8_t get_edge_index(edge_t edge);
     static inline edge_t get_opposite_edge(edge_t edge);
     
+    static inline corner_t get_edge_corner0(edge_t edge);
+    static inline corner_t get_edge_corner1(edge_t edge);
+    
+    static inline uint_fast8_t calc_edge_base_axis(edge_t edge);
+    static inline uint_fast8_t calc_edge_secondary_axis(edge_t edge);
+    static inline uint_fast8_t calc_edge_tertiary_axis(edge_t edge);
+    static inline uint_fast8_t get_edge_base_axis(edge_t edge);
+    static inline uint_fast8_t get_edge_secondary_axis(edge_t edge);
+    static inline uint_fast8_t get_edge_tertiary_axis(edge_t edge);
+    static inline bool is_edge_projected_secondary(edge_t edge);
+    static inline bool is_edge_projected_tertiary(edge_t edge);
+
+    
     
     static inline bool is_corner_adjacent_edge(corner_t corner, edge_t edge);
     static inline bool is_direction_adjacent_edge(direction_t direction, edge_t edge);

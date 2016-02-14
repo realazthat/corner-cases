@@ -466,6 +466,192 @@ extern "C"{
         assert(!is_edge_null(result));
         return result;
     }
+    
+    
+    
+    static inline uint_fast8_t calc_edge_base_axis(edge_t edge)
+    {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        uint_fast8_t result = edge.value >> 2;
+        assert(result < 3);
+        return result;
+    }
+    
+    static inline uint_fast8_t calc_edge_secondary_axis(edge_t edge)
+    {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        return (calc_edge_base_axis(edge) + 1) % 3;
+    }
+    static inline uint_fast8_t calc_edge_tertiary_axis(edge_t edge)
+    {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        return (calc_edge_base_axis(edge) + 2) % 3;
+    }
+    
+    static inline uint_fast8_t get_edge_base_axis(edge_t edge) {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        return calc_edge_base_axis(edge);
+    }
+    
+    
+    static inline uint_fast8_t get_edge_secondary_axis(edge_t edge) {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        return calc_edge_secondary_axis(edge);
+    }
+    
+    static inline uint_fast8_t get_edge_tertiary_axis(edge_t edge) {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        return calc_edge_tertiary_axis(edge);
+    }
+    
+    
+    
+    static inline bool is_edge_projected_secondary(edge_t edge)
+    {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        return edge.value & 1;
+    }
+    
+    static inline bool is_edge_projected_tertiary(edge_t edge)
+    {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        return (edge.value >> 1) & 1;
+    }
+    
+    
+    static inline corner_t calc_edge_corner0(edge_t edge)
+    {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        
+        
+        
+        int xyz[] = {-1, -1, -1};
+        
+        xyz[get_edge_secondary_axis(edge)] += is_edge_projected_secondary(edge) ? 2 : 0;
+        xyz[get_edge_tertiary_axis(edge)] += is_edge_projected_tertiary(edge) ? 2 : 0;
+        return get_corner_by_int3( xyz[0], xyz[1], xyz[2] );
+    }
+    
+    
+    
+    static inline corner_t calc_edge_corner1(edge_t edge)
+    {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        
+        
+        
+        int xyz[] = {-1, -1, -1};
+        
+        xyz[get_edge_secondary_axis(edge)] += is_edge_projected_secondary(edge) ? 2 : 0;
+        xyz[get_edge_tertiary_axis(edge)] += is_edge_projected_tertiary(edge) ? 2 : 0;
+        
+        xyz[get_edge_base_axis(edge)] += 2;
+        return get_corner_by_int3( xyz[0], xyz[1], xyz[2] );
+    }
+    
+    
+    
+    
+    
+    
+    static inline corner_t get_edge_corner0(edge_t edge)
+    {
+        return calc_edge_corner0(edge);
+    }
+    
+    static inline corner_t get_edge_corner1(edge_t edge)
+    {
+        return calc_edge_corner1(edge);
+    }
+    
+    
+    
+    
+    static inline edge_t calc_edge_by_corners(corner_t corner0, corner_t corner1)
+    {
+        assert(is_corner_valid(corner0));
+        assert(is_corner_valid(corner1));
+        assert(!is_corner_null(corner0));
+        assert(!is_corner_null(corner1));
+        assert(!is_corner_equal(corner0, corner1));
+        assert(is_corner_adjacent_corner(corner0, corner1));
+        
+        ///the value will be in the form of 0bBBTS; where BB is the base axis bits, and S,T are the "is projected" bits
+        /// for the Secondary and Tertiary axes.
+        edge_value_t value = 0;
+        
+        ///the bit that is different will be the base axis
+        corner_value_t axis_bit = corner0.value ^ corner1.value;
+        assert(axis_bit == 1 || axis_bit == 2 || axis_bit == 4);
+        
+        ///the bits that are the same will be the projected axis
+        corner_value_t projection_bits = corner0.value & corner1.value;
+        
+        
+        
+        ///table to convert a 3 bit word with one bit set into an index of the position
+        ///in other words, given an "axis-bit" of 0b001, 0b010 or 0b100, representing x,y,z axes
+        /// respectively, this table will turn them into 0-based indices of 0,1,2 respectively.
+        static const uint_fast8_t axis_bit_2_axis[] = { /*invalid*/(uint_fast8_t)-1,/*0b001*/ 0, /*0b010*/1, /*invalid*/(uint_fast8_t)-1, /*0b100*/2 };
+        
+        uint_fast8_t base_axis = axis_bit_2_axis[axis_bit];
+        assert(base_axis < 3);
+        
+        
+        value |= base_axis << 2;
+        
+        uint_fast8_t secondary_axis = (base_axis + 1) % 3;
+        uint_fast8_t tertiary_axis = (base_axis + 2) % 3;
+        uint_fast8_t is_projected_secondary_bit = (projection_bits >> secondary_axis) & 1;
+        uint_fast8_t is_projected_tertiary_bit = (projection_bits >> tertiary_axis) & 1;
+        
+        value |= is_projected_secondary_bit;
+        value |= is_projected_tertiary_bit << 1;
+        
+        edge_t result = {value};
+        
+        
+        assert(get_edge_base_axis(result) == base_axis);
+        assert(get_edge_secondary_axis(result) == secondary_axis);
+        assert(get_edge_tertiary_axis(result) == tertiary_axis);
+        assert(is_edge_projected_secondary(result) == is_projected_secondary_bit);
+        assert(is_edge_projected_tertiary(result) == is_projected_tertiary_bit);
+        //assert(is_corner_adjacent_edge(corner0, result));
+        //assert(is_corner_adjacent_edge(corner1, result));
+        assert(is_corner_equal(get_edge_corner0(result), corner0) || is_corner_equal(get_edge_corner0(result), corner1));
+        assert(is_corner_equal(get_edge_corner1(result), corner0) || is_corner_equal(get_edge_corner1(result), corner1));
+        return result;
+    }
+    
+    static inline edge_t get_edge_by_corners(corner_t corner0, corner_t corner1)
+    {
+        assert(is_corner_valid(corner0));
+        assert(is_corner_valid(corner1));
+        assert(!is_corner_null(corner0));
+        assert(!is_corner_null(corner1));
+        assert(is_corner_adjacent_corner(corner0, corner1));
+        return calc_edge_by_corners(corner0, corner1);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     /*
      * ---------------------------------------------------------------------
      * Faces
