@@ -139,6 +139,10 @@ extern "C"{
     static inline int get_direction_y(direction_t direction);
     static inline int get_direction_z(direction_t direction);
     static inline int get_direction_i(direction_t direction, uint_fast8_t dim);
+    static inline uint_fast8_t get_direction_absx(direction_t direction);
+    static inline uint_fast8_t get_direction_absy(direction_t direction);
+    static inline uint_fast8_t get_direction_absz(direction_t direction);
+    static inline uint_fast8_t get_direction_absi(direction_t direction, uint_fast8_t dim);
 
     static inline uint_fast8_t get_direction_index(direction_t direction);
     static inline direction_t get_direction_by_index(uint_fast8_t index);

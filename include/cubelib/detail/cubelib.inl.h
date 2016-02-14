@@ -256,6 +256,36 @@ extern "C"{
         return 0;
     }
 
+    static inline uint_fast8_t get_direction_absx(direction_t direction)
+    {
+        assert(is_direction_valid(direction));
+        const char xs[] = { 0, 1, 0, 0, 0, 0, +1, 0};
+        return xs[direction.value];
+    }
+    static inline uint_fast8_t get_direction_absy(direction_t direction)
+    {
+        assert(is_direction_valid(direction));
+        const char ys[] = { 0, 0, 1, 0, 0, +1, 0, 0};
+        return ys[direction.value];
+    }
+    static inline uint_fast8_t get_direction_absz(direction_t direction)
+    {
+        assert(is_direction_valid(direction));
+        const char zs[] = { 0, 0, 0, +1, 1, 0, 0, 0};
+        return zs[direction.value];
+    }
+    static inline uint_fast8_t get_direction_absi(direction_t direction, uint_fast8_t dim)
+    {
+        assert(is_direction_valid(direction));
+        assert(dim < 3);
+        if (dim == 0)
+            return get_direction_absx(direction);
+        if (dim == 1)
+            return get_direction_absy(direction);
+        if (dim == 2)
+            return get_direction_absz(direction);
+        return 0;
+    }
     static inline bool is_direction_equal(direction_t left, direction_t right)
     {
         return left.value == right.value;
