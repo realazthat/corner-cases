@@ -122,6 +122,10 @@ extern "C"{
     static inline corner_t corner_push(corner_t corner, direction_t direction);
     
     
+    static inline bool calc_is_corner_adjacent_corner(corner_t corner0, corner_t corner1);
+    static inline bool is_corner_adjacent_corner(corner_t corner0, corner_t corner1);
+    
+    
     static inline uint_fast8_t get_corner_index(corner_t corner);
     static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim);
     static inline bool is_corner_equal(corner_t left, corner_t right);

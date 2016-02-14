@@ -182,7 +182,30 @@ extern "C"{
 
         return result;
     }
+    
+    static inline bool calc_is_corner_adjacent_corner(corner_t corner0, corner_t corner1)
+    {
+        assert(!is_corner_null(corner0));
+        assert(!is_corner_null(corner1));
+        assert(is_corner_valid(corner0));
+        assert(is_corner_valid(corner1));
+        
+        uint_fast8_t different_axis_bits = (corner0.value ^ corner1.value);
+        
+        return different_axis_bits == 1 || different_axis_bits == 2 || different_axis_bits == 4;
+    }
 
+
+    static inline bool is_corner_adjacent_corner(corner_t corner0, corner_t corner1)
+    {
+        assert(!is_corner_null(corner0));
+        assert(!is_corner_null(corner1));
+        assert(is_corner_valid(corner0));
+        assert(is_corner_valid(corner1));
+        return calc_is_corner_adjacent_corner(corner0, corner1);
+    }
+
+    
 
     static inline bool is_corner_equal(corner_t left, corner_t right)
     {
