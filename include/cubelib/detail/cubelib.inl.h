@@ -30,19 +30,30 @@ extern "C"{
 
     static inline int get_corner_x(corner_t corner)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        
         return (corner.value & 1 ? 1 : -1);
     }
     static inline int get_corner_y(corner_t corner)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        
         return (corner.value & 2 ? 1 : -1);
     }
     static inline int get_corner_z(corner_t corner)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        
         return (corner.value & 4 ? 1 : -1);
     }
 
     static inline int get_corner_i(corner_t corner, uint_fast8_t dim)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
         assert (dim < 3);
 
         return ( corner.value & (1 << dim) ? 1 : -1 );
@@ -53,20 +64,32 @@ extern "C"{
 
     static inline int get_corner_unitx(corner_t corner)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        
         return (corner.value & 1 ? 1 : 0);
     }
     static inline int get_corner_unity(corner_t corner)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        
         return (corner.value & 2 ? 1 : 0);
     }
     static inline int get_corner_unitz(corner_t corner)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        
         return (corner.value & 4 ? 1 : 0);
     }
 
 
     static inline int get_corner_uniti(corner_t corner, uint_fast8_t dim)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        
         assert (dim < 3);
 
         return ( corner.value & (1 << dim) ? 1 : 0 );
@@ -79,6 +102,11 @@ extern "C"{
         corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
 
         corner_t result = {value};
+        
+        
+        assert(is_corner_valid(result));
+        assert(!is_corner_null(result));
+        
         return result;
     }
     static inline
@@ -90,6 +118,8 @@ extern "C"{
 
         result.value = value;
 
+        assert(is_corner_valid(result));
+        assert(!is_corner_null(result));
         return result;
     }
 
@@ -109,8 +139,8 @@ extern "C"{
      */
     static inline corner_t get_opposite_corner(corner_t corner)
     {
-        if (is_corner_null(corner))
-            return null_corner;
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
 
         corner_t result;
         result.value = (~corner.value) & 0x7;
@@ -119,7 +149,11 @@ extern "C"{
 
     static inline corner_t corner_move(corner_t corner, direction_t direction)
     {
-
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
         int x = get_corner_x(corner) + get_direction_x(direction)*2;
         int y = get_corner_y(corner) + get_direction_y(direction)*2;
         int z = get_corner_z(corner) + get_direction_z(direction)*2;
@@ -136,7 +170,12 @@ extern "C"{
 
     static inline corner_t corner_push(corner_t corner, direction_t direction)
     {
-
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
+        
         int x = get_corner_x(corner) + get_direction_x(direction)*2;
         int y = get_corner_y(corner) + get_direction_y(direction)*2;
         int z = get_corner_z(corner) + get_direction_z(direction)*2;
@@ -161,34 +200,40 @@ extern "C"{
     
     
     static inline corner_t get_adjacent_corner(corner_t corner, direction_t direction){
-        assert(!is_corner_null(corner));
         assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
         assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
         return calc_adjacent_corner(corner, direction);
     }
 
     static inline uint_fast8_t get_corner_index(corner_t corner){
-        assert (is_corner_valid(corner) && !is_corner_null(corner));
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
         return corner.value;
     }
 
 
     static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim)
     {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
         assert( dim < 3 );
 
         ///flip the bit of the specified dimension
         corner_t result = {(corner_value_t)(corner.value ^ (1 << dim))};
 
+        assert(is_corner_valid(result));
+        assert(!is_corner_null(result));
         return result;
     }
     
     static inline bool calc_is_corner_adjacent_corner(corner_t corner0, corner_t corner1)
     {
-        assert(!is_corner_null(corner0));
-        assert(!is_corner_null(corner1));
         assert(is_corner_valid(corner0));
         assert(is_corner_valid(corner1));
+        assert(!is_corner_null(corner0));
+        assert(!is_corner_null(corner1));
         
         uint_fast8_t different_axis_bits = (corner0.value ^ corner1.value);
         
@@ -198,10 +243,10 @@ extern "C"{
 
     static inline bool is_corner_adjacent_corner(corner_t corner0, corner_t corner1)
     {
-        assert(!is_corner_null(corner0));
-        assert(!is_corner_null(corner1));
         assert(is_corner_valid(corner0));
         assert(is_corner_valid(corner1));
+        assert(!is_corner_null(corner0));
+        assert(!is_corner_null(corner1));
         return calc_is_corner_adjacent_corner(corner0, corner1);
     }
 
@@ -209,6 +254,8 @@ extern "C"{
 
     static inline bool is_corner_equal(corner_t left, corner_t right)
     {
+        assert(is_corner_valid(left));
+        assert(is_corner_valid(right));
         return left.value == right.value;
     }
 
@@ -231,22 +278,34 @@ extern "C"{
 
     static inline int get_direction_x(direction_t direction)
     {
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
         const char xs[] = { 0, 1, 0, 0, 0, 0, -1, 0};
-        return direction.value < 8 ? xs[direction.value] : 0;
+        return xs[direction.value];
     }
     static inline int get_direction_y(direction_t direction)
     {
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
         const char ys[] = { 0, 0, 1, 0, 0, -1, 0, 0};
-        return direction.value < 8 ? ys[direction.value] : 0;
+        return ys[direction.value];
     }
     static inline int get_direction_z(direction_t direction)
     {
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
         const char zs[] = { 0, 0, 0, -1, 1, 0, 0, 0};
-        return direction.value < 8 ? zs[direction.value] : 0;
+        return zs[direction.value];
     }
     static inline int get_direction_i(direction_t direction, uint_fast8_t dim)
     {
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
         assert(dim < 3);
+        
         if (dim == 0)
             return get_direction_x(direction);
         if (dim == 1)
@@ -259,25 +318,33 @@ extern "C"{
     static inline uint_fast8_t get_direction_absx(direction_t direction)
     {
         assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
         const char xs[] = { 0, 1, 0, 0, 0, 0, +1, 0};
         return xs[direction.value];
     }
     static inline uint_fast8_t get_direction_absy(direction_t direction)
     {
         assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
         const char ys[] = { 0, 0, 1, 0, 0, +1, 0, 0};
         return ys[direction.value];
     }
     static inline uint_fast8_t get_direction_absz(direction_t direction)
     {
         assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
         const char zs[] = { 0, 0, 0, +1, 1, 0, 0, 0};
         return zs[direction.value];
     }
     static inline uint_fast8_t get_direction_absi(direction_t direction, uint_fast8_t dim)
     {
         assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
         assert(dim < 3);
+        
         if (dim == 0)
             return get_direction_absx(direction);
         if (dim == 1)
@@ -288,6 +355,9 @@ extern "C"{
     }
     static inline bool is_direction_equal(direction_t left, direction_t right)
     {
+        assert(is_direction_valid(left));
+        assert(is_direction_valid(right));
+        
         return left.value == right.value;
     }
 
@@ -311,14 +381,19 @@ extern "C"{
 
     static inline direction_t get_opposite_direction(direction_t direction)
     {
-        assert( !is_direction_null(direction) );
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
         direction_value_t value = (~direction.value) & 7;
         direction_t result = {value};
+        assert(is_direction_valid(result));
+        assert(!is_direction_null(result));
         return result;
     }
 
     static inline direction_t get_opposite_face(direction_t direction)
     {
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
         return get_opposite_direction(direction);
     }
 
@@ -335,6 +410,8 @@ extern "C"{
         value = pos ? value : ((~value) & 7);
 
         direction_t result = {value};
+        assert(is_direction_valid(result));
+        assert(!is_direction_null(result));
         return result;
     }
 
@@ -344,13 +421,16 @@ extern "C"{
     {
         assert(index < 6);
         direction_t result = {(direction_value_t)(index + 1)};
+        assert(is_direction_valid(result));
+        assert(!is_direction_null(result));
         return result;
     }
 
     static inline
     uint_fast8_t get_direction_index(direction_t direction)
     {
-        assert(is_direction_valid(direction) && !is_direction_null(direction));
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
 
         return direction.value - 1;
     }
@@ -358,6 +438,8 @@ extern "C"{
     static inline
     corner_t calc_dir_adj_cnr(direction_t direction, uint_fast8_t idx)
     {
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
         assert(idx < 4);
 
         int x = get_direction_x(direction)
@@ -445,13 +527,16 @@ extern "C"{
 
     static inline bool is_edge_equal(edge_t left, edge_t right)
     {
+        assert(is_edge_valid(left));
+        assert(is_edge_valid(right));
         return left.value == right.value;
     }
 
     static inline
     uint_fast8_t get_edge_index(edge_t edge)
     {
-        assert(is_edge_valid(edge) && !is_edge_null(edge));
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
 
         return edge.value;
     }
@@ -525,6 +610,7 @@ extern "C"{
     {
         assert(is_edge_valid(edge));
         assert(!is_edge_null(edge));
+
         return (edge.value >> 1) & 1;
     }
     
@@ -533,8 +619,6 @@ extern "C"{
     {
         assert(is_edge_valid(edge));
         assert(!is_edge_null(edge));
-        
-        
         
         int xyz[] = {-1, -1, -1};
         
@@ -549,8 +633,6 @@ extern "C"{
     {
         assert(is_edge_valid(edge));
         assert(!is_edge_null(edge));
-        
-        
         
         int xyz[] = {-1, -1, -1};
         
@@ -568,11 +650,17 @@ extern "C"{
     
     static inline corner_t get_edge_corner0(edge_t edge)
     {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        
         return calc_edge_corner0(edge);
     }
     
     static inline corner_t get_edge_corner1(edge_t edge)
     {
+        assert(is_edge_valid(edge));
+        assert(!is_edge_null(edge));
+        
         return calc_edge_corner1(edge);
     }
     
@@ -642,6 +730,7 @@ extern "C"{
         assert(!is_corner_null(corner0));
         assert(!is_corner_null(corner1));
         assert(is_corner_adjacent_corner(corner0, corner1));
+
         return calc_edge_by_corners(corner0, corner1);
     }
     
