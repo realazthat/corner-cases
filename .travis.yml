@@ -24,8 +24,6 @@ addons:
     packages:
     - gcc-4.8
     - g++-4.8
-    - libboost-all-dev
-    #- libgtest-dev
 
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
