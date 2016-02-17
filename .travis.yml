@@ -25,6 +25,7 @@ addons:
     - gcc-4.8
     - g++-4.8
     - libboost-all-dev
+    - doxygen
     #- libgtest-dev
 
 install:
