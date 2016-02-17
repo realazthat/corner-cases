@@ -5,7 +5,6 @@ language: cpp
 compiler:
   - gcc
   - clang
-
 env:
   global:
     #GH_TOKEN
@@ -26,12 +25,14 @@ addons:
     - g++-4.8
     - libboost-all-dev
     - doxygen
-    #- libgtest-dev
 
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
     - sudo CMAKE_GENERATOR="$CMAKE_GENERATOR" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-googletest.sh
     - sudo CMAKE_GENERATOR="$CMAKE_GENERATOR" CMAKE_BUILD_TYPE="Release" bash ./scripts/download-and-build-cppformat.sh
+    - export PATH=$HOME/.local/bin:$PATH
+    - pip3 install --user `whoami` sphinx
+    - pip3 install --user `whoami` breathe
 
 
 script:
