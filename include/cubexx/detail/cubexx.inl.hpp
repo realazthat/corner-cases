@@ -1313,7 +1313,7 @@ set_base_t<derived_t, element_t, N>::
 set_base_t(const Sequence& sequence)
   : mbits(0)
 {
-  *this |= sequence;
+  self() |= sequence;
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
@@ -1360,7 +1360,7 @@ derived_t
 set_base_t<derived_t, element_t, N>::
 operator|(const derived_t& set) const
 {
-  return derived_t(*this) |= set;
+  return derived_t(self()) |= set;
 }
 
 
@@ -1370,7 +1370,7 @@ derived_t
 set_base_t<derived_t, element_t, N>::
 operator|(const element_t& element) const
 {
-  return derived_t(*this) | element;
+  return derived_t(self()) | element;
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
@@ -1380,7 +1380,7 @@ derived_t
 set_base_t<derived_t, element_t, N>::
 operator|(const Sequence& sequence) const
 {
-  return derived_t(*this) | sequence;
+  return derived_t(self()) | sequence;
 }
 
 template<typename derived_t, typename element_t, std::size_t N>
@@ -1417,11 +1417,88 @@ operator|=(const Sequence& sequence)
   
   for(const element_t& element : sequence)
   {
-    *this |= element;
+    self() |= element;
   }
   
   return self();
 }
+
+
+
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+derived_t&
+set_base_t<derived_t, element_t, N>::
+operator-=(const derived_t& set)
+{
+  mbits &= ~set.mbits;
+  
+  return self();
+}
+
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+derived_t&
+set_base_t<derived_t, element_t, N>::
+operator-=(const element_t& element)
+{
+  assert(element.index() < N);
+  mbits.set(element.index(), false);
+  return self();
+}
+
+
+
+template<typename derived_t, typename element_t, std::size_t N>
+template<typename Sequence>
+CORNER_CASES_CUBEXX_INLINE
+derived_t&
+set_base_t<derived_t, element_t, N>::
+operator-=(const Sequence& sequence)
+{
+  
+  for(const element_t& element : sequence)
+  {
+    self() -= element;
+  }
+  
+  return self();
+}
+
+
+
+
+
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+derived_t
+set_base_t<derived_t, element_t, N>::
+operator-(const derived_t& set) const
+{
+  return derived_t(self()) -= set;
+}
+
+
+template<typename derived_t, typename element_t, std::size_t N>
+CORNER_CASES_CUBEXX_INLINE
+derived_t
+set_base_t<derived_t, element_t, N>::
+operator-(const element_t& element) const
+{
+  return derived_t(self()) -= element;
+}
+
+template<typename derived_t, typename element_t, std::size_t N>
+template<typename Sequence>
+CORNER_CASES_CUBEXX_INLINE
+derived_t
+set_base_t<derived_t, element_t, N>::
+operator-(const Sequence& sequence) const
+{
+  return derived_t(self()) -= sequence;
+}
+
+
 
 
 template<typename derived_t, typename element_t, std::size_t N>

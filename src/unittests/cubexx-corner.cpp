@@ -636,7 +636,7 @@ TEST_F(CUBEXXCornerTest,corner_set)
         }
     }
     
-    ///check corner_set_t::operator|(corner_set_t) and corner_set_t::operator!=(corner_set_t)
+    ///check corner_set_t::operator|(corner_set_t) and corner_set_t::operator|=(corner_set_t)
     for (uint32_t combo0 = 0; combo0 < 256; ++combo0)
     {
         const auto corner_set0 = all_corner_sets[combo0];
@@ -674,9 +674,140 @@ TEST_F(CUBEXXCornerTest,corner_set)
                 ASSERT_EQ(corner_set, bitmask_to_corner_set(combo0 | combo1));
             }
         }
+        ASSERT_EQ(corner_set0, bitmask_to_corner_set(combo0));
     }
     
     
+    
+    
+    ///check ::operator<<(corner_set_t - corner_set_t)
+    for (uint32_t combo0 = 0; combo0 < 256; ++combo0)
+    {
+        const auto corner_set0 = all_corner_sets[combo0];
+        for (uint32_t combo1 = 0; combo1 < 256; ++combo1)
+        {
+            const auto corner_set1 = all_corner_sets[combo1];
+            
+            std::string result0 = tostr(corner_set0 - corner_set1);
+            
+            const auto corner_set2 = corner_set0 - corner_set1;
+            std::string result1 = tostr(corner_set2);
+            
+            ASSERT_EQ(result0,result1);
+        }
+    }
+    
+    ///check corner_set_t::operator-(corner_t) and corner_set_t::operator-=(corner_t)
+    for (uint32_t base_combo = 0; base_combo < 256; ++base_combo)
+    {
+        
+        for (auto corner : cubexx::corner_t::all())
+        {
+            const auto base_corner_set = all_corner_sets[base_combo];
+            
+            auto index = corner.index();
+            
+            uint32_t expected_result_combo = base_combo & (~(1 << index));
+            
+            
+            ///test operator-
+            {
+                
+                ASSERT_TRUE(bitmask_equal_corner_set( base_corner_set - corner, expected_result_combo))
+                    <<   "base_corner_set:                " << base_corner_set.bits()
+                    << "\n corner:                        " << corner
+                    << "\n corner.index():                " << index
+                    << "\n corner.index():                " << std::bitset<8>(index)
+                    << "\n base_corner_set - corner:      " << (base_corner_set - corner).bits()
+                    << "\n base_combo:                    " << std::bitset<8>(base_combo)
+                    << "\n expected_result_combo:  " << std::bitset<8>(expected_result_combo);
+                ASSERT_TRUE(bitmask_equal_corner_set( base_corner_set - corner, expected_result_combo))
+                    <<   "base_corner_set:                " << base_corner_set.bits()
+                    << "\n corner:                        " << corner
+                    << "\n corner.index():                " << index
+                    << "\n corner.index():                " << std::bitset<8>(index)
+                    << "\n base_corner_set - corner:      " << (base_corner_set - corner).bits()
+                    << "\n base_combo:                    " << std::bitset<8>(base_combo)
+                    << "\n expected_result_combo:  " << std::bitset<8>(expected_result_combo);
+                ASSERT_EQ(base_corner_set - corner, bitmask_to_corner_set(expected_result_combo))
+                    <<   "base_corner_set:                " << base_corner_set.bits()
+                    << "\n corner:                        " << corner
+                    << "\n corner.index():                " << index
+                    << "\n corner.index():                " << std::bitset<8>(index)
+                    << "\n base_corner_set - corner:      " << (base_corner_set - corner).bits()
+                    << "\n base_combo:                    " << std::bitset<8>(base_combo)
+                    << "\n expected_result_combo:  " << std::bitset<8>(expected_result_combo);
+            }
+            
+            
+            ///test operator-=
+            {
+                auto corner_set = base_corner_set;
+                corner_set -= corner;
+                
+                ASSERT_TRUE(bitmask_equal_corner_set(corner_set, expected_result_combo));
+                ASSERT_EQ(corner_set, bitmask_to_corner_set(expected_result_combo));
+            }
+            
+            
+            ASSERT_EQ(base_corner_set, all_corner_sets[base_combo]);
+            ASSERT_EQ(base_corner_set, bitmask_to_corner_set(base_combo));
+        }
+    }
+    
+    ///check corner_set_t::operator-(corner_set_t) and corner_set_t::operator-=(corner_set_t)
+    for (uint32_t combo0 = 0; combo0 < 256; ++combo0)
+    {
+        const auto left_corner_set = all_corner_sets[combo0];
+        for (uint32_t combo1 = 0; combo1 < 256; ++combo1)
+        {
+            const auto right_corner_set = all_corner_sets[combo1];
+            uint32_t expected_result_combo = combo0 & (~combo1);
+            
+            
+            
+            ASSERT_TRUE( expected_result_combo < 256 );
+            
+            ///this has no bits of combo1
+            ASSERT_EQ(expected_result_combo & combo1, uint32_t(0));
+            
+            ///expected_result_combo => combo0
+            ASSERT_EQ(uint32_t((~expected_result_combo) | combo0), uint32_t(-1));
+            
+            
+            
+            
+            ///test operator-
+            {
+                
+                ASSERT_TRUE(bitmask_equal_corner_set( left_corner_set - right_corner_set, expected_result_combo))
+                    <<   "left_corner_set:                " << left_corner_set.bits()
+                    << "\n right_corner_set:               " << right_corner_set.bits()
+                    << "\n left_corner_set - right_corner_set: " << (left_corner_set - right_corner_set).bits()
+                    << "\n combo0:          " << combo0
+                    << "\n combo1:          " << combo1
+                    << "\n expected_result_combo: " << (expected_result_combo);
+                ASSERT_TRUE(bitmask_equal_corner_set( left_corner_set - right_corner_set, expected_result_combo))
+                    <<   "left_corner_set:                " << left_corner_set.bits()
+                    << "\n right_corner_set:               " << right_corner_set.bits()
+                    << "\n left_corner_set - right_corner_set: " << (left_corner_set - right_corner_set);
+                ASSERT_EQ(left_corner_set - right_corner_set, bitmask_to_corner_set(expected_result_combo))
+                    <<   "left_corner_set:                " << left_corner_set.bits()
+                    << "\n right_corner_set:               " << right_corner_set.bits()
+                    << "\n left_corner_set - right_corner_set: " << (left_corner_set - right_corner_set);
+            }
+            ///test operator-=
+            {
+                auto result_corner_set = left_corner_set;
+                result_corner_set -= right_corner_set;
+                
+                ASSERT_TRUE(bitmask_equal_corner_set(result_corner_set, expected_result_combo));
+                ASSERT_EQ(result_corner_set, bitmask_to_corner_set(expected_result_combo));
+            }
+            ASSERT_EQ(left_corner_set, bitmask_to_corner_set(combo0));
+            ASSERT_EQ(right_corner_set, bitmask_to_corner_set(combo1));
+        }
+    }
     ///check ::operator<<
     /*
     for (uint32_t combo0 = 0; combo0 < 256; ++combo0)
@@ -712,7 +843,6 @@ TEST_F(CUBEXXCornerTest,corner_set)
                                 , fmt::arg("space", space_re)
                                 , fmt::arg("corner", corner_re)
                                 );
-        
         
         std::string final_re_str = corner_list_re;
         
