@@ -456,6 +456,16 @@ struct set_base_t
   derived_t operator|(const derived_t& set) const;
   derived_t operator|(const element_t& element) const;
   
+  template<typename Sequence>
+  derived_t& operator-=(const Sequence& sequence);
+  derived_t& operator-=(const derived_t& set);
+  derived_t& operator-=(const element_t& element);
+  
+  template<typename Sequence>
+  derived_t operator-(const Sequence& sequence) const;
+  derived_t operator-(const derived_t& set) const;
+  derived_t operator-(const element_t& element) const;
+  
   bool contains(const element_t& element) const;
   bool contains(const std::size_t& idx) const;
   
