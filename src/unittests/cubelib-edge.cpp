@@ -242,3 +242,37 @@ TEST_F(CubelibEdgeTest,get_edge_by_corners)
 
 }
 
+TEST_F(CubelibEdgeTest,get_edge_by_corner_direction)
+{
+    int count = 0;
+    
+    for (auto corner : all_corners)
+    {
+        for (auto direction : all_directions)
+        {
+            auto next_corner = corner_move(corner,direction);
+            if (is_corner_null(next_corner))
+                continue;
+            
+            ++count;
+            
+            auto edge = get_edge_by_corner_direction(corner,direction);
+            
+            ASSERT_TRUE(is_corner_equal(get_edge_corner0(edge), corner)
+                        ||
+                        is_corner_equal(get_edge_corner1(edge), corner));
+            ASSERT_TRUE(is_corner_equal(get_edge_corner0(edge), next_corner)
+                        ||
+                        is_corner_equal(get_edge_corner1(edge), next_corner));
+            
+            
+            ASSERT_TRUE(is_corner_adjacent_corner(get_edge_corner0(edge), get_edge_corner1(edge)));
+            
+        }
+    }
+    
+    ASSERT_EQ(8*3,count);
+}
+
+
+

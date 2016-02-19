@@ -553,7 +553,41 @@ extern "C"{
     }
     
     
+    static inline edge_t calc_edge_by_corner_direction(corner_t corner, direction_t direction)
+    {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
+        corner_t next_corner = corner_move(corner, direction);
+        assert(!is_corner_null(next_corner) && "there is no adjacent corner in that direction");
+        
+        assert(is_corner_adjacent_corner(corner,next_corner));
+        
+        edge_t result = get_edge_by_corners(corner,next_corner);
+        
+        assert(is_edge_valid(result));
+        assert(!is_edge_null(result));
+        
+        ///corner == corner0(edge) || corner == corner1(edge)
+        assert(is_corner_equal(get_edge_corner0(result), corner) || is_corner_equal(get_edge_corner1(result), corner));
+        
+        ///next_corner == corner0(edge) || next_corner == corner1(edge)
+        assert(is_corner_equal(get_edge_corner0(result), next_corner) || is_corner_equal(get_edge_corner1(result), next_corner));
+        
+        return result;
+    }
     
+    static inline edge_t get_edge_by_corner_direction(corner_t corner, direction_t direction)
+    {
+        assert(is_corner_valid(corner));
+        assert(!is_corner_null(corner));
+        assert(is_direction_valid(direction));
+        assert(!is_direction_null(direction));
+        
+        return calc_edge_by_corner_direction(corner,direction);
+    }
     static inline uint_fast8_t calc_edge_base_axis(edge_t edge)
     {
         assert(is_edge_valid(edge));

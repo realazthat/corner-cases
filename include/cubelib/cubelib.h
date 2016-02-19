@@ -156,8 +156,10 @@ extern "C"{
     static inline bool is_direction_null(direction_t direction);
     static inline bool is_direction_equal(direction_t left, direction_t right);
 /* -------------------------------------------------------------------------- */
-
+    
+    ///returns the edge adjacent to the given corner, in the given direction 
     static inline edge_t get_edge_by_corner_direction(corner_t corner, direction_t direction);
+    static inline edge_t calc_edge_by_corner_direction(corner_t corner, direction_t direction);
     static inline edge_t get_edge_by_corners(corner_t corner0, corner_t corner1);
     static inline edge_t get_edge_by_index(uint_fast8_t index);
     static inline uint_fast8_t get_edge_index(edge_t edge);
