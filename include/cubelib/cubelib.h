@@ -150,7 +150,8 @@ extern "C"{
     static inline direction_t get_opposite_direction(direction_t direction);
     static inline direction_t get_opposite_face(direction_t direction);
 
-    static inline bool is_corner_adjacent_direction(corner_t corner, direction_t direction);
+    ///returns true if the given corner is on the given face
+    static inline bool is_corner_adjacent_face(corner_t corner, face_t face);
     
     static inline bool is_direction_valid(direction_t direction);
     static inline bool is_direction_null(direction_t direction);
