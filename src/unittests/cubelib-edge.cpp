@@ -163,7 +163,7 @@ TEST_F(CubelibEdgeTest,get_edge_corner)
         ASSERT_TRUE(is_edge_equal(edge1,edge0));
         auto edge2 = get_edge_by_corners(corner1, corner0);
         
-        ASSERT_TRUE(is_edge_equal(edge1,edge0));
+        ASSERT_TRUE(is_edge_equal(edge2,edge0));
     }
     
     ///for every pair of adjacent corners, check the edge
