@@ -276,3 +276,28 @@ TEST_F(CubelibEdgeTest,get_edge_by_corner_direction)
 
 
 
+
+TEST_F(CubelibEdgeTest,get_opposite_edge)
+{
+    for (auto edge : all_edges)
+    {
+        auto corner0 = get_edge_corner0(edge);
+        auto corner1 = get_edge_corner1(edge);
+        ASSERT_TRUE(is_corner_adjacent_corner(corner0, corner1));
+        
+        auto opposite_edge = get_opposite_edge(edge);
+        
+        auto opposite_corner0 = get_edge_corner0(opposite_edge);
+        auto opposite_corner1 = get_edge_corner1(opposite_edge);
+        
+        ASSERT_TRUE(is_corner_adjacent_corner(corner0, corner1));
+        
+        
+        ASSERT_TRUE(is_corner_equal(get_opposite_corner(corner0), opposite_corner1));
+        ASSERT_TRUE(is_corner_equal(get_opposite_corner(corner1), opposite_corner0));
+    }
+    
+    
+}
+
+

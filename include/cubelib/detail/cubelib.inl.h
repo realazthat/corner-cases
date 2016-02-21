@@ -588,10 +588,41 @@ extern "C"{
         
         return calc_edge_by_corner_direction(corner,direction);
     }
-    static inline uint_fast8_t calc_edge_base_axis(edge_t edge)
+    
+    
+    
+    
+    static inline edge_t get_opposite_edge(edge_t edge)
     {
         assert(is_edge_valid(edge));
         assert(!is_edge_null(edge));
+        
+        
+        ///the value will be in the form of 0bBBTS; where BB is the base axis bits, and S,T are the "is projected" bits
+        /// for the Secondary and Tertiary axes.
+
+        
+        edge_value_t base_axis_bits = edge.value >> 2;
+        edge_value_t projected_secondary = (edge.value >> 0) & 1;
+        edge_value_t projected_tertiary = (edge.value >> 1) & 1;
+        
+        projected_secondary = (~projected_secondary) & 1;
+        projected_tertiary = (~projected_tertiary) & 1;
+        
+        
+        edge_value_t result_value = (base_axis_bits << 2) | (projected_tertiary << 1) | projected_secondary;
+        
+        edge_t result = {result_value};
+        assert(is_edge_valid(result));
+        assert(!is_edge_null(result));
+        return result;
+    }
+    
+    
+    
+    
+    static inline uint_fast8_t calc_edge_base_axis(edge_t edge)
+    {
         assert(is_edge_valid(edge));
         assert(!is_edge_null(edge));
         uint_fast8_t result = edge.value >> 2;
