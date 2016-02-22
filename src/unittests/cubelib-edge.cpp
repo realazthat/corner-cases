@@ -149,6 +149,31 @@ TEST_F(CubelibEdgeTest,unique)
 
 
 
+TEST_F(CubelibEdgeTest,get_edge_by_axis)
+{
+    
+    uint32_t mask = 0;
+    uint32_t count = 0;
+    
+    for (uint_fast8_t base_axis = 0; base_axis < 3; ++base_axis)
+    for (bool project_secondary : {false, true})
+    for (bool project_tertiary : {false, true})
+    {
+        auto edge = get_edge_by_axis(base_axis,project_secondary,project_tertiary);
+        
+        EXPECT_EQ(get_edge_base_axis(edge), base_axis);
+        EXPECT_EQ(is_edge_projected_secondary(edge), project_secondary);
+        EXPECT_EQ(is_edge_projected_tertiary(edge), project_tertiary);
+        
+        ASSERT_EQ(0U, mask & (1 << get_edge_index(edge)));
+        mask |= (1 << get_edge_index(edge));
+    }
+    
+    EXPECT_EQ(mask, uint32_t(1 << EDGES_SIZE) - 1);
+
+}
+
+
 TEST_F(CubelibEdgeTest,get_edge_corner)
 {
     for (auto edge0 : all_edges)

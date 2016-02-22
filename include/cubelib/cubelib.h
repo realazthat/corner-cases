@@ -158,6 +158,31 @@ extern "C"{
     static inline bool is_direction_equal(direction_t left, direction_t right);
 /* -------------------------------------------------------------------------- */
     
+    /**
+     * Returns an edge based on a projected-axis representation.
+     * 
+     * The representation works as follows:
+     *
+     * Every edge has a base-axis, which is one of the x,y, or z axes, which are 0, 1, or 2 respectively.
+     *
+     * After choosing the base-axis, the "secondary" and "tertiary" axis are incremented from base axis (modulo 3).
+     * So if the base-axis is 0, then the secondary is 1, and the tertiary is 2.
+     * If the base-axis is 1, then the secondary is 2, and the tertiary is 0.
+     * If the base-axis is 2, then the secondary is 0, and the tertiary is 1.
+     *
+     * Then, overlay the axis with an edge, starting at the origin, and ending at a distance of 1 along the axis.
+     *
+     * Then, we optionally project the edge across the cube along the secondary axis.
+     * Then, we optionally project the edge across the cube along the tertiary axis.
+     *
+     * Thus any edge can be represented by a base-axis, and two booleans determining if the edge is projected
+     * across the secondary and tertiary axes.
+     *
+     * @see get_edge_base_axis(), get_edge_secondary_axis(), get_edge_tertiary_axis(),
+     *          is_edge_projected_secondary(), is_edge_projected_tertiary()
+     */
+    static inline edge_t get_edge_by_axis(uint_fast8_t base_axis, bool project_secondary, bool project_tertiary);
+    
     ///returns the edge adjacent to the given corner, in the given direction 
     static inline edge_t get_edge_by_corner_direction(corner_t corner, direction_t direction);
     static inline edge_t calc_edge_by_corner_direction(corner_t corner, direction_t direction);

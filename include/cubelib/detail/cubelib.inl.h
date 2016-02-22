@@ -531,6 +531,24 @@ extern "C"{
         assert(is_edge_valid(right));
         return left.value == right.value;
     }
+    
+    static inline edge_t get_edge_by_axis(uint_fast8_t base_axis, bool project_secondary, bool project_tertiary)
+    {
+        assert(base_axis < 3);
+        
+        ///the value will be in the form of 0bBBTS; where BB is the base axis bits, and S,T are the "is projected" bits
+        /// for the Secondary and Tertiary axes.
+        edge_value_t result_value = (base_axis << 2) | (project_tertiary ? 0x2 : 0x0) | (project_secondary ? 0x1 : 0);
+        edge_t result = {result_value};
+        
+        assert(is_edge_valid(result));
+        assert(!is_edge_null(result));
+        assert(get_edge_base_axis(result) == base_axis);
+        assert(is_edge_projected_secondary(result) == project_secondary);
+        assert(is_edge_projected_tertiary(result) == project_tertiary);
+        
+        return result;
+    }
 
     static inline
     uint_fast8_t get_edge_index(edge_t edge)
