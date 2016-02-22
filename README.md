@@ -11,10 +11,10 @@ dealing with data structures based on cubes, such as octrees.
 
 
 
-Branch  | Build Status
----     | ---
-master  | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)
-develop | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=develop)](https://travis-ci.org/realazthat/corner-cases)
+Branch  | Build Status | docs
+---     | --- | ---
+master  | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)  | [docs](http://realazthat.github.io/corner-cases/master/sphinx-docs/html/index.html)
+develop | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=develop)](https://travis-ci.org/realazthat/corner-cases) | [docs](http://realazthat.github.io/corner-cases/develop/sphinx-docs/html/index.html)
 
 
 Incomplete
