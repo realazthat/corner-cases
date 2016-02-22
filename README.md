@@ -5,9 +5,9 @@ corner-cases
 **corner-cases/cubexx** and **corner-cases/cubelib** are two libraries for reasoning about a cube's corners, directions/faces, and edges. It is useful for
 dealing with data structures based on cubes, such as octrees.
 
-**corner-cases/cubexx** is a C++11 header-only template library with bells and whistles.
+**corner-cases/cubexx** (pronounced "queue, bex") is a C++11 header-only template library with bells and whistles.
 
-**corner-cases/cubelib** is a C header-only library; it is also made to be compilable and usable in opencl.
+**corner-cases/cubelib** (pronounced "queue, bleib") is a C header-only library; it is also made to be compilable and usable in opencl.
 
 
 
