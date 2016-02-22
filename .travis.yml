@@ -8,7 +8,7 @@ compiler:
 env:
   global:
     #GH_TOKEN
-    - secure: kNWIuNdZ7JpeiFcbarTfZkGf1QbqQqHF/Zq+9mRMofXcnmAM1w7SklFmkZbl03OnjEWQrWvpabEp6Ro0JUmkltOZhJ768EnEwoOt7BJ5edgaEQiDZgToVdTJhXTC/sIlQz+KaxpLZpiJXGbn1Um4NQa1RT/BVFI/U+G0/jH0A2YuGVobAlD7SFbgKkqufBpn/lASClw+x2iBZ0Zdw5+f3D6zvVBWeSjLJnYuqJm5fySpY9PUOlJo8NJ0HMgxj0OCDJNrd0WrfOqlSzljWn+R1EnIxJcovFKq+3EiQBKV5UqfV3X8+mQg/C/4QLwVCOdiAubs4ik33Z4q9aksXeBCr+52RKNqgQmIb1Tnuj+9ARFF1LC0TrPFdfwcLrTdoqmTaX6usIefPMQmbfwt+5YUTZSb4VIpjql8dqVLHjuUB1GzEw325cY63vZ9GXHKj95jIbUScowVFPYQgTikwkqWjpMCurRFbK7Vzm5VdQlf4iA8S1A0JdbqBFDAGNn2E/T6ocjXppYnLZP8L9B5Zhv+icPnBkq2QdfQZJKprJ/lPBWE1NeFXYkY5Xhd2hElc7GTFFX9Q+y8A2/4A2vSiR7BejhkxivOgbNsFE34drb6T6k1BPvTU6ZwliOxEK5IHcuwrN91gcNw8I2WlFHZhIDN6ArarZ5UpqSjAdHC7Y09z/0=
+    - secure: hKQ4isSsa5cHA0obJ0LqRZVcJA3T5oAiBqP8UQ6zhriAefDkxYbGYHfkC5y6G8MTaGupucHzx2SqKdUz/qCK5ndGBsn9cOB6ZAnaEMTiVXDE9EV+1O1k5rO41mWGt+qXTJT5XFabF1NeGQOrWR7kxtNvuNRLD+DUOtanif8a4iSjcDlpCTBlf/msZqRQRPO6j54SlAvSQPrb/uJ2Mc+ZkrlpF3vlzczmFK//EE+SAf9NhuPMvjmAeDYl3b5XFotI89O2QMnExLSnh5sdEX7qtcB8Ryrj895+OBT0KYzeH2DDEkulJgEYtFPyKfdkdnVudNlaG5rJxCJwIzBqeTLJtC/txikTT9R2uOfUygzFRpF4OGqSCUVxR+Q09E2qyQKKawc9xFJGCvzlJgjKSX5xG2/dA9WMvF+AZwbBcBqvG51DjnBE+4XJPhh9bCVp9aVQgYZwAHVSfBocBxqlCzJ5dWi2Hq4BVNSeIsk0FRvLJqt2U/i/3CR470d8ZxQ8/n9uigBrC4l7HfRZqbPGprlr8EJfGbzXYSb3DZ2jT7niKYDvNTGjBXYlie6cV4A3KSQwsv80q7FSTP4t97c+HM5pX9IkeuOL0+Ws674QDz+THlBA4w72x7qvHQT44YMM+LBWjJ2UwX20QDnr+zrNDT7hFgZsXoXVZw71c5nBQi3JaPg=
     - CMAKE_GENERATOR="Unix Makefiles"
     - CMAKE_DEPS_BUILD_TYPE=Release
     - GTEST_BUILD_TYPE=Release
@@ -24,6 +24,7 @@ addons:
     packages:
     - gcc-4.8
     - g++-4.8
+    - doxygen
     - python3
     - python3-pip
 
@@ -40,6 +41,7 @@ script:
     - mkdir build && cd build
     - cmake .. "-DGTEST_LIB=gtest;pthread"
     - cmake --build .
+    - cmake --build . --target docs-html
     - ./cubelib-unittests
     - ./cubexx-unittests
     - cd ../

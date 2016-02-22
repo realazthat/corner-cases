@@ -184,6 +184,7 @@ TEST_F(CUBEXXEdgeTest,get)
             EXPECT_EQ(edge.project_secondary(), project_secondary);
             EXPECT_EQ(edge.project_tertiary(), project_tertiary);
             
+            ASSERT_EQ(0U, mask & (1 << edge.index()));
             mask |= (1 << edge.index());
         }
         

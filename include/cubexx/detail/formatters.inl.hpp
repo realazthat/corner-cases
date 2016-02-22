@@ -24,11 +24,13 @@ CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 ::std::ostream& operator<<(::std::ostream& out, const direction_t& direction)
 {
-
-    out << "(" << (direction.x() > 0 ? "+" : "") << (int)direction.x()
-             << "," << (direction.y() > 0 ? "+" : "") << (int)direction.y()
-             << "," << (direction.z() > 0 ? "+" : "") << (int)direction.z()
-             << ")";
+    if (direction.is_null())
+        out << "null";
+    else
+        out << "(" << (direction.x() > 0 ? "+" : "") << (int)direction.x()
+                 << "," << (direction.y() > 0 ? "+" : "") << (int)direction.y()
+                 << "," << (direction.z() > 0 ? "+" : "") << (int)direction.z()
+                 << ")";
     return out;
 }
 
@@ -50,17 +52,23 @@ CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 ::std::ostream& operator<<(::std::ostream& out, const corner_t& corner)
 {
-    
-    out << "(" << (corner.x() > 0 ? "+" : "") << (int)corner.x()
-             << "," << (corner.y() > 0 ? "+" : "") << (int)corner.y()
-             << "," << (corner.z() > 0 ? "+" : "") << (int)corner.z()
-             << ")";
+    if (corner.is_null())
+        std::cout << "null";
+    else
+        out << "(" << (corner.x() > 0 ? "+" : "") << (int)corner.x()
+                 << "," << (corner.y() > 0 ? "+" : "") << (int)corner.y()
+                 << "," << (corner.z() > 0 ? "+" : "") << (int)corner.z()
+                 << ")";
     return out;
 }
 
 CORNER_CASES_CUBEXX_FORMATTERS_INLINE
 ::std::ostream& operator<<(::std::ostream& out, const edge_t& edge)
 {
+    if (edge.is_null())
+        return std::cout << "null";
+    
+    
     auto corners = edge.corners();
     cubexx::corner_t corner0 = corners[0], corner1 = corners[1];
     

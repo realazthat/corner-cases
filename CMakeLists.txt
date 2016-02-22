@@ -91,6 +91,9 @@ set_property(TARGET cubexx-formatters PROPERTY CXX_STANDARD_REQUIRED ON)
 ###############################################################################
 add_executable(cubelib-unittests
     src/unittests/cubelib.cpp
+    src/unittests/cubelib-corner.cpp
+    src/unittests/cubelib-direction.cpp
+    src/unittests/cubelib-edge.cpp
     
     )
 

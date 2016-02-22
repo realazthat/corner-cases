@@ -6,9 +6,9 @@
 extern "C"{
 #endif
 
-    typedef unsigned int word_t;
     struct corner_t;
     struct direction_t;
+    struct edge_t;
     typedef direction_t face_t;
 
 
