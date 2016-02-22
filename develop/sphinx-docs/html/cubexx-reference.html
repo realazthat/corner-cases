@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>corner-cases/cubexx Reference Documentation &mdash; corner-cases NONE documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'NONE',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="corner-cases NONE documentation" href="index.html" />
+    <link rel="next" title="cubexx::corner_t" href="cubexx-corner.html" />
+    <link rel="prev" title="corner-cases" href="index.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>corner-cases NONE documentation</span></a></h1>
+        <h2 class="heading"><span>corner-cases/cubexx Reference Documentation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">corner-cases</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubexx-corner.html">cubexx::corner_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="corner-cases-cubexx-reference-documentation">
+<h1>corner-cases/cubexx Reference Documentation<a class="headerlink" href="#corner-cases-cubexx-reference-documentation" title="Permalink to this headline">¶</a></h1>
+<p><strong>CDEF:</strong></p>
+<ul class="simple">
+<li><strong>C</strong>orners</li>
+<li><strong>D</strong>irections</li>
+<li><strong>E</strong>dges</li>
+<li><strong>F</strong>aces</li>
+</ul>
+<div class="section" id="cubexx-corner-t-overview">
+<span id="cubexx-corner-overview"></span><h2>cubexx::corner_t Overview<a class="headerlink" href="#cubexx-corner-t-overview" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::corner_t</span></code></a> represents the corner of a cube.</p>
+<ul class="simple">
+<li>There are 8 corners in a cube.</li>
+</ul>
+<p>You can use it to:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Obtain a corner via 3 unit cube coordinates, i.e coordinates in {0,1}^3, such as <code class="docutils literal"><span class="pre">(0,0,1)</span></code> and <code class="docutils literal"><span class="pre">(1,0,1)</span></code>,</dt>
+<dd><ul class="first last simple">
+<li>Retrieve <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_t2uxEv" title="cubexx::corner_t::ux"><code class="xref cpp cpp-func docutils literal"><span class="pre">x</span></code></a>, <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_t2uyEv" title="cubexx::corner_t::uy"><code class="xref cpp cpp-func docutils literal"><span class="pre">y</span></code></a>, <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_t2uzEv" title="cubexx::corner_t::uz"><code class="xref cpp cpp-func docutils literal"><span class="pre">z</span></code></a> unit-cube coordinates,</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Obrain a corner via 3 origin-centered cube coordinates, i.e coordinates in {-1,+1}^3, such as <code class="docutils literal"><span class="pre">(-1,-1,+1)`</span> <span class="pre">and</span> <span class="pre">``(+1,-1,+1)</span></code>,</dt>
+<dd><ul class="first last simple">
+<li>Retrieve <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_t1xEv" title="cubexx::corner_t::x"><code class="xref cpp cpp-func docutils literal"><span class="pre">x</span></code></a>, <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_t1yEv" title="cubexx::corner_t::y"><code class="xref cpp cpp-func docutils literal"><span class="pre">y</span></code></a>, <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_t1zEv" title="cubexx::corner_t::z"><code class="xref cpp cpp-func docutils literal"><span class="pre">z</span></code></a> origin centered coordinates,</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Obtain all (3) adjacent corners,</p>
+</li>
+<li><p class="first">Push a corner in a <a class="reference internal" href="#cubexx-direction-overview"><span>direction</span></a>, to a neighboring corner (no wrap around),</p>
+</li>
+<li><p class="first">Move a corner in a <a class="reference internal" href="#cubexx-direction-overview"><span>direction</span></a>, to a neighboring corner (with wrap around),</p>
+</li>
+<li><p class="first">Obtain adjacent (3) faces,</p>
+</li>
+<li><p class="first">Obtain or (3) adjacent edges,</p>
+</li>
+<li><p class="first">Obtain the opposite corner,</p>
+</li>
+<li><dl class="first docutils">
+<dt>Retrieve an index suitable for array storage,</dt>
+<dd><ul class="first last simple">
+<li>The index is naturally in 3D <a class="reference external" href="https://en.wikipedia.org/wiki/Z-order_curve">morton-order</a> for the cube-space,</li>
+<li>And the inverse, retrieve a corner via its index</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Reason about sets of corners (using <code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::corner_set_t</span></code>).</p>
+</li>
+</ul>
+</div>
+<div class="section" id="cubexx-direction-t-overview">
+<span id="cubexx-direction-overview"></span><h2>cubexx::direction_t Overview<a class="headerlink" href="#cubexx-direction-t-overview" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::direction_t</span></code> represents a direction in the cube.</p>
+<ul class="simple">
+<li>Directions and <a class="reference internal" href="#cubexx-face-overview"><span>faces</span></a> are related <code class="docutils literal"><span class="pre">1:1</span></code>.</li>
+<li>There are 6 directions for 6 faces.</li>
+<li>Directions and faces and are convertible to each-other. They are separated because they intuitively separate certain functionality.</li>
+</ul>
+<p>Once again, you can do things like:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Obtain a direction via 3 vector coordinates, representing the direction as a relative vector from origin</dt>
+<dd><p class="first">, i.e coordinates in {-1,+1}^3, such as <code class="docutils literal"><span class="pre">(+0,0,+1)</span></code> and <code class="docutils literal"><span class="pre">(0,-1,0)</span></code>,</p>
+<ul class="last simple">
+<li>Retrieve <code class="xref cpp cpp-func docutils literal"><span class="pre">x</span></code>, <code class="xref cpp cpp-func docutils literal"><span class="pre">y</span></code>, <code class="xref cpp cpp-func docutils literal"><span class="pre">z</span></code> vector coordinates,</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Check if a direction is positive, i.e if it&#8217;s non-zero coordinate is positive,</p>
+</li>
+<li><p class="first">Obtain all (4) &#8220;adjacent&#8221; directions,</p>
+</li>
+<li><p class="first">Obtain the opposite direction,</p>
+</li>
+<li></li>
+<li><dl class="first docutils">
+<dt>Retrieve an index suitable for array storage,</dt>
+<dd><ul class="first last simple">
+<li>And the inverse, retrieve a direction via its index</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Reason about sets of directions (using <code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::direction_set_t</span></code>),</p>
+</li>
+<li><p class="first">Convert it to a <a class="reference internal" href="#cubexx-face-overview"><span>face</span></a>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="cubexx-edge-t-overview">
+<span id="cubexx-edge-overview"></span><h2>cubexx::edge_t Overview<a class="headerlink" href="#cubexx-edge-t-overview" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="cubexx-face-t-overview">
+<span id="cubexx-face-overview"></span><h2>cubexx::face_t Overview<a class="headerlink" href="#cubexx-face-t-overview" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cubexx/cubexx.hpp&gt;</span><span class="cp"></span>
+<span class="k">using</span> <span class="n">cubexx</span><span class="o">::</span><span class="n">corner_t</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">cubexx</span><span class="o">::</span><span class="n">direction_t</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">cubexx</span><span class="o">::</span><span class="n">edge_t</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">cubexx</span><span class="o">::</span><span class="n">corner_set_t</span><span class="p">;</span>
+
+<span class="c1">//get the far corner of the cube</span>
+<span class="n">corner_t</span> <span class="n">corner0</span> <span class="o">=</span> <span class="n">corner_t</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">//one can think of the cube as having a length of 2, and lying in a 3D cartesian graph.</span>
+<span class="c1">//One can think of the cube&#39;s center lying at the origin of the space,</span>
+<span class="c1">// with the x-axis going off to the &quot;right&quot;, the y-axis going &quot;up&quot;, and the z-axis going into the</span>
+<span class="c1">// &quot;depth&quot; of space. The particulars of how you imagine this is up to you, as long as you remain consistent.</span>
+
+
+
+<span class="n">corner_t</span> <span class="n">corner1</span> <span class="o">=</span> <span class="n">corner_t</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+
+
+<span class="c1">//corner1 and corner0 are opposite corners of the cube</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">corner1</span><span class="p">.</span><span class="n">opposite</span><span class="p">()</span> <span class="o">==</span> <span class="n">corner0</span><span class="p">);</span>
+
+<span class="c1">//&quot;push&quot; the corner to the right</span>
+<span class="n">corner1</span> <span class="o">=</span> <span class="n">corner1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">direction_t</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+
+<span class="c1">//corner1 will now be at (+1,-1,-1)</span>
+
+
+<span class="c1">//&quot;push&quot; the corner to the right, again</span>
+<span class="n">corner1</span> <span class="o">=</span> <span class="n">corner1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">direction_t</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+
+<span class="c1">//nothing will change, there is no where to go in that direction</span>
+<span class="c1">//corner1 will now be at (+1,-1,-1)</span>
+
+<span class="c1">//get the &quot;adjacent&quot; corner in that direction; this will wrap the corner around the to its original</span>
+<span class="c1">// value of (-1,-1,-1)</span>
+<span class="n">corner1</span> <span class="o">=</span> <span class="n">corner1</span><span class="p">.</span><span class="n">adjacent</span><span class="p">(</span><span class="n">direction_t</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+
+<span class="c1">//get a new corner at (+1,-1,-1)</span>
+<span class="n">corner_t</span> <span class="n">corner2</span> <span class="o">=</span> <span class="n">corner1</span><span class="p">.</span><span class="n">adjacent</span><span class="p">(</span><span class="n">direction_t</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+
+<span class="c1">//the corners are adjacent</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">corner1</span><span class="p">.</span><span class="n">is_adjacent</span><span class="p">(</span><span class="n">corner2</span><span class="p">));</span>
+
+<span class="c1">//now we can get an edge from the two adjacent corners</span>
+<span class="n">edge_t</span> <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge_t</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="n">corner1</span><span class="p">,</span><span class="n">corner2</span><span class="p">);</span>
+
+<span class="c1">//a special bit-wise set for reasoning about sets of corners</span>
+<span class="n">corner_set_t</span> <span class="n">corner_set</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">face</span> <span class="p">:</span> <span class="n">edge0</span><span class="p">.</span><span class="n">faces</span><span class="p">())</span>
+<span class="p">{</span>
+  <span class="c1">//we can now iterate over the 2 faces that are adjacent to this edge.</span>
+
+  <span class="c1">//get all the corners that touch these faces</span>
+  <span class="n">corner_set</span> <span class="o">|=</span> <span class="n">faces</span><span class="p">.</span><span class="n">corners</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">//remove the original corners</span>
+<span class="n">corner_set</span> <span class="o">-=</span> <span class="n">corner1</span><span class="p">;</span>
+<span class="n">corner_set</span> <span class="o">-=</span> <span class="n">corner2</span><span class="p">;</span>
+
+<span class="c1">//print all the corners on the faces of edge0, aside from the corners of the edge itself</span>
+<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">corner</span> <span class="p">:</span> <span class="n">corner_set</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">corner</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reference-pages">
+<h2>Reference pages:<a class="headerlink" href="#reference-pages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cubexx-corner.html">cubexx::corner_t</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cubexx-edge.html">cubexx::edge_t</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">corner-cases</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubexx-corner.html">cubexx::corner_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Azriel Fasten.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+    </div>
+  </body>
+</html>
