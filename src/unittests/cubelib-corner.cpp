@@ -332,6 +332,26 @@ TEST_F(CubelibCornerTest,corner_push)
     }
 }
 
+TEST_F(CubelibCornerTest,is_corner_adjacent_corner)
+{
+
+    for (corner_t corner0 : all_corners)
+    {
+        for (direction_t direction : all_directions)
+        {
+            corner_t corner1 = get_adjacent_corner(corner0, direction);
+            
+            ASSERT_TRUE(!is_corner_null(corner1));
+            ASSERT_TRUE(is_corner_adjacent_corner(corner0, corner1));
+            
+            
+            
+        }
+    }
+    
+    ///@TODO: test for false positives
+}
+
 
 
 
