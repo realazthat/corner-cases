@@ -877,6 +877,8 @@ struct edge_t{
    *
    * There are four combinations of projection: project none, project the secondary only, project the tertiary only,
    * and project it across both, which would give an edge on the far side of the cube.
+   *
+   * @see base_axis(), secondary_axis(), tertiary_axis(), project_secondary(), project_tertiary()
    */
   static const edge_t& get(std::uint_fast8_t axis, bool project_secondary, bool project_tertiary);
   /**
@@ -888,15 +890,31 @@ struct edge_t{
    */
   static const edge_t& get(const corner_t& corner0, const corner_t& corner1);
   
+  ///Returns the "base-axis" (in `{0,1,2}` for the `x,y,z` axis repsectively) that this edge is aligned with this edge.
+  ///@see secondary_axis(), tertiary_axis(), get(std::uint_fast8_t,bool,bool)
   std::uint_fast8_t base_axis() const;
+  ///Returns the "secondary-axis" (in `{0,1,2}` for the `x,y,z` axis repsectively); the "secondary-axis" is the
+  ///next axis (modular increment) from the "base-axis".
+  ///@see base_axis(), tertiary_axis(), get(std::uint_fast8_t,bool,bool)
   std::uint_fast8_t secondary_axis() const;
+  ///Returns the "tertiary-axis" (in `{0,1,2}` for the `x,y,z` axis repsectively); the "tertiary-axis" is the
+  ///next axis (modular increment) from the "secondary-axis".
+  ///@see base_axis(), secondary_axis(), get(std::uint_fast8_t,bool,bool)
   std::uint_fast8_t tertiary_axis() const;
+  
+  ///Returns true if this edge is closer to or farther from the lower (-1,-1,-1) corner in the cube, specifically
+  /// compared with the other parallel edge along the "secondary-axis".
+  ///@see base_axis(), secondary_axis(), get(std::uint_fast8_t,bool,bool)
   bool project_secondary() const;
+  ///Returns true if this edge is closer to or farther from the lower (-1,-1,-1) corner in the cube, specifically
+  /// compared with the other parallel edge along the "tertiary-axis".
+  ///@see base_axis(), tertiary_axis(), get(std::uint_fast8_t,bool,bool)
   bool project_tertiary() const;
   
   ///Retrieve a numeric 0-based index for the edge, for use in indexing when storing in an array, or for comparison
   /// when storing in a container requiring comparison. The index will be less than SIZE(). The "null" edge
   /// has no index, and it is illegal to call index() on it.
+  ///@see get(std::uint_fast8_t idx)
   std::uint_fast8_t index() const;
   ///A comparison operator for using the edge in an std::set-like container.
   bool operator<(const edge_t& other) const;
@@ -927,13 +945,13 @@ private:
    * 
    * mbits := 0bBBTS
    * 
-   * BB    := the base axis; 00 is x, 01 is y, 10 is z, and 11 is used for null.
+   * BB    := the "base-axis"; 00 is x, 01 is y, 10 is z, and 11 is used for null.
    * 
-   * T     := bit to indicate if *t*ertiary axis is projected.
+   * T     := bit to indicate if "*t*ertiary-axis" is projected.
    * 
-   * P     := bit to indicate if *s*econdary axis is projected.
+   * P     := bit to indicate if "*s*econdary-axis" is projected.
    * ```
-   * Some examples: 0b0010, means the edge on the x-axis, projected along the z-axis (which is tertiary when the base axis is x).
+   * Some examples: 0b0010, means the edge on the x-axis, projected along the z-axis (which is tertiary when the "base-axis" is x).
    
    */
   std::bitset<4> mbits;
