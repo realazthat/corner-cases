@@ -657,6 +657,7 @@ struct face_t{
   ///Returns true if this face is a null face_t.
   bool is_null() const;
   
+  bool is_sane() const;
   
   ///Returns a null direction.
   static const face_t& null_face();
@@ -786,10 +787,6 @@ struct corner_t{
   
   ///Retrieve the "null" corner.
   static const corner_t& null_corner();
-protected:
-#ifndef NDEBUG
-  bool mx, my, mz;
-#endif
 private:
   corner_t(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
   corner_t(const std::bitset<4>& bits);

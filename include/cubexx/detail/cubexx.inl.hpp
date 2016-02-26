@@ -459,6 +459,7 @@ corner_t()
     : mbits(0b1000)
 {
   
+  assert(is_sane());
   assert(is_null());
 }
 
@@ -467,11 +468,7 @@ corner_t::
 corner_t(const std::bitset< 4 >& bits)
   : mbits(bits)
 {
-#ifndef NDEBUG
-   mx = mbits.test(0);
-   my = mbits.test(1);
-   mz = mbits.test(2);
-#endif
+  assert(is_sane());
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -479,24 +476,25 @@ corner_t::
 corner_t(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
   : mbits( (x > 0 ? 1 : 0) | (y > 0 ? 2 : 0) | (z > 0 ? 4 : 0))
 {
+  assert(is_sane());
   assert(!is_null());
-#ifndef NDEBUG
-   mx = mbits.test(0);
-   my = mbits.test(1);
-   mz = mbits.test(2);
-#endif
-  //bits.set(0, x);
-  //bits.set(1, y);
-  //bits.set(2, z);
 }
 
 
 CORNER_CASES_CUBEXX_INLINE
 bool
 corner_t::
+is_sane() const
+{
+  return mbits.to_ulong() <= 8;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+bool
+corner_t::
 is_null() const
 {
-    return mbits.test(3);
+  return mbits.test(3);
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -504,9 +502,10 @@ const corner_t&
 corner_t::
 null_corner()
 {
-    static corner_t internal_null = corner_t();
-    assert(internal_null.is_null());
-    return internal_null;
+  static corner_t internal_null = corner_t();
+  assert(internal_null.is_sane());
+  assert(internal_null.is_null());
+  return internal_null;
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -518,7 +517,11 @@ get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z)
   bits.set(0,x > 0);
   bits.set(1,y > 0);
   bits.set(2,z > 0);
-  return all()[bits.to_ulong()];
+  const corner_t& result = all()[bits.to_ulong()];
+  
+  assert(result.is_sane());
+  assert(!result.is_null());
+  return result;
 }
 
 
@@ -546,6 +549,7 @@ std::uint_fast8_t
 corner_t::
 index() const
 {
+  assert(is_sane());
   assert(!is_null());
   return mbits.to_ulong();
 }
@@ -556,7 +560,11 @@ corner_t::
 get(std::uint_fast8_t i)
 {
   assert(i < SIZE());
-  return all()[i];
+  const corner_t& result = all()[i];
+  
+  assert(result.is_sane());
+  assert(!result.is_null());
+  return result;
 }
 
 CORNER_CASES_CUBEXX_INLINE
@@ -564,6 +572,7 @@ std::array< corner_t, 3 >
 corner_t::
 adjacents() const
 {
+  assert(is_sane());
   assert(!is_null());
   std::array<corner_t,3> result =
     {{
@@ -579,6 +588,7 @@ CORNER_CASES_CUBEXX_INLINE
 corner_set_t
 corner_t::adjacents_set() const
 {
+  assert(is_sane());
   assert(!is_null());
   return corner_set_t(adjacents());
 }
@@ -588,6 +598,7 @@ int_fast8_t
 corner_t::
 x() const
 {
+  assert(is_sane());
   assert(!is_null());
   return (mbits[0] ? 1 : -1);
 }
@@ -596,6 +607,7 @@ int_fast8_t
 corner_t::
 y() const
 {
+  assert(is_sane());
   assert(!is_null());
   return (mbits[1] ? 1 : -1);
 }
@@ -605,6 +617,7 @@ int_fast8_t
 corner_t::
 z() const
 {
+  assert(is_sane());
   assert(!is_null());
   return (mbits[2] ? 1 : -1);
 }
@@ -614,6 +627,7 @@ uint_fast8_t
 corner_t::
 ux() const
 {
+  assert(is_sane());
   assert(!is_null());
   return mbits[0];
 }
@@ -622,6 +636,7 @@ uint_fast8_t
 corner_t::
 uy() const
 {
+  assert(is_sane());
   assert(!is_null());
   return mbits[1];
 }
@@ -631,13 +646,16 @@ uint_fast8_t
 corner_t::
 uz() const
 {
+  assert(is_sane());
   assert(!is_null());
   return mbits[2];
 }
 CORNER_CASES_CUBEXX_INLINE
 bool corner_t::operator<(const corner_t& other) const
 {
+  assert(is_sane());
   assert(!is_null());
+  assert(other.is_sane());
   assert(!other.is_null());
   return mbits.to_ulong() < other.mbits.to_ulong();
 }
@@ -646,6 +664,7 @@ CORNER_CASES_CUBEXX_INLINE
 std::array< face_t, 3 >
 corner_t::faces() const
 {
+  assert(is_sane());
   assert(!is_null());
   std::array< face_t, 3 > result = 
     {{
@@ -661,6 +680,8 @@ CORNER_CASES_CUBEXX_INLINE
 face_set_t
 corner_t::face_set() const
 {
+  assert(is_sane());
+  assert(!is_null());
   return face_set_t(faces());
 }
 
@@ -668,29 +689,40 @@ CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::get(const corner_t& corner)
 {
+  assert(corner.is_sane());
+  assert(!corner.is_null());
   assert(corner.index() < SIZE());
-  return all()[corner.index()];
+  const corner_t& result = all()[corner.index()];
+  assert(result.is_sane());
+  assert(!result.is_null());
+  return result;
 }
 
 CORNER_CASES_CUBEXX_INLINE
 const corner_t&
 corner_t::opposite() const
 {
+  assert(is_sane());
   assert(!is_null());
   std::size_t idx =  (std::bitset<4>(mbits) ^ std::bitset<4>(0b0111)).to_ulong();
   assert(idx < SIZE());
-  return all()[idx];
+  const corner_t& result = all()[idx];
+  assert(result.is_sane());
+  assert(!result.is_null());
+  return result;
 }
 
 CORNER_CASES_CUBEXX_INLINE
 bool corner_t::operator!=(const corner_t& other) const
 {
+  assert(is_sane());
   return mbits != other.mbits;
 }
 
 CORNER_CASES_CUBEXX_INLINE
 bool corner_t::operator==(const corner_t& other) const
 {
+  assert(is_sane());
   return mbits == other.mbits;
 }
 
@@ -699,6 +731,7 @@ const corner_t&
 corner_t::
 adjacent(const direction_t& direction) const
 {
+  assert(is_sane());
   assert(!is_null());
   return corner_t::get(detail::wrap_around_2(x() + 2*direction.x()),
                        detail::wrap_around_2(y() + 2*direction.y()),
@@ -709,6 +742,7 @@ const corner_t&
 corner_t::
 push(const direction_t& direction) const
 {
+  assert(is_sane());
   assert(!is_null());
   return corner_t::get(detail::clamp(x() + direction.x()*2, -1, +1),
                        detail::clamp(y() + direction.y()*2, -1, +1),
@@ -719,8 +753,10 @@ CORNER_CASES_CUBEXX_INLINE
 bool
 corner_t::is_adjacent(const corner_t& other) const
 {
-  assert(!other.is_null());
+  assert(is_sane());
   assert(!is_null());
+  assert(other.is_sane());
+  assert(!other.is_null());
   return detail::has_exactly_one_bit(mbits ^ other.mbits);
 }
 
