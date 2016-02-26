@@ -529,34 +529,74 @@ struct direction_set_t : public set_base_t<direction_set_t, direction_t, 6>
 
 
 
+/**
+ * Represents an direction of a cube. There are 6 directions in a cube.
+ * A direction_t is 1:1 equivalent to a face_t; they can be converted from one to the other
+ * via direction_t::face() and face_t::direction().
+ *
+ * @see face_t
+ */
 struct direction_t
 {
-  
+  ///Returns the equivalent face
   const face_t& face() const;
+  ///Returns the opposite direction
   const direction_t& opposite() const;
+  ///Returns the four adjacent directions
   std::array<direction_t, 4> adjacents() const;
   
+  ///Returns a direction from 3 integers; two of them must be 0, the third must be positive or negative
+  /// in the dimension of the direction. For example, (0,0,+1) means a direction on the z-axis pointing along
+  /// the positive length of the axis. While (-1,0,0) means a direction on the (negative) x-axis pointing toward
+  /// the negative asymptote of the x-axis.
   static const direction_t& get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
+  ///Returns a direction given a direction.
   static const direction_t& get(const direction_t& direction);
+  ///Return the direction represented by an index.
+  ///@see index()
   static const direction_t& get(std::uint_fast8_t idx);
+  ///Return a list of all the directions on the cube.
   static const std::array<direction_t, 6>& all();
   
+  ///Return the x component of the direction vector. See
+  /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
   std::int_fast8_t x() const;
+  ///Return the y component of the direction vector. See
+  /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
   std::int_fast8_t y() const;
+  ///Return the z component of the direction vector. See
+  /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
   std::int_fast8_t z() const;
+  ///Returns true if the direction vector is positive; false if it is negative. See
+  /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
   bool positive() const;
   
+  
+  ///Return an index that represents this direction.
   std::uint_fast8_t index() const;
+  ///Comparison
   bool operator<(const direction_t& other) const;
+  ///Comparison
   bool operator==(const direction_t& other) const;
+  ///Comparison
   bool operator!=(const direction_t& other) const;
   
   ///Default constructs a null direction_t
   direction_t();
   
+  ///Returns true if this direction is a null direction_t.
   bool is_null() const;
+  
   bool is_sane() const;
+  
+  ///Returns a null direction.
   static const direction_t& null_direction();
+  
+  ///Number of directions.
   CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 6; }
 private:
   std::bitset<3> mbits;

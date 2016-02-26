@@ -163,6 +163,7 @@ Reference pages:
    :maxdepth: 2
    
    cubexx-corner
+   cubexx-direction
    cubexx-edge
    cubexx-face
 
