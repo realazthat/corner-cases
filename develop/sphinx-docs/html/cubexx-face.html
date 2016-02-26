@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cubexx::face_t &mdash; corner-cases NONE documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'NONE',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="corner-cases NONE documentation" href="index.html" />
+    <link rel="up" title="corner-cases/cubexx Reference Documentation" href="cubexx-reference.html" />
+    <link rel="prev" title="cubexx::edge_t" href="cubexx-edge.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>corner-cases NONE documentation</span></a></h1>
+        <h2 class="heading"><span>cubexx::face_t</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubexx-edge.html">cubexx::edge_t</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="cubexx-face-t">
+<h1>cubexx::face_t<a class="headerlink" href="#cubexx-face-t" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N6cubexx6face_tE">
+<span id="cubexx::face_t"></span><span class="target" id="corner-casesstructcubexx_1_1face__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">face_t</code><a class="headerlink" href="#_CPPv2N6cubexx6face_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an face of a cube. </p>
+<p>There are 6 faces in a cube. A <a class="reference internal" href="#corner-casesstructcubexx_1_1face__t"><span>face_t</span></a> is 1:1 equivalent to a <a class="reference internal" href="cubexx-direction.html#corner-casesstructcubexx_1_1direction__t"><span>direction_t</span></a>; they can be converted from one to the other via <a class="reference internal" href="#corner-casesstructcubexx_1_1face__t_1a1c0ba3beb58ff63c261663fdb9ef7e98"><span>face_t::direction()</span></a> and <a class="reference internal" href="cubexx-direction.html#corner-casesstructcubexx_1_1direction__t_1a4f933197df46d8e65c8b85ca5c86e1c1"><span>direction_t::face()</span></a>.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="cubexx-direction.html#corner-casesstructcubexx_1_1direction__t"><span>direction_t</span></a> </dd>
+</dl>
+</p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t6face_tEv">
+<span id="cubexx::face_t::face_t"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a2ca6bf39eaaee368da45008ff5de3d54"></span><code class="descname">face_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6face_t6face_tEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default construct a &#8220;null&#8221; face. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t9directionEv">
+<span id="cubexx::face_t::direction"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a1c0ba3beb58ff63c261663fdb9ef7e98"></span><em class="property">const</em> <a class="reference internal" href="cubexx-direction.html#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<code class="descname">direction</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_t9directionEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the direction that is equivalent to this face. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t8oppositeEv">
+<span id="cubexx::face_t::opposite"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a483edf889286053a37b8ec6a0842ed86"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a> &amp;<code class="descname">opposite</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_t8oppositeEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the opposite face. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t9adjacentsEv">
+<span id="cubexx::face_t::adjacents"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1ae3c7df9a21ab4a6506c6e628b82c58aa"></span>std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a>, 4&gt; <code class="descname">adjacents</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_t9adjacentsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the 4 adjacent faces. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t7cornersEv">
+<span id="cubexx::face_t::corners"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a5be8ff3de9b05b8b5f53c7fd0722e911"></span>std::array&lt;<a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a>, 4&gt; <code class="descname">corners</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_t7cornersEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the 4 corners on this face. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t10corner_setEv">
+<span id="cubexx::face_t::corner_set"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a2e43e5ea8cbe9d78970e5f69663fa2a6"></span>corner_set_t <code class="descname">corner_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_t10corner_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a corner_set_t containing the 4 corners on this face. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t5edgesEv">
+<span id="cubexx::face_t::edges"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a23dd63556dc7ec39dc10631e8fa7f866"></span>std::array&lt;<a class="reference internal" href="cubexx-edge.html#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a>, 4&gt; <code class="descname">edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_t5edgesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the 4 edges on this face. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t5indexEv">
+<span id="cubexx::face_t::index"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a6ca0e952de1726a2977bd46bf397b836"></span>std::uint_fast8_t <code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_t5indexEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a numeric 0-based index for the face, for use in indexing when storing in an array, or for comparison when storing in a container requiring comparison. </p>
+<p>The index will be less than <a class="reference internal" href="#corner-casesstructcubexx_1_1face__t_1afb6519f51851c46ac8c47b46d2c6fdd6"><span>SIZE()</span></a>. The &#8220;null&#8221; face has no index, and it is illegal to call <a class="reference internal" href="#corner-casesstructcubexx_1_1face__t_1a6ca0e952de1726a2977bd46bf397b836"><span>index()</span></a> on it. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>get(std::uint_fast8_t idx) </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_tltERK6face_t">
+<span id="cubexx::face_t::lt-operator__face_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a02c0d2252d2a1fb30e1e74985e702c04"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_tltERK6face_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_teqERK6face_t">
+<span id="cubexx::face_t::eq-operator__face_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a6f57339e17d2f37c45f525c3eca3e205"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_teqERK6face_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_tneERK6face_t">
+<span id="cubexx::face_t::neq-operator__face_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a2ffec91f80c7b854e7d84204ad836b95"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_tneERK6face_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t7is_nullEv">
+<span id="cubexx::face_t::is_null"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a6b43ded062a026416dba98ff5ab919f0"></span>bool <code class="descname">is_null</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6face_t7is_nullEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if this face is a null <a class="reference internal" href="#corner-casesstructcubexx_1_1face__t"><span>face_t</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t3allEv">
+<span id="cubexx::face_t::all"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a4e413c5e1939344e8cf01caea08a6b57"></span><em class="property">static</em> <em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a>, 6&gt; &amp;<code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6face_t3allEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all the faces on the cube. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t3getERK11direction_t">
+<span id="cubexx::face_t::get__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a12444872f1a3c8b8dc67409b97b7223e"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-direction.html#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>direction</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6face_t3getERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the face equivalent to a specified direction. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t3getERKNSt12uint_fast8_tE">
+<span id="cubexx::face_t::get__std::uint_fast8_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a3f7c5d4dbce3cbdae686df7e7e46cb4a"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span><em class="property">const</em> std::uint_fast8_t &amp;<em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6face_t3getERKNSt12uint_fast8_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the face represented by an index. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1face__t_1a6ca0e952de1726a2977bd46bf397b836"><span>index()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6face_t9null_faceEv">
+<span id="cubexx::face_t::null_face"></span><span class="target" id="corner-casesstructcubexx_1_1face__t_1a59862195f365e1bfc7e9f50a3d1d2dcd"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6face_t6face_tEv" title="cubexx::face_t::face_t">face_t</a> &amp;<code class="descname">null_face</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6face_t9null_faceEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a null direction. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="corner-casesstructcubexx_1_1face__t_1afb6519f51851c46ac8c47b46d2c6fdd6"></span><code class="descname">static CORNER_CASES_CUBEXX_INLINE std::size_t cubexx::face_t::SIZE()</code></dt>
+<dd><p>Number of faces. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubexx-edge.html">cubexx::edge_t</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Azriel Fasten.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+    </div>
+  </body>
+</html>
