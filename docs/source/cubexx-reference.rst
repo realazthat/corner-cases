@@ -93,6 +93,21 @@ You can use it to:
 cubexx::face_t Overview
 ------------------------------------------------
 
+The :cpp:class:`cubexx::face_t <cubexx::face_t>` represents the face of a cube.
+
+* There are 6 faces in a cube.
+
+You can use it to:
+
+* Obtain the opposite face,
+* Obtain all (4) adjacent faces,
+* Obtain all (4) :ref:`corners <cubexx-corner-overview>` lying on the face,
+* Obtain all (4) :ref:`edges <cubexx-edge-overview>`. lying on the face,
+* Retrieve an index suitable for array storage,
+    * And the inverse, retrieve a face via its index
+* Reason about sets of faces (using :cpp:class:`cubexx::face_set_t <cubexx::face_set_t>`),
+* Convert it to a :ref:`direction <cubexx-direction-overview>`.
+
 
 
 
@@ -117,7 +132,7 @@ The set supports:
 * difference
 * erasure
 * membership testing
-
+* iteration
 
 
 
