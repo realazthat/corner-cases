@@ -538,6 +538,9 @@ struct direction_set_t : public set_base_t<direction_set_t, direction_t, 6>
  */
 struct direction_t
 {
+  ///Default constructs a "null" direction_t.
+  direction_t();
+  
   ///Returns the equivalent face
   const face_t& face() const;
   ///Returns the opposite direction
@@ -545,7 +548,7 @@ struct direction_t
   ///Returns the four adjacent directions
   std::array<direction_t, 4> adjacents() const;
   
-  ///Returns a direction from 3 integers; two of them must be 0, the third must be positive or negative
+  ///Returns a direction from a vector of 3 integer components; two of them must be 0, the third must be positive or negative
   /// in the dimension of the direction. For example, (0,0,+1) means a direction on the z-axis pointing along
   /// the positive length of the axis. While (-1,0,0) means a direction on the (negative) x-axis pointing toward
   /// the negative asymptote of the x-axis.
@@ -576,7 +579,10 @@ struct direction_t
   bool positive() const;
   
   
-  ///Return an index that represents this direction.
+  ///Retrieve a numeric 0-based index for the direction, for use in indexing when storing in an array, or for comparison
+  /// when storing in a container requiring comparison. The index will be less than SIZE(). The "null" direction
+  /// has no index, and it is illegal to call index() on it.
+  ///@see get(std::uint_fast8_t idx)
   std::uint_fast8_t index() const;
   ///Comparison
   bool operator<(const direction_t& other) const;
@@ -585,8 +591,6 @@ struct direction_t
   ///Comparison
   bool operator!=(const direction_t& other) const;
   
-  ///Default constructs a null direction_t
-  direction_t();
   
   ///Returns true if this direction is a null direction_t.
   bool is_null() const;
@@ -607,55 +611,71 @@ private:
 
 /**
  * Represents an face of a cube. There are 6 faces in a cube.
+ * A face_t is 1:1 equivalent to a direction_t; they can be converted from one to the other
+ * via face_t::direction() and direction_t::face().
+ *
+ * @see direction_t
  */
 struct face_t{
+  ///Default construct a "null" face.
+  face_t();
   
-  ///return the direction that is equivalent to this face
+  ///Return the direction that is equivalent to this face.
   const direction_t& direction() const;
-  ///return the opposite face
+  ///Return the opposite face.
   const face_t& opposite() const;
-  ///return the 4 adjacent faces
+  ///Return the 4 adjacent faces
   std::array<face_t, 4> adjacents() const;
-  ///return the 4 corners on this face
+  ///Return the 4 corners on this face.
   std::array<corner_t, 4> corners() const;
-  ///return a corner_set_t containing the 4 corners on this face
+  ///Return a corner_set_t containing the 4 corners on this face.
   corner_set_t corner_set() const;
-  ///return the 4 edges on this face
+  ///Return the 4 edges on this face
   std::array<edge_t, 4> edges() const;
   
-  ///return a list of all the faces on the cube
+  ///Return a list of all the faces on the cube.
   static const std::array<face_t, 6>& all();
-  ///return the face equivalent to a specified direction
+  ///Return the face equivalent to a specified direction
   static const face_t& get(const direction_t& direction);
-  ///return the face represented by an index
+  ///Return the face represented by an index.
   ///@see index()
   static const face_t& get(const std::uint_fast8_t& idx);
   
-  ///return an index that represents this face
+  ///Retrieve a numeric 0-based index for the face, for use in indexing when storing in an array, or for comparison
+  /// when storing in a container requiring comparison. The index will be less than SIZE(). The "null" face
+  /// has no index, and it is illegal to call index() on it.
+  ///@see get(std::uint_fast8_t idx)
   std::uint_fast8_t index() const;
   
-  ///comparison
+  ///Comparison
   bool operator<(const face_t& other) const;
-  ///comparison
+  ///Comparison
   bool operator==(const face_t& other) const;
-  ///comparison
+  ///Comparison
   bool operator!=(const face_t& other) const;
   
-  ///number of faces
+  ///Returns true if this face is a null face_t.
+  bool is_null() const;
+  
+  
+  ///Returns a null direction.
+  static const face_t& null_face();
+  
+  ///Number of faces.
   CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 6; }
   
 protected:
   direction_t mdirection;
 private:
-  face_t();
   face_t(const direction_t& direction);
-  
 };
 
 /**
  * Represents an corner of a cube. There are 8 corners in a cube.
  */
 struct corner_t{
+  ///Default construct a "null" corner.
+  corner_t();
   
   /**
    * Returns a corner that is adjacent in the axis of the direction.
@@ -673,51 +693,98 @@ struct corner_t{
    * @see corner_t::adjacent()
    */
   const corner_t& push(const direction_t& direction) const;
+  ///Returns a list of 3 adjacent corners to this corner.
   std::array<corner_t, 3> adjacents() const;
+  ///Returns a set of 3 adjacent corners to this corner.
   corner_set_t adjacents_set() const;
+  ///Returns true if @param other is a corner adjacent to this corner; otherwise returns false.
   bool is_adjacent(const corner_t& other) const;
   
+  ///Returns the 3 adjacent faces to this corner.
   std::array<face_t, 3> faces() const;
+  ///Returns a set of the 3 adjacent faces to this corner.
   face_set_t face_set() const;
   
+  ///Returns a set of the 3 adjacent edges to this corner.
   std::array<edge_t, 3> edges() const;
+  ///Returns the edge between this corner and an adjacent corner, specified via the @param direction parameter.
   edge_t edge(const direction_t& direction);
   
-  
+  ///Returns the opposite corner across the cube.
   const corner_t& opposite() const;
   
+  ///Returns a corner that is represented by the specified index, @param idx.
   static const corner_t& get(std::uint_fast8_t idx);
+  /**
+   * Returns a corner that is represented by a vector of 3 components.
+   *
+   * There are two representations that fit in well with the same function.
+   * 
+   * The first, which we be called "origin-centered-cube-representation" is as follows:
+   *
+   * Cube coordinates are in the range `[-1,+1]`, and specfically can each take one of the two values in `{-1,+1}`.
+   * The lower corner is represented as `(-1,-1,-1)`. The other corners are offset away from the
+   * corner by `+2`, so  they look like `(+1,-1,-1)` or `(+1,+1,+1)` (for the far corner), and so on.
+   * The coordinates of this representation can be retrieved via the corner_t::x(), corner_t::y(),
+   * and corner_t::z() functions.
+   *
+   * The alternative representation, which will called "unit-cube-representation", (or "unsigned") is as follows:
+   *
+   * Cube coordinates are in the range `[0,1]` and specifically can each take one of the two values in `{0,1}`
+   * The lower corner is represented as `(0,0,0)`. The other corners are offset away from the lower corner by `+1`,
+   * so they look like `(1,0,0)` or `(1,1,1)` (for the far corner), and so on.
+   * The coordinates of this representation can be retrieved via the corner_t::ux(), corner_t::uy(),
+   * and corner_t::uz() functions.
+   *
+   * This function can construct the corner_t with either reprentation. The rule is as follows:
+   * if a coordinate is positive, it will result in being +1; if it is zero or negative, it will be lower coordinate; `-1` in the
+   * "origin-centered-cube-representation" or `0` in "unit-cube-representation".
+   *
+   * @see corner_t::x(), corner_t::y(), and corner_t::z(), corner_t::ux(), corner_t::uy(), and corner_t::uz()
+   */
   static const corner_t& get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
+  ///Returns a corner, given a corner.
   static const corner_t& get(const corner_t& corner);
   
+  ///Retrieve a numeric 0-based index for the corner, for use in indexing when storing in an array, or for comparison
+  /// when storing in a container requiring comparison. The index will be less than SIZE(). The "null" corner
+  /// has no index, and it is illegal to call index() on it.
+  ///@see get(std::uint_fast8_t idx)
   std::uint_fast8_t index() const;
+  ///Comparison
   bool operator<(const corner_t& other) const;
+  ///Comparison
   bool operator==(const corner_t& other) const;
+  ///Comparison
   bool operator!=(const corner_t& other) const;
   
   
+  ///Return a list of all the faces on the cube.
   static const std::array<corner_t, 8>& all();
   
-  ///return {-1,1} depending if the corner is in the near side or the far side of the x, respectively
+  ///Return an integer in {-1,1} depending if the corner is in the near side or the far side of the x, respectively
   std::int_fast8_t x() const;
-  ///return {-1,1} depending if the corner is in the near side or the far side of the y, respectively
+  ///Return an integer in {-1,1} depending if the corner is in the near side or the far side of the y, respectively
   std::int_fast8_t y() const;
-  ///return {-1,1} depending if the corner is in the near side or the far side of the z, respectively
+  ///Return an integer in {-1,1} depending if the corner is in the near side or the far side of the z, respectively
   std::int_fast8_t z() const;
   
-  ///return {0,1} depending if the corner is in the near side or the far side of the x, respectively
+  ///Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the x, respectively
   std::uint_fast8_t ux() const;
-  ///return {0,1} depending if the corner is in the near side or the far side of the y, respectively
+  ///Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the y, respectively
   std::uint_fast8_t uy() const;
-  ///return {0,1} depending if the corner is in the near side or the far side of the z, respectively
+  ///Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the z, respectively
   std::uint_fast8_t uz() const;
   
   
-  ///number of corners
+  ///Number of corners.
   CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 8; }
-  corner_t();
   
+  ///Returns true if this corner is null; false otherwise.
   bool is_null() const;
+  bool is_sane() const;
+  
+  ///Retrieve the "null" corner.
   static const corner_t& null_corner();
 protected:
 #ifndef NDEBUG
@@ -736,6 +803,9 @@ private:
  *
  */
 struct edge_t{
+  ///Default construct a "null" edge.
+  edge_t();
+  
   /**
    * Retrieve a list of (2) corners associated with this edge.
    */
@@ -779,8 +849,6 @@ struct edge_t{
   const edge_t& opposite() const;
   
   
-  ///Default construct a "null" edge.
-  edge_t();
   
   ///Test if an edge is a "null" edge.
   bool is_null() const;
@@ -827,7 +895,7 @@ struct edge_t{
   bool project_tertiary() const;
   
   ///Retrieve a numeric 0-based index for the edge, for use in indexing when storing in an array, or for comparison
-  /// when storing in a container requiring comparison. The index will be less than SIZE. The "null" edge
+  /// when storing in a container requiring comparison. The index will be less than SIZE(). The "null" edge
   /// has no index, and it is illegal to call index() on it.
   std::uint_fast8_t index() const;
   ///A comparison operator for using the edge in an std::set-like container.
@@ -838,7 +906,7 @@ struct edge_t{
   ///Inequality operator, can be used between null edge and non-null-edges etc. Two null edges are equal.
   bool operator!=(const edge_t& other) const;
   
-  ///Indicates how many edges there are in total.
+  ///Number of edges.
   CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE() { return 12; }
 private:
   ///internal ctor
