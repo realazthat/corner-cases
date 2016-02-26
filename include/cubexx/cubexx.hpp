@@ -613,11 +613,9 @@ private:
 };
 
 /**
+ * Represents an corner of a cube. There are 8 corners in a cube.
+ */
 struct corner_t{
-  typedef direction_t direction_type;
-  typedef edge_t edge_type;
-  typedef face_t face_type;
-  
   
   /**
    * Returns a corner that is adjacent in the axis of the direction.
@@ -675,7 +673,7 @@ struct corner_t{
   std::uint_fast8_t uz() const;
   
   
-  ///Number of corners
+  ///number of corners
   CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 8; }
   corner_t();
   
@@ -703,7 +701,13 @@ struct edge_t{
    */
   const std::array<corner_t, 2>& corners() const;
   
+  ///Get the lower corner of this edge. Note that "lower" here
+  /// means the one closer to the origin.
+  ///@see corner1()
   const corner_t& corner0() const;
+  ///Get the upper corner of this edge. Note that "upper" here
+  /// means the one farther from the origin.
+  ///@see corner0()
   const corner_t& corner1() const;
   
   /**
@@ -767,6 +771,13 @@ struct edge_t{
    * and project it across both, which would give an edge on the far side of the cube.
    */
   static const edge_t& get(std::uint_fast8_t axis, bool project_secondary, bool project_tertiary);
+  /**
+   * Retrieves an edge via the two corners. Note, the corners specified here may be in any order
+   * so long as they are adjacent; however the edge canonicalizes the order so that calls to 
+   * corner0() and corner1() may not match the two corners used to obtain the edge here.
+   *
+   * @see corner0(), corner1()
+   */
   static const edge_t& get(const corner_t& corner0, const corner_t& corner1);
   
   std::uint_fast8_t base_axis() const;
@@ -825,16 +836,6 @@ private:
   const edge_t& calc_opposite() const;
 };
 
-struct cube_t{
-  std::array<face_t, 6> faces() const;
-  const std::array<corner_t, 8>& corners() const;
-  std::array<edge_t, 12> edges() const;
-  std::array<direction_t, 6> directions() const;
-  
-  static const cube_t& identity();
-private:
-  cube_t();
-};
 
 
 } // namespace cubexx
