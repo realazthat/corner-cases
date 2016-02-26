@@ -70,6 +70,23 @@ Once again, you can do things like:
 cubexx::edge_t Overview
 ------------------------------------------------
 
+The :cpp:class:`cubexx::edge_t <cubexx::edge_t>` represents the edge of a cube.
+
+* There are 12 edges in a cube.
+
+You can use it to:
+
+* Obtain the lower and upper :ref:`corners <cubexx-corner-overview>` of the edge,
+* Obtain all (4) adjacent edges,
+* Obtain all (2) adjacent :ref:`faces <cubexx-face-overview>`,
+* Obtain the opposite edge,
+* Retrieve an index suitable for array storage,
+    * And the inverse, retrieve a edge via its index
+* Reason about sets of edges (using :cpp:class:`cubexx::edge_set_t <cubexx::edge_set_t>`).
+
+
+
+
 
 .. _cubexx-face-overview:
 
