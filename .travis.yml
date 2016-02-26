@@ -49,4 +49,5 @@ script:
 
 after_success:
     - bash ./scripts/publish-sphinx-docs.sh
+    - bash <(curl -s https://codecov.io/bash)
 
