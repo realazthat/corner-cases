@@ -421,7 +421,14 @@ private:
 
 
 
-
+/**
+ * CRTP ([curiously recurring template pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)) class
+ * for a bit-wise set container, where each element is represented by a 0-based index, and the set internally uses
+ * a bit representation for the set implementation. This is just a base class that has most of the implementation.
+ * You probably do not want to ever instantiate this directly.
+ * 
+ * @see corner_set_t, direction_set_t, edge_set_t, face_set_t.
+ */
 template<typename derived_t, typename element_t, std::size_t N>
 struct set_base_t
 {
@@ -432,50 +439,84 @@ struct set_base_t
   typedef const_element_set_iterator_t<value_type const, derived_t const> const_iterator;
   typedef const_iterator iterator;
   
+  ///Return an iterator to the first element in the set.
   const_iterator begin() const;
+  ///Return an invalid iterator that points to one past the last element in the set.
   const_iterator end() const;
   
   
+  ///Construct the set from any Sequence.
   template<typename Sequence>
   set_base_t(const Sequence& sequence);
+  ///Constructs the set from the range range [first, last).
+  template<typename LeftIterator, typename RightIterator>
+  set_base_t(LeftIterator first, RightIterator last);
+  
+  
+  ///Copy constructor.
   set_base_t(const derived_t& set);
+  
+  ///Default constructor.
   set_base_t();
   
+  ///Assignment from any sequence.
   template<typename Sequence>
   derived_t& operator=(const Sequence& sequence);
+  ///Assignment from a single element.
   derived_t& operator=(const element_t& element);
+  ///Assignment from another set.
   derived_t& operator=(const derived_t& set);
   
+  ///Union with any sequence of elements.
   template<typename Sequence>
   derived_t& operator|=(const Sequence& sequence);
+  ///Union with another set.
   derived_t& operator|=(const derived_t& set);
+  ///Insertion of an element.
   derived_t& operator|=(const element_t& element);
   
+  ///Union with any sequence of elements (returns the modified set).
   template<typename Sequence>
   derived_t operator|(const Sequence& sequence) const;
+  ///Union with another set (returns the modified set).
   derived_t operator|(const derived_t& set) const;
+  ///Insertion of an element (returns the modified set).
   derived_t operator|(const element_t& element) const;
   
+  ///Set difference, with any sequence.
   template<typename Sequence>
   derived_t& operator-=(const Sequence& sequence);
+  ///Set difference.
   derived_t& operator-=(const derived_t& set);
+  ///Erasure of an element from a set.
   derived_t& operator-=(const element_t& element);
   
+  ///Set difference, with any sequence (returns the modified set).
   template<typename Sequence>
   derived_t operator-(const Sequence& sequence) const;
+  ///Set difference (returns the modified set).
   derived_t operator-(const derived_t& set) const;
+  ///Erasure of an element from a set (returns the modified set).
   derived_t operator-(const element_t& element) const;
   
+  ///Membership test.
   bool contains(const element_t& element) const;
+  ///Membership test, by element index (within its type).
   bool contains(const std::size_t& idx) const;
   
+  ///Returns the size of the set.
   std::size_t size() const;
   
+  ///Clears the set.
   void clear();
   
+  ///Comparison.
   bool operator==(const derived_t& other) const;
+  ///Comparison.
   bool operator!=(const derived_t& other) const;
   
+  ///Return the bit representation of the set; the bit at each element's index will be set
+  /// to 1 if the set contains the element, or 0 if the set does not contain the element.
   const std::bitset<N>& bits() const;
 private:
   
@@ -485,7 +526,6 @@ private:
   
   std::bitset<N> mbits;
 };
-
 
 struct corner_set_t : public set_base_t<corner_set_t, corner_t, 8>
 {

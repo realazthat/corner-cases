@@ -96,6 +96,33 @@ cubexx::face_t Overview
 
 
 
+.. _cubexx-set-overview:
+
+cubexx::set_base_t Overview
+------------------------------------------------
+
+cubexx comes with set types, which can be used to store and reason about combinations of
+{corners,directions,edges,faces}. These set types inherit from the type :cpp:class:`cubexx::set_base_t <cubexx::set_base_t>`.
+The there is one set type for each {corners,directions,edges,faces}.
+
+* :cpp:class:`cubexx::corner_set_t <cubexx::corner_set_t>`
+* :cpp:class:`cubexx::direction_set_t <cubexx::direction_set_t>`
+* :cpp:class:`cubexx::edge_set_t <cubexx::edge_set_t>`
+* :cpp:class:`cubexx::face_set_t <cubexx::face_set_t>`
+
+The set supports:
+
+* insertion
+* union
+* difference
+* erasure
+* membership testing
+
+
+
+
+
+
 
 
 Usage
