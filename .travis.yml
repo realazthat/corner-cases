@@ -18,15 +18,17 @@ env:
 
 
 addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - gcc-4.8
-    - g++-4.8
-    - doxygen
-    - python3
-    - python3-pip
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - gcc-4.8
+            - g++-4.8
+            - doxygen
+            - python3
+            - python3-pip
+    code_climate:
+        repo_token: 8214ca28cb64d4c6c4fa5bc994400d025e7158f922dcc70baf8d18711c080c59
 
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
@@ -50,4 +52,5 @@ script:
 after_success:
     - bash ./scripts/publish-sphinx-docs.sh
     - bash <(curl -s https://codecov.io/bash)
+    
 
