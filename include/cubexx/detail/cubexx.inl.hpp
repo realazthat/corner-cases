@@ -1215,59 +1215,6 @@ all()
 
 
 
-CORNER_CASES_CUBEXX_INLINE
-cube_t::
-cube_t()
-{
-
-}
-
-CORNER_CASES_CUBEXX_INLINE
-const cube_t&
-cube_t::
-identity()
-{
-  static const cube_t cube;
-  return cube;
-}
-
-
-CORNER_CASES_CUBEXX_INLINE
-const std::array< corner_t, 8 >&
-cube_t::corners() const
-{
-  return corner_t::all();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
