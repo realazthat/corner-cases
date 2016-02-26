@@ -164,6 +164,7 @@ Reference pages:
    
    cubexx-corner
    cubexx-edge
+   cubexx-face
 
 
 

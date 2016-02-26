@@ -565,25 +565,43 @@ private:
   direction_t(const std::bitset<3>& bits);
 };
 
+/**
+ * Represents an face of a cube. There are 6 faces in a cube.
+ */
 struct face_t{
   
+  ///return the direction that is equivalent to this face
   const direction_t& direction() const;
+  ///return the opposite face
   const face_t& opposite() const;
+  ///return the 4 adjacent faces
   std::array<face_t, 4> adjacents() const;
+  ///return the 4 corners on this face
   std::array<corner_t, 4> corners() const;
+  ///return a corner_set_t containing the 4 corners on this face
   corner_set_t corner_set() const;
+  ///return the 4 edges on this face
   std::array<edge_t, 4> edges() const;
   
+  ///return a list of all the faces on the cube
   static const std::array<face_t, 6>& all();
+  ///return the face equivalent to a specified direction
   static const face_t& get(const direction_t& direction);
+  ///return the face represented by an index
+  ///@see index()
   static const face_t& get(const std::uint_fast8_t& idx);
   
-  
+  ///return an index that represents this face
   std::uint_fast8_t index() const;
+  
+  ///comparison
   bool operator<(const face_t& other) const;
+  ///comparison
   bool operator==(const face_t& other) const;
+  ///comparison
   bool operator!=(const face_t& other) const;
   
+  ///number of faces
   CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 6; }
   
 protected:
@@ -594,6 +612,7 @@ private:
   
 };
 
+/**
 struct corner_t{
   typedef direction_t direction_type;
   typedef edge_t edge_type;
