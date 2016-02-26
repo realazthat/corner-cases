@@ -11,10 +11,18 @@ dealing with data structures based on cubes, such as octrees.
 
 
 
-Branch  | Build Status | docs
+Branch  | Build Status | docs | test coverage (codecov)
 ---     | --- | ---
-master  | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)  | [docs](http://realazthat.github.io/corner-cases/master/sphinx-docs/html/index.html)
-develop | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=develop)](https://travis-ci.org/realazthat/corner-cases) | [docs](http://realazthat.github.io/corner-cases/develop/sphinx-docs/html/index.html)
+master  | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=master)](https://travis-ci.org/realazthat/corner-cases)  | [docs](http://realazthat.github.io/corner-cases/master/sphinx-docs/html/index.html) | [![codecov.io](https://codecov.io/github/realazthat/corner-cases/coverage.svg?branch=master)](https://codecov.io/github/realazthat/corner-cases?branch=master)
+develop | [![Build Status](https://travis-ci.org/realazthat/corner-cases.svg?branch=develop)](https://travis-ci.org/realazthat/corner-cases) | [docs](http://realazthat.github.io/corner-cases/develop/sphinx-docs/html/index.html) | [![codecov.io](https://codecov.io/github/realazthat/corner-cases/coverage.svg?branch=master)](https://codecov.io/github/realazthat/corner-cases?branch=master)
+
+
+
+Branch | coverage graph (codecov)
+------ | --------------
+master | ![codecov.io](https://codecov.io/github/realazthat/corner-cases/branch.svg?branch=master)
+develop | ![codecov.io](https://codecov.io/github/realazthat/corner-cases/branch.svg?branch=develop)
+
 
 
 Incomplete
