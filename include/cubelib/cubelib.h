@@ -32,9 +32,18 @@ extern "C"{
     typedef uint_fast8_t direction_value_t;
     typedef uint_fast8_t edge_value_t;
     
+    
+    /** @addtogroup  cubelib-corner-group Corner API
+     *  This is the API for cubelib::corner_t.
+     *  @{
+     */
+    ///Struct that represents a corner.
+    ///@see get_corner_by_int3(), get_corner_index(), get_corner_by_index()
+    ///@see is_corner_valid(), is_corner_null(), is_corner_equal()
     typedef struct corner_t{
         corner_value_t value;
     } corner_t;
+    /** @} */ // end of group corner
 
     typedef struct direction_t{
         direction_value_t value;
@@ -67,35 +76,75 @@ extern "C"{
     
 
 /* -------------------------------------------------------------------------- */
+/** @addtogroup  cubelib-corner-group
+ *  @{
+ */
+
+    ///Checks that a corner is not corrupted somehow and represents a valid corner (including a null corner).
+    ///@see is_corner_null(corner_t)
     static inline bool is_corner_valid(corner_t corner);
+    ///Returns true if this corner is a null corner.
+    ///@see is_corner_valid(corner_t)
     static inline bool is_corner_null(corner_t corner);
 
+    ///get the "origin-centered-cube-representation" x component of the corner.
+    ///@see get_corner_y(), get_corner_z(), get_corner_i(), get_corner_uniti(), get_corner_unitx()
     static inline int get_corner_x(corner_t corner);
+    ///get the "origin-centered-cube-representation" y component of the corner.
+    ///@see get_corner_x(), get_corner_z(), get_corner_i(), get_corner_uniti(), get_corner_unity()
+    ///@see get_corner_by_int3()
     static inline int get_corner_y(corner_t corner);
+    ///get the "origin-centered-cube-representation" z component of the corner.
+    ///@see get_corner_x(), get_corner_y(), get_corner_i(), get_corner_uniti(), get_corner_unitz()
+    ///@see get_corner_by_int3()
     static inline int get_corner_z(corner_t corner);
+    ///get the "origin-centered-cube-representation" i-th component of the corner.
+    ///@param dim an index representing the component dimension.
+    ///@see get_corner_x(), get_corner_y(), get_corner_z(), get_corner_uniti()
+    ///@see get_corner_by_int3()
     static inline int get_corner_i(corner_t corner, uint_fast8_t dim);
+    
+    ///get the "unit-cube-representation" x component of the corner.
+    ///@see get_corner_unity(), get_corner_unitz(), get_corner_uniti(), get_corner_i(), get_corner_x()
     static inline int get_corner_unitx(corner_t corner);
+    ///get the "unit-cube-representation" y component of the corner.
+    ///@see get_corner_unitx(), get_corner_unitz(), get_corner_uniti(), get_corner_i(), get_corner_y()
     static inline int get_corner_unity(corner_t corner);
+    ///get the "unit-cube-representation" z component of the corner.
+    ///@see get_corner_unitx(), get_corner_unity(), get_corner_uniti(), get_corner_i(), get_corner_z()
     static inline int get_corner_unitz(corner_t corner);
-    /**
-     * @brief compute the ith component of the corner's coordinates in unit-space
-     * @see get_corner_unitx(), get_corner_unity(), get_corner_unitz()
-     */
+    ///get the "unit-cube-representation" i-th component of the corner.
+    ///@param dim an index representing the component dimension.
+    ///@see get_corner_unitx(), get_corner_unity(), get_corner_unitz(), get_corner_i()
     static inline int get_corner_uniti(corner_t corner, uint_fast8_t dim);
 
+    ///gets a corner using 3 floats, same as get_corner_by_int3().
+    ///@see get_corner_by_int3()
+    static inline corner_t get_corner_by_float3(float x, float y, float z);
+    ///Gets a corner using 3 ints.
+    ///
+    ///Each component represents a dimension in the cube; if the component value
+    /// is more than 0, then it is an upper corner (in that dimension); if it is zero
+    /// or negative, then it is a lower corner. This accomodates both cube representations,
+    /// "unit-cube-representation" (where @f$x,y,z \in \left\{0,1\right\}@f$) or the "origin-centered-cube-representation"
+    /// (where @f$x,y,z \in \left\{-1,+1\right\}@f$).
+    ///
+    ///@see get_corner_x(), get_corner_y(), get_corner_z(), get_corner_i()
+    ///@see get_corner_unitx(), get_corner_unity(), get_corner_unitz(), get_corner_uniti()
+    ///@see cubexx::get(std::fast_int8_t,std::fast_int8_t,std::fast_int8_t)
+    static inline corner_t get_corner_by_int3(int x, int y, int z);
 
-    static inline
-    corner_t get_corner_by_float3(float x, float y, float z);
-    static inline
-    corner_t get_corner_by_int3(int x, int y, int z);
-
-    static inline
-    corner_t get_corner_by_index(uint_fast8_t index);
+    ///Returns a 0-based index that represents this corner; for use in array indexing and similar.
+    ///The index returned will be in 3D [Z-order curve](https://en.wikipedia.org/wiki/Z-order_curve)
+    /// also known as "Morton order", within the cube, in the range [0,7].
+    ///@see get_corner_by_index()
+    static inline uint_fast8_t get_corner_index(corner_t corner);
+    ///Return a corner based on the 0-based index returned by get_corner_index().
+    ///@see get_corner_index()
+    static inline corner_t get_corner_by_index(uint_fast8_t index);
 
     /**
-     * Return
-     *  then this method will wrap around and return the adjacent corner in the specified direction.
-     * @see corner_push(), corner_move()
+     * Return the corner on the opposite side of the cube.
      */
     static inline corner_t get_opposite_corner(corner_t corner);
     
@@ -105,7 +154,7 @@ extern "C"{
      * @see corner_push(), corner_move()
      */
     static inline corner_t get_adjacent_corner(corner_t corner, direction_t direction);
-    ///@copydoc get_adjacent_corner()
+
     static inline corner_t calc_adjacent_corner(corner_t corner, direction_t direction);
     
     /**
@@ -123,16 +172,18 @@ extern "C"{
     
     
     static inline bool calc_is_corner_adjacent_corner(corner_t corner0, corner_t corner1);
+    
+    ///Returns true if the two corners are adjacent.
     static inline bool is_corner_adjacent_corner(corner_t corner0, corner_t corner1);
     
     
-    static inline uint_fast8_t get_corner_index(corner_t corner);
     static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim);
+    
+    ///Comparison.
     static inline bool is_corner_equal(corner_t left, corner_t right);
 
 
-
-
+/** @} */ // end of group corner
 
 /* -------------------------------------------------------------------------- */
     static inline int get_direction_x(direction_t direction);
