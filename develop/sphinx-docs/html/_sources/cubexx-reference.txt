@@ -70,11 +70,70 @@ Once again, you can do things like:
 cubexx::edge_t Overview
 ------------------------------------------------
 
+The :cpp:class:`cubexx::edge_t <cubexx::edge_t>` represents the edge of a cube.
+
+* There are 12 edges in a cube.
+
+You can use it to:
+
+* Obtain the lower and upper :ref:`corners <cubexx-corner-overview>` of the edge,
+* Obtain all (4) adjacent edges,
+* Obtain all (2) adjacent :ref:`faces <cubexx-face-overview>`,
+* Obtain the opposite edge,
+* Retrieve an index suitable for array storage,
+    * And the inverse, retrieve a edge via its index
+* Reason about sets of edges (using :cpp:class:`cubexx::edge_set_t <cubexx::edge_set_t>`).
+
+
+
+
 
 .. _cubexx-face-overview:
 
 cubexx::face_t Overview
 ------------------------------------------------
+
+The :cpp:class:`cubexx::face_t <cubexx::face_t>` represents the face of a cube.
+
+* There are 6 faces in a cube.
+
+You can use it to:
+
+* Obtain the opposite face,
+* Obtain all (4) adjacent faces,
+* Obtain all (4) :ref:`corners <cubexx-corner-overview>` lying on the face,
+* Obtain all (4) :ref:`edges <cubexx-edge-overview>`. lying on the face,
+* Retrieve an index suitable for array storage,
+    * And the inverse, retrieve a face via its index
+* Reason about sets of faces (using :cpp:class:`cubexx::face_set_t <cubexx::face_set_t>`),
+* Convert it to a :ref:`direction <cubexx-direction-overview>`.
+
+
+
+
+.. _cubexx-set-overview:
+
+cubexx::set_base_t Overview
+------------------------------------------------
+
+cubexx comes with set types, which can be used to store and reason about combinations of
+{corners,directions,edges,faces}. These set types inherit from the type :cpp:class:`cubexx::set_base_t <cubexx::set_base_t>`.
+The there is one set type for each {corners,directions,edges,faces}.
+
+* :cpp:class:`cubexx::corner_set_t <cubexx::corner_set_t>`
+* :cpp:class:`cubexx::direction_set_t <cubexx::direction_set_t>`
+* :cpp:class:`cubexx::edge_set_t <cubexx::edge_set_t>`
+* :cpp:class:`cubexx::face_set_t <cubexx::face_set_t>`
+
+The set supports:
+
+* insertion
+* union
+* difference
+* erasure
+* membership testing
+* iteration
+
 
 
 

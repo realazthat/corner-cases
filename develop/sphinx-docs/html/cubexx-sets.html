@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cubexx::set_base_t &mdash; corner-cases NONE documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'NONE',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="corner-cases NONE documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>corner-cases NONE documentation</span></a></h1>
+        <h2 class="heading"><span>cubexx::set_base_t</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="cubexx-set-base-t">
+<h1>cubexx::set_base_t<a class="headerlink" href="#cubexx-set-base-t" title="Permalink to this headline">¶</a></h1>
+<p><strong>CDEF:</strong></p>
+<ul class="simple">
+<li><strong>C</strong>orner set</li>
+<li><strong>D</strong>irection set</li>
+<li><strong>E</strong>dge set</li>
+<li><strong>F</strong>ace set</li>
+</ul>
+<dl class="class">
+<dt>
+<span class="target" id="corner-casesstructcubexx_1_1set__base__t"></span><em class="property">template </em>&lt;typename <em>derived_t</em>, typename <em>element_t</em>, std::size_t <em>N</em>&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_tE">
+<span id="cubexx::set_base_t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">set_base_t</code><a class="headerlink" href="#_CPPv2N6cubexx10set_base_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>CRTP (<a class="reference external" href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern">curiously recurring template pattern</a>) class for a bit-wise set container, where each element is represented by a 0-based index, and the set internally uses a bit representation for the set implementation. </p>
+<p>This is just a base class that has most of the implementation. You probably do not want to ever instantiate this directly.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__set__t"><span>corner_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__set__t"><span>direction_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__set__t"><span>edge_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1face__set__t"><span>face_set_t</span></a>. </dd>
+</dl>
+</p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t5beginEv">
+<span id="cubexx::set_base_t::begin"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a4141b73812e11d1788fe28b951fc332b"></span>const_iterator <code class="descname">begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_t5beginEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an iterator to the first element in the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t3endEv">
+<span id="cubexx::set_base_t::end"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1ac306c2752ff7520f8500669703eae720"></span>const_iterator <code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_t3endEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an invalid iterator that points to one past the last element in the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Sequence&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_t10set_base_tERK8Sequence">
+<span id="cubexx::set_base_t::set_base_t__SequenceCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1aefe18f30185586d8c0fe272f4671e1c3"></span><code class="descname">set_base_t</code><span class="sig-paren">(</span><em class="property">const</em> Sequence &amp;<em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_t10set_base_tERK8Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the set from any Sequence. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> LeftIterator, <em class="property">typename</em> RightIterator&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_t10set_base_tE12LeftIterator13RightIterator">
+<span id="cubexx::set_base_t::set_base_t__LeftIterator.RightIterator"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1af1dc527fa8479a59d13c868c0485e027"></span><code class="descname">set_base_t</code><span class="sig-paren">(</span>LeftIterator <em>first</em>, RightIterator <em>last</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_t10set_base_tE12LeftIterator13RightIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs the set from the range range [first, last). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t10set_base_tERK9derived_t">
+<span id="cubexx::set_base_t::set_base_t__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a7c94ba6c269e236f7255f69cb5f61594"></span><code class="descname">set_base_t</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>set</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_t10set_base_tERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t10set_base_tEv">
+<span id="cubexx::set_base_t::set_base_t"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a9e3b305ef91247f4f906df70d6ed0774"></span><code class="descname">set_base_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_t10set_base_tEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Sequence&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_taSERK8Sequence">
+<span id="cubexx::set_base_t::assign-operator__SequenceCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a6e3967460336be122f65e78ce018ceb4"></span>derived_t &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> Sequence &amp;<em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_taSERK8Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assignment from any sequence. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_taSERK9element_t">
+<span id="cubexx::set_base_t::assign-operator__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1aa9500e693bf9e6242975e58fd5b14815"></span>derived_t &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_taSERK9element_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assignment from a single element. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_taSERK9derived_t">
+<span id="cubexx::set_base_t::assign-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1ab07f1c5645f234ea1a54ee37eae8c6eb"></span>derived_t &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>set</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_taSERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assignment from another set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Sequence&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_toRERK8Sequence">
+<span id="cubexx::set_base_t::or-assign-operator__SequenceCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1ab61fdfc423422bc3dda8122db23bf3d0"></span>derived_t &amp;<code class="descname">operator|=</code><span class="sig-paren">(</span><em class="property">const</em> Sequence &amp;<em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_toRERK8Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Union with any sequence of elements. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_toRERK9derived_t">
+<span id="cubexx::set_base_t::or-assign-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1adb35fda31898806067f9a13ff0761196"></span>derived_t &amp;<code class="descname">operator|=</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>set</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_toRERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Union with another set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_toRERK9element_t">
+<span id="cubexx::set_base_t::or-assign-operator__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1aa32b63e75b63d1447bd1d5d639d3fd90"></span>derived_t &amp;<code class="descname">operator|=</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_toRERK9element_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insertion of an element. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Sequence&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_torERK8Sequence">
+<span id="cubexx::set_base_t::or-operator__SequenceCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1ac738489480e06eb5afd2a5f13415cf56"></span>derived_t <code class="descname">operator|</code><span class="sig-paren">(</span><em class="property">const</em> Sequence &amp;<em>sequence</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_torERK8Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Union with any sequence of elements (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_torERK9derived_t">
+<span id="cubexx::set_base_t::or-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1ad0766044cc41d113a7d931eb35f612b1"></span>derived_t <code class="descname">operator|</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>set</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_torERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Union with another set (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_torERK9element_t">
+<span id="cubexx::set_base_t::or-operator__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a585d93a09ccaa31473e4889073f1dd74"></span>derived_t <code class="descname">operator|</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_torERK9element_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insertion of an element (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Sequence&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_tmIERK8Sequence">
+<span id="cubexx::set_base_t::sub-assign-operator__SequenceCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a712179ca629b936a1a2715836091912c"></span>derived_t &amp;<code class="descname">operator-=</code><span class="sig-paren">(</span><em class="property">const</em> Sequence &amp;<em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_tmIERK8Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set difference, with any sequence. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_tmIERK9derived_t">
+<span id="cubexx::set_base_t::sub-assign-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1ac4f08f2ccdf2aeec364600b73e20ec29"></span>derived_t &amp;<code class="descname">operator-=</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>set</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_tmIERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set difference. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_tmIERK9element_t">
+<span id="cubexx::set_base_t::sub-assign-operator__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1abc47c1acc173882e3bea566c7f3bbdc0"></span>derived_t &amp;<code class="descname">operator-=</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_tmIERK9element_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Erasure of an element from a set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Sequence&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_tmiERK8Sequence">
+<span id="cubexx::set_base_t::sub-operator__SequenceCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a9fac24f107445f1c67f225710cd3f76e"></span>derived_t <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> Sequence &amp;<em>sequence</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_tmiERK8Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set difference, with any sequence (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_tmiERK9derived_t">
+<span id="cubexx::set_base_t::sub-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a5b6b9a7db49b598f720a2d562b07e08c"></span>derived_t <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>set</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_tmiERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set difference (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_tmiERK9element_t">
+<span id="cubexx::set_base_t::sub-operator__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1ab13353316de4547ed17e2189b7c7789b"></span>derived_t <code class="descname">operator-</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_tmiERK9element_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Erasure of an element from a set (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t8containsERK9element_t">
+<span id="cubexx::set_base_t::contains__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a9332e860d7d751a7e9dadc77bbb914c1"></span>bool <code class="descname">contains</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_t8containsERK9element_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Membership test. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t8containsERKNSt6size_tE">
+<span id="cubexx::set_base_t::contains__std::sCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1aab132e35d4f30e45345ca9109a951d89"></span>bool <code class="descname">contains</code><span class="sig-paren">(</span><em class="property">const</em> std::size_t &amp;<em>idx</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_t8containsERKNSt6size_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Membership test, by element index (within its type). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t4sizeEv">
+<span id="cubexx::set_base_t::size"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a56b706f5b770c895ac7a03d6c25fb113"></span>std::size_t <code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_t4sizeEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the size of the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t5clearEv">
+<span id="cubexx::set_base_t::clear"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a68e1bc47fa61dadcfdd9f2efb2f32442"></span>void <code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_t5clearEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_teqERK9derived_t">
+<span id="cubexx::set_base_t::eq-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a69279001a269e96da9f90f332d00cf76"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_teqERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_tneERK9derived_t">
+<span id="cubexx::set_base_t::neq-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a80d11f3ef7ef2cc094fef04e111782cb"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_tneERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_t4bitsEv">
+<span id="cubexx::set_base_t::bits"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a8faefebf8066a94074a36f86b50cc557"></span><em class="property">const</em> std::bitset&lt;N&gt; &amp;<code class="descname">bits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_t4bitsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the bit representation of the set; the bit at each element&#8217;s index will be set to 1 if the set contains the element, or 0 if the set does not contain the element. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N6cubexx12corner_set_tE">
+<span id="cubexx::corner_set_t"></span><span class="target" id="corner-casesstructcubexx_1_1corner__set__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">corner_set_t</code><a class="headerlink" href="#_CPPv2N6cubexx12corner_set_tE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N6cubexx15direction_set_tE">
+<span id="cubexx::direction_set_t"></span><span class="target" id="corner-casesstructcubexx_1_1direction__set__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">direction_set_t</code><a class="headerlink" href="#_CPPv2N6cubexx15direction_set_tE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N6cubexx10edge_set_tE">
+<span id="cubexx::edge_set_t"></span><span class="target" id="corner-casesstructcubexx_1_1edge__set__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">edge_set_t</code><a class="headerlink" href="#_CPPv2N6cubexx10edge_set_tE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N6cubexx10face_set_tE">
+<span id="cubexx::face_set_t"></span><span class="target" id="corner-casesstructcubexx_1_1face__set__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">face_set_t</code><a class="headerlink" href="#_CPPv2N6cubexx10face_set_tE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Azriel Fasten.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+    </div>
+  </body>
+</html>

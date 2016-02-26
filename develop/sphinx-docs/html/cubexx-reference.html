@@ -101,7 +101,7 @@
 </dd>
 </dl>
 </li>
-<li><p class="first">Reason about sets of corners (using <code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::corner_set_t</span></code>).</p>
+<li><p class="first">Reason about sets of corners (using <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx12corner_set_tE" title="cubexx::corner_set_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::corner_set_t</span></code></a>).</p>
 </li>
 </ul>
 </div>
@@ -139,7 +139,7 @@
 </dd>
 </dl>
 </li>
-<li><p class="first">Reason about sets of directions (using <code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::direction_set_t</span></code>),</p>
+<li><p class="first">Reason about sets of directions (using <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx15direction_set_tE" title="cubexx::direction_set_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::direction_set_t</span></code></a>),</p>
 </li>
 <li><p class="first">Convert it to a <a class="reference internal" href="#cubexx-face-overview"><span>face</span></a>.</p>
 </li>
@@ -147,9 +147,82 @@
 </div>
 <div class="section" id="cubexx-edge-t-overview">
 <span id="cubexx-edge-overview"></span><h2>cubexx::edge_t Overview<a class="headerlink" href="#cubexx-edge-t-overview" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="cubexx-edge.html#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::edge_t</span></code></a> represents the edge of a cube.</p>
+<ul class="simple">
+<li>There are 12 edges in a cube.</li>
+</ul>
+<p>You can use it to:</p>
+<ul>
+<li><p class="first">Obtain the lower and upper <a class="reference internal" href="#cubexx-corner-overview"><span>corners</span></a> of the edge,</p>
+</li>
+<li><p class="first">Obtain all (4) adjacent edges,</p>
+</li>
+<li><p class="first">Obtain all (2) adjacent <a class="reference internal" href="#cubexx-face-overview"><span>faces</span></a>,</p>
+</li>
+<li><p class="first">Obtain the opposite edge,</p>
+</li>
+<li><dl class="first docutils">
+<dt>Retrieve an index suitable for array storage,</dt>
+<dd><ul class="first last simple">
+<li>And the inverse, retrieve a edge via its index</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Reason about sets of edges (using <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10edge_set_tE" title="cubexx::edge_set_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::edge_set_t</span></code></a>).</p>
+</li>
+</ul>
 </div>
 <div class="section" id="cubexx-face-t-overview">
 <span id="cubexx-face-overview"></span><h2>cubexx::face_t Overview<a class="headerlink" href="#cubexx-face-t-overview" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="cubexx-face.html#_CPPv2N6cubexx6face_tE" title="cubexx::face_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::face_t</span></code></a> represents the face of a cube.</p>
+<ul class="simple">
+<li>There are 6 faces in a cube.</li>
+</ul>
+<p>You can use it to:</p>
+<ul>
+<li><p class="first">Obtain the opposite face,</p>
+</li>
+<li><p class="first">Obtain all (4) adjacent faces,</p>
+</li>
+<li><p class="first">Obtain all (4) <a class="reference internal" href="#cubexx-corner-overview"><span>corners</span></a> lying on the face,</p>
+</li>
+<li><p class="first">Obtain all (4) <a class="reference internal" href="#cubexx-edge-overview"><span>edges</span></a>. lying on the face,</p>
+</li>
+<li><dl class="first docutils">
+<dt>Retrieve an index suitable for array storage,</dt>
+<dd><ul class="first last simple">
+<li>And the inverse, retrieve a face via its index</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Reason about sets of faces (using <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10face_set_tE" title="cubexx::face_set_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::face_set_t</span></code></a>),</p>
+</li>
+<li><p class="first">Convert it to a <a class="reference internal" href="#cubexx-direction-overview"><span>direction</span></a>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="cubexx-set-base-t-overview">
+<span id="cubexx-set-overview"></span><h2>cubexx::set_base_t Overview<a class="headerlink" href="#cubexx-set-base-t-overview" title="Permalink to this headline">¶</a></h2>
+<p>cubexx comes with set types, which can be used to store and reason about combinations of
+{corners,directions,edges,faces}. These set types inherit from the type <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10set_base_tE" title="cubexx::set_base_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::set_base_t</span></code></a>.
+The there is one set type for each {corners,directions,edges,faces}.</p>
+<ul class="simple">
+<li><a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx12corner_set_tE" title="cubexx::corner_set_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::corner_set_t</span></code></a></li>
+<li><a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx15direction_set_tE" title="cubexx::direction_set_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::direction_set_t</span></code></a></li>
+<li><a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10edge_set_tE" title="cubexx::edge_set_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::edge_set_t</span></code></a></li>
+<li><a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10face_set_tE" title="cubexx::face_set_t"><code class="xref cpp cpp-class docutils literal"><span class="pre">cubexx::face_set_t</span></code></a></li>
+</ul>
+<p>The set supports:</p>
+<ul class="simple">
+<li>insertion</li>
+<li>union</li>
+<li>difference</li>
+<li>erasure</li>
+<li>membership testing</li>
+<li>iteration</li>
+</ul>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
