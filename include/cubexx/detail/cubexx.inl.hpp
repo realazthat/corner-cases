@@ -870,13 +870,7 @@ secondary_axis() const
     auto base_axis = std::uint_fast8_t((bits >> 2).to_ulong());
     assert(base_axis < 3);
     
-#ifdef CUBEXX_EDGE_MODULAR_AXIS_STRATEGY
-    /// one strategy
     return std::uint_fast8_t(base_axis + 1 % 3);
-#else
-    /// another strategy
-    return std::uint_fast8_t(base_axis != 0 ? 0 : 1);
-#endif
   };
   
   static const std::uint_fast8_t internal_result[] = {
@@ -911,13 +905,7 @@ tertiary_axis() const
     auto base_axis = std::uint_fast8_t((bits >> 2).to_ulong());
     assert(base_axis < 3);
     
-#ifdef CUBEXX_EDGE_MODULAR_AXIS_STRATEGY
-    /// one strategy
     return std::uint_fast8_t(base_axis + 2 % 3);
-#else
-    /// another strategy
-    return std::uint_fast8_t(base_axis != 2 ? 1 : 0);
-#endif
   };
   
   static const std::uint_fast8_t internal_result[] = {
