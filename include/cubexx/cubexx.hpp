@@ -524,6 +524,16 @@ struct direction_set_t : public set_base_t<direction_set_t, direction_t, 6>
 
 
 
+struct edge_set_t : public set_base_t<edge_set_t, edge_t, 6>
+{
+  typedef edge_set_t self_t;
+  typedef set_base_t<edge_set_t, edge_t, 6> base_t;
+  
+  template<typename T>
+  edge_set_t(const T& v);
+  edge_set_t();
+  
+};
 
 
 
