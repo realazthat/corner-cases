@@ -2,3 +2,8 @@
 /.codelite/
 /Debug64/
 /build/
+/.build-debug/*
+/cubelib-*.mk
+/cubelib-*.txt
+/cubexx-*.mk
+/cubexx-*.txt
