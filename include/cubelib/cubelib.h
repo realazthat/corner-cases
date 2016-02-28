@@ -43,8 +43,8 @@ extern "C"{
      *  @{
      */
     ///Struct that represents a corner.
-    ///@see get_corner_by_int3(), get_corner_index(), get_corner_by_index()
-    ///@see is_corner_valid(), is_corner_null(), is_corner_equal()
+    ///@see cubelib_get_corner_by_int3(), cubelib_get_corner_index(), cubelib_get_corner_by_index()
+    ///@see cubelib_is_corner_valid(), cubelib_is_corner_null(), cubelib_is_corner_equal()
     typedef struct cubelib_corner_t{
         corner_value_t value;
     } cubelib_corner_t;
@@ -88,46 +88,46 @@ extern "C"{
 
  
     ///Checks that a corner is not corrupted somehow and represents a valid corner (including a null corner).
-    ///@see is_corner_null()
-    CUBELIB_FUNCTION_QUALIFIER bool is_corner_valid(cubelib_corner_t corner);
+    ///@see cubelib_is_corner_null()
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_valid(cubelib_corner_t corner);
     ///Returns true if this corner is a null corner.
-    ///@see is_corner_valid()
-    CUBELIB_FUNCTION_QUALIFIER bool is_corner_null(cubelib_corner_t corner);
+    ///@see cubelib_is_corner_valid()
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_null(cubelib_corner_t corner);
 
     ///get the "origin-centered-cube-representation" x component of the corner.
-    ///@see get_corner_y(), get_corner_z(), get_corner_i(), get_corner_uniti(), get_corner_unitx()
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_x(cubelib_corner_t corner);
+    ///@see cubelib_get_corner_y(), cubelib_get_corner_z(), cubelib_get_corner_i(), cubelib_get_corner_ui(), cubelib_get_corner_ux()
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_x(cubelib_corner_t corner);
     ///get the "origin-centered-cube-representation" y component of the corner.
-    ///@see get_corner_x(), get_corner_z(), get_corner_i(), get_corner_uniti(), get_corner_unity()
-    ///@see get_corner_by_int3()
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_y(cubelib_corner_t corner);
+    ///@see cubelib_get_corner_x(), cubelib_get_corner_z(), cubelib_get_corner_i(), cubelib_get_corner_ui(), cubelib_get_corner_uy()
+    ///@see cubelib_get_corner_by_int3()
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_y(cubelib_corner_t corner);
     ///get the "origin-centered-cube-representation" z component of the corner.
-    ///@see get_corner_x(), get_corner_y(), get_corner_i(), get_corner_uniti(), get_corner_unitz()
-    ///@see get_corner_by_int3()
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_z(cubelib_corner_t corner);
+    ///@see cubelib_get_corner_x(), cubelib_get_corner_y(), cubelib_get_corner_i(), cubelib_get_corner_ui(), cubelib_get_corner_uz()
+    ///@see cubelib_get_corner_by_int3()
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_z(cubelib_corner_t corner);
     ///get the "origin-centered-cube-representation" i-th component of the corner.
     ///@param dim an index representing the component dimension.
-    ///@see get_corner_x(), get_corner_y(), get_corner_z(), get_corner_uniti()
-    ///@see get_corner_by_int3()
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_i(cubelib_corner_t corner, uint_fast8_t dim);
+    ///@see cubelib_get_corner_x(), cubelib_get_corner_y(), cubelib_get_corner_z(), cubelib_get_corner_ui()
+    ///@see cubelib_get_corner_by_int3()
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_i(cubelib_corner_t corner, uint_fast8_t dim);
     
     ///get the "unit-cube-representation" x component of the corner.
-    ///@see get_corner_unity(), get_corner_unitz(), get_corner_uniti(), get_corner_i(), get_corner_x()
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_unitx(cubelib_corner_t corner);
+    ///@see cubelib_get_corner_uy(), cubelib_get_corner_uz(), cubelib_get_corner_ui(), cubelib_get_corner_i(), cubelib_get_corner_x()
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_ux(cubelib_corner_t corner);
     ///get the "unit-cube-representation" y component of the corner.
-    ///@see get_corner_unitx(), get_corner_unitz(), get_corner_uniti(), get_corner_i(), get_corner_y()
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_unity(cubelib_corner_t corner);
+    ///@see cubelib_get_corner_ux(), cubelib_get_corner_uz(), cubelib_get_corner_ui(), cubelib_get_corner_i(), cubelib_get_corner_y()
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_uy(cubelib_corner_t corner);
     ///get the "unit-cube-representation" z component of the corner.
-    ///@see get_corner_unitx(), get_corner_unity(), get_corner_uniti(), get_corner_i(), get_corner_z()
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_unitz(cubelib_corner_t corner);
+    ///@see cubelib_get_corner_ux(), cubelib_get_corner_uy(), cubelib_get_corner_ui(), cubelib_get_corner_i(), cubelib_get_corner_z()
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_uz(cubelib_corner_t corner);
     ///get the "unit-cube-representation" i-th component of the corner.
     ///@param dim an index representing the component dimension.
-    ///@see get_corner_unitx(), get_corner_unity(), get_corner_unitz(), get_corner_i()
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_uniti(cubelib_corner_t corner, uint_fast8_t dim);
+    ///@see cubelib_get_corner_ux(), cubelib_get_corner_uy(), cubelib_get_corner_uz(), cubelib_get_corner_i()
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_ui(cubelib_corner_t corner, uint_fast8_t dim);
 
-    ///gets a corner using 3 floats, same as get_corner_by_int3().
-    ///@see get_corner_by_int3()
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t get_corner_by_float3(float x, float y, float z);
+    ///gets a corner using 3 floats, same as cubelib_get_corner_by_int3().
+    ///@see cubelib_get_corner_by_int3()
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_corner_by_float3(float x, float y, float z);
     ///Gets a corner using 3 ints.
     ///
     ///Each component represents a dimension in the cube; if the component value
@@ -136,58 +136,58 @@ extern "C"{
     /// "unit-cube-representation" (where @f$x,y,z \in \left\{0,1\right\}@f$) or the "origin-centered-cube-representation"
     /// (where @f$x,y,z \in \left\{-1,+1\right\}@f$).
     ///
-    ///@see get_corner_x(), get_corner_y(), get_corner_z(), get_corner_i()
-    ///@see get_corner_unitx(), get_corner_unity(), get_corner_unitz(), get_corner_uniti()
+    ///@see cubelib_get_corner_x(), cubelib_get_corner_y(), cubelib_get_corner_z(), cubelib_get_corner_i()
+    ///@see cubelib_get_corner_ux(), cubelib_get_corner_uy(), cubelib_get_corner_uz(), cubelib_get_corner_ui()
     ///@see cubexx::get(std::fast_int8_t,std::fast_int8_t,std::fast_int8_t)
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t get_corner_by_int3(int x, int y, int z);
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_corner_by_int3(int x, int y, int z);
 
     ///Returns a 0-based index that represents this corner; for use in array indexing and similar.
     ///The index returned will be in 3D [Z-order curve](https://en.wikipedia.org/wiki/Z-order_curve)
     /// also known as "Morton order", within the cube, in the range @f$[0,7]@f$.
-    ///@see get_corner_by_index()
-    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_corner_index(cubelib_corner_t corner);
-    ///Return a corner based on the 0-based index returned by get_corner_index().
-    ///@see get_corner_index()
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t get_corner_by_index(uint_fast8_t index);
+    ///@see cubelib_get_corner_by_index()
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t cubelib_get_corner_index(cubelib_corner_t corner);
+    ///Return a corner based on the 0-based index returned by cubelib_get_corner_index().
+    ///@see cubelib_get_corner_index()
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_corner_by_index(uint_fast8_t index);
 
     /**
      * Return the corner on the opposite side of the cube.
      */
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t get_opposite_corner(cubelib_corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_opposite_corner(cubelib_corner_t corner);
     
     /**
      * Move a corner in a specified direction. If the new corner cannot be moved in that direction
      *  then this method will wrap around and return the adjacent corner in the specified direction.
-     * @see corner_push(), corner_move()
+     * @see cubelib_corner_push(), cubelib_corner_move()
      */
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t get_adjacent_corner(cubelib_corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_adjacent_corner(cubelib_corner_t corner, direction_t direction);
 
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t calc_adjacent_corner(cubelib_corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_calc_adjacent_corner(cubelib_corner_t corner, direction_t direction);
     
     /**
      * Move a corner in a specified direction. If the new corner cannot be moved in that direction
      *  then this method will return a @c null_corner.
-     * @see corner_push(), get_adjacent_corner()
+     * @see cubelib_corner_push(), cubelib_get_adjacent_corner()
      */
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t corner_move(cubelib_corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_corner_move(cubelib_corner_t corner, direction_t direction);
     /**
      * Move a corner in a specified direction. If the new corner cannot be moved in that direction
      *  then this method will return the same corner.
-     * @see corner_move(), get_adjacent_corner()
+     * @see cubelib_corner_move(), cubelib_get_adjacent_corner()
      */
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t corner_push(cubelib_corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_corner_push(cubelib_corner_t corner, direction_t direction);
     
     
-    CUBELIB_FUNCTION_QUALIFIER bool calc_is_corner_adjacent_corner(cubelib_corner_t corner0, cubelib_corner_t corner1);
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_calc_is_corner_adjacent_corner(cubelib_corner_t corner0, cubelib_corner_t corner1);
     
     ///Returns true if the two corners are adjacent.
-    CUBELIB_FUNCTION_QUALIFIER bool is_corner_adjacent_corner(cubelib_corner_t corner0, cubelib_corner_t corner1);
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_adjacent_corner(cubelib_corner_t corner0, cubelib_corner_t corner1);
     
     
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t calc_cnr_adj_cnr(cubelib_corner_t corner, uint_fast8_t dim);
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_calc_cnr_adj_cnr(cubelib_corner_t corner, uint_fast8_t dim);
     
     ///Comparison.
-    CUBELIB_FUNCTION_QUALIFIER bool is_corner_equal(cubelib_corner_t left, cubelib_corner_t right);
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_equal(cubelib_corner_t left, cubelib_corner_t right);
 
 
 /** @} */ // end of group corner
@@ -290,30 +290,30 @@ extern "C"{
 
     CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t cnr_adj_cnrs[8][3] =
         {
-            {     calc_cnr_adj_cnr(get_corner_by_index(0), 0)
-                , calc_cnr_adj_cnr(get_corner_by_index(0), 1)
-                , calc_cnr_adj_cnr(get_corner_by_index(0), 2)}
-            , {   calc_cnr_adj_cnr(get_corner_by_index(1), 0)
-                , calc_cnr_adj_cnr(get_corner_by_index(1), 1)
-                , calc_cnr_adj_cnr(get_corner_by_index(1), 2)}
-            , {   calc_cnr_adj_cnr(get_corner_by_index(2), 0)
-                , calc_cnr_adj_cnr(get_corner_by_index(2), 1)
-                , calc_cnr_adj_cnr(get_corner_by_index(2), 2)}
-            , {   calc_cnr_adj_cnr(get_corner_by_index(3), 0)
-                , calc_cnr_adj_cnr(get_corner_by_index(3), 1)
-                , calc_cnr_adj_cnr(get_corner_by_index(3), 2)}
-            , {   calc_cnr_adj_cnr(get_corner_by_index(4), 0)
-                , calc_cnr_adj_cnr(get_corner_by_index(4), 1)
-                , calc_cnr_adj_cnr(get_corner_by_index(4), 2)}
-            , {   calc_cnr_adj_cnr(get_corner_by_index(5), 0)
-                , calc_cnr_adj_cnr(get_corner_by_index(5), 1)
-                , calc_cnr_adj_cnr(get_corner_by_index(5), 2)}
-            , {   calc_cnr_adj_cnr(get_corner_by_index(6), 0)
-                , calc_cnr_adj_cnr(get_corner_by_index(6), 1)
-                , calc_cnr_adj_cnr(get_corner_by_index(6), 2)}
-            , {   calc_cnr_adj_cnr(get_corner_by_index(7), 0)
-                , calc_cnr_adj_cnr(get_corner_by_index(7), 1)
-                , calc_cnr_adj_cnr(get_corner_by_index(7), 2)}
+            {     cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(0), 0)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(0), 1)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(0), 2)}
+            , {   cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(1), 0)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(1), 1)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(1), 2)}
+            , {   cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(2), 0)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(2), 1)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(2), 2)}
+            , {   cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(3), 0)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(3), 1)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(3), 2)}
+            , {   cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(4), 0)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(4), 1)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(4), 2)}
+            , {   cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(5), 0)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(5), 1)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(5), 2)}
+            , {   cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(6), 0)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(6), 1)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(6), 2)}
+            , {   cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(7), 0)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(7), 1)
+                , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(7), 2)}
 
         };
     

@@ -194,18 +194,18 @@ TEST_F(CubelibEdgeTest,get_edge_corner)
     ///for every pair of adjacent corners, check the edge
     for (auto corner0 : all_corners){
         for (auto direction : all_directions){
-            auto corner1 = get_adjacent_corner(corner0, direction);
-            ASSERT_TRUE(!is_corner_null(corner1));
-            ASSERT_TRUE(is_corner_adjacent_corner(corner0, corner1));
+            auto corner1 = cubelib_get_adjacent_corner(corner0, direction);
+            ASSERT_TRUE(!cubelib_is_corner_null(corner1));
+            ASSERT_TRUE(cubelib_is_corner_adjacent_corner(corner0, corner1));
             
             auto edge = get_edge_by_corners(corner0, corner1);
             
             ///the edge's corners are equal to one of corner0, corner1
-            ASSERT_TRUE(is_corner_equal(get_edge_corner0(edge), corner0) || is_corner_equal(get_edge_corner0(edge), corner1));
-            ASSERT_TRUE(is_corner_equal(get_edge_corner1(edge), corner0) || is_corner_equal(get_edge_corner1(edge), corner1));
+            ASSERT_TRUE(cubelib_is_corner_equal(get_edge_corner0(edge), corner0) || cubelib_is_corner_equal(get_edge_corner0(edge), corner1));
+            ASSERT_TRUE(cubelib_is_corner_equal(get_edge_corner1(edge), corner0) || cubelib_is_corner_equal(get_edge_corner1(edge), corner1));
             
             ///the edge did not return two equal corners
-            ASSERT_FALSE(is_corner_equal(get_edge_corner0(edge), get_edge_corner1(edge)));
+            ASSERT_FALSE(cubelib_is_corner_equal(get_edge_corner0(edge), get_edge_corner1(edge)));
         }
     }
     
@@ -234,7 +234,7 @@ TEST_F(CubelibEdgeTest,get_edge_by_corners)
         {
             for (cubelib_corner_t corner1 : all_corners)
             {
-                if (!is_corner_adjacent_corner(corner0,corner1))
+                if (!cubelib_is_corner_adjacent_corner(corner0,corner1))
                     continue;
                 edge_corner_count++;
                 
@@ -246,11 +246,11 @@ TEST_F(CubelibEdgeTest,get_edge_by_corners)
                 auto edge_corner1 = get_edge_corner1(edge);
                 
                 ///the edge's endpoints should match one of corner0, or corner1
-                ASSERT_TRUE(is_corner_equal(corner0, edge_corner0) || is_corner_equal(corner1, edge_corner0))
+                ASSERT_TRUE(cubelib_is_corner_equal(corner0, edge_corner0) || cubelib_is_corner_equal(corner1, edge_corner0))
                     << "corner0: " << corner0 << ", edge: " <<  edge << ", corner1: " << corner1;
                 
                 ///the edge's endpoints should match one of corner0, or corner1
-                ASSERT_TRUE(is_corner_equal(corner0, edge_corner1) || is_corner_equal(corner1, edge_corner1))
+                ASSERT_TRUE(cubelib_is_corner_equal(corner0, edge_corner1) || cubelib_is_corner_equal(corner1, edge_corner1))
                     << "corner0: " << corner0 << ", edge: " <<  edge << ", corner1: " << corner1;
                 
                 
@@ -275,23 +275,23 @@ TEST_F(CubelibEdgeTest,get_edge_by_corner_direction)
     {
         for (auto direction : all_directions)
         {
-            auto next_corner = corner_move(corner,direction);
-            if (is_corner_null(next_corner))
+            auto next_corner = cubelib_corner_move(corner,direction);
+            if (cubelib_is_corner_null(next_corner))
                 continue;
             
             ++count;
             
             auto edge = get_edge_by_corner_direction(corner,direction);
             
-            ASSERT_TRUE(is_corner_equal(get_edge_corner0(edge), corner)
+            ASSERT_TRUE(cubelib_is_corner_equal(get_edge_corner0(edge), corner)
                         ||
-                        is_corner_equal(get_edge_corner1(edge), corner));
-            ASSERT_TRUE(is_corner_equal(get_edge_corner0(edge), next_corner)
+                        cubelib_is_corner_equal(get_edge_corner1(edge), corner));
+            ASSERT_TRUE(cubelib_is_corner_equal(get_edge_corner0(edge), next_corner)
                         ||
-                        is_corner_equal(get_edge_corner1(edge), next_corner));
+                        cubelib_is_corner_equal(get_edge_corner1(edge), next_corner));
             
             
-            ASSERT_TRUE(is_corner_adjacent_corner(get_edge_corner0(edge), get_edge_corner1(edge)));
+            ASSERT_TRUE(cubelib_is_corner_adjacent_corner(get_edge_corner0(edge), get_edge_corner1(edge)));
             
         }
     }
@@ -308,18 +308,18 @@ TEST_F(CubelibEdgeTest,get_opposite_edge)
     {
         auto corner0 = get_edge_corner0(edge);
         auto corner1 = get_edge_corner1(edge);
-        ASSERT_TRUE(is_corner_adjacent_corner(corner0, corner1));
+        ASSERT_TRUE(cubelib_is_corner_adjacent_corner(corner0, corner1));
         
         auto opposite_edge = get_opposite_edge(edge);
         
         auto opposite_corner0 = get_edge_corner0(opposite_edge);
         auto opposite_corner1 = get_edge_corner1(opposite_edge);
         
-        ASSERT_TRUE(is_corner_adjacent_corner(corner0, corner1));
+        ASSERT_TRUE(cubelib_is_corner_adjacent_corner(corner0, corner1));
         
         
-        ASSERT_TRUE(is_corner_equal(get_opposite_corner(corner0), opposite_corner1));
-        ASSERT_TRUE(is_corner_equal(get_opposite_corner(corner1), opposite_corner0));
+        ASSERT_TRUE(cubelib_is_corner_equal(cubelib_get_opposite_corner(corner0), opposite_corner1));
+        ASSERT_TRUE(cubelib_is_corner_equal(cubelib_get_opposite_corner(corner1), opposite_corner0));
     }
     
     

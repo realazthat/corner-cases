@@ -23,7 +23,7 @@ void generate_cnr_adj_cnrs_constants(std::ostream& out)
         out << "        " << (corneri == 0 ? "  " : ", ") << "{ \\" << std::endl;
         for (std::size_t i = 0; i < 3; ++i)
         {
-            cubelib_corner_t adj_corner = cnr_adj_cnrs[get_corner_index(corner)][i];
+            cubelib_corner_t adj_corner = cnr_adj_cnrs[cubelib_get_corner_index(corner)][i];
 
             out << "            " << (i == 0 ? "  " : ", ") << "(corner_t){" << adj_corner.value << "}" << " \\" << std::endl;
         }

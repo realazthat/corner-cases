@@ -12,14 +12,14 @@ extern "C"{
      * Corners
      * ---------------------------------------------------------------------
      */
-    CUBELIB_FUNCTION_QUALIFIER bool is_corner_valid(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_valid(cubelib_corner_t corner)
     {
         ///0b1000 represents a null corner
         ///0b0*** are all valid corners
         return (corner.value <= 0x8);
     }
 
-    CUBELIB_FUNCTION_QUALIFIER bool is_corner_null(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_null(cubelib_corner_t corner)
     {
         ///0b1000 represents a null corner
         ///0b0*** are all valid corners
@@ -28,32 +28,32 @@ extern "C"{
     }
 
 
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_x(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_x(cubelib_corner_t corner)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         
         return (corner.value & 1 ? 1 : -1);
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_y(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_y(cubelib_corner_t corner)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         
         return (corner.value & 2 ? 1 : -1);
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_z(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_z(cubelib_corner_t corner)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         
         return (corner.value & 4 ? 1 : -1);
     }
 
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_i(cubelib_corner_t corner, uint_fast8_t dim)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_i(cubelib_corner_t corner, uint_fast8_t dim)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         assert (dim < 3);
 
         return ( corner.value & (1 << dim) ? 1 : -1 );
@@ -62,33 +62,33 @@ extern "C"{
 
 
 
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_unitx(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_ux(cubelib_corner_t corner)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         
         return (corner.value & 1 ? 1 : 0);
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_unity(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_uy(cubelib_corner_t corner)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         
         return (corner.value & 2 ? 1 : 0);
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_unitz(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_uz(cubelib_corner_t corner)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         
         return (corner.value & 4 ? 1 : 0);
     }
 
 
-    CUBELIB_FUNCTION_QUALIFIER int get_corner_uniti(cubelib_corner_t corner, uint_fast8_t dim)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_corner_ui(cubelib_corner_t corner, uint_fast8_t dim)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         
         assert (dim < 3);
 
@@ -97,20 +97,20 @@ extern "C"{
 
 
     CUBELIB_FUNCTION_QUALIFIER
-    cubelib_corner_t get_corner_by_float3(float x, float y, float z)
+    cubelib_corner_t cubelib_get_corner_by_float3(float x, float y, float z)
     {
         corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
 
         cubelib_corner_t result = {value};
         
         
-        assert(is_corner_valid(result));
-        assert(!is_corner_null(result));
+        assert(cubelib_is_corner_valid(result));
+        assert(!cubelib_is_corner_null(result));
         
         return result;
     }
     CUBELIB_FUNCTION_QUALIFIER
-    cubelib_corner_t get_corner_by_int3(int x, int y, int z)
+    cubelib_corner_t cubelib_get_corner_by_int3(int x, int y, int z)
     {
         corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
 
@@ -118,18 +118,18 @@ extern "C"{
 
         result.value = value;
 
-        assert(is_corner_valid(result));
-        assert(!is_corner_null(result));
+        assert(cubelib_is_corner_valid(result));
+        assert(!cubelib_is_corner_null(result));
         return result;
     }
 
     CUBELIB_FUNCTION_QUALIFIER
-    cubelib_corner_t get_corner_by_index(uint_fast8_t index)
+    cubelib_corner_t cubelib_get_corner_by_index(uint_fast8_t index)
     {
         assert (index < 8);
         cubelib_corner_t result = {(corner_value_t)index};
-        assert(is_corner_valid(result));
-        assert(!is_corner_null(result));
+        assert(cubelib_is_corner_valid(result));
+        assert(!cubelib_is_corner_null(result));
         return result;
     }
 
@@ -137,103 +137,103 @@ extern "C"{
     /**
 
      */
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t get_opposite_corner(cubelib_corner_t corner)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_opposite_corner(cubelib_corner_t corner)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
 
         cubelib_corner_t result;
         result.value = (~corner.value) & 0x7;
         return result;
     }
 
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t corner_move(cubelib_corner_t corner, direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_corner_move(cubelib_corner_t corner, direction_t direction)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         assert(is_direction_valid(direction));
         assert(!is_direction_null(direction));
         
-        int x = get_corner_x(corner) + get_direction_x(direction)*2;
-        int y = get_corner_y(corner) + get_direction_y(direction)*2;
-        int z = get_corner_z(corner) + get_direction_z(direction)*2;
+        int x = cubelib_get_corner_x(corner) + get_direction_x(direction)*2;
+        int y = cubelib_get_corner_y(corner) + get_direction_y(direction)*2;
+        int z = cubelib_get_corner_z(corner) + get_direction_z(direction)*2;
 
         //std::cout << "corner: " << corner << ", direction: " << direction << std::endl;
-        //std::cout << "x0,y0,z0: " << get_corner_x(corner) << ", " << get_corner_y(corner) << ", " << get_corner_z(corner) << std::endl;
+        //std::cout << "x0,y0,z0: " << cubelib_get_corner_x(corner) << ", " << cubelib_get_corner_y(corner) << ", " << cubelib_get_corner_z(corner) << std::endl;
         //std::cout << "x,y,z: " << x << ", " << y << ", " << z << std::endl;
 
         if (x > 1 || x < -1 || y > 1 || y < -1 || z > 1 || z < -1)
             return null_corner;
 
-        return get_corner_by_int3(x,y,z);
+        return cubelib_get_corner_by_int3(x,y,z);
     }
 
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t corner_push(cubelib_corner_t corner, direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_corner_push(cubelib_corner_t corner, direction_t direction)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         assert(is_direction_valid(direction));
         assert(!is_direction_null(direction));
         
         
-        int x = get_corner_x(corner) + get_direction_x(direction)*2;
-        int y = get_corner_y(corner) + get_direction_y(direction)*2;
-        int z = get_corner_z(corner) + get_direction_z(direction)*2;
+        int x = cubelib_get_corner_x(corner) + get_direction_x(direction)*2;
+        int y = cubelib_get_corner_y(corner) + get_direction_y(direction)*2;
+        int z = cubelib_get_corner_z(corner) + get_direction_z(direction)*2;
 
-        return get_corner_by_int3(x,y,z);
+        return cubelib_get_corner_by_int3(x,y,z);
     }
     
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t calc_adjacent_corner(cubelib_corner_t corner, direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_calc_adjacent_corner(cubelib_corner_t corner, direction_t direction)
     {
-        assert(!is_corner_null(corner));
-        assert(is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
         assert(is_direction_valid(direction));
         
         
-        uint_fast8_t x = (get_corner_unitx(corner) + get_direction_absx(direction)) % 2;
-        uint_fast8_t y = (get_corner_unity(corner) + get_direction_absy(direction)) % 2;
-        uint_fast8_t z = (get_corner_unitz(corner) + get_direction_absz(direction)) % 2;
+        uint_fast8_t x = (cubelib_get_corner_ux(corner) + get_direction_absx(direction)) % 2;
+        uint_fast8_t y = (cubelib_get_corner_uy(corner) + get_direction_absy(direction)) % 2;
+        uint_fast8_t z = (cubelib_get_corner_uz(corner) + get_direction_absz(direction)) % 2;
 
-        return get_corner_by_int3(x,y,z);
+        return cubelib_get_corner_by_int3(x,y,z);
         
     }
     
     
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t get_adjacent_corner(cubelib_corner_t corner, direction_t direction){
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_adjacent_corner(cubelib_corner_t corner, direction_t direction){
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         assert(is_direction_valid(direction));
         assert(!is_direction_null(direction));
-        return calc_adjacent_corner(corner, direction);
+        return cubelib_calc_adjacent_corner(corner, direction);
     }
 
-    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_corner_index(cubelib_corner_t corner){
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t cubelib_get_corner_index(cubelib_corner_t corner){
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         return corner.value;
     }
 
 
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t calc_cnr_adj_cnr(cubelib_corner_t corner, uint_fast8_t dim)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_calc_cnr_adj_cnr(cubelib_corner_t corner, uint_fast8_t dim)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         assert( dim < 3 );
 
         ///flip the bit of the specified dimension
         cubelib_corner_t result = {(corner_value_t)(corner.value ^ (1 << dim))};
 
-        assert(is_corner_valid(result));
-        assert(!is_corner_null(result));
+        assert(cubelib_is_corner_valid(result));
+        assert(!cubelib_is_corner_null(result));
         return result;
     }
     
-    CUBELIB_FUNCTION_QUALIFIER bool calc_is_corner_adjacent_corner(cubelib_corner_t corner0, cubelib_corner_t corner1)
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_calc_is_corner_adjacent_corner(cubelib_corner_t corner0, cubelib_corner_t corner1)
     {
-        assert(is_corner_valid(corner0));
-        assert(is_corner_valid(corner1));
-        assert(!is_corner_null(corner0));
-        assert(!is_corner_null(corner1));
+        assert(cubelib_is_corner_valid(corner0));
+        assert(cubelib_is_corner_valid(corner1));
+        assert(!cubelib_is_corner_null(corner0));
+        assert(!cubelib_is_corner_null(corner1));
         
         uint_fast8_t different_axis_bits = (corner0.value ^ corner1.value);
         
@@ -241,21 +241,21 @@ extern "C"{
     }
 
 
-    CUBELIB_FUNCTION_QUALIFIER bool is_corner_adjacent_corner(cubelib_corner_t corner0, cubelib_corner_t corner1)
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_adjacent_corner(cubelib_corner_t corner0, cubelib_corner_t corner1)
     {
-        assert(is_corner_valid(corner0));
-        assert(is_corner_valid(corner1));
-        assert(!is_corner_null(corner0));
-        assert(!is_corner_null(corner1));
-        return calc_is_corner_adjacent_corner(corner0, corner1);
+        assert(cubelib_is_corner_valid(corner0));
+        assert(cubelib_is_corner_valid(corner1));
+        assert(!cubelib_is_corner_null(corner0));
+        assert(!cubelib_is_corner_null(corner1));
+        return cubelib_calc_is_corner_adjacent_corner(corner0, corner1);
     }
 
     
 
-    CUBELIB_FUNCTION_QUALIFIER bool is_corner_equal(cubelib_corner_t left, cubelib_corner_t right)
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_equal(cubelib_corner_t left, cubelib_corner_t right)
     {
-        assert(is_corner_valid(left));
-        assert(is_corner_valid(right));
+        assert(cubelib_is_corner_valid(left));
+        assert(cubelib_is_corner_valid(right));
         return left.value == right.value;
     }
 
@@ -452,9 +452,9 @@ extern "C"{
         {
             cubelib_corner_t corner = all_corners[i];
             
-            int cx = get_corner_x(corner)
-              , cy = get_corner_y(corner)
-              , cz = get_corner_z(corner);
+            int cx = cubelib_get_corner_x(corner)
+              , cy = cubelib_get_corner_y(corner)
+              , cz = cubelib_get_corner_z(corner);
 
             if (!(cx == x || cy == y || cz == z))
                 continue;
@@ -573,15 +573,15 @@ extern "C"{
     
     CUBELIB_FUNCTION_QUALIFIER edge_t calc_edge_by_corner_direction(cubelib_corner_t corner, direction_t direction)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         assert(is_direction_valid(direction));
         assert(!is_direction_null(direction));
         
-        cubelib_corner_t next_corner = corner_move(corner, direction);
-        assert(!is_corner_null(next_corner) && "there is no adjacent corner in that direction");
+        cubelib_corner_t next_corner = cubelib_corner_move(corner, direction);
+        assert(!cubelib_is_corner_null(next_corner) && "there is no adjacent corner in that direction");
         
-        assert(is_corner_adjacent_corner(corner,next_corner));
+        assert(cubelib_is_corner_adjacent_corner(corner,next_corner));
         
         edge_t result = get_edge_by_corners(corner,next_corner);
         
@@ -589,18 +589,18 @@ extern "C"{
         assert(!is_edge_null(result));
         
         ///corner == corner0(edge) || corner == corner1(edge)
-        assert(is_corner_equal(get_edge_corner0(result), corner) || is_corner_equal(get_edge_corner1(result), corner));
+        assert(cubelib_is_corner_equal(get_edge_corner0(result), corner) || cubelib_is_corner_equal(get_edge_corner1(result), corner));
         
         ///next_corner == corner0(edge) || next_corner == corner1(edge)
-        assert(is_corner_equal(get_edge_corner0(result), next_corner) || is_corner_equal(get_edge_corner1(result), next_corner));
+        assert(cubelib_is_corner_equal(get_edge_corner0(result), next_corner) || cubelib_is_corner_equal(get_edge_corner1(result), next_corner));
         
         return result;
     }
     
     CUBELIB_FUNCTION_QUALIFIER edge_t get_edge_by_corner_direction(cubelib_corner_t corner, direction_t direction)
     {
-        assert(is_corner_valid(corner));
-        assert(!is_corner_null(corner));
+        assert(cubelib_is_corner_valid(corner));
+        assert(!cubelib_is_corner_null(corner));
         assert(is_direction_valid(direction));
         assert(!is_direction_null(direction));
         
@@ -707,7 +707,7 @@ extern "C"{
         
         xyz[get_edge_secondary_axis(edge)] += is_edge_projected_secondary(edge) ? 2 : 0;
         xyz[get_edge_tertiary_axis(edge)] += is_edge_projected_tertiary(edge) ? 2 : 0;
-        return get_corner_by_int3( xyz[0], xyz[1], xyz[2] );
+        return cubelib_get_corner_by_int3( xyz[0], xyz[1], xyz[2] );
     }
     
     
@@ -723,7 +723,7 @@ extern "C"{
         xyz[get_edge_tertiary_axis(edge)] += is_edge_projected_tertiary(edge) ? 2 : 0;
         
         xyz[get_edge_base_axis(edge)] += 2;
-        return get_corner_by_int3( xyz[0], xyz[1], xyz[2] );
+        return cubelib_get_corner_by_int3( xyz[0], xyz[1], xyz[2] );
     }
     
     
@@ -752,12 +752,12 @@ extern "C"{
     
     CUBELIB_FUNCTION_QUALIFIER edge_t calc_edge_by_corners(cubelib_corner_t corner0, cubelib_corner_t corner1)
     {
-        assert(is_corner_valid(corner0));
-        assert(is_corner_valid(corner1));
-        assert(!is_corner_null(corner0));
-        assert(!is_corner_null(corner1));
-        assert(!is_corner_equal(corner0, corner1));
-        assert(is_corner_adjacent_corner(corner0, corner1));
+        assert(cubelib_is_corner_valid(corner0));
+        assert(cubelib_is_corner_valid(corner1));
+        assert(!cubelib_is_corner_null(corner0));
+        assert(!cubelib_is_corner_null(corner1));
+        assert(!cubelib_is_corner_equal(corner0, corner1));
+        assert(cubelib_is_corner_adjacent_corner(corner0, corner1));
         
         ///the value will be in the form of 0bBBTS; where BB is the base axis bits, and S,T are the "is projected" bits
         /// for the Secondary and Tertiary axes.
@@ -801,18 +801,18 @@ extern "C"{
         assert(is_edge_projected_tertiary(result) == is_projected_tertiary_bit);
         //assert(is_corner_adjacent_edge(corner0, result));
         //assert(is_corner_adjacent_edge(corner1, result));
-        assert(is_corner_equal(get_edge_corner0(result), corner0) || is_corner_equal(get_edge_corner0(result), corner1));
-        assert(is_corner_equal(get_edge_corner1(result), corner0) || is_corner_equal(get_edge_corner1(result), corner1));
+        assert(cubelib_is_corner_equal(get_edge_corner0(result), corner0) || cubelib_is_corner_equal(get_edge_corner0(result), corner1));
+        assert(cubelib_is_corner_equal(get_edge_corner1(result), corner0) || cubelib_is_corner_equal(get_edge_corner1(result), corner1));
         return result;
     }
     
     CUBELIB_FUNCTION_QUALIFIER edge_t get_edge_by_corners(cubelib_corner_t corner0, cubelib_corner_t corner1)
     {
-        assert(is_corner_valid(corner0));
-        assert(is_corner_valid(corner1));
-        assert(!is_corner_null(corner0));
-        assert(!is_corner_null(corner1));
-        assert(is_corner_adjacent_corner(corner0, corner1));
+        assert(cubelib_is_corner_valid(corner0));
+        assert(cubelib_is_corner_valid(corner1));
+        assert(!cubelib_is_corner_null(corner0));
+        assert(!cubelib_is_corner_null(corner1));
+        assert(cubelib_is_corner_adjacent_corner(corner0, corner1));
 
         return calc_edge_by_corners(corner0, corner1);
     }

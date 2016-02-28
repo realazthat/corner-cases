@@ -34,12 +34,12 @@ std::ostream& operator<<(std::ostream& out, const direction_t& direction)
 CORNER_CASES_CUBELIB_FORMATTERS_INLINE
 std::ostream& operator<<(std::ostream& out, const cubelib_corner_t& corner)
 {
-    if (is_corner_null(corner))
+    if (cubelib_is_corner_null(corner))
         out << "null";
     else
-    out << "(" << get_corner_x(corner)
-             << "," << get_corner_y(corner)
-             << "," << get_corner_z(corner)
+    out << "(" << cubelib_get_corner_x(corner)
+             << "," << cubelib_get_corner_y(corner)
+             << "," << cubelib_get_corner_z(corner)
              << ")";
     return out;
 }
