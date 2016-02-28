@@ -99,7 +99,7 @@ extern "C"{
     CUBELIB_FUNCTION_QUALIFIER
     cubelib_corner_t cubelib_get_corner_by_float3(float x, float y, float z)
     {
-        corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
+        cubelib_corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
 
         cubelib_corner_t result = {value};
         
@@ -112,7 +112,7 @@ extern "C"{
     CUBELIB_FUNCTION_QUALIFIER
     cubelib_corner_t cubelib_get_corner_by_int3(int x, int y, int z)
     {
-        corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
+        cubelib_corner_value_t value = (x > 0 ? 1 : 0) | ((y > 0 ? 1 : 0) << 1) | ((z > 0 ? 1 : 0) << 2);
 
         cubelib_corner_t result;
 
@@ -127,7 +127,7 @@ extern "C"{
     cubelib_corner_t cubelib_get_corner_by_index(uint_fast8_t index)
     {
         assert (index < 8);
-        cubelib_corner_t result = {(corner_value_t)index};
+        cubelib_corner_t result = {(cubelib_corner_value_t)index};
         assert(cubelib_is_corner_valid(result));
         assert(!cubelib_is_corner_null(result));
         return result;
@@ -163,7 +163,7 @@ extern "C"{
         //std::cout << "x,y,z: " << x << ", " << y << ", " << z << std::endl;
 
         if (x > 1 || x < -1 || y > 1 || y < -1 || z > 1 || z < -1)
-            return null_corner;
+            return cubelib_null_corner;
 
         return cubelib_get_corner_by_int3(x,y,z);
     }
@@ -221,7 +221,7 @@ extern "C"{
         assert( dim < 3 );
 
         ///flip the bit of the specified dimension
-        cubelib_corner_t result = {(corner_value_t)(corner.value ^ (1 << dim))};
+        cubelib_corner_t result = {(cubelib_corner_value_t)(corner.value ^ (1 << dim))};
 
         assert(cubelib_is_corner_valid(result));
         assert(!cubelib_is_corner_null(result));
@@ -467,7 +467,7 @@ extern "C"{
         }
 
         assert(false && "should be unreachable");
-        return null_corner;
+        return cubelib_null_corner;
     }
 
 
@@ -764,11 +764,11 @@ extern "C"{
         edge_value_t value = 0;
         
         ///the bit that is different will be the base axis
-        corner_value_t axis_bit = corner0.value ^ corner1.value;
+        cubelib_corner_value_t axis_bit = corner0.value ^ corner1.value;
         assert(axis_bit == 1 || axis_bit == 2 || axis_bit == 4);
         
         ///the bits that are the same will be the projected axis
-        corner_value_t projection_bits = corner0.value & corner1.value;
+        cubelib_corner_value_t projection_bits = corner0.value & corner1.value;
         
         
         

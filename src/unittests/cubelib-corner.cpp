@@ -71,17 +71,17 @@ TEST_F(CubelibCornerTest,null)
     
     ///test null corner
     {
-        EXPECT_TRUE(cubelib_is_corner_valid(null_corner));
-        EXPECT_TRUE(cubelib_is_corner_null(null_corner));
-        EXPECT_TRUE(cubelib_is_corner_equal(null_corner, null_corner));
+        EXPECT_TRUE(cubelib_is_corner_valid(cubelib_null_corner));
+        EXPECT_TRUE(cubelib_is_corner_null(cubelib_null_corner));
+        EXPECT_TRUE(cubelib_is_corner_equal(cubelib_null_corner, cubelib_null_corner));
     }
     
-    ///make sure all the regular corners are not null_corner
+    ///make sure all the regular corners are not cubelib_null_corner
     for (cubelib_corner_t corner : cubelib_all_corners)
     {
         EXPECT_FALSE(cubelib_is_corner_null(corner));
         EXPECT_TRUE(cubelib_is_corner_valid(corner));
-        EXPECT_FALSE(cubelib_is_corner_equal(corner, null_corner));
+        EXPECT_FALSE(cubelib_is_corner_equal(corner, cubelib_null_corner));
     }
 
 

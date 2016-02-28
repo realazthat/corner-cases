@@ -33,7 +33,7 @@
 extern "C"{
 #endif
 
-    typedef uint_fast8_t corner_value_t;
+    typedef uint_fast8_t cubelib_corner_value_t;
     typedef uint_fast8_t direction_value_t;
     typedef uint_fast8_t edge_value_t;
     
@@ -46,7 +46,7 @@ extern "C"{
     ///@see cubelib_get_corner_by_int3(), cubelib_get_corner_index(), cubelib_get_corner_by_index()
     ///@see cubelib_is_corner_valid(), cubelib_is_corner_null(), cubelib_is_corner_equal()
     typedef struct cubelib_corner_t{
-        corner_value_t value;
+        cubelib_corner_value_t value;
     } cubelib_corner_t;
     /** @} */ // end of group cubelib-corner-group
 
@@ -59,22 +59,22 @@ extern "C"{
         edge_value_t value;
     } edge_t;
 
-    #define NULL_CORNER (cubelib_corner_t){8}
+    #define CUBELIB_NULL_CORNER (cubelib_corner_t){8}
     #define NULL_DIRECTION (direction_t){0}
     #define NULL_EGDE (edge_t){12}
     #define NULL_FACE (face_t){0}
     
-    #define CORNERS_SIZE 8
+    #define CUBELIB_CORNERS_SIZE 8
     #define DIRECTIONS_SIZE 6
     #define EDGES_SIZE 12
     #define FACES_SIZE 6
 
-    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t null_corner = NULL_CORNER;
+    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t cubelib_null_corner = CUBELIB_NULL_CORNER;
     CUBELIB_GLOBAL_STATIC_CONST direction_t null_direction = NULL_DIRECTION;
     CUBELIB_GLOBAL_STATIC_CONST edge_t null_edge = NULL_EGDE;
     CUBELIB_GLOBAL_STATIC_CONST face_t null_face = NULL_FACE;
     
-    CUBELIB_GLOBAL_STATIC_CONST size_t corners_size = CORNERS_SIZE;
+    CUBELIB_GLOBAL_STATIC_CONST size_t cubelib_corners_size = CUBELIB_CORNERS_SIZE;
     CUBELIB_GLOBAL_STATIC_CONST size_t directions_size = DIRECTIONS_SIZE;
     CUBELIB_GLOBAL_STATIC_CONST size_t edges_size = EDGES_SIZE;
     CUBELIB_GLOBAL_STATIC_CONST size_t faces_size = FACES_SIZE;
