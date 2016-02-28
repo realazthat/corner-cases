@@ -1,6 +1,6 @@
 
 corner-cases/cubexx Reference Documentation
-===================================
+=================================================
 
 
 
@@ -22,9 +22,9 @@ The :cpp:class:`cubexx::corner_t <cubexx::corner_t>` represents the corner of a 
 
 You can use it to:
 
-* Obtain a corner via 3 unit cube coordinates, i.e coordinates in {0,1}^3, such as ``(0,0,1)`` and ``(1,0,1)``,
+* Obtain a corner via 3 unit cube coordinates, i.e coordinates in {0,1}^3, such as `(0,0,1)` and `(1,0,1)`,
     * Retrieve :cpp:func:`x <cubexx::corner_t::ux()>`, :cpp:func:`y <cubexx::corner_t::uy()>`, :cpp:func:`z <cubexx::corner_t::uz()>` unit-cube coordinates,
-* Obrain a corner via 3 origin-centered cube coordinates, i.e coordinates in {-1,+1}^3, such as ``(-1,-1,+1)` and ``(+1,-1,+1)``,
+* Obrain a corner via 3 origin-centered cube coordinates, i.e coordinates in {-1,+1}^3, such as `(-1,-1,+1)` and `(+1,-1,+1)`,
     * Retrieve :cpp:func:`x <cubexx::corner_t::x()>`, :cpp:func:`y <cubexx::corner_t::y()>`, :cpp:func:`z <cubexx::corner_t::z()>` origin centered coordinates,
 * Obtain all (3) adjacent corners,
 * Push a corner in a :ref:`direction <cubexx-direction-overview>`, to a neighboring corner (no wrap around),
@@ -44,14 +44,14 @@ cubexx::direction_t Overview
 
 The :cpp:class:`cubexx::direction_t <cubexx::direction_t>` represents a direction in the cube.
 
-* Directions and :ref:`faces <cubexx-face-overview>` are related ``1:1``.
+* Directions and :ref:`faces <cubexx-face-overview>` are related `1:1`.
 * There are 6 directions for 6 faces.
 * Directions and faces and are convertible to each-other. They are separated because they intuitively separate certain functionality.
 
 Once again, you can do things like:
 
 * Obtain a direction via 3 vector coordinates, representing the direction as a relative vector from origin
-    , i.e coordinates in {-1,+1}^3, such as ``(+0,0,+1)`` and ``(0,-1,0)``,
+    , i.e coordinates in {-1,+1}^3, such as `(+0,0,+1)` and `(0,-1,0)`,
     
     * Retrieve :cpp:func:`x <cubexx::direction_t::x()>`, :cpp:func:`y <cubexx::direction_t::y()>`, :cpp:func:`z <cubexx::direction_t::z()>` vector coordinates,
 * Check if a direction is positive, i.e if it's non-zero coordinate is positive,
@@ -225,6 +225,7 @@ Reference pages:
    cubexx-direction
    cubexx-edge
    cubexx-face
+   cubexx-sets
 
 
 
