@@ -192,7 +192,7 @@ TEST_F(CubelibEdgeTest,get_edge_corner)
     }
     
     ///for every pair of adjacent corners, check the edge
-    for (auto corner0 : all_corners){
+    for (auto corner0 : cubelib_all_corners){
         for (auto direction : all_directions){
             auto corner1 = cubelib_get_adjacent_corner(corner0, direction);
             ASSERT_TRUE(!cubelib_is_corner_null(corner1));
@@ -230,9 +230,9 @@ TEST_F(CubelibEdgeTest,get_edge_by_corners)
     
     ///test get_edge_by_corners() with two adjacent corners
     {
-        for (cubelib_corner_t corner0 : all_corners)
+        for (cubelib_corner_t corner0 : cubelib_all_corners)
         {
-            for (cubelib_corner_t corner1 : all_corners)
+            for (cubelib_corner_t corner1 : cubelib_all_corners)
             {
                 if (!cubelib_is_corner_adjacent_corner(corner0,corner1))
                     continue;
@@ -271,7 +271,7 @@ TEST_F(CubelibEdgeTest,get_edge_by_corner_direction)
 {
     int count = 0;
     
-    for (auto corner : all_corners)
+    for (auto corner : cubelib_all_corners)
     {
         for (auto direction : all_directions)
         {

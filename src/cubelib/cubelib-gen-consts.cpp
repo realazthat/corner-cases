@@ -9,21 +9,21 @@
 
 
 /**
- * Spits out @c cnr_adj_cnrs as raw constants, for use in opencl.
+ * Spits out @c cubelib_cnr_adj_cnrs as raw constants, for use in opencl.
  */
 void generate_cnr_adj_cnrs_constants(std::ostream& out)
 {
-    out << "#define CNR_ADJ_CNRS \\" << std::endl;
+    out << "#define CUBELIB_CNR_ADJ_CNRS \\" << std::endl;
     out << "    { \\" << std::endl;
 
     for (std::size_t corneri = 0; corneri < 8; ++corneri)
     {
-        cubelib_corner_t corner = all_corners[corneri];
+        cubelib_corner_t corner = cubelib_all_corners[corneri];
 
         out << "        " << (corneri == 0 ? "  " : ", ") << "{ \\" << std::endl;
         for (std::size_t i = 0; i < 3; ++i)
         {
-            cubelib_corner_t adj_corner = cnr_adj_cnrs[cubelib_get_corner_index(corner)][i];
+            cubelib_corner_t adj_corner = cubelib_cnr_adj_cnrs[cubelib_get_corner_index(corner)][i];
 
             out << "            " << (i == 0 ? "  " : ", ") << "(corner_t){" << adj_corner.value << "}" << " \\" << std::endl;
         }

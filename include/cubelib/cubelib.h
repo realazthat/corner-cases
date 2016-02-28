@@ -48,7 +48,7 @@ extern "C"{
     typedef struct cubelib_corner_t{
         corner_value_t value;
     } cubelib_corner_t;
-    /** @} */ // end of group corner
+    /** @} */ // end of group cubelib-corner-group
 
     typedef struct direction_t{
         direction_value_t value;
@@ -189,8 +189,7 @@ extern "C"{
     ///Comparison.
     CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_corner_equal(cubelib_corner_t left, cubelib_corner_t right);
 
-
-/** @} */ // end of group corner
+/** @} */ // end of group cubelib-corner-group
 
 /* -------------------------------------------------------------------------- */
     static inline int get_direction_x(direction_t direction);
@@ -285,10 +284,18 @@ extern "C"{
 
     
 #ifdef __OPENCL_VERSION__
-    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t cnr_adj_cnrs[8][3] = CNR_ADJ_CNRS;
+    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t cubelib_cnr_adj_cnrs[8][3] = CUBELIB_CNR_ADJ_CNRS;
 #else
-
-    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t cnr_adj_cnrs[8][3] =
+/** @addtogroup  cubelib-corner-group
+ *  @{
+ */
+ 
+    ///Index through this array with the corner's index, to obtain the 3 adjacent corners.
+    ///`for (int i = 0; i < 3; ++i) cubelib_corner_t adj_corneri = cubelib_cnr_adj_cnrs[ cubelib_get_corner_index(corner) ][i];`
+    ///Example:
+    ///
+    ///@see cubelib_get_corner_index()
+    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t cubelib_cnr_adj_cnrs[8][3] =
         {
             {     cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(0), 0)
                 , cubelib_calc_cnr_adj_cnr(cubelib_get_corner_by_index(0), 1)
@@ -319,12 +326,12 @@ extern "C"{
     
 #endif
     
-    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t all_corners[8] = { {0}, {1}
+    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t cubelib_all_corners[8] = { {0}, {1}
                                             , {2}, {3}
                                             , {4}, {5}
                                             , {6}, {7}
                                             };
-
+/** @} */ // end of group cubelib-corner-group
 
     /*
      * ---------------------------------------------------------------------

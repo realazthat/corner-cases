@@ -450,7 +450,7 @@ extern "C"{
         uint_fast8_t idx0 = 0;
         for (size_t i = 0; i < 8; ++i)
         {
-            cubelib_corner_t corner = all_corners[i];
+            cubelib_corner_t corner = cubelib_all_corners[i];
             
             int cx = cubelib_get_corner_x(corner)
               , cy = cubelib_get_corner_y(corner)

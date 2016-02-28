@@ -39,7 +39,7 @@ TEST_F(CubelibCornerTest,indices)
     {
         ///mark each corner's index, and test if all the indices get marked off
         uint32_t bitmask = 0;
-        for (cubelib_corner_t corner : all_corners)
+        for (cubelib_corner_t corner : cubelib_all_corners)
         {
             bitmask |= (1 << cubelib_get_corner_index(corner));
         }
@@ -50,7 +50,7 @@ TEST_F(CubelibCornerTest,indices)
         
         ///test cubelib_get_corner_by_index()
         uint32_t index = 0;
-        for (cubelib_corner_t corner : all_corners)
+        for (cubelib_corner_t corner : cubelib_all_corners)
         {
             EXPECT_EQ(index, cubelib_get_corner_index(corner));
             
@@ -77,7 +77,7 @@ TEST_F(CubelibCornerTest,null)
     }
     
     ///make sure all the regular corners are not null_corner
-    for (cubelib_corner_t corner : all_corners)
+    for (cubelib_corner_t corner : cubelib_all_corners)
     {
         EXPECT_FALSE(cubelib_is_corner_null(corner));
         EXPECT_TRUE(cubelib_is_corner_valid(corner));
@@ -96,7 +96,7 @@ TEST_F(CubelibCornerTest,get_corner_by_int3_unitxyz)
     {
         ///make sure every corner is tested, use a bitmask to mark each corner
         uint32_t bitmask = 0;
-        for (cubelib_corner_t corner : all_corners)
+        for (cubelib_corner_t corner : cubelib_all_corners)
         {
             bitmask |= (1 << cubelib_get_corner_index(corner));
         }
@@ -135,7 +135,7 @@ TEST_F(CubelibCornerTest,get_corner_by_int3)
     {
         ///make sure every corner is tested, use a bitmask to mark each corner
         uint32_t bitmask = 0;
-        for (cubelib_corner_t corner : all_corners)
+        for (cubelib_corner_t corner : cubelib_all_corners)
         {
             bitmask |= (1 << cubelib_get_corner_index(corner));
         }
@@ -169,7 +169,7 @@ TEST_F(CubelibCornerTest,cubelib_get_opposite_corner)
 {
     ///test cubelib_get_opposite_corner
     {
-        for (cubelib_corner_t corner0 : all_corners)
+        for (cubelib_corner_t corner0 : cubelib_all_corners)
         {
             auto corner1 = cubelib_get_opposite_corner(corner0);
 
@@ -188,7 +188,7 @@ TEST_F(CubelibCornerTest,cubelib_get_opposite_corner)
 TEST_F(CubelibCornerTest,corner_move)
 {
 
-    for (cubelib_corner_t corner0 : all_corners)
+    for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
         for (direction_t direction : all_directions)
         {
@@ -231,7 +231,7 @@ TEST_F(CubelibCornerTest,corner_move)
     
     
     
-    for (cubelib_corner_t corner0 : all_corners)
+    for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
         for (direction_t direction : all_directions)
         {
@@ -261,7 +261,7 @@ TEST_F(CubelibCornerTest,corner_move)
 TEST_F(CubelibCornerTest,corner_push)
 {
 
-    for (cubelib_corner_t corner0 : all_corners)
+    for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
         for (direction_t direction : all_directions)
         {
@@ -306,7 +306,7 @@ TEST_F(CubelibCornerTest,corner_push)
     
     
     ///same thing, written in a different way
-    for (cubelib_corner_t corner0 : all_corners)
+    for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
         for (direction_t direction : all_directions)
         {
@@ -335,7 +335,7 @@ TEST_F(CubelibCornerTest,corner_push)
 TEST_F(CubelibCornerTest,is_corner_adjacent_corner)
 {
 
-    for (cubelib_corner_t corner0 : all_corners)
+    for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
         for (direction_t direction : all_directions)
         {
@@ -362,7 +362,7 @@ TEST_F(CubelibCornerTest,cubelib_calc_cnr_adj_cnr)
     
     ///test cubelib_calc_cnr_adj_cnr()
     {
-        for (cubelib_corner_t corner0 : all_corners)
+        for (cubelib_corner_t corner0 : cubelib_all_corners)
         {
             int xyz0[] = {0,0,0};
             for (int i = 0; i < 3; ++i)
@@ -415,7 +415,7 @@ TEST_F(CubelibCornerTest,cnr_adj_cnrs)
     
     ///test cubelib_calc_cnr_adj_cnr()
     {
-        for (cubelib_corner_t corner0 : all_corners)
+        for (cubelib_corner_t corner0 : cubelib_all_corners)
         {
             int xyz0[] = {0,0,0};
             for (int i = 0; i < 3; ++i)
