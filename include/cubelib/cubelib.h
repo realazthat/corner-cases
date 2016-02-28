@@ -10,6 +10,7 @@
 
     #define GLOBAL_STATIC_CONST __constant const
     #define LOCAL_STATIC_CONST const
+    #define CUBELIB_FUNCTION_QUALIFIER CUBELIB_FUNCTION_QUALIFIER
     
     typedef uint8_t uint_fast8_t;
     
@@ -21,7 +22,11 @@
 
     #define CUBELIB_GLOBAL_STATIC_CONST static const
     #define CUBELIB_LOCAL_STATIC_CONST static const
-
+    
+    #ifndef CUBELIB_FUNCTION_QUALIFIER
+      #define CUBELIB_FUNCTION_QUALIFIER CUBELIB_FUNCTION_QUALIFIER
+    #endif
+    
 #endif
 
 #ifdef __cplusplus
@@ -80,47 +85,49 @@ extern "C"{
  *  @{
  */
 
+
+ 
     ///Checks that a corner is not corrupted somehow and represents a valid corner (including a null corner).
-    ///@see is_corner_null(corner_t)
-    static inline bool is_corner_valid(corner_t corner);
+    ///@see is_corner_null()
+    CUBELIB_FUNCTION_QUALIFIER bool is_corner_valid(corner_t corner);
     ///Returns true if this corner is a null corner.
-    ///@see is_corner_valid(corner_t)
-    static inline bool is_corner_null(corner_t corner);
+    ///@see is_corner_valid()
+    CUBELIB_FUNCTION_QUALIFIER bool is_corner_null(corner_t corner);
 
     ///get the "origin-centered-cube-representation" x component of the corner.
     ///@see get_corner_y(), get_corner_z(), get_corner_i(), get_corner_uniti(), get_corner_unitx()
-    static inline int get_corner_x(corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER int get_corner_x(corner_t corner);
     ///get the "origin-centered-cube-representation" y component of the corner.
     ///@see get_corner_x(), get_corner_z(), get_corner_i(), get_corner_uniti(), get_corner_unity()
     ///@see get_corner_by_int3()
-    static inline int get_corner_y(corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER int get_corner_y(corner_t corner);
     ///get the "origin-centered-cube-representation" z component of the corner.
     ///@see get_corner_x(), get_corner_y(), get_corner_i(), get_corner_uniti(), get_corner_unitz()
     ///@see get_corner_by_int3()
-    static inline int get_corner_z(corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER int get_corner_z(corner_t corner);
     ///get the "origin-centered-cube-representation" i-th component of the corner.
     ///@param dim an index representing the component dimension.
     ///@see get_corner_x(), get_corner_y(), get_corner_z(), get_corner_uniti()
     ///@see get_corner_by_int3()
-    static inline int get_corner_i(corner_t corner, uint_fast8_t dim);
+    CUBELIB_FUNCTION_QUALIFIER int get_corner_i(corner_t corner, uint_fast8_t dim);
     
     ///get the "unit-cube-representation" x component of the corner.
     ///@see get_corner_unity(), get_corner_unitz(), get_corner_uniti(), get_corner_i(), get_corner_x()
-    static inline int get_corner_unitx(corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER int get_corner_unitx(corner_t corner);
     ///get the "unit-cube-representation" y component of the corner.
     ///@see get_corner_unitx(), get_corner_unitz(), get_corner_uniti(), get_corner_i(), get_corner_y()
-    static inline int get_corner_unity(corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER int get_corner_unity(corner_t corner);
     ///get the "unit-cube-representation" z component of the corner.
     ///@see get_corner_unitx(), get_corner_unity(), get_corner_uniti(), get_corner_i(), get_corner_z()
-    static inline int get_corner_unitz(corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER int get_corner_unitz(corner_t corner);
     ///get the "unit-cube-representation" i-th component of the corner.
     ///@param dim an index representing the component dimension.
     ///@see get_corner_unitx(), get_corner_unity(), get_corner_unitz(), get_corner_i()
-    static inline int get_corner_uniti(corner_t corner, uint_fast8_t dim);
+    CUBELIB_FUNCTION_QUALIFIER int get_corner_uniti(corner_t corner, uint_fast8_t dim);
 
     ///gets a corner using 3 floats, same as get_corner_by_int3().
     ///@see get_corner_by_int3()
-    static inline corner_t get_corner_by_float3(float x, float y, float z);
+    CUBELIB_FUNCTION_QUALIFIER corner_t get_corner_by_float3(float x, float y, float z);
     ///Gets a corner using 3 ints.
     ///
     ///Each component represents a dimension in the cube; if the component value
@@ -132,81 +139,81 @@ extern "C"{
     ///@see get_corner_x(), get_corner_y(), get_corner_z(), get_corner_i()
     ///@see get_corner_unitx(), get_corner_unity(), get_corner_unitz(), get_corner_uniti()
     ///@see cubexx::get(std::fast_int8_t,std::fast_int8_t,std::fast_int8_t)
-    static inline corner_t get_corner_by_int3(int x, int y, int z);
+    CUBELIB_FUNCTION_QUALIFIER corner_t get_corner_by_int3(int x, int y, int z);
 
     ///Returns a 0-based index that represents this corner; for use in array indexing and similar.
     ///The index returned will be in 3D [Z-order curve](https://en.wikipedia.org/wiki/Z-order_curve)
     /// also known as "Morton order", within the cube, in the range [0,7].
     ///@see get_corner_by_index()
-    static inline uint_fast8_t get_corner_index(corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_corner_index(corner_t corner);
     ///Return a corner based on the 0-based index returned by get_corner_index().
     ///@see get_corner_index()
-    static inline corner_t get_corner_by_index(uint_fast8_t index);
+    CUBELIB_FUNCTION_QUALIFIER corner_t get_corner_by_index(uint_fast8_t index);
 
     /**
      * Return the corner on the opposite side of the cube.
      */
-    static inline corner_t get_opposite_corner(corner_t corner);
+    CUBELIB_FUNCTION_QUALIFIER corner_t get_opposite_corner(corner_t corner);
     
     /**
      * Move a corner in a specified direction. If the new corner cannot be moved in that direction
      *  then this method will wrap around and return the adjacent corner in the specified direction.
      * @see corner_push(), corner_move()
      */
-    static inline corner_t get_adjacent_corner(corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER corner_t get_adjacent_corner(corner_t corner, direction_t direction);
 
-    static inline corner_t calc_adjacent_corner(corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER corner_t calc_adjacent_corner(corner_t corner, direction_t direction);
     
     /**
      * Move a corner in a specified direction. If the new corner cannot be moved in that direction
      *  then this method will return a @c null_corner.
      * @see corner_push(), get_adjacent_corner()
      */
-    static inline corner_t corner_move(corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER corner_t corner_move(corner_t corner, direction_t direction);
     /**
      * Move a corner in a specified direction. If the new corner cannot be moved in that direction
      *  then this method will return the same corner.
      * @see corner_move(), get_adjacent_corner()
      */
-    static inline corner_t corner_push(corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER corner_t corner_push(corner_t corner, direction_t direction);
     
     
-    static inline bool calc_is_corner_adjacent_corner(corner_t corner0, corner_t corner1);
+    CUBELIB_FUNCTION_QUALIFIER bool calc_is_corner_adjacent_corner(corner_t corner0, corner_t corner1);
     
     ///Returns true if the two corners are adjacent.
-    static inline bool is_corner_adjacent_corner(corner_t corner0, corner_t corner1);
+    CUBELIB_FUNCTION_QUALIFIER bool is_corner_adjacent_corner(corner_t corner0, corner_t corner1);
     
     
-    static inline corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim);
+    CUBELIB_FUNCTION_QUALIFIER corner_t calc_cnr_adj_cnr(corner_t corner, uint_fast8_t dim);
     
     ///Comparison.
-    static inline bool is_corner_equal(corner_t left, corner_t right);
+    CUBELIB_FUNCTION_QUALIFIER bool is_corner_equal(corner_t left, corner_t right);
 
 
 /** @} */ // end of group corner
 
 /* -------------------------------------------------------------------------- */
-    static inline int get_direction_x(direction_t direction);
-    static inline int get_direction_y(direction_t direction);
-    static inline int get_direction_z(direction_t direction);
-    static inline int get_direction_i(direction_t direction, uint_fast8_t dim);
-    static inline uint_fast8_t get_direction_absx(direction_t direction);
-    static inline uint_fast8_t get_direction_absy(direction_t direction);
-    static inline uint_fast8_t get_direction_absz(direction_t direction);
-    static inline uint_fast8_t get_direction_absi(direction_t direction, uint_fast8_t dim);
+    CUBELIB_FUNCTION_QUALIFIER int get_direction_x(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER int get_direction_y(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER int get_direction_z(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER int get_direction_i(direction_t direction, uint_fast8_t dim);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_absx(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_absy(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_absz(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_absi(direction_t direction, uint_fast8_t dim);
 
-    static inline uint_fast8_t get_direction_index(direction_t direction);
-    static inline direction_t get_direction_by_index(uint_fast8_t index);
-    static inline direction_t get_direction_by_int3(int x, int y, int z);
-    static inline direction_t get_opposite_direction(direction_t direction);
-    static inline direction_t get_opposite_face(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_index(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER direction_t get_direction_by_index(uint_fast8_t index);
+    CUBELIB_FUNCTION_QUALIFIER direction_t get_direction_by_int3(int x, int y, int z);
+    CUBELIB_FUNCTION_QUALIFIER direction_t get_opposite_direction(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER direction_t get_opposite_face(direction_t direction);
 
     ///returns true if the given corner is on the given face
-    static inline bool is_corner_adjacent_face(corner_t corner, face_t face);
+    CUBELIB_FUNCTION_QUALIFIER bool is_corner_adjacent_face(corner_t corner, face_t face);
     
-    static inline bool is_direction_valid(direction_t direction);
-    static inline bool is_direction_null(direction_t direction);
-    static inline bool is_direction_equal(direction_t left, direction_t right);
+    CUBELIB_FUNCTION_QUALIFIER bool is_direction_valid(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER bool is_direction_null(direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER bool is_direction_equal(direction_t left, direction_t right);
 /* -------------------------------------------------------------------------- */
     
     /**
@@ -232,38 +239,38 @@ extern "C"{
      * @see get_edge_base_axis(), get_edge_secondary_axis(), get_edge_tertiary_axis(),
      *          is_edge_projected_secondary(), is_edge_projected_tertiary()
      */
-    static inline edge_t get_edge_by_axis(uint_fast8_t base_axis, bool project_secondary, bool project_tertiary);
+    CUBELIB_FUNCTION_QUALIFIER edge_t get_edge_by_axis(uint_fast8_t base_axis, bool project_secondary, bool project_tertiary);
     
     ///returns the edge adjacent to the given corner, in the given direction 
-    static inline edge_t get_edge_by_corner_direction(corner_t corner, direction_t direction);
-    static inline edge_t calc_edge_by_corner_direction(corner_t corner, direction_t direction);
-    static inline edge_t get_edge_by_corners(corner_t corner0, corner_t corner1);
-    static inline edge_t get_edge_by_index(uint_fast8_t index);
-    static inline uint_fast8_t get_edge_index(edge_t edge);
-    static inline edge_t get_opposite_edge(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER edge_t get_edge_by_corner_direction(corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER edge_t calc_edge_by_corner_direction(corner_t corner, direction_t direction);
+    CUBELIB_FUNCTION_QUALIFIER edge_t get_edge_by_corners(corner_t corner0, corner_t corner1);
+    CUBELIB_FUNCTION_QUALIFIER edge_t get_edge_by_index(uint_fast8_t index);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_edge_index(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER edge_t get_opposite_edge(edge_t edge);
     
-    static inline corner_t get_edge_corner0(edge_t edge);
-    static inline corner_t get_edge_corner1(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER corner_t get_edge_corner0(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER corner_t get_edge_corner1(edge_t edge);
     
-    static inline uint_fast8_t calc_edge_base_axis(edge_t edge);
-    static inline uint_fast8_t calc_edge_secondary_axis(edge_t edge);
-    static inline uint_fast8_t calc_edge_tertiary_axis(edge_t edge);
-    static inline uint_fast8_t get_edge_base_axis(edge_t edge);
-    static inline uint_fast8_t get_edge_secondary_axis(edge_t edge);
-    static inline uint_fast8_t get_edge_tertiary_axis(edge_t edge);
-    static inline bool is_edge_projected_secondary(edge_t edge);
-    static inline bool is_edge_projected_tertiary(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t calc_edge_base_axis(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t calc_edge_secondary_axis(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t calc_edge_tertiary_axis(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_edge_base_axis(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_edge_secondary_axis(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_edge_tertiary_axis(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER bool is_edge_projected_secondary(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER bool is_edge_projected_tertiary(edge_t edge);
 
     
     
-    static inline bool is_corner_adjacent_edge(corner_t corner, edge_t edge);
-    static inline bool is_direction_adjacent_edge(direction_t direction, edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER bool is_corner_adjacent_edge(corner_t corner, edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER bool is_direction_adjacent_edge(direction_t direction, edge_t edge);
     
     
     
-    static inline bool is_edge_valid(edge_t edge);
-    static inline bool is_edge_null(edge_t edge);
-    static inline bool is_edge_equal(edge_t left, edge_t right);
+    CUBELIB_FUNCTION_QUALIFIER bool is_edge_valid(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER bool is_edge_null(edge_t edge);
+    CUBELIB_FUNCTION_QUALIFIER bool is_edge_equal(edge_t left, edge_t right);
     
     CUBELIB_GLOBAL_STATIC_CONST edge_t all_edges[12] = {  {0}, {1}
                                                         , {2}, {3}
