@@ -10,7 +10,7 @@
 
     #define GLOBAL_STATIC_CONST __constant const
     #define LOCAL_STATIC_CONST const
-    #define CUBELIB_FUNCTION_QUALIFIER CUBELIB_FUNCTION_QUALIFIER
+    #define CUBELIB_FUNCTION_QUALIFIER static inline
     
     typedef uint8_t uint_fast8_t;
     
@@ -24,7 +24,7 @@
     #define CUBELIB_LOCAL_STATIC_CONST static const
     
     #ifndef CUBELIB_FUNCTION_QUALIFIER
-      #define CUBELIB_FUNCTION_QUALIFIER CUBELIB_FUNCTION_QUALIFIER
+      #define CUBELIB_FUNCTION_QUALIFIER static inline
     #endif
     
 #endif
