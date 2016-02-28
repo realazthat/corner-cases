@@ -230,9 +230,9 @@ TEST_F(CubelibEdgeTest,get_edge_by_corners)
     
     ///test get_edge_by_corners() with two adjacent corners
     {
-        for (corner_t corner0 : all_corners)
+        for (cubelib_corner_t corner0 : all_corners)
         {
-            for (corner_t corner1 : all_corners)
+            for (cubelib_corner_t corner1 : all_corners)
             {
                 if (!is_corner_adjacent_corner(corner0,corner1))
                     continue;

@@ -32,7 +32,7 @@ std::ostream& operator<<(std::ostream& out, const direction_t& direction)
 }
 
 CORNER_CASES_CUBELIB_FORMATTERS_INLINE
-std::ostream& operator<<(std::ostream& out, const corner_t& corner)
+std::ostream& operator<<(std::ostream& out, const cubelib_corner_t& corner)
 {
     if (is_corner_null(corner))
         out << "null";
@@ -58,7 +58,7 @@ std::ostream& operator<<(std::ostream& out, const edge_t& edge)
 }
 
 CORNER_CASES_CUBELIB_FORMATTERS_INLINE
-std::string tostr(const corner_t& corner)
+std::string tostr(const cubelib_corner_t& corner)
 {
     std::ostringstream out;
     out << corner;

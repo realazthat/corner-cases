@@ -6,7 +6,7 @@
 extern "C"{
 #endif
 
-    struct corner_t;
+    struct cubelib_corner_t;
     struct direction_t;
     struct edge_t;
     typedef direction_t face_t;
