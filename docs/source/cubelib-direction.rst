@@ -1,6 +1,8 @@
 ======================
-cubelib_corner_t
+cubelib_direction_t
 ======================
+
+
 
 
 .. code-block:: c
@@ -15,8 +17,7 @@ cubelib_corner_t
 
 
 
-
-.. doxygengroup:: cubelib-corner-group
+.. doxygengroup:: cubelib-direction-group
    :project: corner-cases
    :members:
 

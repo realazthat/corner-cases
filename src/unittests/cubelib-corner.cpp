@@ -190,7 +190,7 @@ TEST_F(CubelibCornerTest,corner_move)
 
     for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
-        for (direction_t direction : all_directions)
+        for (cubelib_direction_t direction : cubelib_all_directions)
         {
             cubelib_corner_t corner1 = cubelib_corner_move(corner0, direction);
             
@@ -198,7 +198,7 @@ TEST_F(CubelibCornerTest,corner_move)
                 << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
             
             int xyz0[] = {cubelib_get_corner_x(corner0), cubelib_get_corner_y(corner0), cubelib_get_corner_z(corner0)};
-            int dir[] = {get_direction_x(direction), get_direction_y(direction), get_direction_z(direction)};
+            int dir[] = {cubelib_get_direction_x(direction), cubelib_get_direction_y(direction), cubelib_get_direction_z(direction)};
             int xyz1_expected[] = {0,0,0};
             for (int i = 0; i < 3; ++i)
                 xyz1_expected[i] = xyz0[i] + dir[i]*2;
@@ -233,15 +233,15 @@ TEST_F(CubelibCornerTest,corner_move)
     
     for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
-        for (direction_t direction : all_directions)
+        for (cubelib_direction_t direction : cubelib_all_directions)
         {
             auto corner1 = cubelib_corner_move(corner0,direction);
             ASSERT_FALSE(cubelib_is_corner_equal(corner0, corner1))
                 << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
 
-            auto x1 = cubelib_get_corner_x(corner0) + 2*get_direction_x(direction);
-            auto y1 = cubelib_get_corner_y(corner0) + 2*get_direction_y(direction);
-            auto z1 = cubelib_get_corner_z(corner0) + 2*get_direction_z(direction);
+            auto x1 = cubelib_get_corner_x(corner0) + 2*cubelib_get_direction_x(direction);
+            auto y1 = cubelib_get_corner_y(corner0) + 2*cubelib_get_direction_y(direction);
+            auto z1 = cubelib_get_corner_z(corner0) + 2*cubelib_get_direction_z(direction);
 
             if (x1 > 1 || x1 < -1 || y1 > 1 || y1 < -1 || z1 > 1 || z1 < -1)
             {
@@ -263,7 +263,7 @@ TEST_F(CubelibCornerTest,corner_push)
 
     for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
-        for (direction_t direction : all_directions)
+        for (cubelib_direction_t direction : cubelib_all_directions)
         {
             cubelib_corner_t corner1 = cubelib_corner_push(corner0, direction);
             
@@ -271,7 +271,7 @@ TEST_F(CubelibCornerTest,corner_push)
                 << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
             
             int xyz0[] = {cubelib_get_corner_x(corner0), cubelib_get_corner_y(corner0), cubelib_get_corner_z(corner0)};
-            int dir[] = {get_direction_x(direction), get_direction_y(direction), get_direction_z(direction)};
+            int dir[] = {cubelib_get_direction_x(direction), cubelib_get_direction_y(direction), cubelib_get_direction_z(direction)};
             int xyz1_expected[] = {0,0,0};
             for (int i = 0; i < 3; ++i)
                 xyz1_expected[i] = xyz0[i] + dir[i]*2;
@@ -308,15 +308,15 @@ TEST_F(CubelibCornerTest,corner_push)
     ///same thing, written in a different way
     for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
-        for (direction_t direction : all_directions)
+        for (cubelib_direction_t direction : cubelib_all_directions)
         {
             auto corner1 = cubelib_corner_push(corner0,direction);
             ASSERT_FALSE(cubelib_is_corner_null(corner1))
                 << "corner0: " << corner0 << ", direction: " << direction << ", corner1: " << corner1;
 
-            auto x1 = cubelib_get_corner_x(corner0) + 2*get_direction_x(direction);
-            auto y1 = cubelib_get_corner_y(corner0) + 2*get_direction_y(direction);
-            auto z1 = cubelib_get_corner_z(corner0) + 2*get_direction_z(direction);
+            auto x1 = cubelib_get_corner_x(corner0) + 2*cubelib_get_direction_x(direction);
+            auto y1 = cubelib_get_corner_y(corner0) + 2*cubelib_get_direction_y(direction);
+            auto z1 = cubelib_get_corner_z(corner0) + 2*cubelib_get_direction_z(direction);
 
             if (x1 > 1 || x1 < -1 || y1 > 1 || y1 < -1 || z1 > 1 || z1 < -1)
             {
@@ -337,7 +337,7 @@ TEST_F(CubelibCornerTest,is_corner_adjacent_corner)
 
     for (cubelib_corner_t corner0 : cubelib_all_corners)
     {
-        for (direction_t direction : all_directions)
+        for (cubelib_direction_t direction : cubelib_all_directions)
         {
             cubelib_corner_t corner1 = cubelib_get_adjacent_corner(corner0, direction);
             

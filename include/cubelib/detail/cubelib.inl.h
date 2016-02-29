@@ -1,5 +1,5 @@
-
-
+#ifndef CORNER_CASES_CUBELIB_CUBELIB_INL_H
+#define CORNER_CASES_CUBELIB_CUBELIB_INL_H
 
 #ifdef __cplusplus
 extern "C"{
@@ -147,16 +147,16 @@ extern "C"{
         return result;
     }
 
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_corner_move(cubelib_corner_t corner, direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_corner_move(cubelib_corner_t corner, cubelib_direction_t direction)
     {
         assert(cubelib_is_corner_valid(corner));
         assert(!cubelib_is_corner_null(corner));
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
-        int x = cubelib_get_corner_x(corner) + get_direction_x(direction)*2;
-        int y = cubelib_get_corner_y(corner) + get_direction_y(direction)*2;
-        int z = cubelib_get_corner_z(corner) + get_direction_z(direction)*2;
+        int x = cubelib_get_corner_x(corner) + cubelib_get_direction_x(direction)*2;
+        int y = cubelib_get_corner_y(corner) + cubelib_get_direction_y(direction)*2;
+        int z = cubelib_get_corner_z(corner) + cubelib_get_direction_z(direction)*2;
 
         //std::cout << "corner: " << corner << ", direction: " << direction << std::endl;
         //std::cout << "x0,y0,z0: " << cubelib_get_corner_x(corner) << ", " << cubelib_get_corner_y(corner) << ", " << cubelib_get_corner_z(corner) << std::endl;
@@ -168,42 +168,42 @@ extern "C"{
         return cubelib_get_corner_by_int3(x,y,z);
     }
 
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_corner_push(cubelib_corner_t corner, direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_corner_push(cubelib_corner_t corner, cubelib_direction_t direction)
     {
         assert(cubelib_is_corner_valid(corner));
         assert(!cubelib_is_corner_null(corner));
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         
-        int x = cubelib_get_corner_x(corner) + get_direction_x(direction)*2;
-        int y = cubelib_get_corner_y(corner) + get_direction_y(direction)*2;
-        int z = cubelib_get_corner_z(corner) + get_direction_z(direction)*2;
+        int x = cubelib_get_corner_x(corner) + cubelib_get_direction_x(direction)*2;
+        int y = cubelib_get_corner_y(corner) + cubelib_get_direction_y(direction)*2;
+        int z = cubelib_get_corner_z(corner) + cubelib_get_direction_z(direction)*2;
 
         return cubelib_get_corner_by_int3(x,y,z);
     }
     
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_calc_adjacent_corner(cubelib_corner_t corner, direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_calc_adjacent_corner(cubelib_corner_t corner, cubelib_direction_t direction)
     {
         assert(!cubelib_is_corner_null(corner));
         assert(cubelib_is_corner_valid(corner));
-        assert(is_direction_valid(direction));
+        assert(cubelib_is_direction_valid(direction));
         
         
-        uint_fast8_t x = (cubelib_get_corner_ux(corner) + get_direction_absx(direction)) % 2;
-        uint_fast8_t y = (cubelib_get_corner_uy(corner) + get_direction_absy(direction)) % 2;
-        uint_fast8_t z = (cubelib_get_corner_uz(corner) + get_direction_absz(direction)) % 2;
+        uint_fast8_t x = (cubelib_get_corner_ux(corner) + cubelib_get_direction_absx(direction)) % 2;
+        uint_fast8_t y = (cubelib_get_corner_uy(corner) + cubelib_get_direction_absy(direction)) % 2;
+        uint_fast8_t z = (cubelib_get_corner_uz(corner) + cubelib_get_direction_absz(direction)) % 2;
 
         return cubelib_get_corner_by_int3(x,y,z);
         
     }
     
     
-    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_adjacent_corner(cubelib_corner_t corner, direction_t direction){
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_adjacent_corner(cubelib_corner_t corner, cubelib_direction_t direction){
         assert(cubelib_is_corner_valid(corner));
         assert(!cubelib_is_corner_null(corner));
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         return cubelib_calc_adjacent_corner(corner, direction);
     }
 
@@ -265,140 +265,140 @@ extern "C"{
      * Directions
      * ---------------------------------------------------------------------
      */
-    CUBELIB_FUNCTION_QUALIFIER bool is_direction_valid(direction_t direction){
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_direction_valid(cubelib_direction_t direction){
         ///0b111 is an invalid direction; anything more than 0b111 is also an invalid direction.
         ///0b000 is a null direction.
         return (direction.value < 7);
     }
 
-    CUBELIB_FUNCTION_QUALIFIER bool is_direction_null(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_direction_null(cubelib_direction_t direction)
     {
         return direction.value == 0;
     }
 
-    CUBELIB_FUNCTION_QUALIFIER int get_direction_x(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_direction_x(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         const char xs[] = { 0, 1, 0, 0, 0, 0, -1, 0};
         return xs[direction.value];
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_direction_y(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_direction_y(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         const char ys[] = { 0, 0, 1, 0, 0, -1, 0, 0};
         return ys[direction.value];
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_direction_z(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_direction_z(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         const char zs[] = { 0, 0, 0, -1, 1, 0, 0, 0};
         return zs[direction.value];
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_direction_i(direction_t direction, uint_fast8_t dim)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_direction_i(cubelib_direction_t direction, uint_fast8_t dim)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         assert(dim < 3);
         
         if (dim == 0)
-            return get_direction_x(direction);
+            return cubelib_get_direction_x(direction);
         if (dim == 1)
-            return get_direction_y(direction);
+            return cubelib_get_direction_y(direction);
         if (dim == 2)
-            return get_direction_z(direction);
+            return cubelib_get_direction_z(direction);
         return 0;
     }
 
-    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_absx(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t cubelib_get_direction_absx(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         const char xs[] = { 0, 1, 0, 0, 0, 0, +1, 0};
         return xs[direction.value];
     }
-    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_absy(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t cubelib_get_direction_absy(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         const char ys[] = { 0, 0, 1, 0, 0, +1, 0, 0};
         return ys[direction.value];
     }
-    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_absz(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t cubelib_get_direction_absz(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         const char zs[] = { 0, 0, 0, +1, 1, 0, 0, 0};
         return zs[direction.value];
     }
-    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t get_direction_absi(direction_t direction, uint_fast8_t dim)
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t cubelib_get_direction_absi(cubelib_direction_t direction, uint_fast8_t dim)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         assert(dim < 3);
         
         if (dim == 0)
-            return get_direction_absx(direction);
+            return cubelib_get_direction_absx(direction);
         if (dim == 1)
-            return get_direction_absy(direction);
+            return cubelib_get_direction_absy(direction);
         if (dim == 2)
-            return get_direction_absz(direction);
+            return cubelib_get_direction_absz(direction);
         return 0;
     }
-    CUBELIB_FUNCTION_QUALIFIER bool is_direction_equal(direction_t left, direction_t right)
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_direction_equal(cubelib_direction_t left, cubelib_direction_t right)
     {
-        assert(is_direction_valid(left));
-        assert(is_direction_valid(right));
+        assert(cubelib_is_direction_valid(left));
+        assert(cubelib_is_direction_valid(right));
         
         return left.value == right.value;
     }
 
     /*
-    CUBELIB_FUNCTION_QUALIFIER int get_direction_unitx(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_direction_unitx(cubelib_direction_t direction)
     {
         static const char xs[] = { 0, 1, 0, 0, 0, 0, -0, 0};
         return direction.value < 8 ? xs[direction.value] : 0;
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_direction_unity(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_direction_unity(cubelib_direction_t direction)
     {
         static const char ys[] = { 0, 0, 1, 0, 0, -0, 0, 0};
         return direction.value < 8 ? ys[direction.value] : 0;
     }
-    CUBELIB_FUNCTION_QUALIFIER int get_direction_unitz(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER int cubelib_get_direction_unitz(cubelib_direction_t direction)
     {
         static const char zs[] = { 0, 0, 0, -0, 1, 0, 0, 0};
         return direction.value < 8 ? zs[direction.value] : 0;
     }
     */
 
-    CUBELIB_FUNCTION_QUALIFIER direction_t get_opposite_direction(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_direction_t cubelib_get_opposite_direction(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
-        direction_value_t value = (~direction.value) & 7;
-        direction_t result = {value};
-        assert(is_direction_valid(result));
-        assert(!is_direction_null(result));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
+        cubelib_direction_value_t value = (~direction.value) & 7;
+        cubelib_direction_t result = {value};
+        assert(cubelib_is_direction_valid(result));
+        assert(!cubelib_is_direction_null(result));
         return result;
     }
 
-    CUBELIB_FUNCTION_QUALIFIER direction_t get_opposite_face(direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER cubelib_direction_t get_opposite_face(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
-        return get_opposite_direction(direction);
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
+        return cubelib_get_opposite_direction(direction);
     }
 
     CUBELIB_FUNCTION_QUALIFIER
-    direction_t get_direction_by_int3(int x, int y, int z)
+    cubelib_direction_t cubelib_get_direction_by_int3(int x, int y, int z)
     {   
         bool pos = x > 0 || y > 0 || z > 0;
         bool neg = x < 0 || y < 0 || z < 0;
@@ -406,104 +406,34 @@ extern "C"{
         assert(pos != neg && "direction must face a side/face, not a corner or edge of the cube");
         assert(abs(x+y+z) == 1);
 
-        direction_value_t value = (x != 0 ? 1 : 0) | ((y != 0 ? 1 : 0) << 1) | ((z != 0 ? 1 : 0) << 2);
+        cubelib_direction_value_t value = (x != 0 ? 1 : 0) | ((y != 0 ? 1 : 0) << 1) | ((z != 0 ? 1 : 0) << 2);
         value = pos ? value : ((~value) & 7);
 
-        direction_t result = {value};
-        assert(is_direction_valid(result));
-        assert(!is_direction_null(result));
+        cubelib_direction_t result = {value};
+        assert(cubelib_is_direction_valid(result));
+        assert(!cubelib_is_direction_null(result));
         return result;
     }
 
 
     CUBELIB_FUNCTION_QUALIFIER
-    direction_t get_direction_by_index(uint_fast8_t index)
+    cubelib_direction_t cubelib_get_direction_by_index(uint_fast8_t index)
     {
         assert(index < 6);
-        direction_t result = {(direction_value_t)(index + 1)};
-        assert(is_direction_valid(result));
-        assert(!is_direction_null(result));
+        cubelib_direction_t result = {(cubelib_direction_value_t)(index + 1)};
+        assert(cubelib_is_direction_valid(result));
+        assert(!cubelib_is_direction_null(result));
         return result;
     }
 
     CUBELIB_FUNCTION_QUALIFIER
-    uint_fast8_t get_direction_index(direction_t direction)
+    uint_fast8_t cubelib_get_direction_index(cubelib_direction_t direction)
     {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
 
         return direction.value - 1;
     }
-
-    CUBELIB_FUNCTION_QUALIFIER
-    cubelib_corner_t calc_dir_adj_cnr(direction_t direction, uint_fast8_t idx)
-    {
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
-        assert(idx < 4);
-
-        int x = get_direction_x(direction)
-          , y = get_direction_y(direction)
-          , z = get_direction_z(direction);
-
-
-        uint_fast8_t idx0 = 0;
-        for (size_t i = 0; i < 8; ++i)
-        {
-            cubelib_corner_t corner = cubelib_all_corners[i];
-            
-            int cx = cubelib_get_corner_x(corner)
-              , cy = cubelib_get_corner_y(corner)
-              , cz = cubelib_get_corner_z(corner);
-
-            if (!(cx == x || cy == y || cz == z))
-                continue;
-
-            assert(cx == x || cy == y || cz == z);
-            
-            if (idx0 == idx)
-                return corner;
-            idx0++;
-        }
-
-        assert(false && "should be unreachable");
-        return cubelib_null_corner;
-    }
-
-
-#ifdef __OPENCL_VERSION__
-    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t dir_adj_cnrs[6][4] = DIR_ADJ_CNRS;
-#else
-
-    CUBELIB_GLOBAL_STATIC_CONST cubelib_corner_t dir_adj_cnrs[6][4] = {
-        {     calc_dir_adj_cnr(get_direction_by_index(0), 0)
-            , calc_dir_adj_cnr(get_direction_by_index(0), 1)
-            , calc_dir_adj_cnr(get_direction_by_index(0), 2)
-            , calc_dir_adj_cnr(get_direction_by_index(0), 3)}
-        , {   calc_dir_adj_cnr(get_direction_by_index(1), 0)
-            , calc_dir_adj_cnr(get_direction_by_index(1), 1)
-            , calc_dir_adj_cnr(get_direction_by_index(1), 2)
-            , calc_dir_adj_cnr(get_direction_by_index(1), 3)}
-        , {   calc_dir_adj_cnr(get_direction_by_index(2), 0)
-            , calc_dir_adj_cnr(get_direction_by_index(2), 1)
-            , calc_dir_adj_cnr(get_direction_by_index(2), 2)
-            , calc_dir_adj_cnr(get_direction_by_index(2), 3)}
-        , {   calc_dir_adj_cnr(get_direction_by_index(3), 0)
-            , calc_dir_adj_cnr(get_direction_by_index(3), 1)
-            , calc_dir_adj_cnr(get_direction_by_index(3), 2)
-            , calc_dir_adj_cnr(get_direction_by_index(3), 3)}
-        , {   calc_dir_adj_cnr(get_direction_by_index(4), 0)
-            , calc_dir_adj_cnr(get_direction_by_index(4), 1)
-            , calc_dir_adj_cnr(get_direction_by_index(4), 2)
-            , calc_dir_adj_cnr(get_direction_by_index(4), 3)}
-        , {   calc_dir_adj_cnr(get_direction_by_index(5), 0)
-            , calc_dir_adj_cnr(get_direction_by_index(5), 1)
-            , calc_dir_adj_cnr(get_direction_by_index(5), 2)
-            , calc_dir_adj_cnr(get_direction_by_index(5), 3)}
-    };
-    
-#endif
-    
 
 
 
@@ -571,12 +501,12 @@ extern "C"{
     }
     
     
-    CUBELIB_FUNCTION_QUALIFIER edge_t calc_edge_by_corner_direction(cubelib_corner_t corner, direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER edge_t calc_edge_by_corner_direction(cubelib_corner_t corner, cubelib_direction_t direction)
     {
         assert(cubelib_is_corner_valid(corner));
         assert(!cubelib_is_corner_null(corner));
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         cubelib_corner_t next_corner = cubelib_corner_move(corner, direction);
         assert(!cubelib_is_corner_null(next_corner) && "there is no adjacent corner in that direction");
@@ -597,12 +527,12 @@ extern "C"{
         return result;
     }
     
-    CUBELIB_FUNCTION_QUALIFIER edge_t get_edge_by_corner_direction(cubelib_corner_t corner, direction_t direction)
+    CUBELIB_FUNCTION_QUALIFIER edge_t get_edge_by_corner_direction(cubelib_corner_t corner, cubelib_direction_t direction)
     {
         assert(cubelib_is_corner_valid(corner));
         assert(!cubelib_is_corner_null(corner));
-        assert(is_direction_valid(direction));
-        assert(!is_direction_null(direction));
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
         
         return calc_edge_by_corner_direction(corner,direction);
     }
@@ -829,17 +759,83 @@ extern "C"{
      * Faces
      * ---------------------------------------------------------------------
      */
-    CUBELIB_FUNCTION_QUALIFIER bool is_face_null(face_t face)
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_face_valid(face_t face)
     {
-        return is_direction_null(face);
+        return cubelib_is_direction_valid(face);
+    }
+
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_face_null(face_t face)
+    {
+        return cubelib_is_direction_null(face);
+    }
+
+    CUBELIB_FUNCTION_QUALIFIER bool cubelib_is_face_equal(face_t left, face_t right)
+    {
+        return cubelib_is_direction_equal(left, right);
+    }
+
+    CUBELIB_FUNCTION_QUALIFIER uint_fast8_t cubelib_get_face_index(face_t face)
+    {
+        return cubelib_get_direction_index(face);
+    }
+
+    CUBELIB_FUNCTION_QUALIFIER face_t cubelib_get_face_by_index(uint_fast8_t index)
+    {
+        return cubelib_get_direction_by_index(index);
     }
 
 
 
+    
+    
+    
+    CUBELIB_FUNCTION_QUALIFIER
+    cubelib_corner_t cubelib_calc_face_adj_cnr(cubelib_direction_t direction, uint_fast8_t idx)
+    {
+        assert(cubelib_is_direction_valid(direction));
+        assert(!cubelib_is_direction_null(direction));
+        assert(idx < 4);
+
+        int x = cubelib_get_direction_x(direction)
+          , y = cubelib_get_direction_y(direction)
+          , z = cubelib_get_direction_z(direction);
+
+
+        uint_fast8_t idx0 = 0;
+        for (size_t i = 0; i < 8; ++i)
+        {
+            cubelib_corner_t corner = cubelib_all_corners[i];
+            
+            int cx = cubelib_get_corner_x(corner)
+              , cy = cubelib_get_corner_y(corner)
+              , cz = cubelib_get_corner_z(corner);
+
+            if (!(cx == x || cy == y || cz == z))
+                continue;
+
+            assert(cx == x || cy == y || cz == z);
+            
+            if (idx0 == idx)
+                return corner;
+            idx0++;
+        }
+
+        assert(false && "should be unreachable");
+        return cubelib_null_corner;
+    }
 
 
 
-
+    CUBELIB_FUNCTION_QUALIFIER cubelib_corner_t cubelib_get_face_adj_cnr(face_t face, uint_fast8_t idx)
+    {
+        assert(cubelib_is_face_valid(face));
+        assert(!cubelib_is_face_null(face));
+        assert(idx < 4);
+        
+        return cubelib_face_adj_cnrs[cubelib_get_face_index(face)][idx];
+    }
+    
+    
 #ifdef __cplusplus
 }
 #endif
@@ -848,4 +844,4 @@ extern "C"{
 
 
 
-
+#endif

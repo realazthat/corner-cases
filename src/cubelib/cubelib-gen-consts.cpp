@@ -23,7 +23,8 @@ void generate_cnr_adj_cnrs_constants(std::ostream& out)
         out << "        " << (corneri == 0 ? "  " : ", ") << "{ \\" << std::endl;
         for (std::size_t i = 0; i < 3; ++i)
         {
-            cubelib_corner_t adj_corner = cubelib_cnr_adj_cnrs[cubelib_get_corner_index(corner)][i];
+            cubelib_corner_t adj_corner = cubelib_calc_cnr_adj_cnr(corner, i);
+            // cubelib_corner_t adj_corner = cubelib_cnr_adj_cnrs[cubelib_get_corner_index(corner)][i];
 
             out << "            " << (i == 0 ? "  " : ", ") << "(corner_t){" << adj_corner.value << "}" << " \\" << std::endl;
         }
@@ -41,17 +42,18 @@ void generate_cnr_adj_cnrs_constants(std::ostream& out)
  */
 void generate_dir_adj_cnrs_constants(std::ostream& out)
 {
-    out << "#define DIR_ADJ_CNRS \\" << std::endl;
+    out << "#define CUBELIB_FACE_ADJ_CNRS \\" << std::endl;
     out << "    { \\" << std::endl;
 
-    for (std::size_t directioni = 0; directioni < 6; ++directioni)
+    for (std::size_t facei = 0; facei < 6; ++facei)
     {
-        direction_t direction = all_directions[directioni];
+        face_t face = cubelib_all_faces[facei];
 
-        out << "        " << (directioni == 0 ? "  " : ", ") << "{ \\" << std::endl;
+        out << "        " << (facei == 0 ? "  " : ", ") << "{ \\" << std::endl;
         for (std::size_t i = 0; i < 4; ++i)
         {
-            cubelib_corner_t adj_corner = dir_adj_cnrs[get_direction_index(direction)][i];
+            
+            cubelib_corner_t adj_corner = cubelib_calc_face_adj_cnr(face, i);
 
             out << "            " << (i == 0 ? "  " : ", ") << "(corner_t){" << adj_corner.value << "}" << " \\" << std::endl;
         }

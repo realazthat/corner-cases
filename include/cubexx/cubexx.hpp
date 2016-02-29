@@ -792,6 +792,8 @@ struct corner_t{
    * "origin-centered-cube-representation" or `0` in "unit-cube-representation".
    *
    * @see corner_t::x(), corner_t::y(), and corner_t::z(), corner_t::ux(), corner_t::uy(), and corner_t::uz()
+   *
+   * @see cubelib_get_corner_by_int3()
    */
   static const corner_t& get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
   ///Returns a corner, given a corner.

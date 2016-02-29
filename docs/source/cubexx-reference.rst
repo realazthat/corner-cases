@@ -2,6 +2,8 @@
 corner-cases/cubexx Reference Documentation
 =================================================
 
+.. role:: cppcode(code)
+   :language: cpp
 
 
 **CDEF:**
@@ -22,15 +24,15 @@ The :cpp:class:`cubexx::corner_t <cubexx::corner_t>` represents the corner of a 
 
 You can use it to:
 
-* Obtain a corner via 3 unit cube coordinates, i.e coordinates in {0,1}^3, such as `(0,0,1)` and `(1,0,1)`,
+* Obtain a corner via 3 unit cube coordinates, i.e coordinates in :math:`\left\{0,1\right\}^3`, such as :math:`(0,0,1)` and :math:`(1,0,1)`,
     * Retrieve :cpp:func:`x <cubexx::corner_t::ux()>`, :cpp:func:`y <cubexx::corner_t::uy()>`, :cpp:func:`z <cubexx::corner_t::uz()>` unit-cube coordinates,
-* Obrain a corner via 3 origin-centered cube coordinates, i.e coordinates in {-1,+1}^3, such as `(-1,-1,+1)` and `(+1,-1,+1)`,
+* Obrain a corner via 3 origin-centered cube coordinates, i.e coordinates in :math:`\left\{-1,+1\right\}^3`, such as :math:`(-1,-1,+1)` and :math:`(+1,-1,+1)`,
     * Retrieve :cpp:func:`x <cubexx::corner_t::x()>`, :cpp:func:`y <cubexx::corner_t::y()>`, :cpp:func:`z <cubexx::corner_t::z()>` origin centered coordinates,
 * Obtain all (3) adjacent corners,
 * Push a corner in a :ref:`direction <cubexx-direction-overview>`, to a neighboring corner (no wrap around),
 * Move a corner in a :ref:`direction <cubexx-direction-overview>`, to a neighboring corner (with wrap around),
-* Obtain adjacent (3) faces,
-* Obtain or (3) adjacent edges,
+* Obtain adjacent (3) :ref:`faces <cubexx-face-overview>`,
+* Obtain or (3) adjacent :ref:`edges <cubexx-edge-overview>`,
 * Obtain the opposite corner,
 * Retrieve an index suitable for array storage,
     * The index is naturally in 3D `morton-order <https://en.wikipedia.org/wiki/Z-order_curve>`_ for the cube-space,
@@ -51,7 +53,7 @@ The :cpp:class:`cubexx::direction_t <cubexx::direction_t>` represents a directio
 Once again, you can do things like:
 
 * Obtain a direction via 3 vector coordinates, representing the direction as a relative vector from origin
-    , i.e coordinates in {-1,+1}^3, such as `(+0,0,+1)` and `(0,-1,0)`,
+    , i.e coordinates in :math:`{0,-1,+1}^3`, such as :math:`(+0,0,+1)` and :math:`(0,-1,0)`,
     
     * Retrieve :cpp:func:`x <cubexx::direction_t::x()>`, :cpp:func:`y <cubexx::direction_t::y()>`, :cpp:func:`z <cubexx::direction_t::z()>` vector coordinates,
 * Check if a direction is positive, i.e if it's non-zero coordinate is positive,

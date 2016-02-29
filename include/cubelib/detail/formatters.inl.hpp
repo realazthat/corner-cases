@@ -18,15 +18,15 @@
 
 
 CORNER_CASES_CUBELIB_FORMATTERS_INLINE
-std::ostream& operator<<(std::ostream& out, const direction_t& direction)
+std::ostream& operator<<(std::ostream& out, const cubelib_direction_t& direction)
 {
 
-    if (is_direction_null(direction))
+    if (cubelib_is_direction_null(direction))
         out << "null";
     else
-        out << "(" << get_direction_x(direction)
-                 << "," << get_direction_y(direction)
-                 << "," << get_direction_z(direction)
+        out << "(" << cubelib_get_direction_x(direction)
+                 << "," << cubelib_get_direction_y(direction)
+                 << "," << cubelib_get_direction_z(direction)
                  << ")";
     return out;
 }
@@ -66,7 +66,7 @@ std::string tostr(const cubelib_corner_t& corner)
 }
 
 CORNER_CASES_CUBELIB_FORMATTERS_INLINE
-std::string tostr(const direction_t& direction)
+std::string tostr(const cubelib_direction_t& direction)
 {
     std::ostringstream out;
     out << direction;

@@ -7,9 +7,9 @@ extern "C"{
 #endif
 
     struct cubelib_corner_t;
-    struct direction_t;
+    struct cubelib_direction_t;
     struct edge_t;
-    typedef direction_t face_t;
+    typedef cubelib_direction_t face_t;
 
 
 #ifdef __cplusplus

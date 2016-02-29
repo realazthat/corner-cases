@@ -193,7 +193,7 @@ TEST_F(CubelibEdgeTest,get_edge_corner)
     
     ///for every pair of adjacent corners, check the edge
     for (auto corner0 : cubelib_all_corners){
-        for (auto direction : all_directions){
+        for (auto direction : cubelib_all_directions){
             auto corner1 = cubelib_get_adjacent_corner(corner0, direction);
             ASSERT_TRUE(!cubelib_is_corner_null(corner1));
             ASSERT_TRUE(cubelib_is_corner_adjacent_corner(corner0, corner1));
@@ -273,7 +273,7 @@ TEST_F(CubelibEdgeTest,get_edge_by_corner_direction)
     
     for (auto corner : cubelib_all_corners)
     {
-        for (auto direction : all_directions)
+        for (auto direction : cubelib_all_directions)
         {
             auto next_corner = cubelib_corner_move(corner,direction);
             if (cubelib_is_corner_null(next_corner))

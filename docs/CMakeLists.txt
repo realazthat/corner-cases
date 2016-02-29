@@ -9,8 +9,9 @@ configure_file(${doxyfile_in} ${doxyfile} @ONLY)
 set(sphinx_conf_in ${CMAKE_CURRENT_SOURCE_DIR}/source/conf.py)
 set(sphinx_conf ${CMAKE_CURRENT_BINARY_DIR}/source/conf.py)
 
-#configure_file(${sphinx_conf_in} ${sphinx_conf} @ONLY)
 configure_file(${sphinx_conf_in} ${sphinx_conf} @ONLY)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/source/_static DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/source/.)
+
 
 
 
