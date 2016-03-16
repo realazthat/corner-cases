@@ -499,6 +499,23 @@ struct set_base_t
   ///Erasure of an element from a set (returns the modified set).
   derived_t operator-(const element_t& element) const;
   
+  ///Set intersection, with any sequence.
+  template<typename Sequence>
+  derived_t& operator&=(const Sequence& sequence);
+  ///Set intersection.
+  derived_t& operator&=(const derived_t& set);
+  ///Set intersection with a single element).
+  derived_t& operator&=(const element_t& element);
+  
+  ///Set intersection, with any sequence (returns the modified set).
+  template<typename Sequence>
+  derived_t operator&(const Sequence& sequence) const;
+  ///Set intersection (returns the modified set).
+  derived_t operator&(const derived_t& set) const;
+  ///Set intersection with a single element (returns the modified set).
+  derived_t operator&(const element_t& element) const;
+  
+  
   ///Membership test.
   bool contains(const element_t& element) const;
   ///Membership test, by element index (within its type).
@@ -564,10 +581,10 @@ struct direction_set_t : public set_base_t<direction_set_t, direction_t, 6>
 
 
 
-struct edge_set_t : public set_base_t<edge_set_t, edge_t, 6>
+struct edge_set_t : public set_base_t<edge_set_t, edge_t, 12>
 {
   typedef edge_set_t self_t;
-  typedef set_base_t<edge_set_t, edge_t, 6> base_t;
+  typedef set_base_t<edge_set_t, edge_t, 12> base_t;
   
   template<typename T>
   edge_set_t(const T& v);
@@ -602,6 +619,7 @@ struct direction_t
   /// in the dimension of the direction. For example, (0,0,+1) means a direction on the z-axis pointing along
   /// the positive length of the axis. While (-1,0,0) means a direction on the (negative) x-axis pointing toward
   /// the negative asymptote of the x-axis.
+  ///@see x(), y(), z(), axis(), positive()
   static const direction_t& get(std::int_fast8_t x, std::int_fast8_t y, std::int_fast8_t z);
   ///Returns a direction given a direction.
   static const direction_t& get(const direction_t& direction);
@@ -626,7 +644,14 @@ struct direction_t
   ///Returns true if the direction vector is positive; false if it is negative. See
   /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
   ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see axis(), x(), y(), z()
   bool positive() const;
+  ///@brief Returns a number \f$\in \left\{0,1,2\right\}\f$ representing the axis of the direction. See
+  /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see positive(), x(), y(), z()
+  uint_fast8_t axis() const;
+  
   
   
   ///Retrieve a numeric 0-based index for the direction, for use in indexing when storing in an array, or for comparison
@@ -677,11 +702,22 @@ struct face_t{
   ///Return the 4 adjacent faces
   std::array<face_t, 4> adjacents() const;
   ///Return the 4 corners on this face.
-  std::array<corner_t, 4> corners() const;
+  const std::array<corner_t, 4>& corners() const;
   ///Return a corner_set_t containing the 4 corners on this face.
-  corner_set_t corner_set() const;
+  const corner_set_t& corner_set() const;
   ///Return the 4 edges on this face
-  std::array<edge_t, 4> edges() const;
+  const std::array<edge_t, 4>& edges() const;
+  ///Return the 4 edges on this face
+  const edge_set_t& edge_set() const;
+  
+  ///Return a face that shares a (specified) common edge.
+  const face_t& flip(const edge_t& edge) const;
+  
+  ///Return the 4 (perpendicular) edges touching this face, but not directly on the face.
+  std::array<edge_t, 4> perpendicular_edges() const;
+  
+  bool is_adjacent(const face_t& other) const;
+  bool is_adjacent(const edge_t& edge) const;
   
   ///Return a list of all the faces on the cube.
   static const std::array<face_t, 6>& all();
@@ -719,6 +755,8 @@ protected:
   direction_t mdirection;
 private:
   face_t(const direction_t& direction);
+  
+  std::array<corner_t, 4> calc_corners() const;
 };
 
 /**
@@ -729,37 +767,73 @@ struct corner_t{
   corner_t();
   
   /**
-   * Returns a corner that is adjacent in the axis of the direction.
-   * Specifically, it will wrap around the cube if there is no corner
-   * in the specified direction
-   *
-   * @see corner_t::push()
-   */
-  const corner_t& adjacent(const direction_t& direction) const;
-  /**
    * Returns a corner that is the next corner in the specified direction.
    * Specifically, it will **NOT** wrap around the cube if there is no corner
    * in the specified direction; but instead return the same corner.
    *
-   * @see corner_t::adjacent()
+   * @see adjacent(), move()
    */
   const corner_t& push(const direction_t& direction) const;
-  ///Returns a list of 3 adjacent corners to this corner.
-  std::array<corner_t, 3> adjacents() const;
-  ///Returns a set of 3 adjacent corners to this corner.
-  corner_set_t adjacents_set() const;
+  
+  
+  
+  /**
+   * Returns a corner that is the next corner in the specified direction.
+   * Specifically, it will **NOT** wrap around the cube if there is no corner
+   * in the specified direction; but instead return the null corner.
+   *
+   * @see adjacent(), push()
+   */
+  const corner_t& move(const direction_t& direction) const;
+  
+  
+  /**
+   * Returns a corner that is adjacent in the axis of the direction.
+   * Specifically, it will wrap around the cube if there is no corner
+   * in the specified direction
+   *
+   * @see push(), move(), adjacents(), adjacent_set()
+   */
+  const corner_t& adjacent(const direction_t& direction) const;
+  
   ///Returns true if @param other is a corner adjacent to this corner; otherwise returns false.
   bool is_adjacent(const corner_t& other) const;
+  ///Returns true if @param other is a edge adjacent to this corner; otherwise returns false.
+  bool is_adjacent(const edge_t& edge) const;
+  
+  
+  ///Returns the direction between two adjacent corners.
+  const direction_t& get_adjacent_direction(const corner_t& other) const;
+  
+  ///Returns a list of 3 adjacent corners to this corner.
+  ///@see adjacent_set()
+  const std::array<corner_t, 3>& adjacents() const;
+  ///Returns a set of 3 adjacent corners to this corner.
+  ///@see adajcents()
+  const corner_set_t& adjacent_set() const;
+  
   
   ///Returns the 3 adjacent faces to this corner.
-  std::array<face_t, 3> faces() const;
-  ///Returns a set of the 3 adjacent faces to this corner.
-  face_set_t face_set() const;
+  ///@see face_set()
+  const std::array<face_t, 3>& faces() const;
+  ///@brief Returns a set of the 3 adjacent faces to this corner.
+  ///@see faces()
+  const face_set_t& face_set() const;
   
   ///Returns a set of the 3 adjacent edges to this corner.
-  std::array<edge_t, 3> edges() const;
+  ///@see edge_set()
+  const std::array<edge_t, 3>& edges() const;
+  ///Returns a set of the 3 adjacent edges to this corner.
+  ///@see edge_set()
+  const edge_set_t& edge_set() const;
+  
+  
   ///Returns the edge between this corner and an adjacent corner, specified via the @param direction parameter.
-  edge_t edge(const direction_t& direction);
+  ///@see edges, edge_set(), corner_t::edge(const corner_t&)
+  const edge_t& edge(const direction_t& direction) const;
+  ///Returns the edge between this corner and an adjacent corner, specified via the @param corner parameter.
+  ///@see edges, edge_set(), corner_t::edge(const direction_t&)
+  const edge_t& edge(const corner_t& other) const;
   
   ///Returns the opposite corner across the cube.
   const corner_t& opposite() const;
@@ -816,17 +890,29 @@ struct corner_t{
   static const std::array<corner_t, 8>& all();
   
   ///Return an integer in {-1,1} depending if the corner is in the near side or the far side of the x, respectively
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see x(), y(), z(), ux(), uy(), uz()
   std::int_fast8_t x() const;
   ///Return an integer in {-1,1} depending if the corner is in the near side or the far side of the y, respectively
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see x(), y(), z(), ux(), uy(), uz()
   std::int_fast8_t y() const;
   ///Return an integer in {-1,1} depending if the corner is in the near side or the far side of the z, respectively
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see x(), y(), z(), ux(), uy(), uz()
   std::int_fast8_t z() const;
   
   ///Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the x, respectively
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see x(), y(), z(), ux(), uy(), uz()
   std::uint_fast8_t ux() const;
   ///Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the y, respectively
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see x(), y(), z(), ux(), uy(), uz()
   std::uint_fast8_t uy() const;
   ///Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the z, respectively
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see x(), y(), z(), ux(), uy(), uz()
   std::uint_fast8_t uz() const;
   
   
@@ -855,39 +941,100 @@ struct edge_t{
   ///Default construct a "null" edge.
   edge_t();
   
-  /**
-   * Retrieve a list of (2) corners associated with this edge.
-   */
-  const std::array<corner_t, 2>& corners() const;
-  
   ///Get the lower corner of this edge. Note that "lower" here
   /// means the one closer to the origin.
-  ///@see corner1()
+  ///@see corner1(), corners(), corner_set()
   const corner_t& corner0() const;
   ///Get the upper corner of this edge. Note that "upper" here
   /// means the one farther from the origin.
-  ///@see corner0()
+  ///@see corner0(), corners(), corner_set()
   const corner_t& corner1() const;
-  
   /**
-   * Retrieve the set of corners associated with this edge.
+   * Retrieve a list of (2) corners associated with this edge.
+   * @see corner0(), corner1()
+   */
+  const std::array<corner_t, 2>& corners() const;
+  /**
+   * Retrieve the set of (2) corners associated with this edge.
+   * @see corner0(), corner1()
    */
   const corner_set_t& corner_set() const;
+  
+  
+  
+  /**
+   * Retrieve a list of (2) adjacent corners associated with a particular corner of the edge.
+   * @see adjacent_corner_set(), adjacent_corners(), adjacent_corner_set(const corner_t&)
+   */
+  const std::array<corner_t, 2>& adjacent_corners(const corner_t& corner) const;
+  
+  /**
+   * Retrieve a set of (2) corners that are adjacent with a particular corner of the edge.
+   * @see adjacent_corners(), adjacent_corners(const corner_t&)
+   */
+  const edge_set_t& adjacent_corner_set(const corner_t& corner) const;
+  
+  
+  /**
+   * Retrieve a list of (4) corners that are adjacent with this edge.
+   *
+   */
+  const std::array<edge_t, 4>& adjacent_corners() const;
+  /**
+   * Retrieve a set of (4) corners that are adjacent with this edge.
+   */
+  const edge_set_t& adjacent_corner_set() const;
+  
+  
+  
+  
+  /**
+   * Retrieve a list of (2) adjacent edges associated with a particular corner of the edge.
+   * @see adjacent_set(), adjacents(), adjacent_set(const corner_t&)
+   */
+  const std::array<edge_t, 2>& adjacent_edges(const corner_t& corner) const;
+  
+  /**
+   * Retrieve a set of (2) edges that are adjacent with a particular corner of the edge.
+   * @see adjacents(), adjacents(const corner_t&)
+   */
+  const edge_set_t& adjacent_edge_set(const corner_t& corner) const;
+  
   
   /**
    * Retrieve a list of (4) edges that are adjacent with this edge.
    *
    */
-  const std::array<edge_t, 4>& adjacents() const;
+  const std::array<edge_t, 4>& adjacent_edges() const;
+  /**
+   * Retrieve a set of (4) edges that are adjacent with this edge.
+   *
+   */
+  const edge_set_t& adjacent_edge_set() const;
   
   ///Retrieve a list of (2) faces that are adjacent with this edge.
   const std::array<face_t, 2>& faces() const;
+  ///Retrieve a set of (2) faces that are adjacent with this edge.
+  const face_set_t& face_set() const;
   
   
-  /**
-   * Retrieve a list of (2) adjacent edges associated with a particular corner of the edge.
-   */
-  const std::array<edge_t, 2>& adjacents(const corner_t& corner) const;
+  
+  ///Retrieve a a face that is not directly adjacent, but is perpendicular and
+  ///touching with the specified end of this edge.
+  ///@see end_faces(), end_face_set()
+  const face_t& end_face(const corner_t& corner) const;
+  ///Retrieve a list of (2) faces that are not directly adjacent, but are perpendicular and
+  ///touching with the ends of this edge.
+  ///@see end_face(), end_face_set()
+  const std::array<face_t, 2>& end_faces() const;
+  
+  ///Retrieve a list of (2) faces that are not directly adjacent, but are perpendicular and
+  ///touching with the ends of this edge.
+  ///@see end_face(), end_faces()
+  const std::array<face_t, 2>& end_face_set() const;
+  
+
+  
   
   ///Retrieve a list of all (12) edges on the cube.
   static const std::array<edge_t, 12>& all();
@@ -896,6 +1043,13 @@ struct edge_t{
   
   ///Retrieve the edge on the opposite side of the cube.
   const edge_t& opposite() const;
+  
+  ///Retrieve the edge on the opposite side of the specified face.
+  const edge_t& opposite(const face_t& face) const;
+  
+  bool is_adjacent(const edge_t& other) const;
+  bool is_adjacent(const face_t& face) const;
+  bool is_adjacent(const corner_t& corner) const;
   
   
   
@@ -1009,6 +1163,8 @@ private:
   const corner_t& calc_corner0() const;
   const corner_t& calc_corner1() const;
   const edge_t& calc_opposite() const;
+  
+  const face_t& calc_face(uint_fast8_t idx) const;
 };
 
 

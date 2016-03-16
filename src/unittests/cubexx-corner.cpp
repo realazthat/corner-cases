@@ -293,6 +293,11 @@ TEST_F(CUBEXXCornerTest,push_direction)
         }
     }
 }
+TEST_F(CUBEXXCornerTest,move_direction)
+{
+
+    ASSERT_TRUE(false);
+}
 
 TEST_F(CUBEXXCornerTest,is_adjacent)
 {
@@ -340,6 +345,50 @@ TEST_F(CUBEXXCornerTest,is_adjacent)
         }
     }
 }
+
+
+
+TEST_F(CUBEXXCornerTest,adjacents)
+{
+    ASSERT_TRUE(false);
+}
+
+TEST_F(CUBEXXCornerTest,faces)
+{
+    ASSERT_TRUE(false);
+}
+
+TEST_F(CUBEXXCornerTest,edges)
+{
+    ASSERT_TRUE(false);
+}
+
+
+TEST_F(CUBEXXCornerTest,edge_via_direction)
+{
+    ASSERT_TRUE(false);
+}
+
+
+
+TEST_F(CUBEXXCornerTest,edge_via_corner)
+{
+    ASSERT_TRUE(false);
+}
+
+
+TEST_F(CUBEXXCornerTest,get_adjacent_direction)
+{
+    ASSERT_TRUE(false);
+}
+
+
+
+
+
+
+
+
 
 
 

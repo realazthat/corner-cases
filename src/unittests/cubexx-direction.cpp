@@ -216,7 +216,21 @@ TEST_F(CUBEXXDirectionTest,positive)
 
 
 
+TEST_F(CUBEXXDirectionTest,axis)
+{
 
+    ASSERT_TRUE(false);
+}
+
+
+
+
+
+TEST_F(CUBEXXDirectionTest,face)
+{
+
+    ASSERT_TRUE(false);
+}
 
 
 

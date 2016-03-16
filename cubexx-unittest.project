@@ -33,9 +33,9 @@
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="cubexx">
       <File Name="include/cubexx/cubexx.hpp"/>
-      <File Name="include/cubexx/cubexx.inl.hpp"/>
       <VirtualDirectory Name="detail">
         <File Name="include/cubexx/detail/formatters.inl.hpp"/>
+        <File Name="include/cubexx/detail/cubexx.inl.hpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
