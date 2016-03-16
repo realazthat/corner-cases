@@ -47,13 +47,13 @@ void generate_dir_adj_cnrs_constants(std::ostream& out)
 
     for (std::size_t facei = 0; facei < 6; ++facei)
     {
-        face_t face = cubelib_all_faces[facei];
+        cubelib_face_t face = cubelib_all_faces[facei];
 
         out << "        " << (facei == 0 ? "  " : ", ") << "{ \\" << std::endl;
         for (std::size_t i = 0; i < 4; ++i)
         {
             
-            cubelib_corner_t adj_corner = cubelib_calc_face_adj_cnr(face, i);
+            cubelib_corner_t adj_corner = cubelib_calc_corner_on_face(face, i);
 
             out << "            " << (i == 0 ? "  " : ", ") << "(corner_t){" << adj_corner.value << "}" << " \\" << std::endl;
         }
@@ -70,12 +70,12 @@ void generate_face_constants(std::ostream& out)
 {
 
 
-    out << "#define POSXFACE (face_t){" << posxface.value << "}" << std::endl;
-    out << "#define NEGXFACE (face_t){" << negxface.value << "}" << std::endl;
-    out << "#define POSYFACE (face_t){" << posyface.value << "}" << std::endl;
-    out << "#define NEGYFACE (face_t){" << negyface.value << "}" << std::endl;
-    out << "#define POSZFACE (face_t){" << poszface.value << "}" << std::endl;
-    out << "#define NEGZFACE (face_t){" << negzface.value << "}" << std::endl;
+    out << "#define POSXFACE (cubelib_face_t){" << posxface.value << "}" << std::endl;
+    out << "#define NEGXFACE (cubelib_face_t){" << negxface.value << "}" << std::endl;
+    out << "#define POSYFACE (cubelib_face_t){" << posyface.value << "}" << std::endl;
+    out << "#define NEGYFACE (cubelib_face_t){" << negyface.value << "}" << std::endl;
+    out << "#define POSZFACE (cubelib_face_t){" << poszface.value << "}" << std::endl;
+    out << "#define NEGZFACE (cubelib_face_t){" << negzface.value << "}" << std::endl;
 
 }
 

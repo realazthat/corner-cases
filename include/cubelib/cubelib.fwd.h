@@ -8,8 +8,8 @@ extern "C"{
 
     struct cubelib_corner_t;
     struct cubelib_direction_t;
-    struct edge_t;
-    typedef cubelib_direction_t face_t;
+    struct cubelib_edge_t;
+    struct cubelib_face_t;
 
 
 #ifdef __cplusplus

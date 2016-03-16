@@ -94,6 +94,7 @@ add_executable(cubelib-unittests
     src/unittests/cubelib-corner.cpp
     src/unittests/cubelib-direction.cpp
     src/unittests/cubelib-edge.cpp
+    src/unittests/cubelib-face.cpp
     
     )
 
@@ -127,4 +128,25 @@ target_compile_options(cubexx-unittests PRIVATE "${C11_CXX_FLAGS}")
 set_property(TARGET cubexx-unittests PROPERTY CXX_STANDARD 11)
 set_property(TARGET cubexx-unittests PROPERTY CXX_STANDARD_REQUIRED ON)
 ###############################################################################
+add_executable(cubelib-docs-example
+    src/examples/cubelib-docs-example.cpp
+    
+    )
 
+
+target_link_libraries(cubelib-docs-example
+    cubelib-formatters
+    ${CPPFORMAT_LIB}
+    ${GTEST_LIB}
+    
+    )
+
+target_compile_options(cubelib-docs-example PRIVATE "${C11_CXX_FLAGS}")
+set_property(TARGET cubelib-docs-example PROPERTY CXX_STANDARD 11)
+set_property(TARGET cubelib-docs-example PROPERTY CXX_STANDARD_REQUIRED ON)
+###############################################################################
+
+ADD_CUSTOM_TARGET(cubelib-examples)
+ADD_DEPENDENCIES(cubelib-examples cubelib-docs-example)
+
+###############################################################################

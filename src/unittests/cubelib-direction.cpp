@@ -62,6 +62,40 @@ TEST_F(CubelibDirectionTest,direction_indices)
     }
 }
 
+TEST_F(CubelibDirectionTest,get_direction_i)
+{
+  
+  for (auto direction : cubelib_all_directions)
+  {
+      int xyz[] = {0,0,0};
+      xyz[0] = cubelib_get_direction_x(direction);
+      xyz[1] = cubelib_get_direction_y(direction);
+      xyz[2] = cubelib_get_direction_z(direction);
+    
+      ///make sure cubelib_get_direction_i() matches
+      for (std::size_t i = 0; i < 3; ++i)
+      {
+          ASSERT_EQ(xyz[i], cubelib_get_direction_i(direction,i));
+      }
+      
+      ///make sure the component values are valid
+      for (std::size_t i = 0; i < 3; ++i)
+      {
+          ASSERT_TRUE(xyz[i] >= -1 && xyz[i] <= 1);
+      }
+      
+      int zero_component_count = 0;
+      
+      for (std::size_t i = 0; i < 3; ++i)
+      {
+          if (cubelib_get_direction_i(direction,i) == 0)
+              zero_component_count++;
+      }
+      
+      ASSERT_EQ(zero_component_count, 2);
+  }
+}
+
 TEST_F(CubelibDirectionTest,null)
 {
 
@@ -161,18 +195,29 @@ TEST_F(CubelibDirectionTest,get_opposite_direction)
 
 }
 
-TEST_F(CubelibDirectionTest,get_dir_adj_cnr)
-{
-    for (auto direction : cubelib_all_directions)
-    {
-        for (int i = 0; i < 4; ++i)
-        {
-          
-        }
-    }
-  
-}
 
+
+TEST_F(CubelibDirectionTest,get_direction_sigdim)
+{
+  
+  for (auto direction : cubelib_all_directions)
+  {
+      auto sigdim = cubelib_get_direction_sigdim(direction);
+      ASSERT_LT(sigdim, 3);
+
+      auto component_value = cubelib_get_direction_i(direction, sigdim);
+      ASSERT_NE(0, component_value);
+      
+      for (std::size_t i = 0; i < 3; ++i)
+      {
+          auto component_value = cubelib_get_direction_i(direction, i);
+          if (i == sigdim)
+              ASSERT_NE(0, component_value);
+          else
+              ASSERT_EQ(0, component_value);
+      }
+  }
+}
 
 
 TEST_F(CubelibDirectionTest,direction_formatters)

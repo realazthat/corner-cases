@@ -462,6 +462,97 @@ TEST_F(CubelibCornerTest,cnr_adj_cnrs)
 
 
 
+TEST_F(CubelibCornerTest,is_corner_on_face)
+{
+    for (auto face : cubelib_all_faces)
+    {
+        
+        uint32_t edge_corners_per_face[CUBELIB_CORNERS_SIZE] = {0};
+        
+        ///for each edge in the face, count up the corner occurrences
+        for (auto edge : cubelib_edges_on_face[cubelib_get_face_index(face)])
+        {
+            auto edge_corner0 = cubelib_get_edge_corner0(edge);
+            auto edge_corner1 = cubelib_get_edge_corner1(edge);
+            edge_corners_per_face[ cubelib_get_corner_index(edge_corner0) ]++;
+            edge_corners_per_face[ cubelib_get_corner_index(edge_corner1) ]++;
+        }
+        
+        ///Check the corners have the right counts
+        for (auto corner : cubelib_all_corners)
+        {
+            int edge_corner_count = edge_corners_per_face[ cubelib_get_corner_index(corner) ];
+            
+            ///cubelib_is_corner_on_face(corner,face) => edge_corner_count == 2
+            ASSERT_TRUE( !cubelib_is_corner_on_face(corner,face) || edge_corner_count == 2 );
+            
+            ///!cubelib_is_corner_on_face(corner,face) => edge_corner_count == 0
+            ASSERT_TRUE( cubelib_is_corner_on_face(corner,face) || edge_corner_count == 0 );
+        }
+    
+    
+        auto direction = cubelib_get_face_direction(face);
+        
+        auto significant_dimension = cubelib_get_direction_sigdim(direction);
+        ASSERT_LT(significant_dimension, 3);
+        
+        for (auto corner : cubelib_all_corners)
+        {
+            
+            ///test that the non-zero component of the direction vector has the same value of the same component
+            /// in the corner vector representation. For example, face/direction (0,0,+1) would have all (u,v,+1) corners on its
+            /// face.
+            if (cubelib_is_corner_on_face(corner,face))
+            {
+                ASSERT_EQ(cubelib_get_direction_i(direction,significant_dimension), cubelib_get_corner_i(corner,significant_dimension));
+            } else {
+                ASSERT_NE(cubelib_get_direction_i(direction,significant_dimension), cubelib_get_corner_i(corner,significant_dimension));
+            }
+          
+          
+        }
+        
+        
+        ///logically test all corners that are on and off the face.
+        ///test that the non-zero component of the direction vector has the same value of the same component
+        /// in the corner vector representation. For example, face/direction (0,0,+1) would have all (u,v,+1) corners on its
+        /// face.
+        for (int u : {-1,+1})
+        for (int v : {-1,+1})
+        {
+            ///manually make an int3 corner
+            int xyz[] = {0,0,0};
+            ///set the significant dimension to match the direction's
+            xyz[significant_dimension] = cubelib_get_direction_i(direction,significant_dimension);
+            
+            ///set the other components to u,v
+            xyz[(significant_dimension + 1) % 3] = u;
+            xyz[(significant_dimension + 2) % 3] = v;
+            
+            {
+              ///construct the corner
+              auto corner = cubelib_get_corner_by_int3(xyz[0],xyz[1],xyz[2]);
+              
+              ASSERT_TRUE(cubelib_is_corner_on_face(corner,face));
+            }
+            
+            
+            ///set the significant dimension to NOT match the direction's (note the negative)
+            xyz[significant_dimension] = -cubelib_get_direction_i(direction,significant_dimension);
+            
+            {
+                ///construct the corner
+                auto corner = cubelib_get_corner_by_int3(xyz[0],xyz[1],xyz[2]);
+                ASSERT_FALSE(cubelib_is_corner_on_face(corner,face));
+            }
+        }
+    }
+    
+    
+}
+
+
+
 TEST_F(CubelibCornerTest,corner_formatters)
 {
 
