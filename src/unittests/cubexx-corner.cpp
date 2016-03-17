@@ -350,7 +350,45 @@ TEST_F(CUBEXXCornerTest,is_adjacent)
 
 TEST_F(CUBEXXCornerTest,adjacents)
 {
-    ASSERT_TRUE(false);
+  uint32_t adjacent_corner_counts[8] = {0};
+  for (auto lhs : cubexx::corner_t::all())
+  {
+    uint32_t rhs_counts[8] = {0};
+    for (auto rhs : lhs.adjacents())
+    {
+      ASSERT_TRUE(lhs.is_adjacent(rhs));
+      ASSERT_TRUE(rhs.is_adjacent(lhs));
+      
+      ASSERT_EQ(0U, rhs_counts[rhs.index()]);
+      rhs_counts[rhs.index()]++;
+      adjacent_corner_counts[rhs.index()]++;
+    }
+    
+    
+    
+    ///check the contrapositive
+    for (auto rhs : cubexx::corner_t::all())
+    {
+      
+      if (rhs_counts[rhs.index()] != 0)
+      {
+        ASSERT_EQ(1U, rhs_counts[rhs.index()]);
+        ASSERT_TRUE(lhs.is_adjacent(rhs));
+        ASSERT_TRUE(rhs.is_adjacent(lhs));
+      } else {
+        ASSERT_FALSE(lhs.is_adjacent(rhs));
+        ASSERT_FALSE(rhs.is_adjacent(lhs));
+        
+      }
+    }
+    
+  }
+  
+  ///each corner should be covered 3 times
+  for (auto corner : cubexx::corner_t::all())
+  {
+    ASSERT_EQ(3U, adjacent_corner_counts[corner.index()]);
+  }
 }
 
 TEST_F(CUBEXXCornerTest,faces)
