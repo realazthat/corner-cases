@@ -269,7 +269,87 @@ TEST_F(CUBEXXFaceTest,is_adjacent_corner)
 
 TEST_F(CUBEXXFaceTest,is_adjacent_edge)
 {
-  ASSERT_TRUE(false);
+  
+  for (auto face : cubexx::face_t::all())
+  {
+    uint32_t rhs_counts[12] = {0};
+    
+    ///check that face_t::edges() produces adjacent edges
+    for (auto rhs : face.edges())
+    {
+      
+      ASSERT_TRUE(face.is_adjacent(rhs))
+        << "face: " << face
+        << ", edge: " << rhs;
+      ASSERT_TRUE(rhs.is_adjacent(face));
+      ASSERT_EQ(0U, rhs_counts[rhs.index()]);
+      rhs_counts[rhs.index()]++;
+    }
+    
+    ///check the contrapositive
+    for (auto rhs : cubexx::edge_t::all())
+    {
+      if (rhs_counts[rhs.index()] != 0)
+      {
+        ASSERT_EQ(1U, rhs_counts[rhs.index()]);
+        
+        ASSERT_TRUE(face.is_adjacent(rhs));
+        ASSERT_TRUE(rhs.is_adjacent(face));
+      } else {
+        
+        ASSERT_FALSE(face.is_adjacent(rhs));
+        ASSERT_FALSE(rhs.is_adjacent(face));
+      }
+    }
+  }
+  
+  ///check the adjacency based on the axes
+  for (auto face : cubexx::face_t::all())
+  {
+    auto direction = face.direction();
+    
+    for (auto edge : cubexx::edge_t::all())
+    {
+      for (auto corner : edge.corners())
+      {
+        
+        
+        int corner_xyz[] = {corner.x(), corner.y(), corner.z()};
+        int direction_xyz[] = {direction.x(), direction.y(), direction.z()};
+        
+          
+        if (face.is_adjacent(edge))
+        {
+          ASSERT_NE(edge.base_axis(), face.direction().axis());
+        
+          ///both corners will be in the same direction as the face
+          ASSERT_EQ(direction_xyz[direction.axis()], corner_xyz[direction.axis()]);
+        } else {
+          ///EACH corners will NOT be in the same direction OR the edge will be parallel to the face
+          ASSERT_TRUE((direction_xyz[direction.axis()] != corner_xyz[direction.axis()]) || edge.base_axis() == direction.axis());
+          
+        }
+      }
+      
+      
+    }
+  }
+  ///check the adjacency based on corner sets
+  for (auto face : cubexx::face_t::all())
+  {
+    
+    for (auto edge : cubexx::face_t::all())
+    {
+      ///iff the two corner sets have two corners in common, they are adjacent
+      ASSERT_EQ(face.is_adjacent(edge), ((edge.corner_set() & face.corner_set()).size() == 2))
+        << "face: " << face << ", edge: " << edge
+        << ", face.corner_set(): " << face.corner_set()
+        << ", edge.corner_set(): " << edge.corner_set()
+        << ", (edge.corner_set() & face.corner_set()): " << (edge.corner_set() & face.corner_set())
+        ;
+      
+    }
+  }
 }
 
 

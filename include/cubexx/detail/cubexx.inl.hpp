@@ -329,7 +329,18 @@ face_t::is_adjacent(const edge_t& edge) const
   assert(!is_null());
   assert(edge.is_sane());
   assert(!edge.is_null());
-  return (edge.corner_set() & this->corner_set()).size() == 2;
+  
+  
+  const auto& corner0 = edge.corner0();
+  
+  int corner0_xyz[] = {corner0.x(), corner0.y(), corner0.z()};
+  int direction_xyz[] = {direction().x(), direction().y(), direction().z()};
+  
+  ///the edge and face/direction are not parallel and
+  return edge.base_axis() != direction().axis()
+          ///the significant dimension component of any edge's corner is the same as the direction
+          && corner0_xyz[direction().axis()] == direction_xyz[direction().axis()];
+  
 }
 
 CORNER_CASES_CUBEXX_INLINE
