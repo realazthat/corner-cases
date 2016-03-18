@@ -235,7 +235,7 @@ TEST_F(CUBEXXEdgeTest,get_by_corners)
 
     ///test edge get(corner0, corner1)
     {
-        std::vector<int> edge_counts(cubexx::edge_t::SIZE(), 0);
+        std::vector<uint32_t> edge_counts(cubexx::edge_t::SIZE(), 0);
         
         for (auto base_corner : cubexx::corner_t::all())
         for (auto direction : cubexx::direction_t::all())
@@ -253,10 +253,10 @@ TEST_F(CUBEXXEdgeTest,get_by_corners)
         }
         
         
-        ///every edge should be covered twice
+        ///every edge should be covered 4 times; because the direction works in both ways
         for (auto edge : cubexx::edge_t::all())
         {
-            ASSERT_EQ(2, edge_counts.at(edge.index()));
+            ASSERT_EQ(4U, edge_counts.at(edge.index()));
         }
 
     }
