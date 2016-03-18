@@ -2291,7 +2291,7 @@ derived_t&
 set_base_t<derived_t, element_t, N>::
 operator&=(const derived_t& set)
 {
-  mbits &= ~set.mbits;
+  mbits &= set.mbits;
 
   return self();
 }
@@ -2303,7 +2303,7 @@ set_base_t<derived_t, element_t, N>::
 operator&=(const element_t& element)
 {
   assert(element.index() < N);
-  mbits &= derived_t(element);
+  self() &= derived_t(element);
   return self();
 }
 
@@ -2318,7 +2318,7 @@ operator&=(const Sequence& sequence)
 {
 
 
-  mbits &= derived_t(sequence);
+  self() &= derived_t(sequence);
 
   return self();
 }
