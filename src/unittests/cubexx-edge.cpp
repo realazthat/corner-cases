@@ -184,10 +184,19 @@ TEST_F(CUBEXXEdgeTest,opposite_over_face)
             //the two edges are not equal
             ASSERT_NE(edge, opposite_edge);
             
+            
+            ASSERT_TRUE(face.is_adjacent(opposite_edge));
+            ASSERT_TRUE(opposite_edge.is_adjacent(face));
+            
+            
             //opposite edge is one of the edges of the face
             ASSERT_TRUE(face.edge_set().contains(opposite_edge));
             //edge and the opposite edge do not share corners
-            ASSERT_TRUE((edge.corner_set() & opposite_edge.corner_set()).size() == 0);
+            ASSERT_EQ(0U,(edge.corner_set() & opposite_edge.corner_set()).size())
+              << "edge: " << edge
+              << ", edge.corner_set(): " << edge.corner_set()
+              << ", opposite_edge: " << opposite_edge
+              << ", opposite_edge.corner_set(): " << opposite_edge.corner_set();
             //the two edges cover all of the faces corners
             ASSERT_TRUE((face.corner_set() - edge.corner_set() - opposite_edge.corner_set()).size() == 0);
         }
