@@ -417,9 +417,60 @@ TEST_F(CUBEXXCornerTest,edge_via_corner)
 
 TEST_F(CUBEXXCornerTest,get_adjacent_direction)
 {
-    ASSERT_TRUE(false);
+    std::vector<uint32_t> rhs_counts(8,0);
+    std::vector<uint32_t> direction_counts(6,0);
+    for (auto lhs : cubexx::corner_t::all())
+    {
+        uint32_t rhs_count = 0;
+        for (auto rhs : cubexx::corner_t::all())
+        {
+            if (!lhs.is_adjacent(rhs))
+                continue;
+            
+            auto direction = lhs.get_adjacent_direction(rhs);
+            
+            ASSERT_EQ(direction.opposite(),rhs.get_adjacent_direction(lhs));
+            ASSERT_EQ(direction.axis(),rhs.get_adjacent_direction(lhs).axis());
+            
+            int lhs_xyz[] = {lhs.x(), lhs.y(), lhs.z()};
+            int rhs_xyz[] = {rhs.x(), rhs.y(), rhs.z()};
+            
+            
+            ///the coordinate of the corners in the component of the direction's axis should be flipped
+            ASSERT_EQ(-lhs_xyz[direction.axis()], rhs_xyz[direction.axis()]);
+            
+            std::uint_fast8_t axis2 = (direction.axis() + 1) % 3;
+            std::uint_fast8_t axis3 = (direction.axis() + 2) % 3;
+            
+            ///the other coordinates of the corners should be the same
+            ASSERT_EQ(lhs_xyz[axis2], rhs_xyz[axis2]);
+            ASSERT_EQ(lhs_xyz[axis3], rhs_xyz[axis3]);
+            
+            rhs_count++;
+            rhs_counts.at(rhs.index())++;
+            direction_counts.at(direction.index())++;
+            
+            
+            
+        }
+        
+        ///there should be 3 adjacent corners
+        ASSERT_EQ(3U, rhs_count);
+    }
+    
+    ///every corner should be covered 3 times
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(3U, rhs_counts.at(corner.index()));
+    }
+    
+    ///every direction should be covered 4 times, between every set of opposite faces
+    for (auto direction : cubexx::direction_t::all())
+    {
+        ASSERT_EQ(4U, direction_counts.at(direction.index()));
+    }
+    
 }
-
 
 
 
