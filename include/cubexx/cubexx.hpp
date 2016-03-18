@@ -829,6 +829,8 @@ struct corner_t{
   
   
   ///Returns the edge between this corner and an adjacent corner, specified via the @param direction parameter.
+  ///If the direction is pointing outside of the cube from this corner, it will return the edge between
+  /// this corner and the corner in the opposite direction.
   ///@see edges, edge_set(), corner_t::edge(const corner_t&)
   const edge_t& edge(const direction_t& direction) const;
   ///Returns the edge between this corner and an adjacent corner, specified via the @param corner parameter.
@@ -915,6 +917,12 @@ struct corner_t{
   ///@see x(), y(), z(), ux(), uy(), uz()
   std::uint_fast8_t uz() const;
   
+  ///Return an array with all three components of the corner's vector
+  ///@see x(), y(), z(), get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  const std::array<std::int_fast8_t,3>& xyz() const;
+  ///Return an array with all three unsigned components of the corner's unsigned representation vector
+  ///@see ux(), uy(), uz(), get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  const std::array<std::uint_fast8_t,3>& uxyz() const;
   
   ///Number of corners.
   CORNER_CASES_CUBEXX_INLINE static std::size_t SIZE(){ return 8; }

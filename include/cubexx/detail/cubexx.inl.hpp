@@ -906,6 +906,75 @@ uz() const
   assert(!is_null());
   return mbits[2];
 }
+
+
+
+CORNER_CASES_CUBEXX_INLINE
+const std::array<int_fast8_t,3>&
+corner_t::
+xyz() const
+{
+  typedef std::array<int_fast8_t,3> result_type;
+  auto precompute = [](){
+    std::array<result_type, 8> internal_results;
+    
+    
+    for (auto corner : cubexx::corner_t::all())
+    {
+      internal_results[corner.index()] = result_type{corner.x(), corner.y(),corner.z()};
+    }
+    return internal_results;
+  };
+  
+  static const auto internal_results = precompute();
+  
+  assert(is_sane());
+  assert(!is_null());
+  
+  const auto& result = internal_results[index()];
+  
+  assert(result[0] == x());
+  assert(result[1] == y());
+  assert(result[2] == z());
+  
+  return result;
+  
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const std::array<uint_fast8_t,3>&
+corner_t::
+uxyz() const
+{
+  typedef std::array<uint_fast8_t,3> result_type;
+  auto precompute = [](){
+    std::array<result_type, 8> internal_results;
+    
+    
+    for (auto corner : cubexx::corner_t::all())
+    {
+      internal_results[corner.index()] = result_type{corner.ux(), corner.uy(),corner.uz()};
+    }
+    return internal_results;
+  };
+  
+  static const auto internal_results = precompute();
+  
+  assert(is_sane());
+  assert(!is_null());
+  
+  const auto& result = internal_results[index()];
+  
+  assert(result[0] == ux());
+  assert(result[1] == uy());
+  assert(result[2] == uz());
+  
+  return result;
+  
+}
+
+
+
 CORNER_CASES_CUBEXX_INLINE
 bool corner_t::operator<(const corner_t& other) const
 {
@@ -1120,6 +1189,97 @@ edge(const corner_t& other) const
   assert(other.is_adjacent(*this));
 
   return this->edge(this->get_adjacent_direction(other));
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
+const std::array<edge_t,3 >&
+corner_t::
+edges() const
+{
+  typedef std::array<edge_t,3 > result_type;
+  auto precompute = [](){
+    std::array<result_type, 8> internal_results;
+    
+    
+    for (auto corner : corner_t::all())
+    {
+      for (auto axis : {0U, 1U, 2U})
+      {
+        auto corner_xyz = corner.xyz();
+        
+        ///flip one component
+        corner_xyz[axis] = -corner_xyz[axis];
+        
+        corner_t other_corner = corner_t::get(corner_xyz[0],corner_xyz[1],corner_xyz[2]);
+        
+        assert(corner.is_adjacent(other_corner));
+        assert(other_corner.is_adjacent(corner));
+        internal_results[corner.index()][axis] = corner.edge(other_corner);
+      }
+    }
+    
+    return internal_results;
+  };
+  
+  
+  static const auto internal_results = precompute();
+  
+  assert(is_sane());
+  assert(!is_null());
+  
+  const result_type& result = internal_results[index()];
+  
+  for (const edge_t& edge : result)
+  {
+    assert(edge.is_sane());
+    assert(!edge.is_null());
+    assert(edge.corner_set().contains(*this));
+    assert(edge.is_adjacent(*this));
+    assert(is_adjacent(edge));
+  }
+  
+  return result;
+}
+
+
+
+CORNER_CASES_CUBEXX_INLINE
+const edge_set_t&
+corner_t::
+edge_set() const
+{
+  
+  auto precompute = [](){
+    std::array<edge_set_t, 8> internal_results;
+    
+    
+    for (auto corner : corner_t::all())
+    {
+      internal_results[corner.index()] = edge_set_t(corner.edges());
+    }
+    
+    return internal_results;
+  };
+  
+  
+  static const auto internal_results = precompute();
+  
+  assert(is_sane());
+  assert(!is_null());
+  
+  const edge_set_t& result = internal_results[index()];
+  
+  for (const edge_t& edge : result)
+  {
+    assert(edge.is_sane());
+    assert(!edge.is_null());
+    assert(edge.corner_set().contains(*this));
+    assert(edge.is_adjacent(*this));
+    assert(is_adjacent(edge));
+  }
+  
+  return result;
 }
 
 CORNER_CASES_CUBEXX_INLINE

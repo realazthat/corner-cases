@@ -404,7 +404,29 @@ TEST_F(CUBEXXCornerTest,edges)
 
 TEST_F(CUBEXXCornerTest,edge_via_direction)
 {
-    ASSERT_TRUE(false);
+    for (auto corner : cubexx::corner_t::all())
+    {
+        for (auto direction : cubexx::direction_t::all())
+        {
+            auto edge = corner.edge(direction);
+            auto lhs_corner = corner.adjacent(direction);
+            
+            
+            ASSERT_EQ(direction.axis(), edge.base_axis());
+            ASSERT_TRUE(edge.corner_set().contains(corner));
+            ASSERT_TRUE(edge.corner_set().contains(lhs_corner));
+            
+            ASSERT_TRUE(lhs_corner.is_adjacent(corner));
+            ASSERT_TRUE(corner.is_adjacent(lhs_corner));
+            
+            ASSERT_TRUE(corner.edge_set().contains(edge));
+            ASSERT_TRUE(lhs_corner.edge_set().contains(edge));
+            
+            
+            
+        }
+    }
+    
 }
 
 
@@ -471,6 +493,7 @@ TEST_F(CUBEXXCornerTest,get_adjacent_direction)
     }
     
 }
+
 
 
 
