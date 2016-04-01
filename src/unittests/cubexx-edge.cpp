@@ -441,5 +441,37 @@ TEST_F(CUBEXXEdgeTest,is_adjacent_to_face)
 TEST_F(CUBEXXEdgeTest,is_adjacent_to_corner)
 {
 
-    ASSERT_TRUE(false);
+    uint32_t all____corner_visits[8] = {0};
+    uint32_t all____corner_visit_count = 0;
+    for (auto edge : cubexx::edge_t::all())
+    {
+
+        ASSERT_TRUE(edge.is_adjacent(edge.corner0()));
+        ASSERT_TRUE(edge.is_adjacent(edge.corner1()));
+
+        uint32_t edge___corner_visits[8] = {0};
+        uint32_t edge___corner_visit_count = 0;
+        for (auto corner : cubexx::corner_t::all())
+        {
+            ASSERT_EQ(corner.is_adjacent(edge),  edge.is_adjacent(corner));
+            ASSERT_EQ(edge.corner_set().contains(corner), edge.is_adjacent(corner));
+
+            if (edge.is_adjacent(corner))
+            {
+                ASSERT_TRUE(edge.corner0() == corner || edge.corner1() == corner);
+                edge___corner_visits[corner.index()]++;
+                edge___corner_visit_count++;
+                all____corner_visits[corner.index()]++;
+                all____corner_visit_count++;
+            }
+        }
+
+        ASSERT_EQ(2U, edge___corner_visit_count);
+    }
+
+    ASSERT_EQ(3U*8U, all____corner_visit_count);
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(3U, all____corner_visits[corner.index()]);
+    }
 }
