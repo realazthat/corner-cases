@@ -325,8 +325,76 @@ TEST_F(CUBEXXEdgeTest,adjacent_to_corner)
 
 TEST_F(CUBEXXEdgeTest,corners)
 {
+    uint32_t all____corner_visits[8] = {0};
+    uint32_t all____corner_visit_count = 0;
+    for (auto edge : cubexx::edge_t::all())
+    {
+        auto corners = edge.corners();
+        auto corner_set = edge.corner_set();
 
-    ASSERT_TRUE(false);
+        ASSERT_EQ(corners.size(), corner_set.size());
+        ASSERT_EQ(corner_set, cubexx::corner_set_t(corners));
+
+        ///make sure corners == corner_set
+        for (auto corner : corners)
+        {
+            ASSERT_TRUE(corner_set.contains(corner));
+
+            ASSERT_TRUE(corner == edge.corner0() || corner == edge.corner1());
+        }
+        ///make sure corner_set == corners
+        for (auto corner : corner_set)
+        {
+            ASSERT_TRUE(corner_set.contains(corner));
+
+            ASSERT_TRUE(corner == edge.corner0() || corner == edge.corner1());
+        }
+
+        ASSERT_EQ(2U,corners.size());
+        ASSERT_NE(corners[0],corners[1]);
+
+        int xyz0[] = {corners[0].x(), corners[0].y(), corners[0].z()};
+        int xyz1[] = {corners[1].x(), corners[1].y(), corners[1].z()};
+
+        ///the two corners will differ in one component
+        ASSERT_NE(xyz0[edge.base_axis()], xyz1[edge.base_axis()]);
+        ///the two corners will be the same in two components
+        ASSERT_EQ(xyz0[edge.secondary_axis()], xyz1[edge.secondary_axis()]);
+        ASSERT_EQ(xyz0[edge.tertiary_axis()], xyz1[edge.tertiary_axis()]);
+        
+
+        ///pidgeon-hole
+        {
+            uint32_t edge____corner_visits[8] = {0};
+            uint32_t edge____corner_visit_count = 0;
+            for (auto corner : cubexx::corner_t::all())
+            {
+                if(corner_set.contains(corner))
+                {
+                    edge____corner_visit_count++;
+                    edge____corner_visits[corner.index()]++;
+                    all____corner_visit_count++;
+                    all____corner_visits[corner.index()]++;
+
+                    ASSERT_TRUE(corner == edge.corner0() || corner == edge.corner1());
+                } else {
+                    ASSERT_TRUE(corner != edge.corner0() && corner != edge.corner1());
+                }
+            }
+
+            ASSERT_EQ(2U,edge____corner_visit_count);
+        }
+    }
+
+    ///check pidgeon-hole
+    ///each corner should be visited twice; once for each adjacent edge
+    ASSERT_EQ(3U*8U,all____corner_visit_count);
+
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(3U,all____corner_visits[corner.index()]);
+    }
+
 }
 
 TEST_F(CUBEXXEdgeTest,end_faces)
