@@ -349,12 +349,6 @@ TEST_F(CUBEXXEdgeTest,adjacents)
 }
 
 
-TEST_F(CUBEXXEdgeTest,adjacent_to_corner)
-{
-
-    ASSERT_TRUE(false);
-}
-
 TEST_F(CUBEXXEdgeTest,corners)
 {
     uint32_t all____corner_visits[8] = {0};
