@@ -465,8 +465,48 @@ TEST_F(CUBEXXEdgeTest,is_adjacent_to_edge)
 
 TEST_F(CUBEXXEdgeTest,is_adjacent_to_face)
 {
+    std::vector<uint32_t> all____face_visits(cubexx::face_t::SIZE(), 0);
+    uint32_t all____face_visit_count = 0;
+    for (auto edge : cubexx::edge_t::all())
+    {
 
-    ASSERT_TRUE(false);
+        std::vector<uint32_t> edge___face_visits(cubexx::face_t::SIZE(), 0);
+        uint32_t edge___face_visit_count = 0;
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(face.is_adjacent(edge),  edge.is_adjacent(face));
+            ASSERT_EQ(edge.face_set().contains(face), edge.is_adjacent(face));
+
+            if (edge.is_adjacent(face))
+            {
+                ASSERT_TRUE(face.corner_set().contains(edge.corner0()));
+                ASSERT_TRUE(face.corner_set().contains(edge.corner1()));
+            } else {
+                ASSERT_FALSE(face.corner_set().contains(edge.corner0()) && face.corner_set().contains(edge.corner1()));
+            }
+            
+            
+            ///counts for pidgeon-hole test
+            if (edge.is_adjacent(face))
+            {
+                edge___face_visits[face.index()]++;
+                edge___face_visit_count++;
+                all____face_visits[face.index()]++;
+                all____face_visit_count++;
+            }
+        }
+
+        ///each edge visits two faces
+        ASSERT_EQ(2U, edge___face_visit_count);
+    }
+
+    ///each face is adjacent to 4 edges.
+    ASSERT_EQ(4U*6U, all____face_visit_count);
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(4U, all____face_visits[face.index()]);
+    }
+    
 }
 
 
