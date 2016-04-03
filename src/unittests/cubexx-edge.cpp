@@ -268,14 +268,14 @@ TEST_F(CUBEXXEdgeTest,faces)
 
     ///test edge_t::faces()
     {
-        std::vector<int> face_counts(cubexx::face_t::SIZE(), 0);
+        std::vector<int> face_visits(cubexx::face_t::SIZE(), 0);
         
         
         for (auto edge : cubexx::edge_t::all())
         {
             for (auto face : edge.faces())
             {
-                face_counts[face.index()]++;
+                face_visits[face.index()]++;
                 
                 
                 ASSERT_TRUE(face.is_adjacent(edge));
@@ -286,6 +286,38 @@ TEST_F(CUBEXXEdgeTest,faces)
             }
         }
 
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(4, face_visits[face.index()]);
+        }
+    }
+}
+TEST_F(CUBEXXEdgeTest,face_set)
+{
+    ///test edge_t::face_set()
+    {
+        std::vector<int> face_visits(cubexx::face_t::SIZE(), 0);
+        
+        
+        for (auto edge : cubexx::edge_t::all())
+        {
+            for (auto face : edge.face_set())
+            {
+                face_visits[face.index()]++;
+                
+                
+                ASSERT_TRUE(face.is_adjacent(edge));
+                ASSERT_TRUE(edge.is_adjacent(face));
+                
+                ASSERT_TRUE(face.corner_set().contains(edge.corner0()));
+                ASSERT_TRUE(face.corner_set().contains(edge.corner1()));
+            }
+        }
+
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(4, face_visits[face.index()]);
+        }
     }
 }
 

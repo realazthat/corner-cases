@@ -2149,6 +2149,33 @@ faces() const
 
   return internal_results[ index() ];
 }
+CORNER_CASES_CUBEXX_INLINE
+const face_set_t&
+edge_t::
+face_set() const
+{
+  auto precompute = []()
+  {
+    typedef face_set_t result_type;
+
+    std::array<result_type, 12> internal_results;
+
+    for (auto edge : edge_t::all())
+    {
+      internal_results[edge.index()] = face_set_t(edge.faces());
+    }
+
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+
+  return internal_results[ index() ];
+}
 
 CORNER_CASES_CUBEXX_INLINE
 const std::array<edge_t, 12>&
