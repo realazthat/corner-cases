@@ -425,8 +425,43 @@ TEST_F(CUBEXXEdgeTest,corners)
 
 TEST_F(CUBEXXEdgeTest,end_faces)
 {
+    std::vector<uint32_t> all____face_visits(cubexx::face_t::SIZE(),0);
+    uint32_t all____face_visit_count = 0;
 
-    ASSERT_TRUE(false);
+    for (auto edge : cubexx::edge_t::all())
+    {
+        std::vector<int> edge___face_visits(cubexx::face_t::SIZE(),0);
+        uint32_t edge___face_visit_count = 0;
+        ASSERT_EQ(edge.end_face_set(), cubexx::face_set_t(edge.end_faces()));
+
+        for (auto face : edge.end_faces())
+        {
+            ASSERT_TRUE(edge.end_face_set().contains(face));
+
+            ASSERT_EQ(1U, (face.corner_set() & edge.corner_set()).size());
+        }
+
+        ASSERT_TRUE(edge.end_face_set().contains(edge.end_face(edge.corner0())));
+        ASSERT_TRUE(edge.end_face_set().contains(edge.end_face(edge.corner1())));
+
+        for (auto face : edge.end_faces())
+        {
+            edge___face_visits[face.index()]++;
+            edge___face_visit_count++;
+            all____face_visits[face.index()]++;
+            all____face_visit_count++;
+
+        }
+
+        ASSERT_EQ(2U, edge___face_visit_count);
+    }
+
+
+    ASSERT_EQ(4U*6U, all____face_visit_count);
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(4U, all____face_visits[face.index()]);
+    }
 }
 
 TEST_F(CUBEXXEdgeTest,is_adjacent_to_edge)

@@ -1039,7 +1039,7 @@ struct edge_t{
   ///Retrieve a list of (2) faces that are not directly adjacent, but are perpendicular and
   ///touching with the ends of this edge.
   ///@see end_face(), end_faces()
-  const std::array<face_t, 2>& end_face_set() const;
+  const face_set_t& end_face_set() const;
   
 
   

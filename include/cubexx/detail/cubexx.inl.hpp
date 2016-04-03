@@ -2125,6 +2125,109 @@ calc_face(uint_fast8_t idx) const
 }
 
 CORNER_CASES_CUBEXX_INLINE
+const face_t&
+edge_t::
+end_face(const corner_t& corner) const
+{
+  auto precompute = [](){
+    std::array<std::array<face_t,2>, 12> internal_results;
+    for (auto edge : edge_t::all())
+    {
+      int xyz0[] = {0,0,0};
+      int xyz1[] = {0,0,0};
+
+      xyz0[edge.base_axis()] = -1;
+      xyz1[edge.base_axis()] = +1;
+
+      internal_results[edge.index()][0] = direction_t::get(xyz0[0],xyz0[1],xyz0[2]).face();
+      internal_results[edge.index()][1] = direction_t::get(xyz1[0],xyz1[1],xyz1[2]).face();
+    }
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+
+
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+  assert(corner.is_adjacent(*this));
+  assert((*this).is_adjacent(corner));
+
+  ///either 0 or 1 if this corner is the positive or negative corner of this edge
+  uint_fast8_t corner_id = corner.uxyz()[(*this).base_axis()];
+
+  assert(corner_id == 0 || corner_id == 1);
+
+  const auto& result = internal_results[ index() ][ corner_id];
+
+  assert(corner_set_t(corner) == (result.corner_set() & (*this).corner_set()));
+
+  return result;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const std::array<face_t, 2>&
+edge_t::
+end_faces() const
+{
+  auto precompute = [](){
+    typedef std::array<face_t,2> result_type;
+    std::array<result_type, 12> internal_results;
+    for (auto edge : edge_t::all())
+    {
+      int xyz0[] = {0,0,0};
+      int xyz1[] = {0,0,0};
+
+      xyz0[edge.base_axis()] = -1;
+      xyz1[edge.base_axis()] = +1;
+
+      internal_results[edge.index()] = {direction_t::get(xyz0[0],xyz0[1],xyz0[2]).face(), direction_t::get(xyz1[0], xyz1[1], xyz1[2]).face()};
+    }
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+
+
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+
+  return internal_results[ index() ];
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const face_set_t&
+edge_t::
+end_face_set() const
+{
+  auto precompute = []()
+  {
+    typedef face_set_t result_type;
+
+    std::array<result_type, 12> internal_results;
+
+    for (auto edge : edge_t::all())
+    {
+      internal_results[edge.index()] = face_set_t(edge.end_faces());
+    }
+
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+  assert(!is_null());
+  assert(is_sane());
+  assert(index() < 12);
+
+  return internal_results[ index() ];
+}
+
+CORNER_CASES_CUBEXX_INLINE
 const std::array<face_t, 2>&
 edge_t::
 faces() const
