@@ -231,10 +231,25 @@ TEST_F(CUBEXXDirectionTest,xyz)
 
 
 
+
+
 TEST_F(CUBEXXDirectionTest,axis)
 {
+    for (auto direction : cubexx::direction_t::all())
+    {
+        auto axis = direction.axis();
+        auto xyz = direction.xyz();
 
-    ASSERT_TRUE(false);
+        ASSERT_NE(0U, direction.xyz()[axis]);
+
+        ASSERT_EQ(0U, direction.xyz()[(axis + 1 ) % 3]) << "direction: " << direction
+                                                        << ", axis: " << (int)axis
+                                                        << ", (axis + 1 ) % 3: " << (int)((axis + 1 ) % 3)
+                                                        << ", direction.xyz()[(axis + 1 ) % 3]: " << (int)direction.xyz()[(axis + 1 ) % 3]
+                                                        << ", xyz[(axis + 1 ) % 3]: " << (int)xyz[(axis + 1 ) % 3]
+                                                        ;
+        ASSERT_EQ(0U, direction.xyz()[(axis + 2 ) % 3]) << "direction: " << direction << ", axis: " << (int)axis;
+    }
 }
 
 
