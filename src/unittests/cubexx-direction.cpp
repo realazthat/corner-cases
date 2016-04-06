@@ -216,6 +216,21 @@ TEST_F(CUBEXXDirectionTest,positive)
 
 
 
+TEST_F(CUBEXXDirectionTest,xyz)
+{
+
+    for (auto direction : cubexx::direction_t::all())
+    {
+        auto xyz = direction.xyz();
+        ASSERT_EQ(direction.x(), xyz[0]);
+        ASSERT_EQ(direction.y(), xyz[1]);
+        ASSERT_EQ(direction.z(), xyz[2]);
+    }
+}
+
+
+
+
 TEST_F(CUBEXXDirectionTest,axis)
 {
 
