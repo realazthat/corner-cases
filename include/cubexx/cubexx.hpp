@@ -631,26 +631,31 @@ struct direction_t
   
   ///Return the x component of the direction vector. See
   /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
-  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t), xyz()
   std::int_fast8_t x() const;
   ///Return the y component of the direction vector. See
   /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
-  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t), xyz()
   std::int_fast8_t y() const;
   ///Return the z component of the direction vector. See
   /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
-  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t), xyz()
   std::int_fast8_t z() const;
   ///Returns true if the direction vector is positive; false if it is negative. See
   /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
-  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
-  ///@see axis(), x(), y(), z()
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t), xyz()
+  ///@see axis(), x(), y(), z(), xyz()
   bool positive() const;
   ///@brief Returns a number \f$\in \left\{0,1,2\right\}\f$ representing the axis of the direction. See
   /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
   ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)
-  ///@see positive(), x(), y(), z()
+  ///@see positive(), x(), y(), z(), xyz()
   uint_fast8_t axis() const;
+
+  ///Return all three components of the direction vector. See
+  /// get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t) for more information.
+  ///@see get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t), x(), y(), z()
+  const std::array<std::int_fast8_t,3>& xyz() const;
   
   
   

@@ -516,6 +516,34 @@ std::int_fast8_t direction_t::z() const
   return (mbits[0] ? 1 : -1)  * (!mbits[2] && !mbits[1] ? 1 : 0);
 }
 
+CORNER_CASES_CUBEXX_INLINE
+const std::array<std::int_fast8_t,3>& direction_t::xyz() const
+{
+  auto precompute = [](){
+    typedef std::array<std::int_fast8_t,3> result_type;
+    std::array<result_type, 6> internal_results;
+    for (auto direction : direction_t::all())
+    {
+      internal_results[direction.index()] = {direction.x(), direction.y(), direction.z()};
+    }
+
+    return internal_results;
+  };
+
+  assert(is_sane());
+  assert(!is_null());
+
+
+  static const auto internal_results = precompute();
+
+  const auto& result = internal_results[index()];
+  assert(result[0] == x());
+  assert(result[1] == y());
+  assert(result[2] == z());
+
+  return result;
+}
+
 
 CORNER_CASES_CUBEXX_INLINE
 std::uint_fast8_t direction_t::index() const
