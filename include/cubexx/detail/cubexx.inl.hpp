@@ -1369,6 +1369,23 @@ corner_t::is_adjacent(const edge_t& edge) const
   return edge.corner0() == *this || edge.corner1() == *this;
 }
 
+CORNER_CASES_CUBEXX_INLINE
+bool
+corner_t::is_adjacent(const face_t& face) const
+{
+
+  assert(is_sane());
+  assert(!is_null());
+  assert(face.is_sane());
+  assert(!face.is_null());
+  
+
+  uint_fast8_t axis = face.direction().axis();
+  auto direction_xyz = face.direction().xyz();
+  auto corner_xyz = this->xyz();
+
+  return corner_xyz[axis] == direction_xyz[axis];
+}
 //###################################################################
 
 

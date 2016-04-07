@@ -809,6 +809,8 @@ struct corner_t{
   bool is_adjacent(const corner_t& other) const;
   ///Returns true if @param edge is an edge adjacent to this corner; otherwise returns false.
   bool is_adjacent(const edge_t& edge) const;
+  ///Returns true if @param face is a face adjacent to this corner; otherwise returns false.
+  bool is_adjacent(const face_t& face) const;
   
   
   ///Returns the direction between two adjacent corners.
