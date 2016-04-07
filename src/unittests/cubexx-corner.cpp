@@ -293,10 +293,44 @@ TEST_F(CUBEXXCornerTest,push_direction)
         }
     }
 }
+
 TEST_F(CUBEXXCornerTest,move_direction)
 {
+    for (auto corner : cubexx::corner_t::all())
+    {
+        auto xyz = corner.xyz();
 
-    ASSERT_TRUE(false);
+        for (auto direction : cubexx::direction_t::all())
+        {
+            auto next_corner = corner.move(direction);
+
+
+            auto expected_next_xyz = xyz;
+
+            for (std::size_t i = 0; i < 3; ++i)
+                expected_next_xyz[i] += direction.xyz()[i]*2;
+
+
+            bool expected_out_of_bounds = false;
+            for (std::size_t i = 0; i < 3; ++i)
+                expected_out_of_bounds |= (std::abs(expected_next_xyz[i]) > 1);
+
+            ASSERT_EQ(expected_out_of_bounds, next_corner.is_null())
+                        << "expected_out_of_bounds: " << (expected_out_of_bounds ? "true" : "false")
+                        << ", corner: " << corner
+                        << ", direction: " << direction
+                        << ", next_corner: " << next_corner
+                        << ", expected_next_xyz: " << (int)expected_next_xyz[0] << ", " << (int)expected_next_xyz[1] << ", " << (int)expected_next_xyz[2]
+                        ;
+
+            if (next_corner.is_null())
+                continue;
+
+            auto next_xyz = next_corner.xyz();
+
+            ASSERT_EQ(expected_next_xyz, next_xyz);
+        }
+    }
 }
 
 TEST_F(CUBEXXCornerTest,is_adjacent)
