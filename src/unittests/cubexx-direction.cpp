@@ -258,8 +258,21 @@ TEST_F(CUBEXXDirectionTest,axis)
 
 TEST_F(CUBEXXDirectionTest,face)
 {
+    std::vector<uint32_t> all___face_visits(cubexx::face_t::SIZE(), 0);
 
-    ASSERT_TRUE(false);
+    for (auto direction : cubexx::direction_t::all())
+    {
+        auto face = direction.face();
+        ASSERT_EQ(face.direction(), direction);
+        ASSERT_EQ(face.direction().index(), direction.index());
+
+        all___face_visits[face.index()]++;
+    }
+
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(1U, all___face_visits[face.index()]);
+    }
 }
 
 
