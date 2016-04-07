@@ -427,7 +427,46 @@ TEST_F(CUBEXXCornerTest,adjacents)
 
 TEST_F(CUBEXXCornerTest,faces)
 {
-    ASSERT_TRUE(false);
+
+    std::vector<uint32_t> all___face_visits(cubexx::face_t::SIZE(), 0);
+
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(corner.face_set(), cubexx::face_set_t(corner.faces()));
+
+        std::vector<uint32_t> corner___face_visits(cubexx::face_t::SIZE(), 0);
+
+        for (auto face : corner.faces())
+        {
+            ASSERT_TRUE(corner.face_set().contains(face));
+
+            ASSERT_TRUE(face.corner_set().contains(corner));
+            ASSERT_TRUE(face.is_adjacent(corner));
+            ASSERT_TRUE(corner.is_adjacent(face));
+
+            corner___face_visits[face.index()]++;
+            all___face_visits[face.index()]++;
+        }
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(face.is_adjacent(corner), corner.is_adjacent(face));
+
+            if (face.is_adjacent(corner))
+            {
+                ASSERT_EQ(1U, all___face_visits[face.index()]);
+            } else {
+                ASSERT_EQ(0U, all___face_visits[face.index()]);
+            }
+        }
+    }
+
+
+
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(4U, all___face_visits[face.index()]);
+    }
+
 }
 
 TEST_F(CUBEXXCornerTest,edges)
