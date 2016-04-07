@@ -510,6 +510,17 @@ TEST_F(CUBEXXCornerTest,edge_via_corner)
 }
 
 
+TEST_F(CUBEXXCornerTest,xyz)
+{
+    for (auto corner : cubexx::corner_t::all()){
+        auto xyz = corner.xyz();
+
+        ASSERT_EQ(corner.x(), xyz[0]);
+        ASSERT_EQ(corner.y(), xyz[1]);
+        ASSERT_EQ(corner.z(), xyz[2]);
+    }
+}
+
 TEST_F(CUBEXXCornerTest,get_adjacent_direction)
 {
     std::vector<uint32_t> rhs_counts(8,0);
