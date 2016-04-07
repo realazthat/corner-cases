@@ -597,7 +597,7 @@ struct edge_set_t : public set_base_t<edge_set_t, edge_t, 12>
 
 
 /**
- * Represents an direction of a cube. There are 6 directions in a cube.
+ * Represents a direction of a cube. There are 6 directions in a cube.
  * A direction_t is 1:1 equivalent to a face_t; they can be converted from one to the other
  * via direction_t::face() and face_t::direction().
  *
@@ -690,7 +690,7 @@ private:
 };
 
 /**
- * Represents an face of a cube. There are 6 faces in a cube.
+ * Represents a face of a cube. There are 6 faces in a cube.
  * A face_t is 1:1 equivalent to a direction_t; they can be converted from one to the other
  * via face_t::direction() and direction_t::face().
  *
@@ -721,7 +721,11 @@ struct face_t{
   ///Return the 4 (perpendicular) edges touching this face, but not directly on the face.
   std::array<edge_t, 4> perpendicular_edges() const;
   
+  ///Returns true if @param corner is a corner adjacent to this face; otherwise returns false.
+  bool is_adjacent(const corner_t& corner) const;
+  ///Returns true if @param other is a face adjacent to this face; otherwise returns false.
   bool is_adjacent(const face_t& other) const;
+  ///Returns true if @param edge is an edge adjacent to this face; otherwise returns false.
   bool is_adjacent(const edge_t& edge) const;
   
   ///Return a list of all the faces on the cube.
@@ -765,7 +769,7 @@ private:
 };
 
 /**
- * Represents an corner of a cube. There are 8 corners in a cube.
+ * Represents a corner of a cube. There are 8 corners in a cube.
  */
 struct corner_t{
   ///Default construct a "null" corner.
@@ -803,7 +807,7 @@ struct corner_t{
   
   ///Returns true if @param other is a corner adjacent to this corner; otherwise returns false.
   bool is_adjacent(const corner_t& other) const;
-  ///Returns true if @param other is a edge adjacent to this corner; otherwise returns false.
+  ///Returns true if @param edge is an edge adjacent to this corner; otherwise returns false.
   bool is_adjacent(const edge_t& edge) const;
   
   
@@ -1032,7 +1036,7 @@ struct edge_t{
   
   
   
-  ///Retrieve a a face that is not directly adjacent, but is perpendicular and
+  ///Retrieve a face that is not directly adjacent, but is perpendicular and
   ///touching with the specified end of this edge.
   ///@see end_faces(), end_face_set()
   const face_t& end_face(const corner_t& corner) const;
@@ -1060,8 +1064,12 @@ struct edge_t{
   ///Retrieve the edge on the opposite side of the specified face.
   const edge_t& opposite(const face_t& face) const;
   
+
+  ///Returns true if @param other is an edge adjacent to this edge; otherwise returns false.
   bool is_adjacent(const edge_t& other) const;
+  ///Returns true if @param face is a face adjacent to this edge; otherwise returns false.
   bool is_adjacent(const face_t& face) const;
+  ///Returns true if @param corner is a corner adjacent to this edge; otherwise returns false.
   bool is_adjacent(const corner_t& corner) const;
   
   

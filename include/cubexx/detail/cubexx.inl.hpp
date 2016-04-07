@@ -345,6 +345,25 @@ face_t::is_adjacent(const edge_t& edge) const
 
 CORNER_CASES_CUBEXX_INLINE
 bool
+face_t::is_adjacent(const corner_t& corner) const
+{
+
+  assert(is_sane());
+  assert(!is_null());
+  assert(corner.is_sane());
+  assert(!corner.is_null());
+  
+
+  uint_fast8_t axis = direction().axis();
+  auto direction_xyz = direction().xyz();
+  auto corner_xyz = corner.xyz();
+
+  return corner_xyz[axis] == direction_xyz[axis];
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
+bool
 face_t::operator==(const face_t& other) const
 {
   return mdirection == other.mdirection;
