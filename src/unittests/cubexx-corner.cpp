@@ -333,7 +333,7 @@ TEST_F(CUBEXXCornerTest,move_direction)
     }
 }
 
-TEST_F(CUBEXXCornerTest,is_adjacent)
+TEST_F(CUBEXXCornerTest,is_adjacent_to_corner)
 {
 
     ///test corner is_adjacent(corner_t)
@@ -381,6 +381,24 @@ TEST_F(CUBEXXCornerTest,is_adjacent)
 }
 
 
+TEST_F(CUBEXXCornerTest,is_adjacent_to_edge)
+{
+    for (auto corner : cubexx::corner_t::all())
+    {
+        for (auto edge : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(edge.is_adjacent(corner), corner.is_adjacent(edge));
+            ASSERT_EQ(corner.is_adjacent(edge), edge.corner_set().contains(corner));
+
+            if (corner.is_adjacent(edge))
+            {
+                ASSERT_TRUE(edge.corner0() == corner || edge.corner1() == corner);
+            } else {
+                ASSERT_TRUE(edge.corner0() != corner && edge.corner1() != corner);
+            }
+        }
+    }
+}
 
 TEST_F(CUBEXXCornerTest,adjacents)
 {
