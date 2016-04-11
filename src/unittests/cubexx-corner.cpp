@@ -400,6 +400,32 @@ TEST_F(CUBEXXCornerTest,is_adjacent_to_edge)
     }
 }
 
+
+TEST_F(CUBEXXCornerTest,is_adjacent_to_face)
+{
+    for (auto corner : cubexx::corner_t::all())
+    {
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(face.is_adjacent(corner), corner.is_adjacent(face));
+            ASSERT_EQ(corner.is_adjacent(face), face.corner_set().contains(corner));
+
+
+            auto direction = face.direction();
+            auto axis = direction.axis();
+
+            auto corner_xyz = corner.xyz();
+            auto direction_xyz = direction.xyz();
+
+            ASSERT_EQ(corner.is_adjacent(face), corner_xyz[axis] == direction_xyz[axis])
+                << "corner: " << corner
+                << ", face: " << face
+                << ", axis: " << int(axis);
+            
+        }
+    }
+}
+
 TEST_F(CUBEXXCornerTest,adjacents)
 {
   uint32_t adjacent_corner_counts[8] = {0};
