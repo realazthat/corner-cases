@@ -515,7 +515,60 @@ TEST_F(CUBEXXCornerTest,faces)
 
 TEST_F(CUBEXXCornerTest,edges)
 {
-    ASSERT_TRUE(false);
+
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(cubexx::edge_set_t(corner.edges()), corner.edge_set());
+
+        std::vector<uint32_t> corner__edge_visits(cubexx::edge_t::SIZE(), 0);
+
+        auto edges = corner.edges();
+
+        for (auto edge : corner.edges())
+        {
+            ///1. compare edges() => edge_set()
+            ASSERT_TRUE(corner.edge_set().contains(edge));
+            ///2. count edge neighbors
+            corner__edge_visits[edge.index()]++;
+        }
+
+        for (auto edge : corner.edge_set())
+        {
+            ///sanity
+            ASSERT_TRUE(corner.edge_set().contains(edge));
+
+            ///edge_set() => edges()
+            ASSERT_TRUE(std::find(edges.begin(), edges.end(), edge) != edges.end());
+            
+            ///check count matches
+            ASSERT_EQ(1U, corner__edge_visits[edge.index()]);
+        }
+
+
+
+
+        for (auto edge : cubexx::edge_t::all())
+        {
+            ///sanity, edge.is_adjacent(corner) <=> corner.is_adjacent(edge)
+            ASSERT_EQ(edge.is_adjacent(corner), corner.is_adjacent(edge));
+            ///edge.is_adjacent(corner) <=> edge \in corner.edge_set()
+            ASSERT_EQ(edge.is_adjacent(corner), corner.edge_set().contains(edge));
+            ///edge.is_adjacent(corner) <=> corner \in edge.corner_set()
+            ASSERT_EQ(edge.is_adjacent(corner), edge.corner_set().contains(corner));
+
+            ///edge.is_adjacent(corner) <=> corner \in edge.corners()
+            ASSERT_EQ(edge.is_adjacent(corner), edge.corner0() == corner || edge.corner1() == corner);
+
+            ///check counts sanity
+            ASSERT_EQ(1U == corner__edge_visits[edge.index()], edge.is_adjacent(corner));
+            ASSERT_EQ(0U == corner__edge_visits[edge.index()], !edge.is_adjacent(corner));
+
+
+            ///edge.is_adjacent(corner) <=> edge \in edges
+            ASSERT_EQ(std::find(edges.begin(), edges.end(), edge) != edges.end(),    edge.is_adjacent(corner));
+
+        }
+    }
 }
 
 
