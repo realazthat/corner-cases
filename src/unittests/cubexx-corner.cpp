@@ -497,9 +497,9 @@ TEST_F(CUBEXXCornerTest,faces)
 
             if (face.is_adjacent(corner))
             {
-                ASSERT_EQ(1U, all___face_visits[face.index()]);
+                ASSERT_EQ(1U, corner___face_visits[face.index()]);
             } else {
-                ASSERT_EQ(0U, all___face_visits[face.index()]);
+                ASSERT_EQ(0U, corner___face_visits[face.index()]);
             }
         }
     }
