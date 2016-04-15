@@ -200,30 +200,48 @@ TEST_F(CUBEXXFaceTest,direction)
 
 TEST_F(CUBEXXFaceTest,edges)
 {
-
-    ASSERT_TRUE(false);
     
-    ///test face_t::edges()
-    // {
-        // std::vector<int> face_counts(cubexx::face_t::SIZE(), 0);
-        
-        
-        // for (auto edge : cubexx::edge_t::all())
-        // {
-            // for (auto face : edge.faces())
-            // {
-                // face_counts[face.index()]++;
-                
-                
-                // ASSERT_TRUE(face.is_adjacent(edge));
-                // ASSERT_TRUE(edge.is_adjacent(face));
-                
-                // ASSERT_TRUE(face.corner_set().contains(edge.corner0()));
-                // ASSERT_TRUE(face.corner_set().contains(edge.corner1()));
-            // }
-        // }
+    std::vector<uint32_t> all____edge_counts(cubexx::edge_t::SIZE(), 0);
+    
+    
+    for (auto face : cubexx::face_t::all())
+    {
+        std::vector<uint32_t> face___edge_counts(cubexx::edge_t::SIZE(), 0);
+        for (auto edge : face.edges())
+        {
+            all____edge_counts[edge.index()]++;
+            face___edge_counts[edge.index()]++;
+            
+            
+            ASSERT_TRUE(face.is_adjacent(edge));
+            ASSERT_TRUE(edge.is_adjacent(face));
+            
+            ASSERT_TRUE(face.corner_set().contains(edge.corner0()));
+            ASSERT_TRUE(face.corner_set().contains(edge.corner1()));
+            ASSERT_TRUE(face.edge_set().contains(edge));
+            ASSERT_TRUE(edge.face_set().contains(face));
+        }
 
-    // }
+        ASSERT_EQ(face.edge_set(), cubexx::edge_set_t(face.edges()));
+
+        for (auto edge : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(face.is_adjacent(edge),edge.is_adjacent(face));
+            ASSERT_EQ(face.is_adjacent(edge),face.edge_set().contains(edge));
+            ASSERT_EQ(face.is_adjacent(edge),edge.face_set().contains(face));
+
+            ASSERT_EQ(1U == face___edge_counts[edge.index()], edge.is_adjacent(face));
+            ASSERT_EQ(0U == face___edge_counts[edge.index()], !edge.is_adjacent(face));
+        }
+    }
+
+
+    for (auto edge : cubexx::edge_t::all())
+    {
+        ///each edge is visited twice in total
+        ASSERT_EQ(2U, all____edge_counts[edge.index()]);
+    }
+
 }
 
 
