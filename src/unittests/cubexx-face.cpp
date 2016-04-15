@@ -289,19 +289,77 @@ TEST_F(CUBEXXFaceTest,corners)
     }
 }
 
-TEST_F(CUBEXXFaceTest,is_adjacent_face)
+TEST_F(CUBEXXFaceTest,is_adjacent_to_face)
 {
   ASSERT_TRUE(false);
 }
 
 
-TEST_F(CUBEXXFaceTest,is_adjacent_corner)
+TEST_F(CUBEXXFaceTest,is_adjacent_to_corner)
 {
-  ASSERT_TRUE(false);
+    std::vector<uint32_t> all____corner_counts(cubexx::corner_t::SIZE(),0);
+
+    for (auto face : cubexx::face_t::all())
+    {
+        std::vector<uint32_t> face___corner_counts(cubexx::corner_t::SIZE(),0);
+
+
+        auto direction = face.direction();
+
+        for (auto corner : cubexx::corner_t::all())
+        {
+            ASSERT_EQ(corner.is_adjacent(face),face.is_adjacent(corner));
+
+            auto direction_xyz = direction.xyz();
+            auto corner_xyz = corner.xyz();
+            auto axis = direction.axis();
+
+            ASSERT_EQ(corner.is_adjacent(face), direction_xyz[axis] == corner_xyz[axis]);
+            ASSERT_EQ(corner.is_adjacent(face), corner.face_set().contains(face));
+            ASSERT_EQ(corner.is_adjacent(face), face.corner_set().contains(corner));
+
+
+        }
+
+
+        ASSERT_EQ(face.corner_set(), cubexx::corner_set_t(face.corners()));
+
+        
+        ///count
+        for (auto corner : cubexx::corner_t::all())
+        {
+            if (!corner.is_adjacent(face))
+                continue;
+            all____corner_counts[corner.index()]++;
+            face___corner_counts[corner.index()]++;
+        }
+        ///pidgeonhole
+        for (auto corner : cubexx::corner_t::all())
+        {
+            ASSERT_EQ(1U == face___corner_counts[corner.index()], corner.is_adjacent(face));
+            ASSERT_EQ(0U == face___corner_counts[corner.index()], !corner.is_adjacent(face));
+        }
+
+        ///pidgeonhole
+        ASSERT_EQ(4U, std::accumulate(face___corner_counts.begin(), face___corner_counts.end(), 0U));
+    }
+
+    ///pidgeonhole
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ///each corner should be visited 3 times
+        ASSERT_EQ(3U, all____corner_counts[corner.index()]);
+    }
+
+    ///pidgeonhole
+    ///8 corners, each is visited 3 times
+    ASSERT_EQ(3U*8U, std::accumulate(all____corner_counts.begin(), all____corner_counts.end(), 0U));
+    ///6 corners, each visits 4 corners
+    ASSERT_EQ(4U*6U, std::accumulate(all____corner_counts.begin(), all____corner_counts.end(), 0U));
 }
 
 
-TEST_F(CUBEXXFaceTest,is_adjacent_edge)
+TEST_F(CUBEXXFaceTest,is_adjacent_to_edge)
 {
   
   for (auto face : cubexx::face_t::all())
