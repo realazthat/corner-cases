@@ -248,29 +248,45 @@ TEST_F(CUBEXXFaceTest,edges)
 TEST_F(CUBEXXFaceTest,corners)
 {
 
-    ASSERT_TRUE(false);
-    
-    ///test face_t::edges()
-    // {
-        // std::vector<int> face_counts(cubexx::face_t::SIZE(), 0);
-        
-        
-        // for (auto edge : cubexx::edge_t::all())
-        // {
-            // for (auto face : edge.faces())
-            // {
-                // face_counts[face.index()]++;
-                
-                
-                // ASSERT_TRUE(face.is_adjacent(edge));
-                // ASSERT_TRUE(edge.is_adjacent(face));
-                
-                // ASSERT_TRUE(face.corner_set().contains(edge.corner0()));
-                // ASSERT_TRUE(face.corner_set().contains(edge.corner1()));
-            // }
-        // }
+    std::vector<uint32_t> all____corner_counts(cubexx::corner_t::SIZE(), 0);
 
-    // }
+
+    for (auto face : cubexx::face_t::all())
+    {
+        std::vector<uint32_t> face___corner_counts(cubexx::corner_t::SIZE(), 0);
+        for (auto corner : face.corners())
+        {
+            all____corner_counts[corner.index()]++;
+            face___corner_counts[corner.index()]++;
+            
+            
+            ASSERT_TRUE(face.is_adjacent(corner));
+            ASSERT_TRUE(corner.is_adjacent(face));
+            
+            ASSERT_TRUE(face.corner_set().contains(corner));
+            ASSERT_TRUE(corner.face_set().contains(face));
+        }
+
+        ASSERT_EQ(face.corner_set(), cubexx::corner_set_t(face.corners()));
+
+        for (auto corner : cubexx::corner_t::all())
+        {
+            ASSERT_EQ(face.is_adjacent(corner),corner.is_adjacent(face));
+            ASSERT_EQ(face.is_adjacent(corner),face.corner_set().contains(corner));
+            ASSERT_EQ(face.is_adjacent(corner),corner.face_set().contains(face));
+
+            ASSERT_EQ(1U == face___corner_counts[corner.index()], corner.is_adjacent(face))
+                << "face: " << face
+                << ", corner: " << corner;
+            ASSERT_EQ(0U == face___corner_counts[corner.index()], !corner.is_adjacent(face));
+        }
+    }
+
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ///each corner is visited thrice in total
+        ASSERT_EQ(3U, all____corner_counts[corner.index()]);
+    }
 }
 
 TEST_F(CUBEXXFaceTest,is_adjacent_face)
