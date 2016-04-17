@@ -6,10 +6,10 @@
 extern "C"{
 #endif
 
-    struct corner_t;
-    struct direction_t;
-    struct edge_t;
-    typedef direction_t face_t;
+    struct cubelib_corner_t;
+    struct cubelib_direction_t;
+    struct cubelib_edge_t;
+    struct cubelib_face_t;
 
 
 #ifdef __cplusplus

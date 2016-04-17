@@ -216,7 +216,64 @@ TEST_F(CUBEXXDirectionTest,positive)
 
 
 
+TEST_F(CUBEXXDirectionTest,xyz)
+{
 
+    for (auto direction : cubexx::direction_t::all())
+    {
+        auto xyz = direction.xyz();
+        ASSERT_EQ(direction.x(), xyz[0]);
+        ASSERT_EQ(direction.y(), xyz[1]);
+        ASSERT_EQ(direction.z(), xyz[2]);
+    }
+}
+
+
+
+
+
+
+TEST_F(CUBEXXDirectionTest,axis)
+{
+    for (auto direction : cubexx::direction_t::all())
+    {
+        auto axis = direction.axis();
+        auto xyz = direction.xyz();
+
+        ASSERT_NE(0, direction.xyz()[axis]);
+
+        ASSERT_EQ(0, direction.xyz()[(axis + 1 ) % 3]) << "direction: " << direction
+                                                       << ", axis: " << (int)axis
+                                                       << ", (axis + 1 ) % 3: " << (int)((axis + 1 ) % 3)
+                                                       << ", direction.xyz()[(axis + 1 ) % 3]: " << (int)direction.xyz()[(axis + 1 ) % 3]
+                                                       << ", xyz[(axis + 1 ) % 3]: " << (int)xyz[(axis + 1 ) % 3]
+                                                        ;
+        ASSERT_EQ(0, direction.xyz()[(axis + 2 ) % 3]) << "direction: " << direction << ", axis: " << (int)axis;
+    }
+}
+
+
+
+
+
+TEST_F(CUBEXXDirectionTest,face)
+{
+    std::vector<uint32_t> all___face_visits(cubexx::face_t::SIZE(), 0);
+
+    for (auto direction : cubexx::direction_t::all())
+    {
+        auto face = direction.face();
+        ASSERT_EQ(face.direction(), direction);
+        ASSERT_EQ(face.direction().index(), direction.index());
+
+        all___face_visits[face.index()]++;
+    }
+
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(1U, all___face_visits[face.index()]);
+    }
+}
 
 
 

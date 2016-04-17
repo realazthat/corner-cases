@@ -166,11 +166,47 @@ TEST_F(CUBEXXEdgeTest,opposite)
 
 
 
+TEST_F(CUBEXXEdgeTest,opposite_over_face)
+{
+    
+    for (auto edge : cubexx::edge_t::all())
+    {
+        for (auto face : edge.faces())
+        {
+            ASSERT_TRUE(face.is_adjacent(edge));
+            ASSERT_TRUE(edge.is_adjacent(face));
+            
+            //edge is one of the edges of the face
+            ASSERT_TRUE(face.edge_set().contains(edge));
+            
+            auto opposite_edge = edge.opposite(face);
+            
+            //the two edges are not equal
+            ASSERT_NE(edge, opposite_edge);
+            
+            
+            ASSERT_TRUE(face.is_adjacent(opposite_edge));
+            ASSERT_TRUE(opposite_edge.is_adjacent(face));
+            
+            
+            //opposite edge is one of the edges of the face
+            ASSERT_TRUE(face.edge_set().contains(opposite_edge));
+            //edge and the opposite edge do not share corners
+            ASSERT_EQ(0U,(edge.corner_set() & opposite_edge.corner_set()).size())
+              << "edge: " << edge
+              << ", edge.corner_set(): " << edge.corner_set()
+              << ", opposite_edge: " << opposite_edge
+              << ", opposite_edge.corner_set(): " << opposite_edge.corner_set();
+            //the two edges cover all of the faces corners
+            ASSERT_TRUE((face.corner_set() - edge.corner_set() - opposite_edge.corner_set()).size() == 0);
+        }
+    }
+}
 
-TEST_F(CUBEXXEdgeTest,get)
+TEST_F(CUBEXXEdgeTest,get_by_axis)
 {
 
-    ///test edge get
+    ///test edge get(base_axis,project_secondary,project_tertiary)
     {
         uint32_t mask = 0;
         
@@ -193,3 +229,391 @@ TEST_F(CUBEXXEdgeTest,get)
     }
 }
 
+
+TEST_F(CUBEXXEdgeTest,get_by_corners)
+{
+
+    ///test edge get(corner0, corner1)
+    {
+        std::vector<uint32_t> edge_counts(cubexx::edge_t::SIZE(), 0);
+        
+        for (auto base_corner : cubexx::corner_t::all())
+        for (auto direction : cubexx::direction_t::all())
+        {
+            auto adjacent_corner = base_corner.adjacent(direction);
+            
+            auto edge = cubexx::edge_t::get(base_corner, adjacent_corner);
+            
+            ASSERT_TRUE(edge.corner_set().contains(base_corner));
+            ASSERT_TRUE(edge.corner_set().contains(adjacent_corner));
+            ASSERT_TRUE(edge.corner0() == base_corner || edge.corner0() == adjacent_corner);
+            ASSERT_TRUE(edge.corner1() == base_corner || edge.corner1() == adjacent_corner);
+            
+            edge_counts.at(edge.index())++;
+        }
+        
+        
+        ///every edge should be covered 4 times; because the direction works in both ways
+        for (auto edge : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(4U, edge_counts.at(edge.index()));
+        }
+
+    }
+}
+
+
+TEST_F(CUBEXXEdgeTest,faces)
+{
+
+    ///test edge_t::faces()
+    {
+        std::vector<int> face_visits(cubexx::face_t::SIZE(), 0);
+        
+        
+        for (auto edge : cubexx::edge_t::all())
+        {
+            for (auto face : edge.faces())
+            {
+                face_visits[face.index()]++;
+                
+                
+                ASSERT_TRUE(face.is_adjacent(edge));
+                ASSERT_TRUE(edge.is_adjacent(face));
+                
+                ASSERT_TRUE(face.corner_set().contains(edge.corner0()));
+                ASSERT_TRUE(face.corner_set().contains(edge.corner1()));
+            }
+        }
+
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(4, face_visits[face.index()]);
+        }
+    }
+}
+TEST_F(CUBEXXEdgeTest,face_set)
+{
+    ///test edge_t::face_set()
+    {
+        std::vector<int> face_visits(cubexx::face_t::SIZE(), 0);
+        
+        
+        for (auto edge : cubexx::edge_t::all())
+        {
+            for (auto face : edge.face_set())
+            {
+                face_visits[face.index()]++;
+                
+                
+                ASSERT_TRUE(face.is_adjacent(edge));
+                ASSERT_TRUE(edge.is_adjacent(face));
+                
+                ASSERT_TRUE(face.corner_set().contains(edge.corner0()));
+                ASSERT_TRUE(face.corner_set().contains(edge.corner1()));
+            }
+        }
+
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(4, face_visits[face.index()]);
+        }
+    }
+}
+
+
+TEST_F(CUBEXXEdgeTest,adjacents)
+{
+
+    
+    uint32_t adjacent_edge_counts[12] = {0};
+    
+    for (auto edge : cubexx::edge_t::all())
+    {
+        for (auto adj_edge : edge.adjacent_edges())
+        {
+            ASSERT_TRUE(edge.is_adjacent(adj_edge));
+            ASSERT_TRUE(adj_edge.is_adjacent(edge));
+            
+            adjacent_edge_counts[adj_edge.index()]++;
+        }
+        
+        ASSERT_EQ(cubexx::edge_set_t(edge.adjacent_edges()), edge.adjacent_edge_set());
+    }
+    
+    for (auto edge : cubexx::edge_t::all())
+    {
+        ///each edge should be covered 4 times
+        ASSERT_EQ(4U, adjacent_edge_counts[edge.index()]);
+    }
+}
+
+
+TEST_F(CUBEXXEdgeTest,corners)
+{
+    uint32_t all____corner_visits[8] = {0};
+    uint32_t all____corner_visit_count = 0;
+    for (auto edge : cubexx::edge_t::all())
+    {
+        auto corners = edge.corners();
+        auto corner_set = edge.corner_set();
+
+        ASSERT_EQ(corners.size(), corner_set.size());
+        ASSERT_EQ(corner_set, cubexx::corner_set_t(corners));
+
+        ///make sure corners == corner_set
+        for (auto corner : corners)
+        {
+            ASSERT_TRUE(corner_set.contains(corner));
+
+            ASSERT_TRUE(corner == edge.corner0() || corner == edge.corner1());
+        }
+        ///make sure corner_set == corners
+        for (auto corner : corner_set)
+        {
+            ASSERT_TRUE(corner_set.contains(corner));
+
+            ASSERT_TRUE(corner == edge.corner0() || corner == edge.corner1());
+        }
+
+        ASSERT_EQ(2U,corners.size());
+        ASSERT_NE(corners[0],corners[1]);
+
+        int xyz0[] = {corners[0].x(), corners[0].y(), corners[0].z()};
+        int xyz1[] = {corners[1].x(), corners[1].y(), corners[1].z()};
+
+        ///the two corners will differ in one component
+        ASSERT_NE(xyz0[edge.base_axis()], xyz1[edge.base_axis()]);
+        ///the two corners will be the same in two components
+        ASSERT_EQ(xyz0[edge.secondary_axis()], xyz1[edge.secondary_axis()]);
+        ASSERT_EQ(xyz0[edge.tertiary_axis()], xyz1[edge.tertiary_axis()]);
+        
+
+        ///pidgeon-hole
+        {
+            uint32_t edge____corner_visits[8] = {0};
+            uint32_t edge____corner_visit_count = 0;
+            for (auto corner : cubexx::corner_t::all())
+            {
+                if(corner_set.contains(corner))
+                {
+                    edge____corner_visit_count++;
+                    edge____corner_visits[corner.index()]++;
+                    all____corner_visit_count++;
+                    all____corner_visits[corner.index()]++;
+
+                    ASSERT_TRUE(corner == edge.corner0() || corner == edge.corner1());
+                } else {
+                    ASSERT_TRUE(corner != edge.corner0() && corner != edge.corner1());
+                }
+            }
+
+            ASSERT_EQ(2U,edge____corner_visit_count);
+        }
+    }
+
+    ///check pidgeon-hole
+    ///each corner should be visited twice; once for each adjacent edge
+    ASSERT_EQ(3U*8U,all____corner_visit_count);
+
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(3U,all____corner_visits[corner.index()]);
+    }
+
+}
+
+TEST_F(CUBEXXEdgeTest,end_faces)
+{
+    std::vector<uint32_t> all____face_visits(cubexx::face_t::SIZE(),0);
+    uint32_t all____face_visit_count = 0;
+
+    for (auto edge : cubexx::edge_t::all())
+    {
+        std::vector<int> edge___face_visits(cubexx::face_t::SIZE(),0);
+        uint32_t edge___face_visit_count = 0;
+        ASSERT_EQ(edge.end_face_set(), cubexx::face_set_t(edge.end_faces()));
+
+        for (auto face : edge.end_faces())
+        {
+            ASSERT_TRUE(edge.end_face_set().contains(face));
+
+            ASSERT_EQ(1U, (face.corner_set() & edge.corner_set()).size());
+        }
+
+        ASSERT_TRUE(edge.end_face_set().contains(edge.end_face(edge.corner0())));
+        ASSERT_TRUE(edge.end_face_set().contains(edge.end_face(edge.corner1())));
+
+        for (auto face : edge.end_faces())
+        {
+            edge___face_visits[face.index()]++;
+            edge___face_visit_count++;
+            all____face_visits[face.index()]++;
+            all____face_visit_count++;
+
+        }
+
+        ASSERT_EQ(2U, edge___face_visit_count);
+    }
+
+
+    ASSERT_EQ(4U*6U, all____face_visit_count);
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(4U, all____face_visits[face.index()]);
+    }
+}
+
+TEST_F(CUBEXXEdgeTest,is_adjacent_to_edge)
+{
+
+    std::vector<uint32_t> all____edge_counts(cubexx::edge_t::SIZE(), 0);
+    for (auto edge : cubexx::edge_t::all())
+    {
+        for (auto adj_edge : edge.adjacent_edges())
+        {
+            ASSERT_TRUE(edge.is_adjacent(adj_edge));
+            ASSERT_TRUE(adj_edge.is_adjacent(edge));
+        }
+        for (auto adj_edge : edge.adjacent_edge_set())
+        {
+            ASSERT_TRUE(edge.is_adjacent(adj_edge));
+            ASSERT_TRUE(adj_edge.is_adjacent(edge));
+        }
+        
+        for (auto other_edge : cubexx::edge_t::all())
+        {
+            if (other_edge.is_adjacent(edge))
+            {
+                ASSERT_TRUE(edge.is_adjacent(other_edge));
+            } else {
+                ASSERT_FALSE(edge.is_adjacent(other_edge));
+            }
+        }
+
+        ASSERT_TRUE(!edge.is_adjacent(edge));
+        ASSERT_TRUE(!edge.is_adjacent(edge.opposite()));
+        ASSERT_TRUE(!edge.opposite().is_adjacent(edge));
+
+        std::vector<uint32_t> edge___edge_counts(cubexx::edge_t::SIZE(), 0);
+        for (auto rhs : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(rhs.is_adjacent(edge), edge.is_adjacent(rhs));
+
+            ///they are adjacent if they share exactly one corner
+            ASSERT_EQ(rhs.is_adjacent(edge), (edge.corner_set() & rhs.corner_set()).size() == 1);
+        }
+
+        ///count for pidgeonhole
+        for (auto rhs : cubexx::edge_t::all())
+        {
+            if (!edge.is_adjacent(rhs))
+                continue;
+            all____edge_counts[rhs.index()]++;
+            edge___edge_counts[rhs.index()]++;
+        }
+        
+        ///pidgeonhole
+        for (auto rhs : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(1U == edge___edge_counts[rhs.index()], edge.is_adjacent(rhs));
+            ASSERT_EQ(0U == edge___edge_counts[rhs.index()], !edge.is_adjacent(rhs));
+        }
+        ///pidgeonhole
+        ASSERT_EQ(4U, std::accumulate(edge___edge_counts.begin(), edge___edge_counts.end(), 0U));
+    }
+
+    ///pidgeonhole
+    for (auto edge : cubexx::edge_t::all())
+    {
+        ASSERT_EQ(4U, all____edge_counts[edge.index()]);
+    }
+    ///pidgeonhole
+    ///12 edges, each touch 4 adjacent edges
+    ASSERT_EQ(cubexx::edge_t::SIZE()*4U, std::accumulate(all____edge_counts.begin(), all____edge_counts.end(), 0U));
+}
+
+TEST_F(CUBEXXEdgeTest,is_adjacent_to_face)
+{
+    std::vector<uint32_t> all____face_visits(cubexx::face_t::SIZE(), 0);
+    uint32_t all____face_visit_count = 0;
+    for (auto edge : cubexx::edge_t::all())
+    {
+
+        std::vector<uint32_t> edge___face_visits(cubexx::face_t::SIZE(), 0);
+        uint32_t edge___face_visit_count = 0;
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(face.is_adjacent(edge),  edge.is_adjacent(face));
+            ASSERT_EQ(edge.face_set().contains(face), edge.is_adjacent(face));
+
+            if (edge.is_adjacent(face))
+            {
+                ASSERT_TRUE(face.corner_set().contains(edge.corner0()));
+                ASSERT_TRUE(face.corner_set().contains(edge.corner1()));
+            } else {
+                ASSERT_FALSE(face.corner_set().contains(edge.corner0()) && face.corner_set().contains(edge.corner1()));
+            }
+            
+            
+            ///counts for pidgeon-hole test
+            if (edge.is_adjacent(face))
+            {
+                edge___face_visits[face.index()]++;
+                edge___face_visit_count++;
+                all____face_visits[face.index()]++;
+                all____face_visit_count++;
+            }
+        }
+
+        ///each edge visits two faces
+        ASSERT_EQ(2U, edge___face_visit_count);
+    }
+
+    ///each face is adjacent to 4 edges.
+    ASSERT_EQ(4U*6U, all____face_visit_count);
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(4U, all____face_visits[face.index()]);
+    }
+    
+}
+
+
+TEST_F(CUBEXXEdgeTest,is_adjacent_to_corner)
+{
+
+    uint32_t all____corner_visits[8] = {0};
+    uint32_t all____corner_visit_count = 0;
+    for (auto edge : cubexx::edge_t::all())
+    {
+
+        ASSERT_TRUE(edge.is_adjacent(edge.corner0()));
+        ASSERT_TRUE(edge.is_adjacent(edge.corner1()));
+
+        uint32_t edge___corner_visits[8] = {0};
+        uint32_t edge___corner_visit_count = 0;
+        for (auto corner : cubexx::corner_t::all())
+        {
+            ASSERT_EQ(corner.is_adjacent(edge),  edge.is_adjacent(corner));
+            ASSERT_EQ(edge.corner_set().contains(corner), edge.is_adjacent(corner));
+
+            if (edge.is_adjacent(corner))
+            {
+                ASSERT_TRUE(edge.corner0() == corner || edge.corner1() == corner);
+                edge___corner_visits[corner.index()]++;
+                edge___corner_visit_count++;
+                all____corner_visits[corner.index()]++;
+                all____corner_visit_count++;
+            }
+        }
+
+        ASSERT_EQ(2U, edge___corner_visit_count);
+    }
+
+    ASSERT_EQ(3U*8U, all____corner_visit_count);
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(3U, all____corner_visits[corner.index()]);
+    }
+}

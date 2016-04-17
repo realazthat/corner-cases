@@ -294,7 +294,46 @@ TEST_F(CUBEXXCornerTest,push_direction)
     }
 }
 
-TEST_F(CUBEXXCornerTest,is_adjacent)
+TEST_F(CUBEXXCornerTest,move_direction)
+{
+    for (auto corner : cubexx::corner_t::all())
+    {
+        auto xyz = corner.xyz();
+
+        for (auto direction : cubexx::direction_t::all())
+        {
+            auto next_corner = corner.move(direction);
+
+
+            auto expected_next_xyz = xyz;
+
+            for (std::size_t i = 0; i < 3; ++i)
+                expected_next_xyz[i] += direction.xyz()[i]*2;
+
+
+            bool expected_out_of_bounds = false;
+            for (std::size_t i = 0; i < 3; ++i)
+                expected_out_of_bounds |= (std::abs(expected_next_xyz[i]) > 1);
+
+            ASSERT_EQ(expected_out_of_bounds, next_corner.is_null())
+                        << "expected_out_of_bounds: " << (expected_out_of_bounds ? "true" : "false")
+                        << ", corner: " << corner
+                        << ", direction: " << direction
+                        << ", next_corner: " << next_corner
+                        << ", expected_next_xyz: " << (int)expected_next_xyz[0] << ", " << (int)expected_next_xyz[1] << ", " << (int)expected_next_xyz[2]
+                        ;
+
+            if (next_corner.is_null())
+                continue;
+
+            auto next_xyz = next_corner.xyz();
+
+            ASSERT_EQ(expected_next_xyz, next_xyz);
+        }
+    }
+}
+
+TEST_F(CUBEXXCornerTest,is_adjacent_to_corner)
 {
 
     ///test corner is_adjacent(corner_t)
@@ -302,7 +341,9 @@ TEST_F(CUBEXXCornerTest,is_adjacent)
         
         for (auto corner0 : cubexx::corner_t::all())
         {
-            
+            ASSERT_TRUE(!corner0.is_adjacent(corner0));
+            ASSERT_TRUE(!corner0.is_adjacent(corner0.opposite()));
+
             for (auto corner1 : cubexx::corner_t::all())
             {
                 
@@ -340,6 +381,343 @@ TEST_F(CUBEXXCornerTest,is_adjacent)
         }
     }
 }
+
+
+TEST_F(CUBEXXCornerTest,is_adjacent_to_edge)
+{
+    for (auto corner : cubexx::corner_t::all())
+    {
+        for (auto edge : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(edge.is_adjacent(corner), corner.is_adjacent(edge));
+            ASSERT_EQ(corner.is_adjacent(edge), edge.corner_set().contains(corner));
+
+            if (corner.is_adjacent(edge))
+            {
+                ASSERT_TRUE(edge.corner0() == corner || edge.corner1() == corner);
+            } else {
+                ASSERT_TRUE(edge.corner0() != corner && edge.corner1() != corner);
+            }
+        }
+    }
+}
+
+
+TEST_F(CUBEXXCornerTest,is_adjacent_to_face)
+{
+    for (auto corner : cubexx::corner_t::all())
+    {
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(face.is_adjacent(corner), corner.is_adjacent(face));
+            ASSERT_EQ(corner.is_adjacent(face), face.corner_set().contains(corner));
+
+
+            auto direction = face.direction();
+            auto axis = direction.axis();
+
+            auto corner_xyz = corner.xyz();
+            auto direction_xyz = direction.xyz();
+
+            ASSERT_EQ(corner.is_adjacent(face), corner_xyz[axis] == direction_xyz[axis])
+                << "corner: " << corner
+                << ", face: " << face
+                << ", axis: " << int(axis);
+            
+        }
+    }
+}
+
+TEST_F(CUBEXXCornerTest,adjacents)
+{
+  uint32_t adjacent_corner_counts[8] = {0};
+  for (auto lhs : cubexx::corner_t::all())
+  {
+    uint32_t rhs_counts[8] = {0};
+    for (auto rhs : lhs.adjacents())
+    {
+      ASSERT_TRUE(lhs.is_adjacent(rhs));
+      ASSERT_TRUE(rhs.is_adjacent(lhs));
+      
+      ASSERT_EQ(0U, rhs_counts[rhs.index()]);
+      rhs_counts[rhs.index()]++;
+      adjacent_corner_counts[rhs.index()]++;
+    }
+    
+    
+    
+    ///check the contrapositive
+    for (auto rhs : cubexx::corner_t::all())
+    {
+      
+      if (rhs_counts[rhs.index()] != 0)
+      {
+        ASSERT_EQ(1U, rhs_counts[rhs.index()]);
+        ASSERT_TRUE(lhs.is_adjacent(rhs));
+        ASSERT_TRUE(rhs.is_adjacent(lhs));
+      } else {
+        ASSERT_FALSE(lhs.is_adjacent(rhs));
+        ASSERT_FALSE(rhs.is_adjacent(lhs));
+        
+      }
+    }
+    
+  }
+  
+  ///each corner should be covered 3 times
+  for (auto corner : cubexx::corner_t::all())
+  {
+    ASSERT_EQ(3U, adjacent_corner_counts[corner.index()]);
+  }
+}
+
+TEST_F(CUBEXXCornerTest,faces)
+{
+
+    std::vector<uint32_t> all___face_visits(cubexx::face_t::SIZE(), 0);
+
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(corner.face_set(), cubexx::face_set_t(corner.faces()));
+
+        std::vector<uint32_t> corner___face_visits(cubexx::face_t::SIZE(), 0);
+
+        for (auto face : corner.faces())
+        {
+            ASSERT_TRUE(corner.face_set().contains(face));
+
+            ASSERT_TRUE(face.corner_set().contains(corner));
+            ASSERT_TRUE(face.is_adjacent(corner));
+            ASSERT_TRUE(corner.is_adjacent(face));
+
+            corner___face_visits[face.index()]++;
+            all___face_visits[face.index()]++;
+        }
+        for (auto face : cubexx::face_t::all())
+        {
+            ASSERT_EQ(face.is_adjacent(corner), corner.is_adjacent(face));
+
+            if (face.is_adjacent(corner))
+            {
+                ASSERT_EQ(1U, corner___face_visits[face.index()]);
+            } else {
+                ASSERT_EQ(0U, corner___face_visits[face.index()]);
+            }
+        }
+        ///pidgeonhole
+        ASSERT_EQ(3U, std::accumulate(corner___face_visits.begin(), corner___face_visits.end(), 0U));
+    }
+
+
+
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(4U, all___face_visits[face.index()]);
+    }
+    ///pidgeonhole
+    ///8 corners, each visits 3 faces
+    ASSERT_EQ(8U*3U, std::accumulate(all___face_visits.begin(), all___face_visits.end(), 0U));
+
+}
+
+TEST_F(CUBEXXCornerTest,edges)
+{
+
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(cubexx::edge_set_t(corner.edges()), corner.edge_set());
+
+        std::vector<uint32_t> corner__edge_visits(cubexx::edge_t::SIZE(), 0);
+
+        auto edges = corner.edges();
+
+        for (auto edge : corner.edges())
+        {
+            ///1. compare edges() => edge_set()
+            ASSERT_TRUE(corner.edge_set().contains(edge));
+            ///2. count edge neighbors
+            corner__edge_visits[edge.index()]++;
+        }
+
+        for (auto edge : corner.edge_set())
+        {
+            ///sanity
+            ASSERT_TRUE(corner.edge_set().contains(edge));
+
+            ///edge_set() => edges()
+            ASSERT_TRUE(std::find(edges.begin(), edges.end(), edge) != edges.end());
+            
+            ///check count matches
+            ASSERT_EQ(1U, corner__edge_visits[edge.index()]);
+        }
+
+
+
+
+        for (auto edge : cubexx::edge_t::all())
+        {
+            ///sanity, edge.is_adjacent(corner) <=> corner.is_adjacent(edge)
+            ASSERT_EQ(edge.is_adjacent(corner), corner.is_adjacent(edge));
+            ///edge.is_adjacent(corner) <=> edge \in corner.edge_set()
+            ASSERT_EQ(edge.is_adjacent(corner), corner.edge_set().contains(edge));
+            ///edge.is_adjacent(corner) <=> corner \in edge.corner_set()
+            ASSERT_EQ(edge.is_adjacent(corner), edge.corner_set().contains(corner));
+
+            ///edge.is_adjacent(corner) <=> corner \in edge.corners()
+            ASSERT_EQ(edge.is_adjacent(corner), edge.corner0() == corner || edge.corner1() == corner);
+
+            ///check counts sanity
+            ASSERT_EQ(1U == corner__edge_visits[edge.index()], edge.is_adjacent(corner));
+            ASSERT_EQ(0U == corner__edge_visits[edge.index()], !edge.is_adjacent(corner));
+
+
+            ///edge.is_adjacent(corner) <=> edge \in edges
+            ASSERT_EQ(std::find(edges.begin(), edges.end(), edge) != edges.end(),    edge.is_adjacent(corner));
+
+        }
+    }
+}
+
+
+TEST_F(CUBEXXCornerTest,edge_via_direction)
+{
+    for (auto corner : cubexx::corner_t::all())
+    {
+        for (auto direction : cubexx::direction_t::all())
+        {
+            auto edge = corner.edge(direction);
+            auto lhs_corner = corner.adjacent(direction);
+            
+            
+            ASSERT_EQ(direction.axis(), edge.base_axis());
+            ASSERT_TRUE(edge.corner_set().contains(corner));
+            ASSERT_TRUE(edge.corner_set().contains(lhs_corner));
+            
+            ASSERT_TRUE(lhs_corner.is_adjacent(corner));
+            ASSERT_TRUE(corner.is_adjacent(lhs_corner));
+            
+            ASSERT_TRUE(corner.edge_set().contains(edge));
+            ASSERT_TRUE(lhs_corner.edge_set().contains(edge));
+            
+            
+            
+        }
+    }
+    
+}
+
+
+
+TEST_F(CUBEXXCornerTest,edge_via_corner)
+{
+    for (auto lhs : cubexx::corner_t::all())
+    {
+        std::vector<uint32_t> corner___corner_visits(cubexx::corner_t::SIZE(), 0);
+
+        for (auto rhs : cubexx::corner_t::all())
+        {
+            if (!rhs.is_adjacent(lhs))
+                continue;
+
+            auto direction = lhs.get_adjacent_direction(rhs);
+            auto edge = lhs.edge(rhs);
+
+            ASSERT_EQ(edge,lhs.edge(direction));
+            ASSERT_EQ(rhs,lhs.adjacent(direction));
+            
+            
+            ASSERT_EQ(direction.axis(), edge.base_axis());
+            ASSERT_TRUE(edge.corner_set().contains(lhs));
+            ASSERT_TRUE(edge.corner_set().contains(rhs));
+            
+            ASSERT_TRUE(rhs.is_adjacent(lhs));
+            ASSERT_TRUE(lhs.is_adjacent(rhs));
+            
+            ASSERT_TRUE(lhs.edge_set().contains(edge));
+            ASSERT_TRUE(rhs.edge_set().contains(edge));
+            
+            corner___corner_visits[rhs.index()]++;
+        }
+
+    }
+}
+
+
+TEST_F(CUBEXXCornerTest,xyz)
+{
+    for (auto corner : cubexx::corner_t::all()){
+        auto xyz = corner.xyz();
+
+        ASSERT_EQ(corner.x(), xyz[0]);
+        ASSERT_EQ(corner.y(), xyz[1]);
+        ASSERT_EQ(corner.z(), xyz[2]);
+    }
+}
+
+TEST_F(CUBEXXCornerTest,get_adjacent_direction)
+{
+    std::vector<uint32_t> rhs_counts(8,0);
+    std::vector<uint32_t> direction_counts(6,0);
+    for (auto lhs : cubexx::corner_t::all())
+    {
+        uint32_t rhs_count = 0;
+        for (auto rhs : cubexx::corner_t::all())
+        {
+            if (!lhs.is_adjacent(rhs))
+                continue;
+            
+            auto direction = lhs.get_adjacent_direction(rhs);
+            
+            ASSERT_EQ(direction.opposite(),rhs.get_adjacent_direction(lhs));
+            ASSERT_EQ(direction.axis(),rhs.get_adjacent_direction(lhs).axis());
+            
+            int lhs_xyz[] = {lhs.x(), lhs.y(), lhs.z()};
+            int rhs_xyz[] = {rhs.x(), rhs.y(), rhs.z()};
+            
+            
+            ///the coordinate of the corners in the component of the direction's axis should be flipped
+            ASSERT_EQ(-lhs_xyz[direction.axis()], rhs_xyz[direction.axis()]);
+            
+            std::uint_fast8_t axis2 = (direction.axis() + 1) % 3;
+            std::uint_fast8_t axis3 = (direction.axis() + 2) % 3;
+            
+            ///the other coordinates of the corners should be the same
+            ASSERT_EQ(lhs_xyz[axis2], rhs_xyz[axis2]);
+            ASSERT_EQ(lhs_xyz[axis3], rhs_xyz[axis3]);
+            
+            rhs_count++;
+            rhs_counts.at(rhs.index())++;
+            direction_counts.at(direction.index())++;
+            
+            
+            
+        }
+        
+        ///there should be 3 adjacent corners
+        ASSERT_EQ(3U, rhs_count);
+    }
+    
+    ///every corner should be covered 3 times
+    for (auto corner : cubexx::corner_t::all())
+    {
+        ASSERT_EQ(3U, rhs_counts.at(corner.index()));
+    }
+    
+    ///every direction should be covered 4 times, between every set of opposite faces
+    for (auto direction : cubexx::direction_t::all())
+    {
+        ASSERT_EQ(4U, direction_counts.at(direction.index()));
+    }
+    
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -808,6 +1186,67 @@ TEST_F(CUBEXXCornerTest,corner_set)
             ASSERT_EQ(right_corner_set, bitmask_to_corner_set(combo1));
         }
     }
+    
+    
+    ///check corner_set_t::operator&(corner_set_t) and corner_set_t::operator-=(corner_set_t)
+    for (uint32_t combo0 = 0; combo0 < 256; ++combo0)
+    {
+        const auto left_corner_set = all_corner_sets[combo0];
+        for (uint32_t combo1 = 0; combo1 < 256; ++combo1)
+        {
+            const auto right_corner_set = all_corner_sets[combo1];
+            uint32_t expected_result_combo = combo0 & combo1;
+            
+            
+            
+            ASSERT_TRUE( expected_result_combo < 256 );
+            
+            
+            ///expected_result_combo => combo0
+            ASSERT_EQ(uint32_t((~expected_result_combo) | combo0), uint32_t(-1));
+            ///expected_result_combo => combo1
+            ASSERT_EQ(uint32_t((~expected_result_combo) | combo0), uint32_t(-1));
+            
+            
+            
+            
+            ///test operator&
+            {
+                
+                ASSERT_TRUE(bitmask_equal_corner_set( left_corner_set & right_corner_set, expected_result_combo))
+                    <<   "left_corner_set:                " << left_corner_set.bits()
+                    << "\n right_corner_set:               " << right_corner_set.bits()
+                    << "\n left_corner_set & right_corner_set: " << (left_corner_set & right_corner_set).bits()
+                    << "\n combo0:          " << combo0
+                    << "\n combo1:          " << combo1
+                    << "\n expected_result_combo: " << (expected_result_combo);
+                ASSERT_TRUE(bitmask_equal_corner_set( left_corner_set & right_corner_set, expected_result_combo))
+                    <<   "left_corner_set:                " << left_corner_set.bits()
+                    << "\n right_corner_set:               " << right_corner_set.bits()
+                    << "\n left_corner_set & right_corner_set: " << (left_corner_set & right_corner_set);
+                ASSERT_EQ(left_corner_set & right_corner_set, bitmask_to_corner_set(expected_result_combo))
+                    <<   "left_corner_set:                " << left_corner_set.bits()
+                    << "\n right_corner_set:               " << right_corner_set.bits()
+                    << "\n left_corner_set & right_corner_set: " << (left_corner_set & right_corner_set);
+            }
+            ///test operator-=
+            {
+                auto result_corner_set = left_corner_set;
+                result_corner_set &= right_corner_set;
+                
+                ASSERT_TRUE(bitmask_equal_corner_set(result_corner_set, expected_result_combo));
+                ASSERT_EQ(result_corner_set, bitmask_to_corner_set(expected_result_combo));
+            }
+            ASSERT_EQ(left_corner_set, bitmask_to_corner_set(combo0));
+            ASSERT_EQ(right_corner_set, bitmask_to_corner_set(combo1));
+        }
+    }
+    
+    
+    
+    
+    
+    
     ///check ::operator<<
     /*
     for (uint32_t combo0 = 0; combo0 < 256; ++combo0)
