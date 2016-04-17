@@ -291,7 +291,59 @@ TEST_F(CUBEXXFaceTest,corners)
 
 TEST_F(CUBEXXFaceTest,is_adjacent_to_face)
 {
-  ASSERT_TRUE(false);
+    std::vector<uint32_t> all____face_counts(cubexx::face_t::SIZE(),0);
+
+    for (auto face : cubexx::face_t::all())
+    {
+        std::vector<uint32_t> face___face_counts(cubexx::face_t::SIZE(),0);
+
+        auto opposite = face.opposite();
+
+        ASSERT_TRUE(!face.is_adjacent(face));
+        ASSERT_TRUE(!face.is_adjacent(opposite));
+        ASSERT_TRUE(!opposite.is_adjacent(face));
+
+        for (auto rhs : cubexx::face_t::all())
+        {
+            ASSERT_EQ(rhs.is_adjacent(face),face.is_adjacent(rhs));
+
+
+            ASSERT_EQ(rhs.is_adjacent(face), face.direction().axis() != rhs.direction().axis());
+            ASSERT_EQ(rhs.is_adjacent(face), (face.corner_set() & rhs.corner_set()).size() == 2);
+
+
+        }
+
+
+        ///count
+        for (auto rhs : cubexx::face_t::all())
+        {
+            if (!rhs.is_adjacent(face))
+                continue;
+            all____face_counts[rhs.index()]++;
+            face___face_counts[rhs.index()]++;
+        }
+        ///pidgeonhole
+        for (auto rhs : cubexx::face_t::all())
+        {
+            ASSERT_EQ(1U == face___face_counts[rhs.index()], rhs.is_adjacent(face));
+            ASSERT_EQ(0U == face___face_counts[rhs.index()], !rhs.is_adjacent(face));
+        }
+
+        ///pidgeonhole
+        ASSERT_EQ(4U, std::accumulate(face___face_counts.begin(), face___face_counts.end(), 0U));
+    }
+
+    ///pidgeonhole
+    for (auto face : cubexx::face_t::all())
+    {
+        ///each face should be visited 4 times
+        ASSERT_EQ(4U, all____face_counts[face.index()]);
+    }
+
+    ///pidgeonhole
+    ///6 faces, each is visited 4 times
+    ASSERT_EQ(6U*4U, std::accumulate(all____face_counts.begin(), all____face_counts.end(), 0U));
 }
 
 
