@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cubelib_corner_t &mdash; corner-cases NONE documentation</title>
+    
+    <link rel="stylesheet" href="_static/mydoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'NONE',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="corner-cases NONE documentation" href="index.html" />
+    <link rel="up" title="corner-cases/cubelib Reference Documentation" href="cubelib-reference.html" />
+    <link rel="next" title="cubelib_direction_t" href="cubelib-direction.html" />
+    <link rel="prev" title="corner-cases/cubelib Reference Documentation" href="cubelib-reference.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>corner-cases NONE documentation</span></a></h1>
+        <h2 class="heading"><span>cubelib_corner_t</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubelib-reference.html">corner-cases/cubelib Reference Documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubelib-direction.html">cubelib_direction_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="cubelib-corner-t">
+<h1>cubelib_corner_t<a class="headerlink" href="#cubelib-corner-t" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="c1">//Headers</span>
+<span class="c1">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="c1">//forward declarations</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cubelib/cubelib.fwd.h&gt;</span><span class="cp"></span>
+<span class="c1">//API</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cubelib/cubelib.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<dl class="group">
+<dt>
+<span class="target" id="corner-casesgroup__cubelib-corner-group"></span><em>group</em> <code class="descname">cubelib-corner-group</code></dt>
+<dd><p>This is the API for <a class="reference internal" href="#corner-casesstructcubelib__corner__t"><span class="std std-ref">cubelib_corner_t</span></a>. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="define">
+<dt id="c.CUBELIB_NULL_CORNER">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga716a2d6b480b350acfd4b0d101e7731e"></span><code class="descname">CUBELIB_NULL_CORNER</code><a class="headerlink" href="#c.CUBELIB_NULL_CORNER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="define">
+<dt id="c.CUBELIB_CORNERS_SIZE">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gaa179650643cd5fdb1453d548034194f6"></span><code class="descname">CUBELIB_CORNERS_SIZE</code><a class="headerlink" href="#c.CUBELIB_CORNERS_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt id="c.cubelib_corner_t">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga456ab0b9e123fc006218aa3de252f036"></span><em class="property">typedef </em><code class="descname">cubelib_corner_t</code><a class="headerlink" href="#c.cubelib_corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Struct that represents a corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"><span class="std std-ref">cubelib_get_corner_by_int3()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1b3db7d5ae91b31e181b021cb2962476"><span class="std std-ref">cubelib_get_corner_index()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga3f06f67ff9c5e3ac73ea0d288bb421ba"><span class="std std-ref">cubelib_get_corner_by_index()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga9f9b5a444353df42e31600c232a939d5"><span class="std std-ref">cubelib_is_corner_valid()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga6b52ad7476a91b2ebe840a624dc14d5a"><span class="std std-ref">cubelib_is_corner_null()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga01c549454fa94565ea61e18d54b61d4b"><span class="std std-ref">cubelib_is_corner_equal()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="c.cubelib_is_corner_valid">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga9f9b5a444353df42e31600c232a939d5"></span>bool <code class="descname">cubelib_is_corner_valid</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_is_corner_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a corner is not corrupted somehow and represents a valid corner (including a null corner). </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga6b52ad7476a91b2ebe840a624dc14d5a"><span class="std std-ref">cubelib_is_corner_null()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_is_corner_null">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga6b52ad7476a91b2ebe840a624dc14d5a"></span>bool <code class="descname">cubelib_is_corner_null</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_is_corner_null" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if this corner is a null corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga9f9b5a444353df42e31600c232a939d5"><span class="std std-ref">cubelib_is_corner_valid()</span></a>, cubelib_null_corner, CUBELIB_NULL_CORNER </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_is_corner_equal">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga01c549454fa94565ea61e18d54b61d4b"></span>bool <code class="descname">cubelib_is_corner_equal</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;left</em>, <a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;right</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_is_corner_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_x">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga1ea8b41d75ab3afe934b9bd4b7b47c24"></span>int <code class="descname">cubelib_get_corner_x</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the &#8220;origin-centered-cube-representation&#8221; x component of the corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gacd927c2091f02ab665c8607e86a4b10b"><span class="std std-ref">cubelib_get_corner_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gaa2a3a6e6b4bb7e94edd9442801b74d5d"><span class="std std-ref">cubelib_get_corner_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"><span class="std std-ref">cubelib_get_corner_i()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"><span class="std std-ref">cubelib_get_corner_ui()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga46a653ef5b81169565fcb26535369db3"><span class="std std-ref">cubelib_get_corner_ux()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_y">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gacd927c2091f02ab665c8607e86a4b10b"></span>int <code class="descname">cubelib_get_corner_y</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the &#8220;origin-centered-cube-representation&#8221; y component of the corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1ea8b41d75ab3afe934b9bd4b7b47c24"><span class="std std-ref">cubelib_get_corner_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gaa2a3a6e6b4bb7e94edd9442801b74d5d"><span class="std std-ref">cubelib_get_corner_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"><span class="std std-ref">cubelib_get_corner_i()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"><span class="std std-ref">cubelib_get_corner_ui()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga95a071ddf6c3174db01c1aea469bcd0b"><span class="std std-ref">cubelib_get_corner_uy()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"><span class="std std-ref">cubelib_get_corner_by_int3()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_z">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gaa2a3a6e6b4bb7e94edd9442801b74d5d"></span>int <code class="descname">cubelib_get_corner_z</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_z" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the &#8220;origin-centered-cube-representation&#8221; z component of the corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1ea8b41d75ab3afe934b9bd4b7b47c24"><span class="std std-ref">cubelib_get_corner_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gacd927c2091f02ab665c8607e86a4b10b"><span class="std std-ref">cubelib_get_corner_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"><span class="std std-ref">cubelib_get_corner_i()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"><span class="std std-ref">cubelib_get_corner_ui()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga806473b7aeaac5fc18556c38c64e1958"><span class="std std-ref">cubelib_get_corner_uz()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"><span class="std std-ref">cubelib_get_corner_by_int3()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_i">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"></span>int <code class="descname">cubelib_get_corner_i</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, uint_fast8_t<em>&nbsp;dim</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the &#8220;origin-centered-cube-representation&#8221; i-th component of the corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1ea8b41d75ab3afe934b9bd4b7b47c24"><span class="std std-ref">cubelib_get_corner_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gacd927c2091f02ab665c8607e86a4b10b"><span class="std std-ref">cubelib_get_corner_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gaa2a3a6e6b4bb7e94edd9442801b74d5d"><span class="std std-ref">cubelib_get_corner_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"><span class="std std-ref">cubelib_get_corner_ui()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"><span class="std std-ref">cubelib_get_corner_by_int3()</span></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">dim</span></code> - <p>an index representing the component dimension. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_ux">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga46a653ef5b81169565fcb26535369db3"></span>int <code class="descname">cubelib_get_corner_ux</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_ux" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the &#8220;unit-cube-representation&#8221; x component of the corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga95a071ddf6c3174db01c1aea469bcd0b"><span class="std std-ref">cubelib_get_corner_uy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga806473b7aeaac5fc18556c38c64e1958"><span class="std std-ref">cubelib_get_corner_uz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"><span class="std std-ref">cubelib_get_corner_ui()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"><span class="std std-ref">cubelib_get_corner_i()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1ea8b41d75ab3afe934b9bd4b7b47c24"><span class="std std-ref">cubelib_get_corner_x()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_uy">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga95a071ddf6c3174db01c1aea469bcd0b"></span>int <code class="descname">cubelib_get_corner_uy</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_uy" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the &#8220;unit-cube-representation&#8221; y component of the corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga46a653ef5b81169565fcb26535369db3"><span class="std std-ref">cubelib_get_corner_ux()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga806473b7aeaac5fc18556c38c64e1958"><span class="std std-ref">cubelib_get_corner_uz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"><span class="std std-ref">cubelib_get_corner_ui()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"><span class="std std-ref">cubelib_get_corner_i()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gacd927c2091f02ab665c8607e86a4b10b"><span class="std std-ref">cubelib_get_corner_y()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_uz">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga806473b7aeaac5fc18556c38c64e1958"></span>int <code class="descname">cubelib_get_corner_uz</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_uz" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the &#8220;unit-cube-representation&#8221; z component of the corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga46a653ef5b81169565fcb26535369db3"><span class="std std-ref">cubelib_get_corner_ux()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga95a071ddf6c3174db01c1aea469bcd0b"><span class="std std-ref">cubelib_get_corner_uy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"><span class="std std-ref">cubelib_get_corner_ui()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"><span class="std std-ref">cubelib_get_corner_i()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gaa2a3a6e6b4bb7e94edd9442801b74d5d"><span class="std std-ref">cubelib_get_corner_z()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_ui">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"></span>int <code class="descname">cubelib_get_corner_ui</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, uint_fast8_t<em>&nbsp;dim</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_ui" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the &#8220;unit-cube-representation&#8221; i-th component of the corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga46a653ef5b81169565fcb26535369db3"><span class="std std-ref">cubelib_get_corner_ux()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga95a071ddf6c3174db01c1aea469bcd0b"><span class="std std-ref">cubelib_get_corner_uy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga806473b7aeaac5fc18556c38c64e1958"><span class="std std-ref">cubelib_get_corner_uz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"><span class="std std-ref">cubelib_get_corner_i()</span></a> </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">dim</span></code> - <p>an index representing the component dimension. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_by_float3">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga7e541d9c15abd1970c6cdb1eed3314ac"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_get_corner_by_float3</code><span class="sig-paren">(</span>float<em>&nbsp;x</em>, float<em>&nbsp;y</em>, float<em>&nbsp;z</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_by_float3" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets a corner using 3 floats, same as <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"><span class="std std-ref">cubelib_get_corner_by_int3()</span></a>. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"><span class="std std-ref">cubelib_get_corner_by_int3()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_by_int3">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_get_corner_by_int3</code><span class="sig-paren">(</span>int<em>&nbsp;x</em>, int<em>&nbsp;y</em>, int<em>&nbsp;z</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_by_int3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a corner using 3 component integer vector representation. </p>
+<p>Each component represents a dimension in the cube; if the component value is more than 0, then it is an upper corner (in that dimension); if it is zero or negative, then it is a lower corner. This accomodates both cube representations, &#8220;unit-cube-representation&#8221; (where <span class="math">\(x,y,z \in \left\{0,1\right\}\)</span>) or the &#8220;origin-centered-cube-representation&#8221; (where <span class="math">\(x,y,z \in \left\{-1,+1\right\}\)</span>).</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1ea8b41d75ab3afe934b9bd4b7b47c24"><span class="std std-ref">cubelib_get_corner_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gacd927c2091f02ab665c8607e86a4b10b"><span class="std std-ref">cubelib_get_corner_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gaa2a3a6e6b4bb7e94edd9442801b74d5d"><span class="std std-ref">cubelib_get_corner_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga645217e6fec494fffb1feae9f4e9730a"><span class="std std-ref">cubelib_get_corner_i()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga46a653ef5b81169565fcb26535369db3"><span class="std std-ref">cubelib_get_corner_ux()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga95a071ddf6c3174db01c1aea469bcd0b"><span class="std std-ref">cubelib_get_corner_uy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga806473b7aeaac5fc18556c38c64e1958"><span class="std std-ref">cubelib_get_corner_uz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gac48a1c4ee296a2836c244a7f84357278"><span class="std std-ref">cubelib_get_corner_ui()</span></a> </p>
+<p class="last"><a class="reference internal" href="cubexx-corner.html#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">cubexx::corner_t::get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_index">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga1b3db7d5ae91b31e181b021cb2962476"></span>uint_fast8_t <code class="descname">cubelib_get_corner_index</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 0-based index that represents this corner; for use in array indexing and similar. </p>
+<p>The index returned will be in 3D <a class="reference external" href="https://en.wikipedia.org/wiki/Z-order_curve">Z-order curve</a> also known as &#8220;Morton order&#8221;, within the cube, in the range <span class="math">\([0,7]\)</span>. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga3f06f67ff9c5e3ac73ea0d288bb421ba"><span class="std std-ref">cubelib_get_corner_by_index()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_corner_by_index">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga3f06f67ff9c5e3ac73ea0d288bb421ba"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_get_corner_by_index</code><span class="sig-paren">(</span>uint_fast8_t<em>&nbsp;index</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_corner_by_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a corner based on the 0-based index returned by <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1b3db7d5ae91b31e181b021cb2962476"><span class="std std-ref">cubelib_get_corner_index()</span></a>. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1b3db7d5ae91b31e181b021cb2962476"><span class="std std-ref">cubelib_get_corner_index()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_opposite_corner">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga35651f0421db7d927cced304828ca31d"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_get_opposite_corner</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_opposite_corner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the corner on the opposite side of the cube. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_adjacent_corner">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga08f9d3fd28d99068b6f04ed38d2169bc"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_get_adjacent_corner</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, <a class="reference internal" href="cubelib-direction.html#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_adjacent_corner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve an adjacent a corner in a specified dimension. </p>
+<p>If the new corner cannot be moved in the specified direction then this method will wrap around and return the adjacent corner in the specified direction. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gaaa984a41223bc776106045c972b86728"><span class="std std-ref">cubelib_corner_push()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga9aa1efc8dbb080f3c6b1800f425f1aa5"><span class="std std-ref">cubelib_corner_move()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_calc_adjacent_corner">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga5da071780bdf3db7770e6cfa5b9e6b2e"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_calc_adjacent_corner</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, <a class="reference internal" href="cubelib-direction.html#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_calc_adjacent_corner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_corner_move">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga9aa1efc8dbb080f3c6b1800f425f1aa5"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_corner_move</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, <a class="reference internal" href="cubelib-direction.html#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_corner_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move a corner in a specified direction. </p>
+<p>&amp; If the new corner cannot be moved in that direction then this method will return a <code class="docutils literal"><span class="pre">null_corner</span></code>. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1gaaa984a41223bc776106045c972b86728"><span class="std std-ref">cubelib_corner_push()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga08f9d3fd28d99068b6f04ed38d2169bc"><span class="std std-ref">cubelib_get_adjacent_corner()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_corner_push">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gaaa984a41223bc776106045c972b86728"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_corner_push</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, <a class="reference internal" href="cubelib-direction.html#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_corner_push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Push a corner in a specified direction. </p>
+<p>If the new corner cannot be moved in that direction then this method will return the same corner. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga9aa1efc8dbb080f3c6b1800f425f1aa5"><span class="std std-ref">cubelib_corner_move()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga08f9d3fd28d99068b6f04ed38d2169bc"><span class="std std-ref">cubelib_get_adjacent_corner()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_calc_is_corner_adjacent_corner">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga0e8773d8ee1b0cf61672f43e7bb6b364"></span>bool <code class="descname">cubelib_calc_is_corner_adjacent_corner</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner0</em>, <a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner1</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_calc_is_corner_adjacent_corner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_is_corner_adjacent_corner">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gaaa1bf1d76ebf33578c6c141778fa9bba"></span>bool <code class="descname">cubelib_is_corner_adjacent_corner</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner0</em>, <a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner1</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_is_corner_adjacent_corner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the two corners are adjacent. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_calc_cnr_adj_cnr">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gab7a98ab943d32ea3b36b86711444cac3"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_calc_cnr_adj_cnr</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, uint_fast8_t<em>&nbsp;dim</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_calc_cnr_adj_cnr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_calc_cnr_adj_edge">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga1a6927a00953cfe2860128fed02a07c6"></span><a class="reference internal" href="cubelib-edge.html#c.cubelib_edge_t" title="cubelib_edge_t">cubelib_edge_t</a> <code class="descname">cubelib_calc_cnr_adj_edge</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, uint_fast8_t<em>&nbsp;idx</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_calc_cnr_adj_edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_calc_cnr_adj_face">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gac9a4a73a3514a1b487321cc042f2637c"></span><a class="reference internal" href="cubelib-face.html#c.cubelib_face_t" title="cubelib_face_t">cubelib_face_t</a> <code class="descname">cubelib_calc_cnr_adj_face</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a><em>&nbsp;corner</em>, uint_fast8_t<em>&nbsp;idx</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_calc_cnr_adj_face" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="variable">
+<dt id="c.cubelib_null_corner">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gad932348e16bade682388f0af6285e9fd"></span><a class="reference internal" href="#c.cubelib_corner_t" title="cubelib_corner_t">cubelib_corner_t</a> <code class="descname">cubelib_null_corner</code><a class="headerlink" href="#c.cubelib_null_corner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt id="c.cubelib_corners_size">
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1gad3439fa58d2ac61c17b7b07f7f51cb89"></span>size_t <code class="descname">cubelib_corners_size</code><a class="headerlink" href="#c.cubelib_corners_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga7df8df973e0fa0aefd74b9e369df40da"></span><code class="descname">cubelib_corner_t cubelib_cnr_adj_cnrs[8][3]</code></dt>
+<dd><p>Index through this array with the corner&#8217;s index, to obtain the 3 adjacent corners. </p>
+<p>Example:</p>
+<p><div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">cubelib_corner_t</span> <span class="n">adj_corner_i</span> <span class="o">=</span> <span class="n">cubelib_cnr_adj_cnrs</span><span class="p">[</span> <span class="n">cubelib_get_corner_index</span><span class="p">(</span><span class="n">corner</span><span class="p">)</span> <span class="p">][</span><span class="n">i</span><span class="p">];</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1b3db7d5ae91b31e181b021cb2962476"><span class="std std-ref">cubelib_get_corner_index()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="corner-casesgroup__cubelib-corner-group_1ga02af658234ad9ce6de21e42d6804015f"></span><code class="descname">cubelib_corner_t cubelib_all_corners[8]</code></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv216cubelib_corner_t">
+<span id="cubelib_corner_t"></span><span class="target" id="corner-casesstructcubelib__corner__t"></span><em class="property">struct </em><code class="descname">cubelib_corner_t</code><a class="headerlink" href="#_CPPv216cubelib_corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;cubelib/cubelib.h&gt;</em><p>Struct that represents a corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"><span class="std std-ref">cubelib_get_corner_by_int3()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga1b3db7d5ae91b31e181b021cb2962476"><span class="std std-ref">cubelib_get_corner_index()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga3f06f67ff9c5e3ac73ea0d288bb421ba"><span class="std std-ref">cubelib_get_corner_by_index()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga9f9b5a444353df42e31600c232a939d5"><span class="std std-ref">cubelib_is_corner_valid()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga6b52ad7476a91b2ebe840a624dc14d5a"><span class="std std-ref">cubelib_is_corner_null()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-corner-group_1ga01c549454fa94565ea61e18d54b61d4b"><span class="std std-ref">cubelib_is_corner_equal()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubelib-reference.html">corner-cases/cubelib Reference Documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubelib-direction.html">cubelib_direction_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Azriel Fasten.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

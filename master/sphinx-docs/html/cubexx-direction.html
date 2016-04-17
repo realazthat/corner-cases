@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cubexx::direction_t &mdash; corner-cases NONE documentation</title>
+    
+    <link rel="stylesheet" href="_static/mydoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'NONE',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="corner-cases NONE documentation" href="index.html" />
+    <link rel="up" title="corner-cases/cubexx Reference Documentation" href="cubexx-reference.html" />
+    <link rel="next" title="cubexx::edge_t" href="cubexx-edge.html" />
+    <link rel="prev" title="cubexx::corner_t" href="cubexx-corner.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>corner-cases NONE documentation</span></a></h1>
+        <h2 class="heading"><span>cubexx::direction_t</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubexx-corner.html">cubexx::corner_t</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubexx-edge.html">cubexx::edge_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="cubexx-direction-t">
+<h1>cubexx::direction_t<a class="headerlink" href="#cubexx-direction-t" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N6cubexx11direction_tE">
+<span id="cubexx::direction_t"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">direction_t</code><a class="headerlink" href="#_CPPv2N6cubexx11direction_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a direction of a cube. </p>
+<p>There are 6 directions in a cube. A <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t"><span class="std std-ref">direction_t</span></a> is 1:1 equivalent to a <a class="reference internal" href="cubexx-face.html#corner-casesstructcubexx_1_1face__t"><span class="std std-ref">face_t</span></a>; they can be converted from one to the other via <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a4f933197df46d8e65c8b85ca5c86e1c1"><span class="std std-ref">direction_t::face()</span></a> and <a class="reference internal" href="cubexx-face.html#corner-casesstructcubexx_1_1face__t_1a1c0ba3beb58ff63c261663fdb9ef7e98"><span class="std std-ref">face_t::direction()</span></a>.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="cubexx-face.html#corner-casesstructcubexx_1_1face__t"><span class="std std-ref">face_t</span></a> </dd>
+</dl>
+</p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t11direction_tEv">
+<span id="cubexx::direction_t::direction_t"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a543cd4b554e28401297f1e9ef43b0e79"></span><code class="descname">direction_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx11direction_t11direction_tEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default constructs a &#8220;null&#8221; <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t"><span class="std std-ref">direction_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t4faceEv">
+<span id="cubexx::direction_t::face"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a4f933197df46d8e65c8b85ca5c86e1c1"></span><em class="property">const</em> <a class="reference internal" href="cubexx-face.html#_CPPv2N6cubexx6face_tE" title="cubexx::face_t">face_t</a> &amp;<code class="descname">face</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t4faceEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the equivalent face. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t8oppositeEv">
+<span id="cubexx::direction_t::opposite"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1ab369d0bf58aa9842d1846b2e932376a5"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<code class="descname">opposite</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t8oppositeEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the opposite direction. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t9adjacentsEv">
+<span id="cubexx::direction_t::adjacents"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a1c691be8593f56b29b602d46cb95683e"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a>, 4&gt; &amp;<code class="descname">adjacents</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t9adjacentsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the four adjacent directions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t12adjacent_setEv">
+<span id="cubexx::direction_t::adjacent_set"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1acad4f8c46e84b17926e3b59b80f21c4e"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx15direction_set_tE" title="cubexx::direction_set_t">direction_set_t</a> &amp;<code class="descname">adjacent_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t12adjacent_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a <a class="reference internal" href="cubexx-sets.html#corner-casesstructcubexx_1_1direction__set__t"><span class="std std-ref">direction_set_t</span></a> containing the 4 adjacent directions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t1xEv">
+<span id="cubexx::direction_t::x"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a821196a1e3fe57f8237374f49c823c4d"></span>std::int_fast8_t <code class="descname">x</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t1xEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the x component of the direction vector. </p>
+<p>See <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> for more information. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1ad38dabd86cb53f519aef96f5ae0a8680"><span class="std std-ref">xyz()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t1yEv">
+<span id="cubexx::direction_t::y"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a5e5cc89450c5f1b92d849c273fd293c0"></span>std::int_fast8_t <code class="descname">y</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t1yEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the y component of the direction vector. </p>
+<p>See <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> for more information. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1ad38dabd86cb53f519aef96f5ae0a8680"><span class="std std-ref">xyz()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t1zEv">
+<span id="cubexx::direction_t::z"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a99da2e04e8624b88efea0d0dd93167ca"></span>std::int_fast8_t <code class="descname">z</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t1zEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the z component of the direction vector. </p>
+<p>See <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> for more information. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1ad38dabd86cb53f519aef96f5ae0a8680"><span class="std std-ref">xyz()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t8positiveEv">
+<span id="cubexx::direction_t::positive"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a482339a310380969b79e08489187c748"></span>bool <code class="descname">positive</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t8positiveEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the direction vector is positive; false if it is negative. </p>
+<p>See <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> for more information. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1ad38dabd86cb53f519aef96f5ae0a8680"><span class="std std-ref">xyz()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a0b30e0d278400dd32811937edff1a6fb"><span class="std std-ref">axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a821196a1e3fe57f8237374f49c823c4d"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a5e5cc89450c5f1b92d849c273fd293c0"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a99da2e04e8624b88efea0d0dd93167ca"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1ad38dabd86cb53f519aef96f5ae0a8680"><span class="std std-ref">xyz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t4axisEv">
+<span id="cubexx::direction_t::axis"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a0b30e0d278400dd32811937edff1a6fb"></span>uint_fast8_t <code class="descname">axis</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t4axisEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a number <span class="math">\(\in \left\{0,1,2\right\}\)</span> representing the axis of the direction. </p>
+<p>See <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> for more information. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a482339a310380969b79e08489187c748"><span class="std std-ref">positive()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a821196a1e3fe57f8237374f49c823c4d"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a5e5cc89450c5f1b92d849c273fd293c0"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a99da2e04e8624b88efea0d0dd93167ca"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1ad38dabd86cb53f519aef96f5ae0a8680"><span class="std std-ref">xyz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t3xyzEv">
+<span id="cubexx::direction_t::xyz"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1ad38dabd86cb53f519aef96f5ae0a8680"></span><em class="property">const</em> std::array&lt;std::int_fast8_t, 3&gt; &amp;<code class="descname">xyz</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t3xyzEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all three components of the direction vector. </p>
+<p>See <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> for more information. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a821196a1e3fe57f8237374f49c823c4d"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a5e5cc89450c5f1b92d849c273fd293c0"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a99da2e04e8624b88efea0d0dd93167ca"><span class="std std-ref">z()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t5indexEv">
+<span id="cubexx::direction_t::index"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a87b278a8443b7758836826b534b5eb26"></span>std::uint_fast8_t <code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t5indexEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a numeric 0-based index for the direction, for use in indexing when storing in an array, or for comparison when storing in a container requiring comparison. </p>
+<p>The index will be less than <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a76559c7c0eedeef58a9460548a3034b5"><span class="std std-ref">SIZE()</span></a>. The &#8220;null&#8221; direction has no index, and it is illegal to call <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a87b278a8443b7758836826b534b5eb26"><span class="std std-ref">index()</span></a> on it. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a2a8993c8d51bf28ebe288fad203f709d"><span class="std std-ref">get(std::uint_fast8_t idx)</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_tltERK11direction_t">
+<span id="cubexx::direction_t::lt-operator__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1adfce75134bcb3647326738aac367bd30"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_tltERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_teqERK11direction_t">
+<span id="cubexx::direction_t::eq-operator__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1acea3f785eafb4c6b97da4f669f5ac5f0"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_teqERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_tneERK11direction_t">
+<span id="cubexx::direction_t::neq-operator__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1ac55c4be7b323dd9063d240ec3d45ad7f"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_tneERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t7is_nullEv">
+<span id="cubexx::direction_t::is_null"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1aade9682e83985f584871bb3a74ace1a8"></span>bool <code class="descname">is_null</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx11direction_t7is_nullEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if this direction is a null <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t"><span class="std std-ref">direction_t</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t3getENSt11int_fast8_tENSt11int_fast8_tENSt11int_fast8_tE">
+<span id="cubexx::direction_t::get__std::int_fast8_t.std::int_fast8_t.std::int_fast8_t"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a77ef221f06d911d638ecb1f774466809"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span>std::int_fast8_t <em>x</em>, std::int_fast8_t <em>y</em>, std::int_fast8_t <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx11direction_t3getENSt11int_fast8_tENSt11int_fast8_tENSt11int_fast8_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a direction from a vector of 3 integer components; two of them must be 0, the third must be positive or negative in the dimension of the direction. </p>
+<p>For example, (0,0,+1) means a direction on the z-axis pointing along the positive length of the axis. While (-1,0,0) means a direction on the (negative) x-axis pointing toward the negative asymptote of the x-axis. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a821196a1e3fe57f8237374f49c823c4d"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a5e5cc89450c5f1b92d849c273fd293c0"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a99da2e04e8624b88efea0d0dd93167ca"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a0b30e0d278400dd32811937edff1a6fb"><span class="std std-ref">axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a482339a310380969b79e08489187c748"><span class="std std-ref">positive()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t3getERK11direction_t">
+<span id="cubexx::direction_t::get__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a875fad777724293c9b8a232b1b9b4075"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>direction</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx11direction_t3getERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a direction given a direction. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t3getENSt12uint_fast8_tE">
+<span id="cubexx::direction_t::get__std::uint_fast8_t"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a2a8993c8d51bf28ebe288fad203f709d"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span>std::uint_fast8_t <em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx11direction_t3getENSt12uint_fast8_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the direction represented by an index. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1direction__t_1a87b278a8443b7758836826b534b5eb26"><span class="std std-ref">index()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t3allEv">
+<span id="cubexx::direction_t::all"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1ae38ae8f67af55e5bcef9fc829c64fb9e"></span><em class="property">static</em> <em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a>, 6&gt; &amp;<code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx11direction_t3allEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all the directions on the cube. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t14null_directionEv">
+<span id="cubexx::direction_t::null_direction"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a55565ae890c13510ed2b47c5db7232c3"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<code class="descname">null_direction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx11direction_t14null_directionEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a null direction. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx11direction_t4SIZEEv">
+<span id="cubexx::direction_t::SIZE"></span><span class="target" id="corner-casesstructcubexx_1_1direction__t_1a76559c7c0eedeef58a9460548a3034b5"></span><em class="property">static</em> std::size_t <code class="descname">SIZE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx11direction_t4SIZEEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of directions. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubexx-corner.html">cubexx::corner_t</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubexx-edge.html">cubexx::edge_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Azriel Fasten.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

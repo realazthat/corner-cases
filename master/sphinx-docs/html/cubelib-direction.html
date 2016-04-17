@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cubelib_direction_t &mdash; corner-cases NONE documentation</title>
+    
+    <link rel="stylesheet" href="_static/mydoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'NONE',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="corner-cases NONE documentation" href="index.html" />
+    <link rel="up" title="corner-cases/cubelib Reference Documentation" href="cubelib-reference.html" />
+    <link rel="next" title="cubelib_edge_t" href="cubelib-edge.html" />
+    <link rel="prev" title="cubelib_corner_t" href="cubelib-corner.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>corner-cases NONE documentation</span></a></h1>
+        <h2 class="heading"><span>cubelib_direction_t</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubelib-corner.html">cubelib_corner_t</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubelib-edge.html">cubelib_edge_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="cubelib-direction-t">
+<h1>cubelib_direction_t<a class="headerlink" href="#cubelib-direction-t" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="c1">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="c1">//Headers</span>
+<span class="c1">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="c1">//forward declarations</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cubelib/cubelib.fwd.h&gt;</span><span class="cp"></span>
+<span class="c1">//API</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cubelib/cubelib.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<dl class="group">
+<dt>
+<span class="target" id="corner-casesgroup__cubelib-direction-group"></span><em>group</em> <code class="descname">cubelib-direction-group</code></dt>
+<dd><p>This is the API for <a class="reference internal" href="#corner-casesstructcubelib__direction__t"><span class="std std-ref">cubelib_direction_t</span></a>. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="define">
+<dt id="c.CUBELIB_NULL_DIRECTION">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gaca5437cb51ee3d7b37159632f93866ef"></span><code class="descname">CUBELIB_NULL_DIRECTION</code><a class="headerlink" href="#c.CUBELIB_NULL_DIRECTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="define">
+<dt id="c.CUBELIB_DIRECTIONS_SIZE">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga65acbae87de478c83270e91dd18fae99"></span><code class="descname">CUBELIB_DIRECTIONS_SIZE</code><a class="headerlink" href="#c.CUBELIB_DIRECTIONS_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt id="c.cubelib_direction_t">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga512e75de01ceaf97662bd5c7b62ea37d"></span><em class="property">typedef </em><code class="descname">cubelib_direction_t</code><a class="headerlink" href="#c.cubelib_direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Struct that represents a direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8cc9cb8e9b366e877ba349efa337af74"><span class="std std-ref">cubelib_get_direction_index()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga6a27be6b38b2276dd0cd6386abddf0ba"><span class="std std-ref">cubelib_get_direction_by_index()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga703cf8e07e6719cef077044df5e2231b"><span class="std std-ref">cubelib_is_direction_valid()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafbc8e360cd732bef245051c11a228388"><span class="std std-ref">cubelib_is_direction_null()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga218dc108fbb7a6def33f4cdc5cf13f5c"><span class="std std-ref">cubelib_is_direction_equal()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="c.cubelib_is_direction_valid">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga703cf8e07e6719cef077044df5e2231b"></span>bool <code class="descname">cubelib_is_direction_valid</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_is_direction_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a direction is not corrupted somehow and represents a valid direction (including a null direction). </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafbc8e360cd732bef245051c11a228388"><span class="std std-ref">cubelib_is_direction_null()</span></a>, cubelib_null_direction, CUBELIB_NULL_DIRECTION </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_is_direction_null">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gafbc8e360cd732bef245051c11a228388"></span>bool <code class="descname">cubelib_is_direction_null</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_is_direction_null" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if this corner is a null corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="cubelib-corner.html#corner-casesgroup__cubelib-corner-group_1ga9f9b5a444353df42e31600c232a939d5"><span class="std std-ref">cubelib_is_corner_valid()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_is_direction_equal">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga218dc108fbb7a6def33f4cdc5cf13f5c"></span>bool <code class="descname">cubelib_is_direction_equal</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;left</em>, <a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;right</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_is_direction_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_x">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"></span>int <code class="descname">cubelib_get_direction_x</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the x-component of the vector representation of this direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_y">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"></span>int <code class="descname">cubelib_get_direction_y</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the y-component of the vector representation of this direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_z">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"></span>int <code class="descname">cubelib_get_direction_z</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the z-component of the vector representation of this direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_i">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"></span>int <code class="descname">cubelib_get_direction_i</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em>, uint_fast8_t<em>&nbsp;dim</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the specified ith-component of the vector representation of this direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_absx">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"></span>uint_fast8_t <code class="descname">cubelib_get_direction_absx</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_absx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute value of the x-component of the vector representation of this direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_absy">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"></span>uint_fast8_t <code class="descname">cubelib_get_direction_absy</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_absy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute value of the y-component of the vector representation of this direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_absz">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"></span>uint_fast8_t <code class="descname">cubelib_get_direction_absz</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_absz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute value of the z-component of the vector representation of this direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_absi">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"></span>uint_fast8_t <code class="descname">cubelib_get_direction_absi</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em>, uint_fast8_t<em>&nbsp;dim</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_absi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute value of the ith-component of the vector representation of this direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_sigdim">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gad959bc9d137df066e5a54d33a02875ea"></span>uint_fast8_t <code class="descname">cubelib_get_direction_sigdim</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_sigdim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dimension of the vector-representation of a direction that has a non-zero value. </p>
+<p>So for example, :math:<code class="docutils literal"><span class="pre">(1,0,0)</span></code> will result in <code class="docutils literal"><span class="pre">0</span></code>; :math:<code class="docutils literal"><span class="pre">(0,-1,0)</span></code> will be <code class="docutils literal"><span class="pre">1</span></code>; :math:<code class="docutils literal"><span class="pre">(0,0,-1)</span></code> will be <code class="docutils literal"><span class="pre">2</span></code>.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a> </p>
+<p><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_index">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga8cc9cb8e9b366e877ba349efa337af74"></span>uint_fast8_t <code class="descname">cubelib_get_direction_index</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 0-based index that represents this direction; for use in array indexing and similar. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga6a27be6b38b2276dd0cd6386abddf0ba"><span class="std std-ref">cubelib_get_direction_by_index()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_by_index">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga6a27be6b38b2276dd0cd6386abddf0ba"></span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a> <code class="descname">cubelib_get_direction_by_index</code><span class="sig-paren">(</span>uint_fast8_t<em>&nbsp;index</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_by_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a direction based on the 0-based index returned by <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8cc9cb8e9b366e877ba349efa337af74"><span class="std std-ref">cubelib_get_direction_index()</span></a>. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8cc9cb8e9b366e877ba349efa337af74"><span class="std std-ref">cubelib_get_direction_index()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_by_int3">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"></span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a> <code class="descname">cubelib_get_direction_by_int3</code><span class="sig-paren">(</span>int<em>&nbsp;x</em>, int<em>&nbsp;y</em>, int<em>&nbsp;z</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_by_int3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a direction represented by a given 3 component vector. </p>
+<p>
+Examples:<ul class="simple">
+<li><code class="docutils literal"><span class="pre">cubelib_get_direction_by_int3(0,+1,0)</span></code> Returns a direction pointing in the direction of the positive Y axis from the the center of the cube</li>
+<li><code class="docutils literal"><span class="pre">cubelib_get_direction_by_int3(0,0,-1)</span></code> Returns a direction pointing in the direction of the negative Z axis from the the center of the cube</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>two of the components must be zero, and one component must be non-zero.</dd>
+</dl>
+</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae23846e04dfdc94382b8839b0a810666"><span class="std std-ref">cubelib_get_direction_x()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga2897236b298b229ba85e2e9f487e7a39"><span class="std std-ref">cubelib_get_direction_y()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gae4836379040f4aa6738df1c26c8f2d57"><span class="std std-ref">cubelib_get_direction_z()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga17337e5532c778933cf5f088326ea988"><span class="std std-ref">cubelib_get_direction_i()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad27a5b3c45507f834ba2eb1e0267f9c3"><span class="std std-ref">cubelib_get_direction_absx()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8bab95cac3bca99cae43233ab131ffa8"><span class="std std-ref">cubelib_get_direction_absy()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gad1ebfe81b64cdc87a0ebbf308e4deff0"><span class="std std-ref">cubelib_get_direction_absz()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafaab39dcaa94ebb83f0733b961974e81"><span class="std std-ref">cubelib_get_direction_absi()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_opposite_direction">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1gaab6f127e6bf7d88b1c53558b624b98f0"></span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a> <code class="descname">cubelib_get_opposite_direction</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_opposite_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the opposite direction. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.cubelib_get_direction_face">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga6b825201833c8091c012d72922ea5b6e"></span><a class="reference internal" href="cubelib-face.html#c.cubelib_face_t" title="cubelib_face_t">cubelib_face_t</a> <code class="descname">cubelib_get_direction_face</code><span class="sig-paren">(</span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a><em>&nbsp;direction</em><span class="sig-paren">)</span><a class="headerlink" href="#c.cubelib_get_direction_face" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert a direction to a face </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="cubelib-face.html#corner-casesstructcubelib__face__t"><span class="std std-ref">cubelib_face_t</span></a>, cubelib_get_face_direction() </dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="variable">
+<dt id="c.cubelib_null_direction">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga74d7f48040f902b577ee79d0f26204ab"></span><a class="reference internal" href="#c.cubelib_direction_t" title="cubelib_direction_t">cubelib_direction_t</a> <code class="descname">cubelib_null_direction</code><a class="headerlink" href="#c.cubelib_null_direction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt id="c.cubelib_directions_size">
+<span class="target" id="corner-casesgroup__cubelib-direction-group_1ga1676e6e19cf12bb2bc5c0a40cf071fa8"></span>size_t <code class="descname">cubelib_directions_size</code><a class="headerlink" href="#c.cubelib_directions_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv219cubelib_direction_t">
+<span id="cubelib_direction_t"></span><span class="target" id="corner-casesstructcubelib__direction__t"></span><em class="property">struct </em><code class="descname">cubelib_direction_t</code><a class="headerlink" href="#_CPPv219cubelib_direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;cubelib/cubelib.h&gt;</em><p>Struct that represents a direction. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gadb0c156c1152a4c8e63d523d8643b04e"><span class="std std-ref">cubelib_get_direction_by_int3()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga8cc9cb8e9b366e877ba349efa337af74"><span class="std std-ref">cubelib_get_direction_index()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga6a27be6b38b2276dd0cd6386abddf0ba"><span class="std std-ref">cubelib_get_direction_by_index()</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga703cf8e07e6719cef077044df5e2231b"><span class="std std-ref">cubelib_is_direction_valid()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1gafbc8e360cd732bef245051c11a228388"><span class="std std-ref">cubelib_is_direction_null()</span></a>, <a class="reference internal" href="#corner-casesgroup__cubelib-direction-group_1ga218dc108fbb7a6def33f4cdc5cf13f5c"><span class="std std-ref">cubelib_is_direction_equal()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubelib-corner.html">cubelib_corner_t</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubelib-edge.html">cubelib_edge_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Azriel Fasten.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cubexx::corner_t &mdash; corner-cases NONE documentation</title>
+    
+    <link rel="stylesheet" href="_static/mydoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'NONE',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="corner-cases NONE documentation" href="index.html" />
+    <link rel="up" title="corner-cases/cubexx Reference Documentation" href="cubexx-reference.html" />
+    <link rel="next" title="cubexx::direction_t" href="cubexx-direction.html" />
+    <link rel="prev" title="corner-cases/cubexx Reference Documentation" href="cubexx-reference.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>corner-cases NONE documentation</span></a></h1>
+        <h2 class="heading"><span>cubexx::corner_t</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubexx-reference.html">corner-cases/cubexx Reference Documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubexx-direction.html">cubexx::direction_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="cubexx-corner-t">
+<h1>cubexx::corner_t<a class="headerlink" href="#cubexx-corner-t" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N6cubexx8corner_tE">
+<span id="cubexx::corner_t"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">corner_t</code><a class="headerlink" href="#_CPPv2N6cubexx8corner_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a corner of a cube. </p>
+<p>There are 8 corners in a cube. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t8corner_tEv">
+<span id="cubexx::corner_t::corner_t"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a945efab603565a014795f274c49bd753"></span><code class="descname">corner_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx8corner_t8corner_tEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default construct a &#8220;null&#8221; corner. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t4pushERK11direction_t">
+<span id="cubexx::corner_t::push__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1aaef4a182ad7e0604e7d63732f100788d"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">push</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-direction.html#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>direction</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t4pushERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a corner that is the next corner in the specified direction. </p>
+<p>Specifically, it will <strong>NOT</strong> wrap around the cube if there is no corner in the specified direction; but instead return the same corner.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ad42a68ea91bcd50affb869280e537574"><span class="std std-ref">adjacent()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a23840ca19853b6532c03f426c150235b"><span class="std std-ref">move()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t4moveERK11direction_t">
+<span id="cubexx::corner_t::move__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a23840ca19853b6532c03f426c150235b"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">move</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-direction.html#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>direction</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t4moveERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a corner that is the next corner in the specified direction. </p>
+<p>Specifically, it will <strong>NOT</strong> wrap around the cube if there is no corner in the specified direction; but instead return the null corner.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ad42a68ea91bcd50affb869280e537574"><span class="std std-ref">adjacent()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aaef4a182ad7e0604e7d63732f100788d"><span class="std std-ref">push()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t8adjacentERK11direction_t">
+<span id="cubexx::corner_t::adjacent__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1ad42a68ea91bcd50affb869280e537574"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">adjacent</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-direction.html#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>direction</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t8adjacentERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a corner that is adjacent in the axis of the direction. </p>
+<p>Specifically, it will wrap around the cube if there is no corner in the specified direction</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aaef4a182ad7e0604e7d63732f100788d"><span class="std std-ref">push()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a23840ca19853b6532c03f426c150235b"><span class="std std-ref">move()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1afdb9016000f2afcb71a927d0fd241856"><span class="std std-ref">adjacents()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a6bb34b534fb9ca0404595e7490b59659"><span class="std std-ref">adjacent_set()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t11is_adjacentERK8corner_t">
+<span id="cubexx::corner_t::is_adjacent__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a4e7870dc82a9b058c748ea60a28a7202"></span>bool <code class="descname">is_adjacent</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t11is_adjacentERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>that this will NOT return true for (*this).is_adjacent(*this). </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">other</span></code> - <p>is a corner adjacent to this corner; otherwise returns false. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t11is_adjacentERK6edge_t">
+<span id="cubexx::corner_t::is_adjacent__edge_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a896799032878a25514bea7e843cc5056"></span>bool <code class="descname">is_adjacent</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-edge.html#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<em>edge</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t11is_adjacentERK6edge_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">edge</span></code> - <p>is an edge adjacent to this corner; otherwise returns false. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t11is_adjacentERK6face_t">
+<span id="cubexx::corner_t::is_adjacent__face_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1ad2b4fb6f08e69ba69d0a82257083cb60"></span>bool <code class="descname">is_adjacent</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-face.html#_CPPv2N6cubexx6face_tE" title="cubexx::face_t">face_t</a> &amp;<em>face</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t11is_adjacentERK6face_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">face</span></code> - <p>is a face adjacent to this corner; otherwise returns false. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t22get_adjacent_directionERK8corner_t">
+<span id="cubexx::corner_t::get_adjacent_direction__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a4a3a61e33b1e5b7e7577e6d61a4ba419"></span><em class="property">const</em> <a class="reference internal" href="cubexx-direction.html#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<code class="descname">get_adjacent_direction</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t22get_adjacent_directionERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the direction between two adjacent corners. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t9adjacentsEv">
+<span id="cubexx::corner_t::adjacents"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1afdb9016000f2afcb71a927d0fd241856"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a>, 3&gt; &amp;<code class="descname">adjacents</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t9adjacentsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of 3 adjacent corners to this corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a6bb34b534fb9ca0404595e7490b59659"><span class="std std-ref">adjacent_set()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t12adjacent_setEv">
+<span id="cubexx::corner_t::adjacent_set"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a6bb34b534fb9ca0404595e7490b59659"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx12corner_set_tE" title="cubexx::corner_set_t">corner_set_t</a> &amp;<code class="descname">adjacent_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t12adjacent_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a set of 3 adjacent corners to this corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>adajcents() </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t5facesEv">
+<span id="cubexx::corner_t::faces"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a875217060531d437bcef048bbd303830"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="cubexx-face.html#_CPPv2N6cubexx6face_tE" title="cubexx::face_t">face_t</a>, 3&gt; &amp;<code class="descname">faces</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t5facesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the 3 adjacent faces to this corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a3a6b8e7427e26e7767db22f7e170a373"><span class="std std-ref">face_set()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t8face_setEv">
+<span id="cubexx::corner_t::face_set"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a3a6b8e7427e26e7767db22f7e170a373"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10face_set_tE" title="cubexx::face_set_t">face_set_t</a> &amp;<code class="descname">face_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t8face_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a set of the 3 adjacent faces to this corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a875217060531d437bcef048bbd303830"><span class="std std-ref">faces()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t5edgesEv">
+<span id="cubexx::corner_t::edges"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a58894831e46739ff2dc4e22cfe9023e7"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="cubexx-edge.html#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a>, 3&gt; &amp;<code class="descname">edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t5edgesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a set of the 3 adjacent edges to this corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a117d1eaef9e493a0d244562f1186b3e4"><span class="std std-ref">edge_set()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t8edge_setEv">
+<span id="cubexx::corner_t::edge_set"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a117d1eaef9e493a0d244562f1186b3e4"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10edge_set_tE" title="cubexx::edge_set_t">edge_set_t</a> &amp;<code class="descname">edge_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t8edge_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a set of the 3 adjacent edges to this corner. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a117d1eaef9e493a0d244562f1186b3e4"><span class="std std-ref">edge_set()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t4edgeERK11direction_t">
+<span id="cubexx::corner_t::edge__direction_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1aec49f0961b9fd9cb60fc76242e5fea26"></span><em class="property">const</em> <a class="reference internal" href="cubexx-edge.html#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<code class="descname">edge</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-direction.html#_CPPv2N6cubexx11direction_tE" title="cubexx::direction_t">direction_t</a> &amp;<em>direction</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t4edgeERK11direction_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the edge between this corner and an adjacent corner, specified via the. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a58894831e46739ff2dc4e22cfe9023e7"><span class="std std-ref">edges</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a117d1eaef9e493a0d244562f1186b3e4"><span class="std std-ref">edge_set()</span></a>, corner_t::edge(const corner_t&amp;) </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">direction</span></code> - <p>parameter. If the direction is pointing outside of the cube from this corner, it will return the edge between this corner and the corner in the opposite direction. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t4edgeERK8corner_t">
+<span id="cubexx::corner_t::edge__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a1a85b949a3256a0ed70740efd2a49bcf"></span><em class="property">const</em> <a class="reference internal" href="cubexx-edge.html#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<code class="descname">edge</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t4edgeERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the edge between this corner and an adjacent corner, specified via the. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a58894831e46739ff2dc4e22cfe9023e7"><span class="std std-ref">edges</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a117d1eaef9e493a0d244562f1186b3e4"><span class="std std-ref">edge_set()</span></a>, corner_t::edge(const direction_t&amp;) </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">corner</span></code> - <p>parameter. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t8oppositeEv">
+<span id="cubexx::corner_t::opposite"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1adab5c1e2444b1876fd48812884d5bd0b"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">opposite</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t8oppositeEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the opposite corner across the cube. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t5indexEv">
+<span id="cubexx::corner_t::index"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1acfcfa2f1afd6855f56361bcfcc186d9e"></span>std::uint_fast8_t <code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t5indexEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a numeric 0-based index for the corner, for use in indexing when storing in an array, or for comparison when storing in a container requiring comparison. </p>
+<p>The index will be less than <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1acd69ef749d577c16572ca31bd7946874"><span class="std std-ref">SIZE()</span></a>. The &#8220;null&#8221; corner has no index, and it is illegal to call <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1acfcfa2f1afd6855f56361bcfcc186d9e"><span class="std std-ref">index()</span></a> on it. <dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1af43d13499f779dba6f050c00f8cc1d46"><span class="std std-ref">get(std::uint_fast8_t idx)</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_tltERK8corner_t">
+<span id="cubexx::corner_t::lt-operator__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a4d7b1b2e130c913db2231bf96c94eab2"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_tltERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_teqERK8corner_t">
+<span id="cubexx::corner_t::eq-operator__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1ad6b58907037cd41e41502ec6123c7a4d"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_teqERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_tneERK8corner_t">
+<span id="cubexx::corner_t::neq-operator__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a222201d53250b7a4b170231fafe2227e"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_tneERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comparison. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t1xEv">
+<span id="cubexx::corner_t::x"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"></span>std::int_fast8_t <code class="descname">x</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t1xEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an integer in {-1,1} depending if the corner is in the near side or the far side of the x, respectively. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">uy()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">uz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t1yEv">
+<span id="cubexx::corner_t::y"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"></span>std::int_fast8_t <code class="descname">y</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t1yEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an integer in {-1,1} depending if the corner is in the near side or the far side of the y, respectively. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">uy()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">uz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t1zEv">
+<span id="cubexx::corner_t::z"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"></span>std::int_fast8_t <code class="descname">z</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t1zEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an integer in {-1,1} depending if the corner is in the near side or the far side of the z, respectively. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">uy()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">uz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t2uxEv">
+<span id="cubexx::corner_t::ux"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"></span>std::uint_fast8_t <code class="descname">ux</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t2uxEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the x, respectively. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">uy()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">uz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t2uyEv">
+<span id="cubexx::corner_t::uy"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"></span>std::uint_fast8_t <code class="descname">uy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t2uyEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the y, respectively. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">uy()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">uz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t2uzEv">
+<span id="cubexx::corner_t::uz"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"></span>std::uint_fast8_t <code class="descname">uz</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t2uzEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an unsigned integer in {0,1} depending if the corner is in the near side or the far side of the z, respectively. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </p>
+<p class="last"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">uy()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">uz()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t3xyzEv">
+<span id="cubexx::corner_t::xyz"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1aa88ed96765f81146276463e091a268df"></span><em class="property">const</em> std::array&lt;std::int_fast8_t, 3&gt; &amp;<code class="descname">xyz</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t3xyzEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an array with all three components of the corner&#8217;s vector. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">y()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t4uxyzEv">
+<span id="cubexx::corner_t::uxyz"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1ad35345357ed88ef8cc87c84ec55e33c9"></span><em class="property">const</em> std::array&lt;std::uint_fast8_t, 3&gt; &amp;<code class="descname">uxyz</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t4uxyzEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an array with all three unsigned components of the corner&#8217;s unsigned representation vector. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">uy()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">uz()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"><span class="std std-ref">get(std::int_fast8_t,std::int_fast8_t,std::int_fast8_t)</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t7is_nullEv">
+<span id="cubexx::corner_t::is_null"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1af67af17205e834f06755cf8f76ba5d97"></span>bool <code class="descname">is_null</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx8corner_t7is_nullEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if this corner is null; false otherwise. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t3getENSt12uint_fast8_tE">
+<span id="cubexx::corner_t::get__std::uint_fast8_t"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1af43d13499f779dba6f050c00f8cc1d46"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span>std::uint_fast8_t <em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx8corner_t3getENSt12uint_fast8_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a corner that is represented by the specified index,. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">idx.</span></code> - <p></p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t3getENSt11int_fast8_tENSt11int_fast8_tENSt11int_fast8_tE">
+<span id="cubexx::corner_t::get__std::int_fast8_t.std::int_fast8_t.std::int_fast8_t"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a7f3beb70f847edda41e8b99526b0a899"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span>std::int_fast8_t <em>x</em>, std::int_fast8_t <em>y</em>, std::int_fast8_t <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx8corner_t3getENSt11int_fast8_tENSt11int_fast8_tENSt11int_fast8_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a corner that is represented by a vector of 3 components. </p>
+<p>There are two representations that fit in well with the same function.</p>
+<p>The first, which we be called &#8220;origin-centered-cube-representation&#8221; is as follows:</p>
+<p>Cube coordinates are in the range <code class="docutils literal"><span class="pre">[-1,+1]</span></code>, and specfically can each take one of the two values in <code class="docutils literal"><span class="pre">{-1,+1}</span></code>. The lower corner is represented as <code class="docutils literal"><span class="pre">(-1,-1,-1)</span></code>. The other corners are offset away from the corner by <code class="docutils literal"><span class="pre">+2</span></code>, so they look like <code class="docutils literal"><span class="pre">(+1,-1,-1)</span></code> or <code class="docutils literal"><span class="pre">(+1,+1,+1)</span></code> (for the far corner), and so on. The coordinates of this representation can be retrieved via the <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">corner_t::x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">corner_t::y()</span></a>, and <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">corner_t::z()</span></a> functions.</p>
+<p>The alternative representation, which will called &#8220;unit-cube-representation&#8221;, (or &#8220;unsigned&#8221;) is as follows:</p>
+<p>Cube coordinates are in the range <code class="docutils literal"><span class="pre">[0,1]</span></code> and specifically can each take one of the two values in <code class="docutils literal"><span class="pre">{0,1}</span></code> The lower corner is represented as <code class="docutils literal"><span class="pre">(0,0,0)</span></code>. The other corners are offset away from the lower corner by <code class="docutils literal"><span class="pre">+1</span></code>, so they look like <code class="docutils literal"><span class="pre">(1,0,0)</span></code> or <code class="docutils literal"><span class="pre">(1,1,1)</span></code> (for the far corner), and so on. The coordinates of this representation can be retrieved via the <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">corner_t::ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">corner_t::uy()</span></a>, and <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">corner_t::uz()</span></a> functions.</p>
+<p>This function can construct the <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t"><span class="std std-ref">corner_t</span></a> with either reprentation. The rule is as follows: if a coordinate is positive, it will result in being +1; if it is zero or negative, it will be lower coordinate; <code class="docutils literal"><span class="pre">-1</span></code> in the &#8220;origin-centered-cube-representation&#8221; or <code class="docutils literal"><span class="pre">0</span></code> in &#8220;unit-cube-representation&#8221;.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1aee8ff8bf0050a01f457434c2755b7ac7"><span class="std std-ref">corner_t::x()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a4c7fa5d2453fdecf8ab7607a7a5cdefa"><span class="std std-ref">corner_t::y()</span></a>, and <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a11059cdd556b90fdc0b55017d6012818"><span class="std std-ref">corner_t::z()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a960f06b8f4f6fbb1ffa5414ba9cd8a48"><span class="std std-ref">corner_t::ux()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1a65f0c1896c5c8fd33374a6e14c1b4c45"><span class="std std-ref">corner_t::uy()</span></a>, and <a class="reference internal" href="#corner-casesstructcubexx_1_1corner__t_1ae71ccefc8e0f74e05ba2008e70ff7f7f"><span class="std std-ref">corner_t::uz()</span></a></p>
+<p class="last"><a class="reference internal" href="cubelib-corner.html#corner-casesgroup__cubelib-corner-group_1ga45ddcb748331f7ff525978083860c519"><span class="std std-ref">cubelib_get_corner_by_int3()</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t3getERK8corner_t">
+<span id="cubexx::corner_t::get__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1a0c1f7ae95ebe6f4816b328c68d6a3dee"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx8corner_t3getERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a corner, given a corner. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t3allEv">
+<span id="cubexx::corner_t::all"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1aef066319967dbd559bc97f127f88778d"></span><em class="property">static</em> <em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a>, 8&gt; &amp;<code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx8corner_t3allEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all the faces on the cube. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t4SIZEEv">
+<span id="cubexx::corner_t::SIZE"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1acd69ef749d577c16572ca31bd7946874"></span><em class="property">static</em> std::size_t <code class="descname">SIZE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx8corner_t4SIZEEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of corners. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx8corner_t11null_cornerEv">
+<span id="cubexx::corner_t::null_corner"></span><span class="target" id="corner-casesstructcubexx_1_1corner__t_1ac32dd31e83c5637c287de609c119fb10"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">null_corner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx8corner_t11null_cornerEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the &#8220;null&#8221; corner. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cubexx-reference.html">corner-cases/cubexx Reference Documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cubexx-direction.html">cubexx::direction_t</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Azriel Fasten.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>
