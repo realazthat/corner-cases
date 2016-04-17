@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="corner-cases" Database="">
+  <Project Name="cubexx-unittest" Path="cubexx-unittest.project" Active="No"/>
+  <Project Name="cubelib-unittest" Path="cubelib-unittest.project" Active="Yes"/>
+  <Project Name="cubelib-formatters" Path="cubelib-formatters.project" Active="No"/>
+  <Project Name="cubexx-formatters" Path="cubexx-formatters.project" Active="No"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="cubexx-unittest" ConfigName="Debug"/>
+      <Project Name="cubelib-unittest" ConfigName="Debug"/>
+      <Project Name="cubelib-unittest" ConfigName="Debug"/>
+      <Project Name="cubelib-formatters" ConfigName="Debug"/>
+      <Project Name="cubexx-formatters" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="cubexx-unittest" ConfigName="Release"/>
+      <Project Name="cubelib-unittest" ConfigName="Release"/>
+      <Project Name="cubelib-unittest" ConfigName="Release"/>
+      <Project Name="cubelib-formatters" ConfigName="Release"/>
+      <Project Name="cubexx-formatters" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
