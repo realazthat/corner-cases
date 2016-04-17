@@ -341,7 +341,9 @@ TEST_F(CUBEXXCornerTest,is_adjacent_to_corner)
         
         for (auto corner0 : cubexx::corner_t::all())
         {
-            
+            ASSERT_TRUE(!corner0.is_adjacent(corner0));
+            ASSERT_TRUE(!corner0.is_adjacent(corner0.opposite()));
+
             for (auto corner1 : cubexx::corner_t::all())
             {
                 
