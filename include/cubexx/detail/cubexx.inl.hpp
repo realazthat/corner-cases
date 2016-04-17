@@ -135,6 +135,69 @@ const face_t& face_t::opposite() const
 }
 
 CORNER_CASES_CUBEXX_INLINE
+const std::array<face_t,4>&
+face_t::adjacents() const
+{
+  auto precompute = [](){
+    typedef std::array<face_t,4> result_type;
+    std::array<result_type, 6> internal_results;
+
+    for (auto face : face_t::all())
+    {
+      for (uint_fast8_t i = 0; i < 4; ++i)
+        internal_results[face.index()][i] = face.direction().adjacents()[i];
+    }
+
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+  assert(is_sane());
+  assert(!is_null());
+
+  const auto& results = internal_results[index()];
+
+  for (auto adjacent : results)
+  {
+    assert((*this).is_adjacent(adjacent));
+    assert(adjacent.is_adjacent(*this));
+  }
+
+  return results;
+}
+CORNER_CASES_CUBEXX_INLINE
+const face_set_t&
+face_t::adjacent_set() const
+{
+  auto precompute = [](){
+    std::array<face_set_t, 6> internal_results;
+
+    for (auto face : face_t::all())
+    {
+      internal_results[face.index()] = face_set_t(face.adjacents());
+    }
+
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+  assert(is_sane());
+  assert(!is_null());
+
+  const auto& results = internal_results[index()];
+
+  for (auto adjacent : results)
+  {
+    assert((*this).is_adjacent(adjacent));
+    assert(adjacent.is_adjacent(*this));
+  }
+
+  return results;
+}
+
+CORNER_CASES_CUBEXX_INLINE
 std::array<corner_t, 4>
 face_t::calc_corners() const
 {
@@ -280,6 +343,7 @@ face_t::edges() const
 
   return result;
 }
+
 CORNER_CASES_CUBEXX_INLINE
 const edge_set_t&
 face_t::edge_set() const
@@ -303,6 +367,56 @@ face_t::edge_set() const
   assert(index() < 6);
 
   const auto& result = internal_results[index()];
+
+  return result;
+}
+
+CORNER_CASES_CUBEXX_INLINE
+const face_t&
+face_t::flip(const edge_t& edge) const
+{
+  auto precompute = []()
+  {
+    std::array<std::array<face_t,12>, 6> internal_results;
+
+    for (auto face : face_t::all())
+    {
+      for (auto edge : edge_t::all())
+      {
+        if (!face.is_adjacent(edge))
+          continue;
+
+        assert(face.index() < internal_results.size());
+        assert(edge.index() < internal_results[face.index()].size());
+
+        auto neighbors = (face.adjacent_set() & edge.face_set());
+        assert(neighbors.size() == 1);
+        for (auto neighbor : neighbors)
+        {
+          internal_results[face.index()][edge.index()] = neighbor;
+        }
+      }
+    }
+
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+  assert(is_sane());
+  assert(!is_null());
+  assert(edge.is_sane());
+  assert(!edge.is_null());
+
+  assert(is_adjacent(edge));
+  assert(edge.is_adjacent(*this));
+
+  const auto& result = internal_results[index()][edge.index()];
+
+  assert(result.is_adjacent(*this));
+  assert(is_adjacent(result));
+  assert(edge_set_t(edge) == (result.edge_set() & edge_set()));
+
 
   return result;
 }
@@ -672,28 +786,76 @@ bool direction_t::positive() const
 }
 
 CORNER_CASES_CUBEXX_INLINE
-std::array<direction_t, 4>
+const std::array<direction_t, 4>&
 direction_t::adjacents() const
 {
-  std::array<direction_t, 4> result = {{ direction_t(), direction_t(), direction_t(), direction_t()}};
-  std::size_t ri = 0;
-  for (const direction_t& d : direction_t::all())
-  {
-    if (d != *this && d != opposite())
-    {
-      assert(ri < result.size());
-      result[ri++] = d;
-    }
-  }
+  auto precompute = [](){
+    typedef std::array<direction_t, 4> result_type;
+    std::array<result_type,6> internal_results;
 
-  assert(ri == 4);
+    for (auto direction : direction_t::all())
+    {
+      uint_fast8_t i = 0;
+      for (uint_fast8_t next_dir_index = 0; next_dir_index < direction_t::SIZE(); ++next_dir_index)
+      {
+        auto adjacent = direction_t::get((direction.index() + next_dir_index) % direction_t::SIZE());
+        if (direction.face().is_adjacent(adjacent.face())){
+          assert(i < 4);
+          internal_results[direction.index()][i++] = adjacent;
+        }
+      }
+      assert(i == 4);
+    }
+
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
 
   assert(is_sane());
   assert(!is_null());
+
+  const auto& result = internal_results[index()];
+
+  for (const direction_t& other : result){
+    assert(face().is_adjacent(other.face()));
+    assert(other.face().is_adjacent(face()));
+  }
+
   return result;
 }
 
 
+
+CORNER_CASES_CUBEXX_INLINE
+const direction_set_t&
+direction_t::adjacent_set() const
+{
+
+  auto precompute = [](){
+    std::array<direction_set_t,6> internal_results;
+
+    for (auto direction : direction_t::all())
+    {
+      internal_results[direction.index()] = direction_set_t(direction.adjacents());
+    }
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+  assert(is_sane());
+  assert(!is_null());
+
+  const auto& result = internal_results[index()];
+
+  for (const direction_t& other : result){
+    assert(face().is_adjacent(other.face()));
+    assert(other.face().is_adjacent(face()));
+  }
+
+  return result;
+}
 
 
 

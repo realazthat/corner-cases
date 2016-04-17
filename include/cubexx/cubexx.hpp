@@ -613,7 +613,9 @@ struct direction_t
   ///Returns the opposite direction
   const direction_t& opposite() const;
   ///Returns the four adjacent directions
-  std::array<direction_t, 4> adjacents() const;
+  const std::array<direction_t, 4>& adjacents() const;
+  ///Return a direction_set_t containing the 4 adjacent directions.
+  const direction_set_t& adjacent_set() const;
   
   ///Returns a direction from a vector of 3 integer components; two of them must be 0, the third must be positive or negative
   /// in the dimension of the direction. For example, (0,0,+1) means a direction on the z-axis pointing along
@@ -705,7 +707,9 @@ struct face_t{
   ///Return the opposite face.
   const face_t& opposite() const;
   ///Return the 4 adjacent faces
-  std::array<face_t, 4> adjacents() const;
+  const std::array<face_t, 4>& adjacents() const;
+  ///Return a face_set_t containing the 4 adjacent faces
+  const face_set_t& adjacent_set() const;
   ///Return the 4 corners on this face.
   const std::array<corner_t, 4>& corners() const;
   ///Return a corner_set_t containing the 4 corners on this face.

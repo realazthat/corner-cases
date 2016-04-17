@@ -497,7 +497,45 @@ TEST_F(CUBEXXFaceTest,is_adjacent_to_edge)
 
 TEST_F(CUBEXXFaceTest,flip)
 {
-  ASSERT_TRUE(false);
+    std::vector<uint32_t> all____face_counts(cubexx::face_t::SIZE(), 0);
+    for (auto face : cubexx::face_t::all())
+    {
+        std::vector<uint32_t> face___face_counts(cubexx::face_t::SIZE(), 0);
+        for (auto edge : face.edges()){
+            if (!edge.is_adjacent(face))
+                continue;
+
+            auto neighbor = face.flip(edge);
+
+            ASSERT_TRUE(face.is_adjacent(neighbor));
+            ASSERT_TRUE(neighbor.is_adjacent(face));
+
+            ASSERT_EQ(cubexx::edge_set_t(edge), (face.edge_set() & neighbor.edge_set()));
+
+            face___face_counts[neighbor.index()]++;
+            all____face_counts[neighbor.index()]++;
+        }
+
+        ///pidgeonhole
+        for (auto other : cubexx::face_t::all())
+        {
+            ASSERT_EQ(1U == face___face_counts[other.index()], face.is_adjacent(other));
+            ASSERT_EQ(0U == face___face_counts[other.index()], !face.is_adjacent(other));
+        }
+
+        ///pidgeonhole
+        ASSERT_EQ(4U, std::accumulate(face___face_counts.begin(), face___face_counts.end(), 0U));
+    }
+
+
+    ///pidgeonhole
+    for (auto face : cubexx::face_t::all())
+    {
+        ASSERT_EQ(4U, all____face_counts[face.index()]);
+    }
+
+    ///pidgeonhole
+    ASSERT_EQ(6U*4U, std::accumulate(all____face_counts.begin(), all____face_counts.end(), 0U));
 }
 
 
