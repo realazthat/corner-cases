@@ -133,6 +133,7 @@ The set supports:
 * union
 * difference
 * erasure
+* intersection
 * membership testing
 * iteration
 
