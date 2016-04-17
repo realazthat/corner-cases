@@ -541,6 +541,35 @@ TEST_F(CUBEXXFaceTest,flip)
 
 TEST_F(CUBEXXFaceTest,perpendicular_edges)
 {
-  ASSERT_TRUE(false);
+    std::vector<uint32_t> all____edge_counts(cubexx::edge_t::SIZE(), 0);
+    for (auto face : cubexx::face_t::all())
+    {
+        std::vector<uint32_t> face___edge_counts(cubexx::edge_t::SIZE(), 0);
+        for (auto edge : face.perpendicular_edges())
+        {
+            ASSERT_EQ(1U, (edge.corner_set() & face.corner_set()).size());
+
+            face___edge_counts[edge.index()]++;
+            all____edge_counts[edge.index()]++;
+        }
+
+        for (auto edge : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(1U==face___edge_counts[edge.index()], (edge.corner_set() & face.corner_set()).size() == 1);
+        }
+
+        ///pidgeonhole
+        ASSERT_EQ(4U, std::accumulate(face___edge_counts.begin(), face___edge_counts.end(), 0U));
+
+    }
+    for (auto edge : cubexx::edge_t::all())
+    {
+        ASSERT_EQ(2U, all____edge_counts[edge.index()]);
+    }
+
+    ///pidgeonhole
+    ASSERT_EQ(12U*2U, std::accumulate(all____edge_counts.begin(), all____edge_counts.end(), 0U));
+    ///pidgeonhole
+    ASSERT_EQ(6U*4U, std::accumulate(all____edge_counts.begin(), all____edge_counts.end(), 0U));
 }
 

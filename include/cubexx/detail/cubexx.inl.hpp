@@ -372,6 +372,46 @@ face_t::edge_set() const
 }
 
 CORNER_CASES_CUBEXX_INLINE
+const std::array<edge_t, 4>&
+face_t::perpendicular_edges() const
+{
+  auto precompute = [](){
+    typedef std::array<edge_t, 4> result_type;
+    std::array<result_type, 6> internal_results;
+
+    for (auto face : face_t::all())
+    {
+      auto opposite_direction = face.direction().opposite();
+      std::size_t i = 0;
+      for (auto corner : face.corners())
+      {
+        auto other_corner = corner.adjacent(opposite_direction);
+        auto edge = edge_t::get(corner, other_corner);
+
+        internal_results[face.index()][i++] = edge;
+
+        assert((edge.corner_set() & face.corner_set()).size() == 1);
+      }
+    }
+
+    return internal_results;
+  };
+
+  static const auto internal_results = precompute();
+
+  assert(is_sane());
+  assert(!is_null());
+
+  const auto& result = internal_results[index()];
+  for (auto edge : result){
+    assert((edge.corner_set() & corner_set()).size() == 1);
+  }
+
+  return result;
+}
+
+
+CORNER_CASES_CUBEXX_INLINE
 const face_t&
 face_t::flip(const edge_t& edge) const
 {

@@ -723,7 +723,7 @@ struct face_t{
   const face_t& flip(const edge_t& edge) const;
   
   ///Return the 4 (perpendicular) edges touching this face, but not directly on the face.
-  std::array<edge_t, 4> perpendicular_edges() const;
+  const std::array<edge_t, 4>& perpendicular_edges() const;
   
   ///Returns true if @param corner is a corner adjacent to this face; otherwise returns false.
   bool is_adjacent(const corner_t& corner) const;
