@@ -8,7 +8,7 @@
     
     <title>cubexx::set_base_t &mdash; corner-cases NONE documentation</title>
     
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/mydoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,7 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="corner-cases NONE documentation" href="index.html" /> 
+    <link rel="top" title="corner-cases NONE documentation" href="index.html" />
+    <link rel="up" title="corner-cases/cubexx Reference Documentation" href="cubexx-reference.html" />
+    <link rel="prev" title="cubexx::face_t" href="cubexx-face.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="index.html">
@@ -34,6 +36,8 @@
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
+        «&#160;&#160;<a href="cubexx-face.html">cubexx::face_t</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         </p>
 
@@ -59,7 +63,7 @@
 <p>This is just a base class that has most of the implementation. You probably do not want to ever instantiate this directly.</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__set__t"><span>corner_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__set__t"><span>direction_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__set__t"><span>edge_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1face__set__t"><span>face_set_t</span></a>. </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1corner__set__t"><span class="std std-ref">corner_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1direction__set__t"><span class="std std-ref">direction_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__set__t"><span class="std std-ref">edge_set_t</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1face__set__t"><span class="std std-ref">face_set_t</span></a>. </dd>
 </dl>
 </p>
 <div class="breathe-sectiondef container">
@@ -205,6 +209,46 @@
 </dd></dl>
 
 <dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Sequence&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_taNERK8Sequence">
+<span id="cubexx::set_base_t::and-assign-operator__SequenceCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a74c8dbd4b5c591617543e505e3725dc3"></span>derived_t &amp;<code class="descname">operator&amp;=</code><span class="sig-paren">(</span><em class="property">const</em> Sequence &amp;<em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_taNERK8Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set intersection, with any sequence. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_taNERK9derived_t">
+<span id="cubexx::set_base_t::and-assign-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a08f4375efb3b5fdde956b5c4daf11de4"></span>derived_t &amp;<code class="descname">operator&amp;=</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>set</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_taNERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set intersection. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_taNERK9element_t">
+<span id="cubexx::set_base_t::and-assign-operator__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1af7b37e48e004988bcfb86092f8bae4ce"></span>derived_t &amp;<code class="descname">operator&amp;=</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx10set_base_taNERK9element_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set intersection with a single element). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Sequence&gt;</dt>
+<dt id="_CPPv2N6cubexx10set_base_tanERK8Sequence">
+<span id="cubexx::set_base_t::and-operator__SequenceCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a00fd3ff1a79e94ceb9f526b21f09cf55"></span>derived_t <code class="descname">operator&amp;</code><span class="sig-paren">(</span><em class="property">const</em> Sequence &amp;<em>sequence</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_tanERK8Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set intersection, with any sequence (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_tanERK9derived_t">
+<span id="cubexx::set_base_t::and-operator__derived_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a3d09b04869f7fc0394d797cf673c4aef"></span>derived_t <code class="descname">operator&amp;</code><span class="sig-paren">(</span><em class="property">const</em> derived_t &amp;<em>set</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_tanERK9derived_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set intersection (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx10set_base_tanERK9element_t">
+<span id="cubexx::set_base_t::and-operator__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a58a54607e41fe4447919b1caf0d2694a"></span>derived_t <code class="descname">operator&amp;</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_tanERK9element_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set intersection with a single element (returns the modified set). </p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv2N6cubexx10set_base_t8containsERK9element_t">
 <span id="cubexx::set_base_t::contains__element_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1set__base__t_1a9332e860d7d751a7e9dadc77bbb914c1"></span>bool <code class="descname">contains</code><span class="sig-paren">(</span><em class="property">const</em> element_t &amp;<em>element</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx10set_base_t8containsERK9element_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>Membership test. </p>
@@ -252,22 +296,26 @@
 <dl class="class">
 <dt id="_CPPv2N6cubexx12corner_set_tE">
 <span id="cubexx::corner_set_t"></span><span class="target" id="corner-casesstructcubexx_1_1corner__set__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">corner_set_t</code><a class="headerlink" href="#_CPPv2N6cubexx12corner_set_tE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inherits from <a class="reference internal" href="#corner-casesstructcubexx_1_1set__base__t"><span class="std std-ref">cubexx::set_base_t&lt; corner_set_t, corner_t, 8 &gt;</span></a></p>
+</dd></dl>
 
 <dl class="class">
 <dt id="_CPPv2N6cubexx15direction_set_tE">
 <span id="cubexx::direction_set_t"></span><span class="target" id="corner-casesstructcubexx_1_1direction__set__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">direction_set_t</code><a class="headerlink" href="#_CPPv2N6cubexx15direction_set_tE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inherits from <a class="reference internal" href="#corner-casesstructcubexx_1_1set__base__t"><span class="std std-ref">cubexx::set_base_t&lt; direction_set_t, direction_t, 6 &gt;</span></a></p>
+</dd></dl>
 
 <dl class="class">
 <dt id="_CPPv2N6cubexx10edge_set_tE">
 <span id="cubexx::edge_set_t"></span><span class="target" id="corner-casesstructcubexx_1_1edge__set__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">edge_set_t</code><a class="headerlink" href="#_CPPv2N6cubexx10edge_set_tE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inherits from <a class="reference internal" href="#corner-casesstructcubexx_1_1set__base__t"><span class="std std-ref">cubexx::set_base_t&lt; edge_set_t, edge_t, 12 &gt;</span></a></p>
+</dd></dl>
 
 <dl class="class">
 <dt id="_CPPv2N6cubexx10face_set_tE">
 <span id="cubexx::face_set_t"></span><span class="target" id="corner-casesstructcubexx_1_1face__set__t"></span><em class="property">struct </em><code class="descclassname">cubexx::</code><code class="descname">face_set_t</code><a class="headerlink" href="#_CPPv2N6cubexx10face_set_tE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inherits from <a class="reference internal" href="#corner-casesstructcubexx_1_1set__base__t"><span class="std std-ref">cubexx::set_base_t&lt; face_set_t, face_t, 6 &gt;</span></a></p>
+</dd></dl>
 
 </div>
 
@@ -276,6 +324,8 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
+        «&#160;&#160;<a href="cubexx-face.html">cubexx::face_t</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         </p>
 
@@ -283,7 +333,7 @@
 
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Azriel Fasten.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

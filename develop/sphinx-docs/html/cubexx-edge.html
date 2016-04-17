@@ -8,7 +8,7 @@
     
     <title>cubexx::edge_t &mdash; corner-cases NONE documentation</title>
     
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/mydoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -64,18 +64,12 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N6cubexx6edge_t7cornersEv">
-<span id="cubexx::edge_t::corners"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1abb52e1eb9b3eb48a691c9520d751b507"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a>, 2&gt; &amp;<code class="descname">corners</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t7cornersEv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve a list of (2) corners associated with this edge. </p>
-</dd></dl>
-
-<dl class="function">
 <dt id="_CPPv2N6cubexx6edge_t7corner0Ev">
 <span id="cubexx::edge_t::corner0"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"></span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<code class="descname">corner0</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t7corner0Ev" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the lower corner of this edge. </p>
 <p>Note that &#8220;lower&#8221; here means the one closer to the origin. <dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aa8971e89e1cb2d497109e0d87170fedd"><span>corner1()</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aa8971e89e1cb2d497109e0d87170fedd"><span class="std std-ref">corner1()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1abb52e1eb9b3eb48a691c9520d751b507"><span class="std std-ref">corners()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a2385a2a56668cbd8ce331a90a63d9c0d"><span class="std std-ref">corner_set()</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
@@ -86,7 +80,18 @@
 <dd><p>Get the upper corner of this edge. </p>
 <p>Note that &#8220;upper&#8221; here means the one farther from the origin. <dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"><span>corner0()</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"><span class="std std-ref">corner0()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1abb52e1eb9b3eb48a691c9520d751b507"><span class="std std-ref">corners()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a2385a2a56668cbd8ce331a90a63d9c0d"><span class="std std-ref">corner_set()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t7cornersEv">
+<span id="cubexx::edge_t::corners"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1abb52e1eb9b3eb48a691c9520d751b507"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a>, 2&gt; &amp;<code class="descname">corners</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t7cornersEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of (2) corners associated with this edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"><span class="std std-ref">corner0()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aa8971e89e1cb2d497109e0d87170fedd"><span class="std std-ref">corner1()</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
@@ -94,13 +99,80 @@
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_t10corner_setEv">
 <span id="cubexx::edge_t::corner_set"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a2385a2a56668cbd8ce331a90a63d9c0d"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx12corner_set_tE" title="cubexx::corner_set_t">corner_set_t</a> &amp;<code class="descname">corner_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t10corner_setEv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the set of corners associated with this edge. </p>
+<dd><p>Retrieve the set of (2) corners associated with this edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"><span class="std std-ref">corner0()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aa8971e89e1cb2d497109e0d87170fedd"><span class="std std-ref">corner1()</span></a> </dd>
+</dl>
+</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N6cubexx6edge_t9adjacentsEv">
-<span id="cubexx::edge_t::adjacents"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a4a0e8a97833131bb2b48dbc2f020d628"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a>, 4&gt; &amp;<code class="descname">adjacents</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t9adjacentsEv" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N6cubexx6edge_t16adjacent_cornersERK8corner_t">
+<span id="cubexx::edge_t::adjacent_corners__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ac2eb17db108ca8dd9bd237cbc2b7a782"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a>, 2&gt; &amp;<code class="descname">adjacent_corners</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t16adjacent_cornersERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of (2) adjacent corners associated with a particular corner of the edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a1208b88b7acc59c63d7b1c682e5d46d7"><span class="std std-ref">adjacent_corner_set()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ac2eb17db108ca8dd9bd237cbc2b7a782"><span class="std std-ref">adjacent_corners()</span></a>, adjacent_corner_set(const corner_t&amp;) </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t19adjacent_corner_setERK8corner_t">
+<span id="cubexx::edge_t::adjacent_corner_set__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a1208b88b7acc59c63d7b1c682e5d46d7"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10edge_set_tE" title="cubexx::edge_set_t">edge_set_t</a> &amp;<code class="descname">adjacent_corner_set</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t19adjacent_corner_setERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a set of (2) corners that are adjacent with a particular corner of the edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ac2eb17db108ca8dd9bd237cbc2b7a782"><span class="std std-ref">adjacent_corners()</span></a>, adjacent_corners(const corner_t&amp;) </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t16adjacent_cornersEv">
+<span id="cubexx::edge_t::adjacent_corners"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ac1a0c048e8dcc868e1ef89bd66879c64"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a>, 4&gt; &amp;<code class="descname">adjacent_corners</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t16adjacent_cornersEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of (4) corners that are adjacent with this edge. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t19adjacent_corner_setEv">
+<span id="cubexx::edge_t::adjacent_corner_set"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1af892040faa1ffc352fb3907350b29aac"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10edge_set_tE" title="cubexx::edge_set_t">edge_set_t</a> &amp;<code class="descname">adjacent_corner_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t19adjacent_corner_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a set of (4) corners that are adjacent with this edge. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t14adjacent_edgesERK8corner_t">
+<span id="cubexx::edge_t::adjacent_edges__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a50bd0ee697fb5fe98c3c7510a21fcbc8"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a>, 2&gt; &amp;<code class="descname">adjacent_edges</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t14adjacent_edgesERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of (2) adjacent edges associated with a particular corner of the edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>adjacent_set(), adjacents(), adjacent_set(const corner_t&amp;) </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t17adjacent_edge_setERK8corner_t">
+<span id="cubexx::edge_t::adjacent_edge_set__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a48fdd843be6d7f236b2c3c1318e421b5"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10edge_set_tE" title="cubexx::edge_set_t">edge_set_t</a> &amp;<code class="descname">adjacent_edge_set</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t17adjacent_edge_setERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a set of (2) edges that are adjacent with a particular corner of the edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>adjacents(), adjacents(const corner_t&amp;) </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t14adjacent_edgesEv">
+<span id="cubexx::edge_t::adjacent_edges"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1afd5fcd87d810ef60c86c293aa2e150b0"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a>, 4&gt; &amp;<code class="descname">adjacent_edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t14adjacent_edgesEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a list of (4) edges that are adjacent with this edge. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t17adjacent_edge_setEv">
+<span id="cubexx::edge_t::adjacent_edge_set"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a6c83844b026199af8ee7c81ffd106f00"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10edge_set_tE" title="cubexx::edge_set_t">edge_set_t</a> &amp;<code class="descname">adjacent_edge_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t17adjacent_edge_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a set of (4) edges that are adjacent with this edge. </p>
 </dd></dl>
 
 <dl class="function">
@@ -110,15 +182,101 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N6cubexx6edge_t9adjacentsERK8corner_t">
-<span id="cubexx::edge_t::adjacents__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a5718904549d19b193f7c34420e6120ba"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a>, 2&gt; &amp;<code class="descname">adjacents</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t9adjacentsERK8corner_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve a list of (2) adjacent edges associated with a particular corner of the edge. </p>
+<dt id="_CPPv2N6cubexx6edge_t8face_setEv">
+<span id="cubexx::edge_t::face_set"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a27404ecb6a32e13cd9c217cfcbcb59b8"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10face_set_tE" title="cubexx::face_set_t">face_set_t</a> &amp;<code class="descname">face_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t8face_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a set of (2) faces that are adjacent with this edge. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t8end_faceERK8corner_t">
+<span id="cubexx::edge_t::end_face__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a9ec28854bf54a7ba516564599fafac29"></span><em class="property">const</em> <a class="reference internal" href="cubexx-face.html#_CPPv2N6cubexx6face_tE" title="cubexx::face_t">face_t</a> &amp;<code class="descname">end_face</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t8end_faceERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a face that is not directly adjacent, but is perpendicular and touching with the specified end of this edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ae19a58913a0c956293046ae6795df1cc"><span class="std std-ref">end_faces()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a294b7b846392768ddd349e77b6136802"><span class="std std-ref">end_face_set()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t9end_facesEv">
+<span id="cubexx::edge_t::end_faces"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ae19a58913a0c956293046ae6795df1cc"></span><em class="property">const</em> std::array&lt;<a class="reference internal" href="cubexx-face.html#_CPPv2N6cubexx6face_tE" title="cubexx::face_t">face_t</a>, 2&gt; &amp;<code class="descname">end_faces</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t9end_facesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of (2) faces that are not directly adjacent, but are perpendicular and touching with the ends of this edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a9ec28854bf54a7ba516564599fafac29"><span class="std std-ref">end_face()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a294b7b846392768ddd349e77b6136802"><span class="std std-ref">end_face_set()</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t12end_face_setEv">
+<span id="cubexx::edge_t::end_face_set"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a294b7b846392768ddd349e77b6136802"></span><em class="property">const</em> <a class="reference internal" href="cubexx-sets.html#_CPPv2N6cubexx10face_set_tE" title="cubexx::face_set_t">face_set_t</a> &amp;<code class="descname">end_face_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t12end_face_setEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of (2) faces that are not directly adjacent, but are perpendicular and touching with the ends of this edge. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a9ec28854bf54a7ba516564599fafac29"><span class="std std-ref">end_face()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ae19a58913a0c956293046ae6795df1cc"><span class="std std-ref">end_faces()</span></a> </dd>
+</dl>
+</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_t8oppositeEv">
-<span id="cubexx::edge_t::opposite"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a042828167314562b8a1fb37ec02fd7cf"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a> &amp;<code class="descname">opposite</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t8oppositeEv" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::opposite"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a042828167314562b8a1fb37ec02fd7cf"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<code class="descname">opposite</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t8oppositeEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the edge on the opposite side of the cube. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t8oppositeERK6face_t">
+<span id="cubexx::edge_t::opposite__face_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a6730ef28d3e43fd47978f51a1789ac9e"></span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<code class="descname">opposite</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-face.html#_CPPv2N6cubexx6face_tE" title="cubexx::face_t">face_t</a> &amp;<em>face</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t8oppositeERK6face_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the edge on the opposite side of the specified face. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t11is_adjacentERK6edge_t">
+<span id="cubexx::edge_t::is_adjacent__edge_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1abfde9bf4d8fd4d9ad2021c105ac5d776"></span>bool <code class="descname">is_adjacent</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t11is_adjacentERK6edge_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>that this will NOT return true for (*this).is_adjacent(*this). </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">other</span></code> - <p>is an edge adjacent to this edge; otherwise returns false. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t11is_adjacentERK6face_t">
+<span id="cubexx::edge_t::is_adjacent__face_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ac779bf6886ecd5870797148f36db8d90"></span>bool <code class="descname">is_adjacent</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-face.html#_CPPv2N6cubexx6face_tE" title="cubexx::face_t">face_t</a> &amp;<em>face</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t11is_adjacentERK6face_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">face</span></code> - <p>is a face adjacent to this edge; otherwise returns false. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N6cubexx6edge_t11is_adjacentERK8corner_t">
+<span id="cubexx::edge_t::is_adjacent__corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a5d0e64f55bfd2947f1124ff7c75ae677"></span>bool <code class="descname">is_adjacent</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t11is_adjacentERK8corner_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">corner</span></code> - <p>is a corner adjacent to this edge; otherwise returns false. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
 </dd></dl>
 
 <dl class="function">
@@ -133,7 +291,7 @@
 <dd><p>Returns the &#8220;base-axis&#8221; (in <code class="docutils literal"><span class="pre">{0,1,2}</span></code> for the <code class="docutils literal"><span class="pre">x,y,z</span></code> axis repsectively) that this edge is aligned with this edge. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a469c1eb5488918bfbcb154be32e7ef12"><span>secondary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a5a63d74062895874189f9954e09a6822"><span>tertiary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span>get(std::uint_fast8_t,bool,bool)</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a469c1eb5488918bfbcb154be32e7ef12"><span class="std std-ref">secondary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a5a63d74062895874189f9954e09a6822"><span class="std std-ref">tertiary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span class="std std-ref">get(std::uint_fast8_t,bool,bool)</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
@@ -144,7 +302,7 @@
 <dd><p>Returns the &#8220;secondary-axis&#8221; (in <code class="docutils literal"><span class="pre">{0,1,2}</span></code> for the <code class="docutils literal"><span class="pre">x,y,z</span></code> axis repsectively); the &#8220;secondary-axis&#8221; is the next axis (modular increment) from the &#8220;base-axis&#8221;. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span>base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a5a63d74062895874189f9954e09a6822"><span>tertiary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span>get(std::uint_fast8_t,bool,bool)</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span class="std std-ref">base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a5a63d74062895874189f9954e09a6822"><span class="std std-ref">tertiary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span class="std std-ref">get(std::uint_fast8_t,bool,bool)</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
@@ -155,7 +313,7 @@
 <dd><p>Returns the &#8220;tertiary-axis&#8221; (in <code class="docutils literal"><span class="pre">{0,1,2}</span></code> for the <code class="docutils literal"><span class="pre">x,y,z</span></code> axis repsectively); the &#8220;tertiary-axis&#8221; is the next axis (modular increment) from the &#8220;secondary-axis&#8221;. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span>base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a469c1eb5488918bfbcb154be32e7ef12"><span>secondary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span>get(std::uint_fast8_t,bool,bool)</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span class="std std-ref">base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a469c1eb5488918bfbcb154be32e7ef12"><span class="std std-ref">secondary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span class="std std-ref">get(std::uint_fast8_t,bool,bool)</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
@@ -166,7 +324,7 @@
 <dd><p>Returns true if this edge is closer to or farther from the lower (-1,-1,-1) corner in the cube, specifically compared with the other parallel edge along the &#8220;secondary-axis&#8221;. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span>base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a469c1eb5488918bfbcb154be32e7ef12"><span>secondary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span>get(std::uint_fast8_t,bool,bool)</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span class="std std-ref">base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a469c1eb5488918bfbcb154be32e7ef12"><span class="std std-ref">secondary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span class="std std-ref">get(std::uint_fast8_t,bool,bool)</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
@@ -177,7 +335,7 @@
 <dd><p>Returns true if this edge is closer to or farther from the lower (-1,-1,-1) corner in the cube, specifically compared with the other parallel edge along the &#8220;tertiary-axis&#8221;. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span>base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a5a63d74062895874189f9954e09a6822"><span>tertiary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span>get(std::uint_fast8_t,bool,bool)</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span class="std std-ref">base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a5a63d74062895874189f9954e09a6822"><span class="std std-ref">tertiary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"><span class="std std-ref">get(std::uint_fast8_t,bool,bool)</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
@@ -186,28 +344,28 @@
 <dt id="_CPPv2N6cubexx6edge_t5indexEv">
 <span id="cubexx::edge_t::index"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ad8dccb5c663448d19fe7cae5df0d98e0"></span>std::uint_fast8_t <code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_t5indexEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a numeric 0-based index for the edge, for use in indexing when storing in an array, or for comparison when storing in a container requiring comparison. </p>
-<p>The index will be less than <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ae1edcf8c7b8584647dd89e575785230c"><span>SIZE()</span></a>. The &#8220;null&#8221; edge has no index, and it is illegal to call <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ad8dccb5c663448d19fe7cae5df0d98e0"><span>index()</span></a> on it. <dl class="docutils">
+<p>The index will be less than <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a82bd1fa3205311196b39e35a21d4490a"><span class="std std-ref">SIZE()</span></a>. The &#8220;null&#8221; edge has no index, and it is illegal to call <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ad8dccb5c663448d19fe7cae5df0d98e0"><span class="std std-ref">index()</span></a> on it. <dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a35343ccc53700a5222d808640987b498"><span>get(std::uint_fast8_t idx)</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a35343ccc53700a5222d808640987b498"><span class="std std-ref">get(std::uint_fast8_t idx)</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_tltERK6edge_t">
-<span id="cubexx::edge_t::lt-operator__edge_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a6d101d6b032721de9ad04973c18b89e3"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_tltERK6edge_t" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::lt-operator__edge_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a6d101d6b032721de9ad04973c18b89e3"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_tltERK6edge_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>A comparison operator for using the edge in an std::set-like container. </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_teqERK6edge_t">
-<span id="cubexx::edge_t::eq-operator__edge_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ab93ef59c3ae59217153a33a7adaf7a1c"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_teqERK6edge_t" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::eq-operator__edge_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ab93ef59c3ae59217153a33a7adaf7a1c"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_teqERK6edge_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>Equality operator, can be used between null edge and non-null-edges etc. Two null edges are equal. </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_tneERK6edge_t">
-<span id="cubexx::edge_t::neq-operator__edge_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a6bd2781b70840f52d60de4a5a3fc9946"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_tneERK6edge_t" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::neq-operator__edge_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a6bd2781b70840f52d60de4a5a3fc9946"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<em>other</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N6cubexx6edge_tneERK6edge_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inequality operator, can be used between null edge and non-null-edges etc. Two null edges are equal. </p>
 </dd></dl>
 
@@ -216,30 +374,30 @@
 <p class="breathe-sectiondef-title rubric">Public Static Functions</p>
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_t3allEv">
-<span id="cubexx::edge_t::all"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1adb2cbde603e378801ce698af6c0157e3"></span><em class="property">static</em> <em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a>, 12&gt; &amp;<code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t3allEv" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::all"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1adb2cbde603e378801ce698af6c0157e3"></span><em class="property">static</em> <em class="property">const</em> std::array&lt;<a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a>, 12&gt; &amp;<code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t3allEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a list of all (12) edges on the cube. </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_t9null_edgeEv">
-<span id="cubexx::edge_t::null_edge"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a7b9954afd379bc93ba4ee90f0b16422e"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a> &amp;<code class="descname">null_edge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t9null_edgeEv" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::null_edge"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a7b9954afd379bc93ba4ee90f0b16422e"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<code class="descname">null_edge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t9null_edgeEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the &#8220;null&#8221; edge. </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_t3getENSt12uint_fast8_tE">
-<span id="cubexx::edge_t::get__std::uint_fast8_t"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a35343ccc53700a5222d808640987b498"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span>std::uint_fast8_t <em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t3getENSt12uint_fast8_tE" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::get__std::uint_fast8_t"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a35343ccc53700a5222d808640987b498"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span>std::uint_fast8_t <em>idx</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t3getENSt12uint_fast8_tE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve an edge by its index. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ad8dccb5c663448d19fe7cae5df0d98e0"><span>index()</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ad8dccb5c663448d19fe7cae5df0d98e0"><span class="std std-ref">index()</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_t3getENSt12uint_fast8_tEbb">
-<span id="cubexx::edge_t::get__std::uint_fast8_t.b.b"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span>std::uint_fast8_t <em>axis</em>, bool <em>project_secondary</em>, bool <em>project_tertiary</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t3getENSt12uint_fast8_tEbb" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::get__std::uint_fast8_t.b.b"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a91d1c68236ddf4fbb01b76b8c3fddb7c"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span>std::uint_fast8_t <em>axis</em>, bool <em>project_secondary</em>, bool <em>project_tertiary</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t3getENSt12uint_fast8_tEbb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieves an edge by the following descriptive logic: </p>
 <p>First, choose a base-axis, the X axis, the Y axis or the Z axis (0,1, or 2 respectively).</p>
 <p>Second, let us define the &#8220;secondary-axis&#8221; as the first non-base-axis in (X,Y,Z), and the &#8220;tertiary-axis&#8221; as the remaining non-base-axis.</p>
@@ -247,26 +405,26 @@
 <p>There are four combinations of projection: project none, project the secondary only, project the tertiary only, and project it across both, which would give an edge on the far side of the cube.</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span>base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a469c1eb5488918bfbcb154be32e7ef12"><span>secondary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a5a63d74062895874189f9954e09a6822"><span>tertiary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a40a1fe254eed1385ac2e0233ca5282ad"><span>project_secondary()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a7e19fe7825502d89920e1a10128418fe"><span>project_tertiary()</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1ab11c94b3aa1e144df458647be55fee93"><span class="std std-ref">base_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a469c1eb5488918bfbcb154be32e7ef12"><span class="std std-ref">secondary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a5a63d74062895874189f9954e09a6822"><span class="std std-ref">tertiary_axis()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a40a1fe254eed1385ac2e0233ca5282ad"><span class="std std-ref">project_secondary()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1a7e19fe7825502d89920e1a10128418fe"><span class="std std-ref">project_tertiary()</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N6cubexx6edge_t3getERK8corner_tRK8corner_t">
-<span id="cubexx::edge_t::get__corner_tCR.corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ab0f78a767f374b1401e23c1515e52a0b"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_t6edge_tEv" title="cubexx::edge_t::edge_t">edge_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner0</em>, <em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner1</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t3getERK8corner_tRK8corner_t" title="Permalink to this definition">¶</a></dt>
+<span id="cubexx::edge_t::get__corner_tCR.corner_tCR"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1ab0f78a767f374b1401e23c1515e52a0b"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="#_CPPv2N6cubexx6edge_tE" title="cubexx::edge_t">edge_t</a> &amp;<code class="descname">get</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner0</em>, <em class="property">const</em> <a class="reference internal" href="cubexx-corner.html#_CPPv2N6cubexx8corner_tE" title="cubexx::corner_t">corner_t</a> &amp;<em>corner1</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t3getERK8corner_tRK8corner_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieves an edge via the two corners. </p>
-<p>Note, the corners specified here may be in any order so long as they are adjacent; however the edge canonicalizes the order so that calls to <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"><span>corner0()</span></a> and <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aa8971e89e1cb2d497109e0d87170fedd"><span>corner1()</span></a> may not match the two corners used to obtain the edge here.</p>
+<p>Note, the corners specified here may be in any order so long as they are adjacent; however the edge canonicalizes the order so that calls to <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"><span class="std std-ref">corner0()</span></a> and <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aa8971e89e1cb2d497109e0d87170fedd"><span class="std std-ref">corner1()</span></a> may not match the two corners used to obtain the edge here.</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"><span>corner0()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aa8971e89e1cb2d497109e0d87170fedd"><span>corner1()</span></a> </dd>
+<dd><a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aeb8a15b6931b17089537e73b1d1f8a4c"><span class="std std-ref">corner0()</span></a>, <a class="reference internal" href="#corner-casesstructcubexx_1_1edge__t_1aa8971e89e1cb2d497109e0d87170fedd"><span class="std std-ref">corner1()</span></a> </dd>
 </dl>
 </p>
 </dd></dl>
 
 <dl class="function">
-<dt>
-<span class="target" id="corner-casesstructcubexx_1_1edge__t_1ae1edcf8c7b8584647dd89e575785230c"></span><code class="descname">static CORNER_CASES_CUBEXX_INLINE std::size_t cubexx::edge_t::SIZE()</code></dt>
+<dt id="_CPPv2N6cubexx6edge_t4SIZEEv">
+<span id="cubexx::edge_t::SIZE"></span><span class="target" id="corner-casesstructcubexx_1_1edge__t_1a82bd1fa3205311196b39e35a21d4490a"></span><em class="property">static</em> std::size_t <code class="descname">SIZE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N6cubexx6edge_t4SIZEEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of edges. </p>
 </dd></dl>
 
@@ -291,7 +449,7 @@
 
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Azriel Fasten.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>
