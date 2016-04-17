@@ -1586,7 +1586,7 @@ is_adjacent(const edge_t& other) const
   assert(other.is_sane());
   assert(!other.is_null());
 
-  return (other.corner_set() & this->corner_set()).size() > 0;
+  return (other.corner_set() & this->corner_set()).size() == 1;
 }
 
 CORNER_CASES_CUBEXX_INLINE

@@ -724,6 +724,7 @@ struct face_t{
   ///Returns true if @param corner is a corner adjacent to this face; otherwise returns false.
   bool is_adjacent(const corner_t& corner) const;
   ///Returns true if @param other is a face adjacent to this face; otherwise returns false.
+  ///@note that this will NOT return true for (*this).is_adjacent(*this).
   bool is_adjacent(const face_t& other) const;
   ///Returns true if @param edge is an edge adjacent to this face; otherwise returns false.
   bool is_adjacent(const edge_t& edge) const;
@@ -806,6 +807,7 @@ struct corner_t{
   const corner_t& adjacent(const direction_t& direction) const;
   
   ///Returns true if @param other is a corner adjacent to this corner; otherwise returns false.
+  ///@note that this will NOT return true for (*this).is_adjacent(*this).
   bool is_adjacent(const corner_t& other) const;
   ///Returns true if @param edge is an edge adjacent to this corner; otherwise returns false.
   bool is_adjacent(const edge_t& edge) const;
@@ -1068,6 +1070,7 @@ struct edge_t{
   
 
   ///Returns true if @param other is an edge adjacent to this edge; otherwise returns false.
+  ///@note that this will NOT return true for (*this).is_adjacent(*this).
   bool is_adjacent(const edge_t& other) const;
   ///Returns true if @param face is a face adjacent to this edge; otherwise returns false.
   bool is_adjacent(const face_t& face) const;
