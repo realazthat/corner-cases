@@ -504,6 +504,8 @@ TEST_F(CUBEXXCornerTest,faces)
                 ASSERT_EQ(0U, corner___face_visits[face.index()]);
             }
         }
+        ///pidgeonhole
+        ASSERT_EQ(3U, std::accumulate(corner___face_visits.begin(), corner___face_visits.end(), 0U));
     }
 
 
@@ -512,6 +514,9 @@ TEST_F(CUBEXXCornerTest,faces)
     {
         ASSERT_EQ(4U, all___face_visits[face.index()]);
     }
+    ///pidgeonhole
+    ///8 corners, each visits 3 faces
+    ASSERT_EQ(8U*3U, std::accumulate(all___face_visits.begin(), all___face_visits.end(), 0U));
 
 }
 
