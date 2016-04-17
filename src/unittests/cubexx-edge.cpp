@@ -467,6 +467,7 @@ TEST_F(CUBEXXEdgeTest,end_faces)
 TEST_F(CUBEXXEdgeTest,is_adjacent_to_edge)
 {
 
+    std::vector<uint32_t> all____edge_counts(cubexx::edge_t::SIZE(), 0);
     for (auto edge : cubexx::edge_t::all())
     {
         for (auto adj_edge : edge.adjacent_edges())
@@ -489,7 +490,47 @@ TEST_F(CUBEXXEdgeTest,is_adjacent_to_edge)
                 ASSERT_FALSE(edge.is_adjacent(other_edge));
             }
         }
+
+        ASSERT_TRUE(!edge.is_adjacent(edge));
+        ASSERT_TRUE(!edge.is_adjacent(edge.opposite()));
+        ASSERT_TRUE(!edge.opposite().is_adjacent(edge));
+
+        std::vector<uint32_t> edge___edge_counts(cubexx::edge_t::SIZE(), 0);
+        for (auto rhs : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(rhs.is_adjacent(edge), edge.is_adjacent(rhs));
+
+            ///they are adjacent if they share exactly one corner
+            ASSERT_EQ(rhs.is_adjacent(edge), (edge.corner_set() & rhs.corner_set()).size() == 1);
+        }
+
+        ///count for pidgeonhole
+        for (auto rhs : cubexx::edge_t::all())
+        {
+            if (!edge.is_adjacent(rhs))
+                continue;
+            all____edge_counts[rhs.index()]++;
+            edge___edge_counts[rhs.index()]++;
+        }
+        
+        ///pidgeonhole
+        for (auto rhs : cubexx::edge_t::all())
+        {
+            ASSERT_EQ(1U == edge___edge_counts[rhs.index()], edge.is_adjacent(rhs));
+            ASSERT_EQ(0U == edge___edge_counts[rhs.index()], !edge.is_adjacent(rhs));
+        }
+        ///pidgeonhole
+        ASSERT_EQ(4U, std::accumulate(edge___edge_counts.begin(), edge___edge_counts.end(), 0U));
     }
+
+    ///pidgeonhole
+    for (auto edge : cubexx::edge_t::all())
+    {
+        ASSERT_EQ(4U, all____edge_counts[edge.index()]);
+    }
+    ///pidgeonhole
+    ///12 edges, each touch 4 adjacent edges
+    ASSERT_EQ(cubexx::edge_t::SIZE()*4U, std::accumulate(all____edge_counts.begin(), all____edge_counts.end(), 0U));
 }
 
 TEST_F(CUBEXXEdgeTest,is_adjacent_to_face)
